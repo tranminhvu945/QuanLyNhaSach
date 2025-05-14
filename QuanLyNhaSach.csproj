@@ -10,8 +10,8 @@
 
   <ItemGroup>
     <Folder Include="Models\dto\" />
-    <Folder Include="Views\" />
     <Folder Include="ViewModes\" />
+    <Folder Include="Views\PhieuNhapSachViews\" />
   </ItemGroup>
 
   <ItemGroup>
