@@ -1,0 +1,97 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--  App Header Border Style  -->
+    <Style x:Key="AppHeaderBorderStyle" TargetType="Border">
+        <Setter Property="Background" Value="#F7F9FD" />
+        <Setter Property="Padding" Value="10,0,10,0" />
+    </Style>
+
+    <!--  App Logo Container Style  -->
+    <Style x:Key="AppLogoContainerStyle" TargetType="Border">
+        <Setter Property="MaxWidth" Value="60" />
+        <Setter Property="MaxHeight" Value="60" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Background" Value="White" />
+        <Setter Property="CornerRadius" Value="90" />
+    </Style>
+
+    <!--  App Logo Style  -->
+    <Style x:Key="AppLogoStyle" TargetType="Image">
+        <Setter Property="MaxWidth" Value="70" />
+        <Setter Property="MaxHeight" Value="70" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Stretch" Value="Uniform" />
+    </Style>
+
+    <!--  App Title Style  -->
+    <Style x:Key="AppTitleStyle" TargetType="TextBlock">
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="FontFamily" Value="Nunito" />
+        <Setter Property="FontSize" Value="19" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Foreground" Value="#1976D2" />
+        <Setter Property="Margin" Value="5,0,0,0" />
+    </Style>
+
+    <!--  App Header Container Style  -->
+    <Style x:Key="AppHeaderContainerStyle" TargetType="StackPanel">
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Orientation" Value="Horizontal" />
+    </Style>
+
+    <!--  Right Side Content Style  -->
+    <Style x:Key="AppHeaderRightContentStyle" TargetType="StackPanel">
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="VerticalAlignment" Value="Bottom" />
+        <Setter Property="Orientation" Value="Horizontal" />
+        <Setter Property="Margin" Value="0,0,20,0" />
+    </Style>
+
+    <!--  Header Grid Style  -->
+    <Style x:Key="AppHeaderGridStyle" TargetType="Grid">
+        <Setter Property="Height" Value="70" />
+    </Style>
+
+    <!--  Tab Bar Button Style  -->
+    <Style x:Key="TabBarButtonStyle" TargetType="RadioButton">
+        <Setter Property="Height" Value="40" />
+        <Setter Property="Margin" Value="10,0" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="FontFamily" Value="Nunito" />
+        <Setter Property="Foreground" Value="#555555" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0,0,0,3" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Bottom" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Border
+                        x:Name="border"
+                        Padding="{TemplateBinding Padding}"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="border" Property="BorderBrush" Value="#00AAFF" />
+                            <Setter TargetName="border" Property="Background" Value="#F0F8FF" />
+                            <Setter Property="Foreground" Value="#00AAFF" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="#F0F8FF" />
+                            <Setter Property="Foreground" Value="#00AAFF" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+</ResourceDictionary>
