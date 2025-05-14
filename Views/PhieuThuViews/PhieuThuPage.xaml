@@ -1,4 +1,4 @@
-﻿<Page x:Class="QuanLyNhaSach.Views.SachViews.SachPage"
+﻿<Page x:Class="QuanLyNhaSach.Views.PhieuThuViews.PhieuThuPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -26,7 +26,7 @@
             <TextBlock
                 Grid.Row="0"
                 Style="{StaticResource PageHeaderTextBlockStyle}"
-                Text="Danh sách Sách" />
+                Text="Danh sách phiếu thu" />
 
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
@@ -49,7 +49,7 @@
                                 Margin="0,0,8,0"
                                 VerticalAlignment="Center"
                                 Icon="Search" />
-                            <TextBlock VerticalAlignment="Center" Text="Tra cứu sách" />
+                            <TextBlock VerticalAlignment="Center" Text="Tra cứu phiếu thu" />
                         </StackPanel>
                     </Button>
                     <Button
@@ -75,20 +75,7 @@
                                 Margin="0,0,8,0"
                                 VerticalAlignment="Center"
                                 Icon="Plus" />
-                            <TextBlock VerticalAlignment="Center" Text="Thêm sách mới" />
-                        </StackPanel>
-                    </Button>
-
-                    <Button
-                        Margin="10,0,0,0"
-                        Command="{Binding EditPhieuXuatCommand}"
-                        Style="{StaticResource PrimaryButtonStyle}">
-                        <StackPanel Orientation="Horizontal">
-                            <fa:FontAwesome
-                                Margin="0,0,8,0"
-                                VerticalAlignment="Center"
-                                Icon="Edit" />
-                            <TextBlock VerticalAlignment="Center" Text="Cập nhật sách" />
+                            <TextBlock VerticalAlignment="Center" Text="Thêm phiếu thu" />
                         </StackPanel>
                     </Button>
 
@@ -101,7 +88,7 @@
                                 Margin="0,0,8,0"
                                 VerticalAlignment="Center"
                                 Icon="Trash" />
-                            <TextBlock VerticalAlignment="Center" Text="Xóa sách" />
+                            <TextBlock VerticalAlignment="Center" Text="Xóa phiếu thu" />
                         </StackPanel>
                     </Button>
 
@@ -124,30 +111,26 @@
                             Width="*"
                             Binding="{Binding MaPhieuXuat}"
                             ElementStyle="{StaticResource ColumnTextBlockStyle}"
-                            Header="Mã sách" />
+                            Header="Mã phiếu thu" />
 
                         <DataGridTextColumn
                             Width="*"
                             Binding="{Binding DaiLy.TenDaiLy}"
                             ElementStyle="{StaticResource ColumnTextBlockStyle}"
-                            Header="Tên sách" />
+                            Header="Tên khách hàng" />
 
                         <DataGridTextColumn
                             Width="*"
                             Binding="{Binding NgayLapPhieu, StringFormat={}{0:dd/MM/yyyy}}"
                             ElementStyle="{StaticResource ColumnTextBlockStyle}"
-                            Header="Thể loại" />
+                            Header="Ngày thu tiền" />
 
                         <DataGridTextColumn
                             Width="*"
                             Binding="{Binding TongTriGia, StringFormat={}{0:N0} VNĐ}"
                             ElementStyle="{StaticResource ColumnTextBlockStyle}"
-                            Header="Tác giả" />
-                        <DataGridTextColumn
-                            Width="*"
-                            Binding="{Binding TongTriGia, StringFormat={}{0:N0} VNĐ}"
-                            ElementStyle="{StaticResource ColumnTextBlockStyle}"
-                            Header="Số lượng tồn" />
+                            Header="Số tiền thu" />
+
                     </DataGrid.Columns>
                 </DataGrid>
             </Border>
@@ -155,3 +138,4 @@
         </Grid>
     </Border>
 </Page>
+

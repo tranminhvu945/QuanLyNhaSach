@@ -151,6 +151,14 @@
                         Margin="20,0,10,0"
                         HorizontalAlignment="Right"
                         Orientation="Horizontal">
+
+                        <Button Command="{Binding TraCuuPhieuThuCommand}" Style="{StaticResource WindowPrimaryButtonStyle}" Width="174">
+                            <StackPanel Orientation="Horizontal">
+                                <fa:FontAwesome Margin="0,0,10,0" Icon="Search" />
+                                <TextBlock Text="Tra cứu sách" />
+                            </StackPanel>
+                        </Button>
+                        
                         <Button
                             Margin="0,0,20,0"
                             Command="{Binding BoChonMatHangCommand}"
@@ -291,6 +299,7 @@
                                                 Margin="0,5,0,5"
                                                 VerticalAlignment="Center"
                                                 Background="White"
+                                                IsEditable="True"
                                                 ItemsSource="{Binding DanhSachMatHang}"
                                                 SelectedItem="{Binding SelectedMatHang, UpdateSourceTrigger=PropertyChanged}"
                                                 Style="{StaticResource StandardComboBoxStyle}">
