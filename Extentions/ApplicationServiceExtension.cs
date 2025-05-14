@@ -30,6 +30,17 @@ namespace QuanLyNhaSach.Extentions
 
 
             // Register Views
+            services.AddTransient<Views.TraCuuPhieuNhapSachWindow>();
+            services.AddTransient<Views.MainWindow>();
+            services.AddTransient<Views.LapPhieuNhapSachWindow>();
+            services.AddTransient<Views.CapNhatPhieuNhapSachWindow>();
+
+            // Register Page Views
+            services.AddTransient<Views.SachViews.SachPage>();
+            services.AddTransient<Views.SachViews.CapNhatSachWindow>();
+            services.AddTransient<Views.SachViews.ThemSachWindow>();
+            services.AddTransient<Views.SachViews.TraCuuSachWindow>();
+
 
             // Register navigation service
             services.AddSingleton<INavigationService, NavigationService>();
