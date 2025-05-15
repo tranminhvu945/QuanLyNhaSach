@@ -11,17 +11,16 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using QuanLyNhaSach.ViewModels.BaoCaoViewModel;
 
 namespace QuanLyNhaSach.Views.BaoCaoViews
 {
-    /// <summary>
-    /// Interaction logic for BaoCaoTonWindow.xaml
-    /// </summary>
     public partial class BaoCaoTonWindow : Window
     {
-        public BaoCaoTonWindow()
+        public BaoCaoTonWindow(BaoCaoTonSachViewModel vm)
         {
             InitializeComponent();
+            DataContext = vm;
         }
     }
 }

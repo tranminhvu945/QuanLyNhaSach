@@ -12,17 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using QuanLyNhaSach.ViewModels.BaoCaoViewModel;
 
 namespace QuanLyNhaSach.Views.BaoCaoViews
 {
-    /// <summary>
-    /// Interaction logic for BaoCaoChiTietPage.xaml
-    /// </summary>
+
     public partial class BaoCaoChiTietPage : Page
     {
-        public BaoCaoChiTietPage()
+        public BaoCaoChiTietPage(BaoCaoChiTietViewModel vm)
         {
             InitializeComponent();
+            DataContext = vm;
         }
     }
 }
