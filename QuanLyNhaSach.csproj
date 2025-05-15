@@ -9,8 +9,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ViewModes\**" />
+    <EmbeddedResource Remove="ViewModes\**" />
+    <None Remove="ViewModes\**" />
+    <Page Remove="ViewModes\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Models\dto\" />
-    <Folder Include="ViewModes\SachViewModels\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -109,7 +109,7 @@
                                             Height="25"
                                             Margin="0,3,0,0"
                                             ItemsSource="{Binding MonthOptions}"
-                                            SelectedItem="{Binding SelectedDoanhSoMonth}"
+                                            SelectedItem="{Binding SelectedTonSachMonth}"
                                             Style="{StaticResource SmallComboBoxStyle}" />
                                     </Grid>
 
@@ -128,7 +128,7 @@
                                             Height="25"
                                             Margin="0,3,0,0"
                                             ItemsSource="{Binding YearOptions}"
-                                            SelectedItem="{Binding SelectedDoanhSoYear, Mode=TwoWay}"
+                                            SelectedItem="{Binding SelectedTonSachYear, Mode=TwoWay}"
                                             Style="{StaticResource SmallComboBoxStyle}" />
                                     </Grid>
                                 </StackPanel>
@@ -136,7 +136,7 @@
                                     Grid.Column="1"
                                     Margin="10,0,0,0"
                                     HorizontalAlignment="Right">
-                                    <Button Command="{Binding DoanhSoCommand}" Style="{StaticResource SmallButtonStyle}">
+                                    <Button Command="{Binding TonSachCommand}" Style="{StaticResource SmallButtonStyle}">
                                         <StackPanel Orientation="Horizontal">
                                             <fa:FontAwesome Margin="0,0,10,0" Icon="FileText" />
                                             <TextBlock Text="Lập báo cáo tồn" />
@@ -169,6 +169,7 @@
                                     <lvc:Axis
                                         FontFamily="Nunito"
                                         FontSize="14"
+                                        MinValue="0"
                                         LabelFormatter="{Binding CurrencyFormatter}">
                                         <lvc:Axis.Separator>
                                             <lvc:Separator Step="10000000" />
@@ -297,6 +298,7 @@
                                     <lvc:Axis
                                         FontFamily="Nunito"
                                         FontSize="14"
+                                        MinValue="0"
                                         LabelFormatter="{Binding CurrencyFormatter}">
                                         <lvc:Axis.Separator>
                                             <lvc:Separator Step="10000000" />
