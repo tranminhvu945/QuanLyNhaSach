@@ -1,0 +1,235 @@
+﻿<Window x:Class="QuanLyNhaSach.Views.BaoCaoViews.BaoCaoTonWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:fa="http://schemas.fontawesome.io/icons/"
+    xmlns:helpers="clr-namespace:QuanLyNhaSach.Helpers"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Báo cáo công nợ"
+    Width="1450"
+    Height="762"
+    Style="{StaticResource WindowPopupStyle}"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+
+    <Window.Resources>
+        <helpers:RowToIndexConverter x:Key="RowToIndexConverter" />
+    </Window.Resources>
+
+    <Border
+        Background="White"
+        BorderBrush="#DDDDDD"
+        BorderThickness="1"
+        CornerRadius="20">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80" />
+                <RowDefinition Height="1" />
+                <RowDefinition Height="681" />
+                <RowDefinition Height="1" />
+            </Grid.RowDefinitions>
+
+            <!--  Header  -->
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".5*" />
+                    <ColumnDefinition Width=".5*" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel
+                    Grid.Column="0"
+                    Margin="20,15,0,0"
+                    VerticalAlignment="Center">
+                    <TextBlock Style="{StaticResource WindowHeaderTextBlockStyle}" Text="Lập báo cáo tồn theo tháng" />
+                </StackPanel>
+
+                <StackPanel
+                    Grid.Column="1"
+                    Margin="0,0,20,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center">
+                    <Button
+                        Command="{Binding CloseCommand}"
+                        Content="❌"
+                        Style="{StaticResource WindowCloseButtonStyle}" />
+                </StackPanel>
+            </Grid>
+
+            <Border Grid.Row="1" Background="LightGray" />
+            <Border Grid.Row="3" Background="LightGray" />
+
+            <!--  Body  -->
+            <Border Grid.Row="2" Style="{StaticResource WindowBorderContentWrapper}">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="17*" />
+                        <RowDefinition Height="10*" />
+                        <RowDefinition Height="83*" />
+                    </Grid.RowDefinitions>
+
+                    <!--  Line 1  -->
+
+                    <!--  Line 2  -->
+                    <StackPanel
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Stretch"
+                        Orientation="Horizontal">
+                        <Grid
+                            Width="200"
+                            Margin="0,0,15,0"
+                            VerticalAlignment="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock
+                                Grid.Row="0"
+                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
+                                Text="Năm lập báo cáo" />
+                            <ComboBox
+                                Grid.Row="1"
+                                Height="40"
+                                Margin="0,5,0,0"
+                                IsEditable="True"
+                                ItemsSource="{Binding YearOptions}"
+                                SelectedItem="{Binding SelectedYear}"
+                                Style="{StaticResource StandardComboBoxStyle}" />
+                        </Grid>
+                        <Grid
+                            Width="200"
+                            Margin="0,0,15,0"
+                            VerticalAlignment="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock
+                                Grid.Row="0"
+                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
+                                Text="Tháng lập báo cáo" />
+                            <ComboBox
+                                Grid.Row="1"
+                                Height="40"
+                                Margin="0,5,0,0"
+                                IsEditable="True"
+                                ItemsSource="{Binding MonthOptions}"
+                                SelectedItem="{Binding SelectedMonth}"
+                                Style="{StaticResource StandardComboBoxStyle}" />
+                        </Grid>
+
+
+                    </StackPanel>
+
+                    <Button
+                        Margin="0,0,10,0"
+                        HorizontalAlignment="Right"
+                        Command="{Binding LapBaoCaoCommand}"
+                        Style="{StaticResource WindowPrimaryButtonStyle}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:FontAwesome Margin="0,0,10,0" Icon="FileText" />
+                            <TextBlock Text="Lập báo cáo tồn" />
+                        </StackPanel>
+                    </Button>
+
+                    <StackPanel
+                        Grid.Row="1"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Stretch"
+                        Orientation="Horizontal">
+                        <TextBlock
+                            Margin="0,0,10,0"
+                            Style="{StaticResource FieldSmallLabelTextBlockStyle}"
+                            FontSize="24"
+                            Text="Tổng tồn cuối trong tháng của tất cả đầu sách" />
+                        <TextBox
+                            IsReadOnly="True"
+                            Margin="0,0,10,0"
+                            Width="400"
+                            Style="{StaticResource ReadOnlyTextBoxStyle}"
+                            Text="{Binding TongNoCuoiThang, StringFormat={}{0:N0} VNĐ}" />
+                    </StackPanel>
+
+                    <!--  Line 3  -->
+                    <Border
+                        Grid.Row="2"
+                        Margin="10,20,10,0"
+                        Background="White"
+                        BorderBrush="LightGray"
+                        BorderThickness="2"
+                        CornerRadius="10">
+
+                        <DataGrid ItemsSource="{Binding BaoCaoCongNoList}" Style="{StaticResource BaoCaoDataGridStyle}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn
+                                    Width="Auto"
+                                    ElementStyle="{StaticResource BaoCaoTextBlockStyle}"
+                                    Header="STT"
+                                    IsReadOnly="True">
+                                    <DataGridTextColumn.Binding>
+                                        <Binding Converter="{StaticResource RowToIndexConverter}" RelativeSource="{RelativeSource AncestorType=DataGridRow}" />
+                                    </DataGridTextColumn.Binding>
+                                </DataGridTextColumn>
+
+                                <DataGridTemplateColumn
+                                    Width="250"
+                                    Header="TÊN SÁCH"
+                                    IsReadOnly="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Border Width="200" Style="{StaticResource BaoCaoBorderStyle}">
+                                                <TextBlock Style="{StaticResource BaoCaoTemplateTextBlockStyle}" Text="{Binding TenDaiLy}" />
+                                            </Border>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                                <DataGridTemplateColumn
+                                    Width="260"
+                                    Header="TỒN ĐẦU"
+                                    IsReadOnly="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Border Width="200" Style="{StaticResource BaoCaoBorderStyle}">
+                                                <TextBlock Style="{StaticResource BaoCaoTemplateTextBlockStyle}" Text="{Binding NoDauThang, StringFormat={}{0:N0} VNĐ}" />
+                                            </Border>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                                <DataGridTemplateColumn
+                                    Width="*"
+                                    Header="PHÁT SINH"
+                                    IsReadOnly="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Border Width="400" Style="{StaticResource BaoCaoBorderStyle}">
+                                                <TextBlock Style="{StaticResource BaoCaoTemplateTextBlockStyle}" Text="{Binding GiaTriGiaoDich, StringFormat={}{0:N0} VNĐ}" />
+                                            </Border>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                                <DataGridTemplateColumn
+                                    Width="270"
+                                    Header="TỒN CUỐI"
+                                    IsReadOnly="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Border Width="200" Style="{StaticResource BaoCaoBorderStyle}">
+                                                <TextBlock Style="{StaticResource BaoCaoTemplateTextBlockStyle}" Text="{Binding NoCuoiThang, StringFormat={}{0:N0} VNĐ}" />
+                                            </Border>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Border>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</Window>
+
+

@@ -41,6 +41,30 @@ namespace QuanLyNhaSach.Extentions
             services.AddTransient<Views.SachViews.ThemSachWindow>();
             services.AddTransient<Views.SachViews.TraCuuSachWindow>();
 
+            services.AddTransient<Views.KhachHangViews.KhachHangPage>();
+            services.AddTransient<Views.KhachHangViews.CapNhatKhachHangWindow>();
+            services.AddTransient<Views.KhachHangViews.ThemKhachHangWindow>();
+            services.AddTransient<Views.KhachHangViews.TraCuuKhachHangWindow>();
+
+
+            services.AddTransient<Views.PhieuThuViews.PhieuThuPage>();
+            services.AddTransient<Views.PhieuThuViews.ThemPhieuThuWindow>();
+            services.AddTransient<Views.PhieuThuViews.TraCuuPhieuThuWindow>();
+
+            services.AddTransient<Views.HoaDonBanViews.HoaDonBanPage>();
+            services.AddTransient<Views.HoaDonBanViews.CapNhatHoaDonBanWindow>();
+            services.AddTransient<Views.HoaDonBanViews.ThemHoaDonBanWindow>();
+            services.AddTransient<Views.HoaDonBanViews.TraCuuHoaDonBanWindow>();
+
+            services.AddTransient<Views.ThamSoViews.ThamSoPage>();
+
+            services.AddTransient<Views.BaoCaoViews.BaoCaoChiTietPage>();
+            services.AddTransient<Views.BaoCaoViews.BaoCaoCongNoWindow>();
+            services.AddTransient<Views.BaoCaoViews.BaoCaoTonWindow>();
+
+            services.AddTransient<Views.CustomAnimation.GridLengthAnimation>();
+
+
 
             // Register navigation service
             services.AddSingleton<INavigationService, NavigationService>();
