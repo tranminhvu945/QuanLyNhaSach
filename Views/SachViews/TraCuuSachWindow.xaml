@@ -1,12 +1,666 @@
 ﻿<Window x:Class="QuanLyNhaSach.Views.SachViews.TraCuuSachWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:QuanLyNhaSach.Views.SachViews"
-        mc:Ignorable="d"
-        Title="TraCuuSachWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:fa="http://schemas.fontawesome.io/icons/"
+    xmlns:helpers="clr-namespace:QuanLyNhaSach.Helpers"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Tra Cứu Đại Lý"
+    Width="1360"
+    Height="742"
+    Style="{StaticResource WindowPopupStyle}"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+
+    <Border Style="{StaticResource WindowPopUpBorder}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80" />
+                <RowDefinition Height="1" />
+                <RowDefinition Height="581" />
+                <RowDefinition Height="1" />
+                <RowDefinition Height="80" />
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="1" Background="LightGray" />
+            <Border Grid.Row="3" Background="LightGray" />
+
+            <!--  Header  -->
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".5*" />
+                    <ColumnDefinition Width=".5*" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel
+                    Grid.Column="0"
+                    Margin="20,15,0,0"
+                    VerticalAlignment="Center">
+                    <TextBlock Style="{StaticResource WindowHeaderTextBlockStyle}" Text="Tra cứu sách" />
+                </StackPanel>
+
+                <StackPanel
+                    Grid.Column="1"
+                    Margin="0,0,20,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center">
+                    <Button
+                        Command="{Binding CloseWindowCommand}"
+                        Content="❌"
+                        Style="{StaticResource WindowCloseButtonStyle}" />
+                </StackPanel>
+            </Grid>
+
+            <!--  Body  -->
+            <Border Grid.Row="2" Style="{StaticResource WindowBorderContentWrapper}">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="145*" />
+                        <RowDefinition Height="120*" />
+                        <RowDefinition Height="95*" />
+                        <RowDefinition Height="95*" />
+                        <RowDefinition Height="95*" />
+                        <RowDefinition Height="95*" />
+                        <RowDefinition Height="95*" />
+                    </Grid.RowDefinitions>
+
+                    <!--  Line 1  -->
+                    <Grid
+                        Grid.Row="0"
+                        Margin="10"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="14*" />
+                            <ColumnDefinition Width="16*" />
+                            <ColumnDefinition Width="14*" />
+                            <ColumnDefinition Width="14*" />
+                            <ColumnDefinition Width="40*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!--  Mã đại lý  -->
+                        <Grid Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="3*" />
+                                <RowDefinition Height="7*" />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock
+                                Grid.Row="0"
+                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
+                                Text="Mã sách" />
+                            <TextBox
+                                Grid.Row="1"
+                                Style="{StaticResource StandardTextBoxStyle}"
+                                Text="{Binding MaDaiLy}" />
+                        </Grid>
+
+                        <!--  Tên đại lý  -->
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="3*" />
+                                <RowDefinition Height="7*" />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock
+                                Grid.Row="0"
+                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
+                                Text="Tên sách" />
+                            <TextBox
+                                Grid.Row="1"
+                                Style="{StaticResource StandardTextBoxStyle}"
+                                Text="{Binding TenDaiLy}" />
+                        </Grid>
+
+                        <!--  Điện thoại  -->
+                        <Grid Grid.Column="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="3*" />
+                                <RowDefinition Height="7*" />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock
+                                Grid.Row="0"
+                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
+                                Text="Thể loại" />
+                            <TextBox
+                                Grid.Row="1"
+                                Style="{StaticResource StandardTextBoxStyle}"
+                                Text="{Binding DienThoai}" />
+                        </Grid>
+
+                        <!--  Địa chỉ  -->
+                        <Grid Grid.Column="3">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="3*" />
+                                <RowDefinition Height="7*" />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock
+                                Grid.Row="0"
+                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
+                                Text="Tác giả" />
+                            <TextBox
+                                Grid.Row="1"
+                                Style="{StaticResource StandardTextBoxStyle}"
+                                Text="{Binding DiaChi}" />
+                        </Grid>
+
+                        <!--  Email  -->
+                        <Grid Grid.Column="4">
+
+                            <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                                <TextBlock
+                                        Grid.Column="0"
+                                        Margin="20,25,0,0"
+                                        Style="{StaticResource FieldSmallLabelTextBlockStyle}"
+                                        Text="Số lượng tồn" />
+                                <TextBlock
+                                        Grid.Column="1"
+                                        Margin="5,25,10,0"
+                                        Style="{StaticResource RedHighlightTextBlockStyle}"
+                                        Text="từ" />
+                                <TextBox
+                                        Grid.Column="2"
+                                        Margin="0,25,0,0"
+                                        Style="{StaticResource StandardTextBoxStyle}"
+                                        Text="{Binding NoDaiLyFrom}" />
+                                <TextBlock
+                                        Grid.Column="3"
+                                        Margin="10,25,10,0"
+                                        Style="{StaticResource RedHighlightTextBlockStyle}"
+                                        Text="đến" />
+                                <TextBox
+                                        Grid.Column="4"
+                                        Margin="0,25,0,0"
+                                        Style="{StaticResource StandardTextBoxStyle}"
+                                        Text="{Binding NoDaiLyTo}" />
+                        </Grid>
+
+                        <!--  Tên loại đại lý  -->
+                        <Grid Grid.Column="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="3*" />
+                                <RowDefinition Height="7*" />
+                            </Grid.RowDefinitions>
+                        </Grid>
+
+                        <!--  Tên quận  -->
+                        <Grid Grid.Column="6">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="3*" />
+                                <RowDefinition Height="7*" />
+                            </Grid.RowDefinitions>
+                        </Grid>
+                    </Grid>
+
+                    <Grid
+                        Grid.Row="1"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="1.5*" />
+                            <ColumnDefinition Width="2.5*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="3*" />
+                                <RowDefinition Height="7*" />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock
+                                Grid.Row="0"
+                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
+                                Text="Mã khách hàng" />
+                            <TextBox
+                                Grid.Row="1"
+                                Style="{StaticResource StandardTextBoxStyle}"
+                                Text="{Binding MaDaiLy}" />
+                        </Grid>
+
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="3*" />
+                                <RowDefinition Height="7*" />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock
+                                Grid.Row="0"
+                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
+                                Text="Tên khách hàng" />
+                            <TextBox
+                                Grid.Row="1"
+                                Style="{StaticResource StandardTextBoxStyle}"
+                                Text="{Binding MaDaiLy}" />
+                        </Grid>
+
+                        <!--  Nợ đại lý  -->
+                        <Grid Grid.Column="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock
+                                Grid.Column="0"
+                                Margin="20,25,0,0"
+                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
+                                Text="Tiền nợ khách hàng" />
+                            <TextBlock
+                                Grid.Column="1"
+                                Margin="5,25,10,0"
+                                Style="{StaticResource RedHighlightTextBlockStyle}"
+                                Text="từ" />
+                            <TextBox
+                                Grid.Column="2"
+                                Margin="0,25,0,0"
+                                Style="{StaticResource StandardTextBoxStyle}"
+                                Text="{Binding NoDaiLyFrom}" />
+                            <TextBlock
+                                Grid.Column="3"
+                                Margin="10,25,10,0"
+                                Style="{StaticResource RedHighlightTextBlockStyle}"
+                                Text="đến" />
+                            <TextBox
+                                Grid.Column="4"
+                                Margin="0,25,0,0"
+                                Style="{StaticResource StandardTextBoxStyle}"
+                                Text="{Binding NoDaiLyTo}" />
+                        </Grid>
+                    </Grid>
+
+                    <Grid
+                        Grid.Row="2"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50*" />
+                            <ColumnDefinition Width="50*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!--  Nợ theo tối đa loại đại lý  -->
+                        <Grid Grid.Column="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock
+                                Grid.Column="0"
+                                Margin="20,0,0,0"
+                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
+                                Text="Mã hóa đơn " />
+                            <TextBlock
+                                Grid.Column="1"
+                                Style="{StaticResource RedHighlightTextBlockStyle}"
+                                Text="từ" />
+                            <TextBox
+                                Grid.Column="2"
+                                Style="{StaticResource StandardTextBoxStyle}"
+                                Text="{Binding NoTheoToiDaLoaiDaiLyFrom}" />
+                            <TextBlock
+                                Grid.Column="3"
+                                Style="{StaticResource RedHighlightTextBlockStyle}"
+                                Text="đến" />
+                            <TextBox
+                                Grid.Column="4"
+                                Style="{StaticResource StandardTextBoxStyle}"
+                                Text="{Binding NoTheoToiDaLoaiDaiLyTo}" />
+                        </Grid>
+
+                        <!--  Mã phiếu xuất  -->
+                        <Grid Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock
+                                Grid.Column="0"
+                                Margin="20,0,0,0"
+                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
+                                Text="Ngày lập hóa đơn" />
+                            <TextBlock
+                                Grid.Column="1"
+                                Style="{StaticResource RedHighlightTextBlockStyle}"
+                                Text="từ" />
+                            <DatePicker
+                                Grid.Column="2"
+                                SelectedDate="{Binding NgayLapPhieuXuatFrom}"
+                                Style="{StaticResource StandardDatePickerStyle}" />
+                            <TextBlock
+                                Grid.Column="3"
+                                Style="{StaticResource RedHighlightTextBlockStyle}"
+                                Text="đến" />
+                            <DatePicker
+                                Grid.Column="4"
+                                SelectedDate="{Binding NgayLapPhieuXuatTo}"
+                                Style="{StaticResource StandardDatePickerStyle}" />
+                        </Grid>
+                    </Grid>
+
+                    <Grid
+                        Grid.Row="3"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50*" />
+                            <ColumnDefinition Width="50*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!--  Ngày lập phiếu xuất  -->
+                        <Grid Grid.Column="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock
+                                Grid.Column="0"
+                                Margin="20,0,0,0"
+                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
+                                Text="Đơn giá bán " />
+                            <TextBlock
+                                Grid.Column="1"
+                                Style="{StaticResource RedHighlightTextBlockStyle}"
+                                Text="từ" />
+                            <TextBox
+                                Grid.Column="2"
+                                Style="{StaticResource StandardTextBoxStyle}"
+                                Text="{Binding SoLuongXuatCuaMatHangXuatFrom}" />
+                            <TextBlock
+                                Grid.Column="3"
+                                Style="{StaticResource RedHighlightTextBlockStyle}"
+                                Text="đến" />
+                            <TextBox
+                                Grid.Column="4"
+                                Style="{StaticResource StandardTextBoxStyle}"
+                                Text="{Binding SoLuongXuatCuaMatHangXuatTo}" />                        </Grid>
+
+                        <!--  Tổng giá trị phiếu xuất  -->
+                        <Grid Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock
+                                Grid.Column="0"
+                                Margin="20,0,0,0"
+                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
+                                Text="Số lượng bán " />
+                            <TextBlock
+                                Grid.Column="1"
+                                Style="{StaticResource RedHighlightTextBlockStyle}"
+                                Text="từ" />
+                            <TextBox
+                                Grid.Column="2"
+                                Style="{StaticResource StandardTextBoxStyle}"
+                                Text="{Binding TongGiaTriPhieuXuatFrom}" />
+                            <TextBlock
+                                Grid.Column="3"
+                                Style="{StaticResource RedHighlightTextBlockStyle}"
+                                Text="đến" />
+                            <TextBox
+                                Grid.Column="4"
+                                Style="{StaticResource StandardTextBoxStyle}"
+                                Text="{Binding TongGiaTriPhieuXuatTo}" />
+                        </Grid>
+                    </Grid>
+
+                    <!--  Tên mặt hàng xuất và Tên đơn vị tính  -->
+                    <Grid Grid.Row="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+
+                    <Grid
+                        Grid.Row="4"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50*" />
+                            <ColumnDefinition Width="50*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!--  Số lượng xuất của mặt hàng xuất  -->
+                        <Grid Grid.Column="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock
+                                Grid.Column="0"
+                                Margin="20,0,0,0"
+                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
+                                Text="Thành Tiền" />
+                            <TextBlock
+                                Grid.Column="1"
+                                Style="{StaticResource RedHighlightTextBlockStyle}"
+                                Text="từ" />
+                            <TextBox
+                                Grid.Column="2"
+                                Style="{StaticResource StandardTextBoxStyle}"
+                                Text="{Binding SoLuongXuatCuaMatHangXuatFrom}" />
+                            <TextBlock
+                                Grid.Column="3"
+                                Style="{StaticResource RedHighlightTextBlockStyle}"
+                                Text="đến" />
+                            <TextBox
+                                Grid.Column="4"
+                                Style="{StaticResource StandardTextBoxStyle}"
+                                Text="{Binding SoLuongXuatCuaMatHangXuatTo}" />
+                        </Grid>
+
+                        <!--  Đơn giá xuất của mặt hàng xuất  -->
+                        <Grid Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock
+                                Grid.Column="0"
+                                Margin="20,0,0,0"
+                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
+                                Text="Tổng giá trị hóa đơn" />
+                            <TextBlock
+                                Grid.Column="1"
+                                Style="{StaticResource RedHighlightTextBlockStyle}"
+                                Text="từ" />
+                            <TextBox
+                                Grid.Column="2"
+                                Style="{StaticResource StandardTextBoxStyle}"
+                                Text="{Binding DonGiaXuatCuaMatHangXuatFrom}" />
+                            <TextBlock
+                                Grid.Column="3"
+                                Style="{StaticResource RedHighlightTextBlockStyle}"
+                                Text="đến" />
+                            <TextBox
+                                Grid.Column="4"
+                                Style="{StaticResource StandardTextBoxStyle}"
+                                Text="{Binding DonGiaXuatCuaMatHangXuatTo}" />
+                        </Grid>
+                    </Grid>
+
+                    <Grid
+                        Grid.Row="5"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50*" />
+                            <ColumnDefinition Width="50*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!--  Thành tiền của mặt hàng xuất  -->
+                        <Grid Grid.Column="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock
+                                Grid.Column="0"
+                                Margin="20,0,0,0"
+                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
+                                Text="Mã phiếu nhập" />
+                            <TextBlock
+                                Grid.Column="1"
+                                Style="{StaticResource RedHighlightTextBlockStyle}"
+                                Text="từ" />
+                            <TextBox
+                                Grid.Column="2"
+                                Style="{StaticResource StandardTextBoxStyle}"
+                                Text="{Binding ThanhTienCuaMatHangXuatFrom}" />
+                            <TextBlock
+                                Grid.Column="3"
+                                Style="{StaticResource RedHighlightTextBlockStyle}"
+                                Text="đến" />
+                            <TextBox
+                                Grid.Column="4"
+                                Style="{StaticResource StandardTextBoxStyle}"
+                                Text="{Binding ThanhTienCuaMatHangXuatTo}" />
+                        </Grid>
+
+                        <!--  Số lượng tồn của mặt hàng xuất  -->
+                        <Grid Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock
+                                Grid.Column="0"
+                                Margin="20,0,0,0"
+                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
+                                Text="Ngày nhập" />
+                            <TextBlock
+                                Grid.Column="1"
+                                Style="{StaticResource RedHighlightTextBlockStyle}"
+                                Text="từ" />
+                            <DatePicker
+                                Grid.Column="2"
+                                SelectedDate="{Binding NgayLapPhieuXuatFrom}"
+                                Style="{StaticResource StandardDatePickerStyle}" />
+                            <TextBlock
+                                Grid.Column="3"
+                                Style="{StaticResource RedHighlightTextBlockStyle}"
+                                Text="đến" />
+                            <DatePicker
+                                Grid.Column="4"
+                                SelectedDate="{Binding NgayLapPhieuXuatTo}"
+                                Style="{StaticResource StandardDatePickerStyle}" />
+                        </Grid>
+                    </Grid>
+
+                    <Grid
+                        Grid.Row="6"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50*" />
+                            <ColumnDefinition Width="50*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                Grid.Column="0"
+                                Margin="20,0,0,0"
+                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
+                                Text="Số lượng nhập" />
+                            <TextBlock
+                                Grid.Column="1"
+                                Style="{StaticResource RedHighlightTextBlockStyle}"
+                                Text="từ" />
+                            <TextBox
+                                Grid.Column="2"
+                                Style="{StaticResource StandardTextBoxStyle}"
+                                Text="{Binding ThanhTienCuaMatHangXuatFrom}" />
+                            <TextBlock
+                                Grid.Column="3"
+                                Style="{StaticResource RedHighlightTextBlockStyle}"
+                                Text="đến" />
+                            <TextBox
+                                Grid.Column="4"
+                                Style="{StaticResource StandardTextBoxStyle}"
+                                Text="{Binding ThanhTienCuaMatHangXuatTo}" />
+
+                        </Grid>
+
+
+                    </Grid>
+                </Grid>
+            </Border>
+
+            <!--  Footer  -->
+            <StackPanel
+                Grid.Row="4"
+                Margin="20"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Stretch"
+                Orientation="Horizontal">
+                <Button Command="{Binding SearchDaiLyCommand}" Style="{StaticResource WindowPrimaryButtonStyle}">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:FontAwesome Margin="0,0,10,0" Icon="Search" />
+                        <TextBlock Text="Tra cứu sách" />
+                    </StackPanel>
+                </Button>
+
+                <Button Command="{Binding CloseWindowCommand}" Style="{StaticResource WindowSignoutButtonStyle}">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:FontAwesome Margin="0,0,10,0" Icon="SignOut" />
+                        <TextBlock Text="Thoát" />
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Border>
 </Window>
+
