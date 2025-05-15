@@ -22,8 +22,8 @@ public partial class App : Application
         services.ConfigureServices();
         ServiceProvider = services.BuildServiceProvider();
 
-        //var dbService = ServiceProvider.GetRequiredService<DatabaseConfig>();
-        //await dbService.Initialize();
+        var dbService = ServiceProvider.GetRequiredService<DatabaseConfig>();
+        await dbService.Initialize();
 
         var mainWindow = ServiceProvider.GetRequiredService<Views.MainWindow>();
         mainWindow.Show();
