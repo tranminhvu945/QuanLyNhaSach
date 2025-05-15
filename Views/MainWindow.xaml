@@ -2,11 +2,255 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:QuanLyNhaSach.Views"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="Danh sách phiếu nhập sách"
+        d:DesignHeight="1536"
+        d:DesignWidth="1536"
+        Background="#F7F9FD"
+        WindowState="Maximized"
+        mc:Ignorable="d">
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Style="{StaticResource AppHeaderBorderStyle}">
+            <Grid Style="{StaticResource AppHeaderGridStyle}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel
+                x:Name="StackPanelTabButton"
+                Grid.Column="1"
+                Style="{StaticResource AppHeaderRightContentStyle}"
+                Visibility="Visible">
+                    <RadioButton
+                    Checked="RadioButton_Checked"
+                    GroupName="TabGroup"
+                    IsChecked="True"
+                    Style="{StaticResource TabBarButtonStyle}"
+                    Tag="BaoCao">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:FontAwesome Margin="3,0,10,0" Icon="LineChart" />
+                            <TextBlock Text="Báo cáo" />
+                        </StackPanel>
+                    </RadioButton>
+                    <RadioButton
+                    Checked="RadioButton_Checked"
+                    GroupName="TabGroup"
+                    Style="{StaticResource TabBarButtonStyle}"
+                    Tag="Sach">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:FontAwesome Margin="3,0,10,0" Icon="Book" />
+                            <TextBlock Text="Sách" />
+                        </StackPanel>
+                    </RadioButton>
+                    <RadioButton
+                    Checked="RadioButton_Checked"
+                    GroupName="TabGroup"
+                    Style="{StaticResource TabBarButtonStyle}"
+                    Tag="KhachHang">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:FontAwesome Margin="7,0,15,0" Icon="Users" />
+                            <TextBlock Text="Khách hàng" />
+                        </StackPanel>
+                    </RadioButton>
+                    <RadioButton
+                    Checked="RadioButton_Checked"
+                    GroupName="TabGroup"
+                    Style="{StaticResource TabBarButtonStyle}"
+                    Tag="HoaDon">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:FontAwesome Margin="3,0,10,0" Icon="Cubes" />
+                            <TextBlock Text="Hóa đơn" />
+                        </StackPanel>
+                    </RadioButton>
+                    <RadioButton
+                    Checked="RadioButton_Checked"
+                    GroupName="TabGroup"
+                    Style="{StaticResource TabBarButtonStyle}"
+                    Tag="PhieuThu">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:FontAwesome Margin="3,0,10,0" Icon="Money" />
+                            <TextBlock Text="Phiếu thu" />
+                        </StackPanel>
+                    </RadioButton>
+                    <RadioButton
+                    Checked="RadioButton_Checked"
+                    GroupName="TabGroup"
+                    Style="{StaticResource TabBarButtonStyle}"
+                    Tag="PhieuSach">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:FontAwesome Margin="3,0,11,0" Icon="FileText" />
+                            <TextBlock Text="Phiếu nhập sách" />
+                        </StackPanel>
+                    </RadioButton>
+                    <RadioButton
+                    Margin="10,0,0,0"
+                    Checked="RadioButton_Checked"
+                    GroupName="TabGroup"
+                    Style="{StaticResource TabBarButtonStyle}"
+                    Tag="ThamSo">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:FontAwesome Margin="3,0,10,0" Icon="Cogs" />
+                            <TextBlock Text="Tham số" />
+                        </StackPanel>
+                    </RadioButton>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+
+        <Grid
+        Grid.Row="1"
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Stretch">
+            <Border
+            Margin="10"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Background="White"
+            CornerRadius="10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="15*" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="80*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock
+                    Grid.Row="0"
+                    Style="{StaticResource PageHeaderTextBlockStyle}"
+                    Text="Danh sách phiếu nhập sách" />
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".5*" />
+                            <ColumnDefinition Width=".5*" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel
+                        Grid.Column="0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal">
+
+                            <Button
+                            Margin="20,0,0,0"
+                            Command="{Binding SearchDaiLyCommand}"
+                            Style="{StaticResource PrimaryButtonStyle}" Width="224">
+                                <StackPanel Orientation="Horizontal">
+                                    <fa:FontAwesome
+                                    Margin="0,0,8,0"
+                                    VerticalAlignment="Center"
+                                    Icon="Search" />
+                                    <TextBlock VerticalAlignment="Center" Text="Tra cứu phiếu nhập sách" />
+                                </StackPanel>
+                            </Button>
+                            <Button
+                            Width="50"
+                            Margin="10,0,0,0"
+                            Command="{Binding LoadDataCommand}"
+                            Style="{StaticResource PrimaryButtonStyle}">
+                                <fa:FontAwesome VerticalAlignment="Center" Icon="Refresh" />
+                            </Button>
+
+                        </StackPanel>
+
+                        <StackPanel
+                        Grid.Column="1"
+                        Margin="0,0,20,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal">
+
+                            <Button Command="{Binding AddDaiLyCommand}" Style="{StaticResource PrimaryButtonStyle}">
+                                <StackPanel Orientation="Horizontal">
+                                    <fa:FontAwesome
+                                    Margin="0,0,8,0"
+                                    VerticalAlignment="Center"
+                                    Icon="Plus" />
+                                    <TextBlock VerticalAlignment="Center" Text="Lập phiếu nhập sách" />
+                                </StackPanel>
+                            </Button>
+
+                            <Button
+                            Margin="10,0,0,0"
+                            Command="{Binding EditDaiLyCommand}"
+                            Style="{StaticResource PrimaryButtonStyle}" Width="234">
+                                <StackPanel Orientation="Horizontal">
+                                    <fa:FontAwesome
+                                    Margin="0,0,8,0"
+                                    VerticalAlignment="Center"
+                                    Icon="Edit" />
+                                    <TextBlock VerticalAlignment="Center" Text="Cập nhật phiếu nhập sách" />
+                                </StackPanel>
+                            </Button>
+
+                            <Button
+                            Margin="10,0,0,0"
+                            Command="{Binding DeleteDaiLyCommand}"
+                            Style="{StaticResource DeleteButtonStyle}">
+                                <StackPanel Orientation="Horizontal">
+                                    <fa:FontAwesome
+                                    Margin="0,0,8,0"
+                                    VerticalAlignment="Center"
+                                    Icon="Trash" />
+                                    <TextBlock VerticalAlignment="Center" Text="Xóa phiếu nhập sách" />
+                                </StackPanel>
+                            </Button>
+
+                        </StackPanel>
+                    </Grid>
+
+                    <Border
+                    Grid.Row="2"
+                    Margin="20"
+                    Background="#F7F9FD"
+                    BorderBrush="#E0E0E0"
+                    BorderThickness="1">
+                        <DataGrid
+                        ItemsSource="{Binding DanhSachDaiLy}"
+                        SelectedItem="{Binding SelectedDaiLy}"
+                        Style="{StaticResource DefaultDataGridStyle}">
+
+                            <DataGrid.Columns>
+                                <DataGridTextColumn
+                                Width="*"
+                                Binding="{Binding MaDaiLy}"
+                                ElementStyle="{StaticResource ColumnTextBlockStyle}"
+                                Header="Mã phiếu nhập" />
+
+                                <DataGridTextColumn
+                                Width="*"
+                                Binding="{Binding TenDaiLy}"
+                                ElementStyle="{StaticResource ColumnTextBlockStyle}"
+                                Header="Ngày nhập" />
+
+
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Border>
+
+
+                </Grid>
+            </Border>
+
+            <Frame
+            x:Name="MainContent"
+            Grid.Column="1"
+            VerticalAlignment="Stretch"
+            Panel.ZIndex="1"
+            ContentRendered="MainContent_ContentRendered"
+            IsHitTestVisible="True"
+            Navigated="MainContent_Navigated"
+            NavigationUIVisibility="Hidden" />
+        </Grid>
     </Grid>
 </Window>
+

@@ -1,0 +1,313 @@
+﻿<Page x:Class="QuanLyNhaSach.Views.BaoCaoViews.BaoCaoChiTietPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:fa="http://schemas.fontawesome.io/icons/"
+    xmlns:helpers="clr-namespace:QuanLyNhaSach.Helpers"
+    xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="BaoCaoChiTietPage"
+    d:DesignHeight="1536"
+    d:DesignWidth="1536"
+    Background="#F7F9FD"
+    mc:Ignorable="d">
+
+    <!--  Page Resources  -->
+    <Page.Resources>
+        <DropShadowEffect
+            x:Key="DropShadowEffect"
+            BlurRadius="10"
+            Opacity="0.5"
+            ShadowDepth="0"
+            Color="Black" />
+        <helpers:ComboBoxItemConverter x:Key="ComboBoxItemConverter" />
+    </Page.Resources>
+
+    <Border
+        Margin="10"
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Stretch"
+        Background="White"
+        CornerRadius="10">
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock
+                Margin="20,10,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Style="{StaticResource PageHeaderTextBlockStyle}"
+                Text="Báo cáo chi tiết" />
+
+            <Grid
+                Grid.Row="1"
+                Margin="20"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*" />
+                    <RowDefinition Height="5*" />
+                </Grid.RowDefinitions>
+
+                <Grid
+                    Grid.Row="0"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch">
+                    <Border
+                        Margin="0,10"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Background="#F9F9FA"
+                        CornerRadius="10">
+                        <Grid
+                            Margin="15,10"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="75" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <Grid
+                                Grid.Row="0"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock
+                                    Grid.Column="0"
+                                    VerticalAlignment="Center"
+                                    FontFamily="Nunito"
+                                    FontSize="28"
+                                    FontWeight="Bold"
+                                    Text="Thống kê Tồn sách trong tháng" />
+
+                                <StackPanel
+                                    Grid.Column="0"
+                                    Margin="0,10,10,15"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Orientation="Horizontal">
+                                    <Grid Width="120" Margin="0,0,15,0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock
+                                            Grid.Row="0"
+                                            Style="{StaticResource MonthYearWidget}"
+                                            Text="Tháng" />
+                                        <ComboBox
+                                            Grid.Row="1"
+                                            Height="25"
+                                            Margin="0,3,0,0"
+                                            ItemsSource="{Binding MonthOptions}"
+                                            SelectedItem="{Binding SelectedDoanhSoMonth}"
+                                            Style="{StaticResource SmallComboBoxStyle}" />
+                                    </Grid>
+
+                                    <Grid Width="130">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock
+                                            Grid.Row="0"
+                                            Style="{StaticResource MonthYearWidget}"
+                                            Text="Năm" />
+                                        <ComboBox
+                                            Grid.Row="1"
+                                            Height="25"
+                                            Margin="0,3,0,0"
+                                            ItemsSource="{Binding YearOptions}"
+                                            SelectedItem="{Binding SelectedDoanhSoYear, Mode=TwoWay}"
+                                            Style="{StaticResource SmallComboBoxStyle}" />
+                                    </Grid>
+                                </StackPanel>
+                                <Border
+                                    Grid.Column="1"
+                                    Margin="10,0,0,0"
+                                    HorizontalAlignment="Right">
+                                    <Button Command="{Binding DoanhSoCommand}" Style="{StaticResource SmallButtonStyle}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <fa:FontAwesome Margin="0,0,10,0" Icon="FileText" />
+                                            <TextBlock Text="Lập báo cáo tồn" />
+                                        </StackPanel>
+                                    </Button>
+                                </Border>
+                            </Grid>
+
+                            <lvc:CartesianChart
+                                Grid.Row="1"
+                                Margin="10"
+                                DataTooltip="{Binding DoanhSoTooltip}"
+                                DisableAnimations="False"
+                                Hoverable="True"
+                                LegendLocation="None"
+                                Series="{Binding DoanhSoSeries}">
+
+                                <lvc:CartesianChart.AxisX>
+                                    <lvc:Axis
+                                        FontFamily="Nunito"
+                                        FontSize="12"
+                                        Labels="{Binding DoanhSoLabels}">
+                                        <lvc:Axis.Separator>
+                                            <lvc:Separator IsEnabled="False" Step="1" />
+                                        </lvc:Axis.Separator>
+                                    </lvc:Axis>
+                                </lvc:CartesianChart.AxisX>
+
+                                <lvc:CartesianChart.AxisY>
+                                    <lvc:Axis
+                                        FontFamily="Nunito"
+                                        FontSize="14"
+                                        LabelFormatter="{Binding CurrencyFormatter}">
+                                        <lvc:Axis.Separator>
+                                            <lvc:Separator Step="10000000" />
+                                        </lvc:Axis.Separator>
+                                    </lvc:Axis>
+                                </lvc:CartesianChart.AxisY>
+                            </lvc:CartesianChart>
+                        </Grid>
+                    </Border>
+                </Grid>
+
+                <Grid
+                    Grid.Row="1"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch">
+                    <Border
+                        Margin="0,10"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Background="#F9F9FA"
+                        CornerRadius="10">
+                        <Grid
+                            Margin="15,10"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="75" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <Grid
+                                Grid.Row="0"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock
+                                    Grid.Column="0"
+                                    VerticalAlignment="Center"
+                                    FontFamily="Nunito"
+                                    FontSize="28"
+                                    FontWeight="Bold"
+                                    Text="Thống kê công nợ trong tháng" />
+
+                                <StackPanel
+                                    Grid.Column="0"
+                                    Margin="0,10,10,15"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Orientation="Horizontal">
+                                    <Grid Width="120" Margin="0,0,15,0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock
+                                            Grid.Row="0"
+                                            Style="{StaticResource MonthYearWidget}"
+                                            Text="Tháng" />
+                                        <ComboBox
+                                            Grid.Row="1"
+                                            Height="25"
+                                            Margin="0,3,0,0"
+                                            ItemsSource="{Binding MonthOptions}"
+                                            SelectedItem="{Binding SelectedCongNoMonth}"
+                                            Style="{StaticResource SmallComboBoxStyle}" />
+                                    </Grid>
+
+                                    <Grid Width="130">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock
+                                            Grid.Row="0"
+                                            Style="{StaticResource MonthYearWidget}"
+                                            Text="Năm" />
+                                        <ComboBox
+                                            Grid.Row="1"
+                                            Height="25"
+                                            Margin="0,3,0,0"
+                                            ItemsSource="{Binding YearOptions}"
+                                            SelectedItem="{Binding SelectedCongNoYear, Mode=TwoWay}"
+                                            Style="{StaticResource SmallComboBoxStyle}" />
+                                    </Grid>
+                                </StackPanel>
+                                <Border
+                                    Grid.Column="1"
+                                    Margin="10,0,0,0"
+                                    HorizontalAlignment="Right">
+                                    <Button Command="{Binding CongNoCommand}" Style="{StaticResource SmallButtonStyle}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <fa:FontAwesome Margin="0,0,10,0" Icon="FileText" />
+                                            <TextBlock Text="Lập báo cáo công nợ" />
+                                        </StackPanel>
+                                    </Button>
+                                </Border>
+                            </Grid>
+
+                            <lvc:CartesianChart
+                                Grid.Row="1"
+                                Margin="10"
+                                DataTooltip="{Binding CongNoTooltip}"
+                                DisableAnimations="False"
+                                Hoverable="True"
+                                LegendLocation="None"
+                                Series="{Binding CongNoSeries}">
+
+                                <lvc:CartesianChart.AxisX>
+                                    <lvc:Axis
+                                        FontFamily="Nunito"
+                                        FontSize="12"
+                                        Labels="{Binding CongNoLabels}">
+                                        <lvc:Axis.Separator>
+                                            <lvc:Separator IsEnabled="False" Step="1" />
+                                        </lvc:Axis.Separator>
+                                    </lvc:Axis>
+                                </lvc:CartesianChart.AxisX>
+
+                                <lvc:CartesianChart.AxisY>
+                                    <lvc:Axis
+                                        FontFamily="Nunito"
+                                        FontSize="14"
+                                        LabelFormatter="{Binding CurrencyFormatter}">
+                                        <lvc:Axis.Separator>
+                                            <lvc:Separator Step="10000000" />
+                                        </lvc:Axis.Separator>
+                                    </lvc:Axis>
+                                </lvc:CartesianChart.AxisY>
+                            </lvc:CartesianChart>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Border>
+</Page>

@@ -25,7 +25,7 @@ public partial class App : Application
         //var dbService = ServiceProvider.GetRequiredService<DatabaseConfig>();
         //await dbService.Initialize();
 
-        var mainWindow = ServiceProvider.GetRequiredService<Views.TraCuuPhieuNhapSachWindow>();
+        var mainWindow = ServiceProvider.GetRequiredService<Views.MainWindow>();
         mainWindow.Show();
     }
 }
