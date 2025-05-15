@@ -37,7 +37,7 @@
                     Grid.Column="0"
                     Margin="20,15,0,0"
                     VerticalAlignment="Center">
-                    <TextBlock Style="{StaticResource WindowHeaderTextBlockStyle}" Text="Cập nhật phiếu nhập sách" />
+                    <TextBlock Style="{StaticResource WindowHeaderTextBlockStyle}" Text="Cập nhật nhập sách" />
                 </StackPanel>
 
                 <StackPanel
@@ -256,7 +256,7 @@
                                     <Setter Property="FontWeight" Value="SemiBold" />
                                     <Setter Property="FontSize" Value="20" />
                                     <Setter Property="Foreground" Value="#333333" />
-                                    <Setter Property="Height" Value="40" />
+                                    <Setter Property="Height" Value="50" />
                                     <Setter Property="HorizontalContentAlignment" Value="Center" />
                                     <Setter Property="VerticalContentAlignment" Value="Center" />
                                     <Setter Property="BorderThickness" Value="0" />
@@ -387,6 +387,39 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
+                                <DataGridTemplateColumn Width="*" IsReadOnly="True">
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="Số lượng tồn được nhập"
+                                                        TextWrapping="Wrap"
+                                                        TextAlignment="Center"
+                                                        FontWeight="SemiBold"
+                                                        FontFamily="Open Sans"
+                                                        FontSize="20"
+                                                        Padding="5"
+                                                        MinHeight="60" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
+
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Border Width="150" Padding="10,5" HorizontalAlignment="Center" Background="#A2A2A2" BorderBrush="#33000000" BorderThickness="1" CornerRadius="10">
+                                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Open Sans" FontSize="20" Foreground="White" Text="{Binding SoLuongTon}" TextAlignment="Center">
+                                                    <TextBlock.Style>
+                                                        <Style TargetType="TextBlock">
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=IsSelected}" Value="True">
+                                                                    <Setter Property="FontWeight" Value="SemiBold" />
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </TextBlock.Style>
+                                                </TextBlock>
+                                            </Border>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
                                 <!--  SỐ LƯỢNG XUẤT Column  -->
                                 <DataGridTemplateColumn
                                     Width="*"
@@ -424,6 +457,40 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
+
+                                <DataGridTemplateColumn Width="*" IsReadOnly="True">
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="Số lượng Nhập tối thiểu"
+                                                        TextWrapping="Wrap"
+                                                        TextAlignment="Center"
+                                                        FontWeight="SemiBold"
+                                                        FontFamily="Open Sans"
+                                                        FontSize="20"
+                                                        Padding="5"
+                                                        MinHeight="60" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
+
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Border Width="150" Padding="10,5" HorizontalAlignment="Center" Background="#A2A2A2" BorderBrush="#33000000" BorderThickness="1" CornerRadius="10">
+                                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Open Sans" FontSize="20" Foreground="White" Text="{Binding SoLuongTon}" TextAlignment="Center">
+                                                    <TextBlock.Style>
+                                                        <Style TargetType="TextBlock">
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=IsSelected}" Value="True">
+                                                                    <Setter Property="FontWeight" Value="SemiBold" />
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </TextBlock.Style>
+                                                </TextBlock>
+                                            </Border>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
 
                                 <!--  ĐƠN GIÁ XUẤT Column  -->
                                 <DataGridTemplateColumn Width="*" Header="Số lượng nhập">
@@ -471,6 +538,7 @@
                     </Border>
                 </Grid>
             </Border>
+
 
             <!--  Footer  -->
             <StackPanel
