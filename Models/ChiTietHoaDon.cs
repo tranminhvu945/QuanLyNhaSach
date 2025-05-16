@@ -20,6 +20,9 @@ namespace QuanLyNhaSach.Models
         [Range(0, long.MaxValue)]
         public long DonGiaBan { get; set; } = 0;
 
+        [Range(0, long.MaxValue)]
+        public long ThanhTien { get; set; } = 0;
+
         /* ---------- Navigation ---------- */
         public HoaDon HoaDon { get; set; } = null!;
         public Sach Sach { get; set; } = null!;

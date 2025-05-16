@@ -48,7 +48,6 @@ namespace QuanLyNhaSach.ViewModels.PhieuThuViewModel
                 _ = LoadDataAsync();
             }
         }
-
         private async Task LoadDataAsync()
         {
             try

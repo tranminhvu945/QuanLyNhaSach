@@ -37,9 +37,9 @@ namespace QuanLyNhaSach.ViewModels.PhieuThuViewModel
             if (KhachHanges.Count() > 0)
             {
                 SelectedKhachHang = KhachHanges.First();
-                SoDienThoai = SelectedKhachHang.DienThoai;
-                Email = SelectedKhachHang.Email;
-                DiaChi = SelectedKhachHang.DiaChi;
+                SoDienThoai = SelectedKhachHang.DienThoai ?? string.Empty ;
+                Email = SelectedKhachHang.Email ?? string.Empty;
+                DiaChi = SelectedKhachHang.DiaChi ?? string.Empty;
                 TienNo = SelectedKhachHang.TienNo;
                 var thamso = await _thamSoService.GetThamSo();
                 _quyDinhTienThuTienNo = thamso.QuyDinhTienThuTienNo;
@@ -65,9 +65,9 @@ namespace QuanLyNhaSach.ViewModels.PhieuThuViewModel
                 SetProperty(ref _selectedKhachHang, value);
                 if (_selectedKhachHang != null)
                 {
-                    SoDienThoai = _selectedKhachHang.DienThoai;
-                    Email = _selectedKhachHang.Email;
-                    DiaChi = _selectedKhachHang.DiaChi;
+                    SoDienThoai = _selectedKhachHang.DienThoai ?? string.Empty;
+                    Email = _selectedKhachHang.Email ?? string.Empty;
+                    DiaChi = _selectedKhachHang.DiaChi ?? string.Empty;
                     TienNo = _selectedKhachHang.TienNo;
                 }
             }
