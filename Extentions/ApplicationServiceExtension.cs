@@ -3,6 +3,9 @@ using QuanLyNhaSach.Configs;
 using QuanLyNhaSach.Helpers;
 using QuanLyNhaSach.Repositories;
 using QuanLyNhaSach.Services;
+using QuanLyNhaSach.ViewModels.BaoCaoViewModel;
+using QuanLyNhaSach.ViewModels.PhieuThuViewModel;
+using QuanLyNhaSach.Views.BaoCaoViews;
 
 namespace QuanLyNhaSach.Extentions
 {
@@ -27,7 +30,12 @@ namespace QuanLyNhaSach.Extentions
             services.AddSingleton<ComboBoxItemConverter>();
 
             // Register ViewModels
-
+            services.AddTransient<BaoCaoChiTietViewModel>();
+            services.AddTransient<BaoCaoCongNoViewModel>();
+            services.AddTransient<BaoCaoTonSachViewModel>();
+            services.AddTransient<PhieuThuPageViewModel>();
+            services.AddTransient<ThemPhieuThuWindowViewModel>();
+            services.AddTransient<TraCuuPhieuThuWindowViewModel>();
 
             // Register Views
             services.AddTransient<Views.TraCuuPhieuNhapSachWindow>();
@@ -45,7 +53,6 @@ namespace QuanLyNhaSach.Extentions
             services.AddTransient<Views.KhachHangViews.CapNhatKhachHangWindow>();
             services.AddTransient<Views.KhachHangViews.ThemKhachHangWindow>();
             services.AddTransient<Views.KhachHangViews.TraCuuKhachHangWindow>();
-
 
             services.AddTransient<Views.PhieuThuViews.PhieuThuPage>();
             services.AddTransient<Views.PhieuThuViews.ThemPhieuThuWindow>();
