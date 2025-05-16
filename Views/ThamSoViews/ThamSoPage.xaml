@@ -267,7 +267,7 @@
 
 
                             <TextBox
-                                Style="{StaticResource ReadOnlyTextBoxStyle}"
+                                Style="{StaticResource StandardTextBoxStyle}"
                                 Text="{Binding SoLuongNhapToiThieu}"
                                 Width="300"
                                 Height="70"
@@ -280,7 +280,7 @@
                         <Grid>
 
                             <TextBox
-                                Style="{StaticResource ReadOnlyTextBoxStyle}"
+                                Style="{StaticResource StandardTextBoxStyle}"
                                 Text="{Binding SoLuongTonToiThieu}"
                                 Height="70"
                                 Width="300"
@@ -296,7 +296,7 @@
 
                             <TextBox
                                 Grid.Column="0"
-                                Style="{StaticResource ReadOnlyTextBoxStyle}"
+                                Style="{StaticResource StandardTextBoxStyle}"
                                 Text="{Binding SoLuongTonToiDa}"
                                 Height="70"
                                 Width="300"
@@ -310,7 +310,7 @@
 
                             <TextBox
                                 Grid.Column="0"
-                                Style="{StaticResource ReadOnlyTextBoxStyle}"
+                                Style="{StaticResource StandardTextBoxStyle}"
                                 Text="{Binding TienNoToiDa}"
                                 Height="70"
                                 Width="300"
@@ -326,8 +326,6 @@
                          HorizontalAlignment="Center"
                          Cursor="Hand"
                          IsChecked="{Binding QuyDinhTienThuTienNo}"
-                         IsHitTestVisible="False"
-                         Focusable="False"
                          Height="110" >
                             <ToggleButton.Resources>
                                 <Style TargetType="{x:Type Border}">
@@ -412,6 +410,8 @@
                             </ToggleButton.Style>
                         </ToggleButton>
                     </Border>
+                    
+                    
 
             <Border Margin="20,0,20,20" Padding="15" CornerRadius="8" Height="110" >
                         <Button
