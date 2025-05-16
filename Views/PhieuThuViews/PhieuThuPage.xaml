@@ -42,7 +42,7 @@
 
                     <Button
                         Margin="20,0,0,0"
-                        Command="{Binding SearchPhieuXuatCommand}"
+                        Command="{Binding SearchPhieuThuCommand}"
                         Style="{StaticResource PrimaryButtonStyle}">
                         <StackPanel Orientation="Horizontal">
                             <fa:FontAwesome
@@ -69,7 +69,7 @@
                     VerticalAlignment="Center"
                     Orientation="Horizontal">
 
-                    <Button Command="{Binding AddPhieuXuatCommand}" Style="{StaticResource PrimaryButtonStyle}">
+                    <Button Command="{Binding AddPhieuThuCommand}" Style="{StaticResource PrimaryButtonStyle}">
                         <StackPanel Orientation="Horizontal">
                             <fa:FontAwesome
                                 Margin="0,0,8,0"
@@ -81,7 +81,7 @@
 
                     <Button
                         Margin="10,0,0,0"
-                        Command="{Binding DeletePhieuXuatCommand}"
+                        Command="{Binding DeletePhieuThuCommand}"
                         Style="{StaticResource DeleteButtonStyle}">
                         <StackPanel Orientation="Horizontal">
                             <fa:FontAwesome
@@ -102,32 +102,32 @@
                 BorderBrush="#E0E0E0"
                 BorderThickness="1">
                 <DataGrid
-                    ItemsSource="{Binding DanhSachPhieuXuat}"
-                    SelectedItem="{Binding SelectedPhieuXuat}"
+                    ItemsSource="{Binding DanhSachPhieuThu}"
+                    SelectedItem="{Binding SelectedPhieuThu}"
                     Style="{StaticResource DefaultDataGridStyle}">
 
                     <DataGrid.Columns>
                         <DataGridTextColumn
                             Width="*"
-                            Binding="{Binding MaPhieuXuat}"
+                            Binding="{Binding MaPhieuThu}"
                             ElementStyle="{StaticResource ColumnTextBlockStyle}"
                             Header="Mã phiếu thu" />
 
                         <DataGridTextColumn
                             Width="*"
-                            Binding="{Binding DaiLy.TenDaiLy}"
+                            Binding="{Binding KhachHang.TenKhachHang}"
                             ElementStyle="{StaticResource ColumnTextBlockStyle}"
                             Header="Tên khách hàng" />
 
                         <DataGridTextColumn
                             Width="*"
-                            Binding="{Binding NgayLapPhieu, StringFormat={}{0:dd/MM/yyyy}}"
+                            Binding="{Binding NgayThu, StringFormat={}{0:dd/MM/yyyy}}"
                             ElementStyle="{StaticResource ColumnTextBlockStyle}"
                             Header="Ngày thu tiền" />
 
                         <DataGridTextColumn
                             Width="*"
-                            Binding="{Binding TongTriGia, StringFormat={}{0:N0} VNĐ}"
+                            Binding="{Binding SoTienThu, StringFormat={}{0:N0} VNĐ}"
                             ElementStyle="{StaticResource ColumnTextBlockStyle}"
                             Header="Số tiền thu" />
 
