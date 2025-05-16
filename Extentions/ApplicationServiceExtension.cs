@@ -33,9 +33,14 @@ namespace QuanLyNhaSach.Extentions
             services.AddTransient<BaoCaoChiTietViewModel>();
             services.AddTransient<BaoCaoCongNoViewModel>();
             services.AddTransient<BaoCaoTonSachViewModel>();
+
             services.AddTransient<PhieuThuPageViewModel>();
             services.AddTransient<ThemPhieuThuWindowViewModel>();
             services.AddTransient<TraCuuPhieuThuWindowViewModel>();
+
+            services.AddTransient<ViewModels.ThamSoViewModel.ThamSoPageViewModel>();
+            services.AddTransient<ViewModels.ThamSoViewModel.CapNhatThamSoWindowViewModel>();
+
 
             // Register Views
             services.AddTransient<Views.TraCuuPhieuNhapSachWindow>();
@@ -64,6 +69,7 @@ namespace QuanLyNhaSach.Extentions
             services.AddTransient<Views.HoaDonBanViews.TraCuuHoaDonBanWindow>();
 
             services.AddTransient<Views.ThamSoViews.ThamSoPage>();
+            services.AddTransient<Views.ThamSoViews.CapNhatThamSoWindow>();
 
             services.AddTransient<Views.BaoCaoViews.BaoCaoChiTietPage>();
             services.AddTransient<Views.BaoCaoViews.BaoCaoCongNoWindow>();
