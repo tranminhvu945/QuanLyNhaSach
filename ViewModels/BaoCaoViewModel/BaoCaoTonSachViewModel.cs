@@ -158,7 +158,7 @@ namespace QuanLyNhaSach.ViewModels.BaoCaoViewModel
                             if (hoaDon.NgayLap.Month == month && hoaDon.NgayLap.Year == year)
                                 phatSinh -= chiTiet.SoLuongBan;
                     }
-                    TongTonCuoiThang = tonDau + phatSinh;
+                    TongTonCuoiThang += tonDau + phatSinh;
                     BaoCaoTonSachList.Add(new BaoCaoTonSach
                     {
                         STT = BaoCaoTonSachList.Count + 1,
@@ -243,11 +243,11 @@ namespace QuanLyNhaSach.ViewModels.BaoCaoViewModel
                                     {
                                         table.ColumnsDefinition(columns =>
                                         {
-                                            columns.ConstantColumn(50); // STT
-                                            columns.RelativeColumn(2); // Tên Sách
-                                            columns.RelativeColumn(); // Nợ đầu
-                                            columns.RelativeColumn(); // Giao dịch
-                                            columns.RelativeColumn(); // Nợ cuối
+                                            columns.ConstantColumn(50); 
+                                            columns.RelativeColumn(2); 
+                                            columns.RelativeColumn(); 
+                                            columns.RelativeColumn();
+                                            columns.RelativeColumn(); 
                                         });
 
                                         // Tiêu đề cột (Thêm màu nền xanh nhạt và căn giữa)
@@ -255,9 +255,9 @@ namespace QuanLyNhaSach.ViewModels.BaoCaoViewModel
                                         {
                                             header.Cell().Element(CellStyle).AlignCenter().Text("STT").Bold();
                                             header.Cell().Element(CellStyle).AlignCenter().Text("Tên Sách").Bold();
-                                            header.Cell().Element(CellStyle).AlignCenter().Text("Nợ Đầu").Bold();
-                                            header.Cell().Element(CellStyle).AlignCenter().Text("Giao Dịch").Bold();
-                                            header.Cell().Element(CellStyle).AlignCenter().Text("Nợ Cuối").Bold();
+                                            header.Cell().Element(CellStyle).AlignCenter().Text("Tồn Đầu").Bold();
+                                            header.Cell().Element(CellStyle).AlignCenter().Text("Phát Sinh").Bold();
+                                            header.Cell().Element(CellStyle).AlignCenter().Text("Tồn Cuối").Bold();
                                         });
 
                                         // Dữ liệu (Căn giữa các ô)
