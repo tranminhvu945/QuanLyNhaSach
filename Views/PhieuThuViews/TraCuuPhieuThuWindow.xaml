@@ -87,7 +87,7 @@
                             <TextBox
                                 Grid.Row="1"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding MaPhieuThu}" />
+                                Text="{Binding MaPhieuThu}" Margin="10,10,10,21" />
                         </Grid>
 
                         <Grid Grid.Column="1">
@@ -104,7 +104,7 @@
                                 Grid.Row="1"
                                 ItemsSource="{Binding Khachhanges}"
                                 SelectedItem="{Binding SelectedKhachHang}"
-                                Style="{StaticResource StandardComboBoxStyle}">
+                                Style="{StaticResource StandardComboBoxStyle}" Margin="10,10,10,21">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding TenKhachHang}" />
@@ -126,7 +126,7 @@
                             <TextBox
                                 Grid.Row="1"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding DienThoai}" />
+                                Text="{Binding DienThoai}" Margin="10,10,10,22" />
                         </Grid>
 
                         <Grid Grid.Column="3">
@@ -215,7 +215,7 @@
                             <TextBox
                                 Grid.Column="2"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding TienNoFrom}" />
+                                Text="{Binding TienNoFrom}" Margin="10,10,10,10" />
                             <TextBlock
                                 Grid.Column="3"
                                 Style="{StaticResource RedHighlightTextBlockStyle}"
