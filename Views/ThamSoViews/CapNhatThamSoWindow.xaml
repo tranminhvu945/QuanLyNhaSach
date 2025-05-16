@@ -5,7 +5,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:fa="http://schemas.fontawesome.io/icons/"
 
-    d:DesignHeight="1300"
+    WindowState="Maximized"
+    d:DesignHeight="1100"
     d:DesignWidth="1536"
     Background="White"
     mc:Ignorable="d">
@@ -74,8 +75,6 @@
             </StackPanel>
         </Grid>
 
-
-
         <Border
             Grid.Row="1"
             Margin="20"
@@ -93,8 +92,9 @@
                     ShadowDepth="3"
                     Color="#AAAAAA" />
             </Border.Effect>
-
-            <Grid>
+            
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*" />
                     <ColumnDefinition Width="*" />
@@ -362,7 +362,7 @@
                          VerticalContentAlignment="Center"
                          HorizontalAlignment="Center"
                          Cursor="Hand"
-                         IsChecked="{Binding QuyDinhTienThuTienNo}" Checked="ToggleButton_Checked" Height="110" >
+                         IsChecked="{Binding QuyDinhTienThuTienNo}" Height="110" >
                             <ToggleButton.Resources>
                                 <Style TargetType="{x:Type Border}">
                                     <Setter Property="CornerRadius" Value="30" />
@@ -449,7 +449,7 @@
                     <Border Margin="20,0,20,20" Padding="15" CornerRadius="8" Height="110" >
                         <Button
                         Margin="0,0,0,0"
-                        Command="{Binding EditPhieuXuatCommand}"
+                        Command="{Binding SaveChangeCommand}"
                         Style="{StaticResource PrimaryButtonStyle}" Width="300" Height="70">
                             <StackPanel Orientation="Horizontal">
                                 <fa:FontAwesome
@@ -458,7 +458,7 @@
                                 Icon="Save" />
                                 <TextBlock VerticalAlignment="Center"
                                            FontSize="25"
-                                           Text="Cập nhật tham số" />
+                                           Text="Lưu thay đổi" />
                             </StackPanel>
                         </Button>
                     </Border>
@@ -466,6 +466,7 @@
 
                 </StackPanel>
             </Grid>
+            </ScrollViewer>
         </Border>
     </Grid>
 </Window>
