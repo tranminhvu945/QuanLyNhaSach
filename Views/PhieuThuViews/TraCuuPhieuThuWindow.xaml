@@ -45,7 +45,7 @@
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center">
                     <Button
-                        Command="{Binding CloseCommand}"
+                        Command="{Binding CloseWindowCommand}"
                         Content="❌"
                         Style="{StaticResource WindowCloseButtonStyle}" />
                 </StackPanel>
@@ -102,13 +102,12 @@
                                 Text="Tên khách hàng" />
                             <ComboBox
                                 Grid.Row="1"
-                                IsEditable="True"
-                                ItemsSource="{Binding DaiLies}"
-                                SelectedItem="{Binding SelectedDaiLy}"
+                                ItemsSource="{Binding Khachhanges}"
+                                SelectedItem="{Binding SelectedKhachHang}"
                                 Style="{StaticResource StandardComboBoxStyle}">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding TenDaiLy}" />
+                                        <TextBlock Text="{Binding TenKhachHang}" />
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
@@ -216,7 +215,7 @@
                             <TextBox
                                 Grid.Column="2"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding NoDaiLyFrom}" />
+                                Text="{Binding TienNoFrom}" />
                             <TextBlock
                                 Grid.Column="3"
                                 Style="{StaticResource RedHighlightTextBlockStyle}"
@@ -224,7 +223,7 @@
                             <TextBox
                                 Grid.Column="4"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding NoDaiLyTo}" />
+                                Text="{Binding TienNoTo}" />
                         </Grid>
                     </Grid>
 
@@ -310,14 +309,14 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Stretch"
                 Orientation="Horizontal">
-                <Button Command="{Binding TraCuuPhieuThuCommand}" Style="{StaticResource WindowPrimaryButtonStyle}">
+                <Button Command="{Binding SearchPhieuThuCommand}" Style="{StaticResource WindowPrimaryButtonStyle}">
                     <StackPanel Orientation="Horizontal">
                         <fa:FontAwesome Margin="0,0,10,0" Icon="Search" />
                         <TextBlock Text="Tra cứu Phiếu thu" />
                     </StackPanel>
                 </Button>
 
-                <Button Command="{Binding CloseCommand}" Style="{StaticResource WindowSignoutButtonStyle}">
+                <Button Command="{Binding CloseWindowCommand}" Style="{StaticResource WindowSignoutButtonStyle}">
                     <StackPanel Orientation="Horizontal">
                         <fa:FontAwesome Margin="0,0,10,0" Icon="SignOut" />
                         <TextBlock Text="Thoát" />

@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using QuanLyNhaSach.ViewModels.PhieuThuViewModel;
 
 namespace QuanLyNhaSach.Views.PhieuThuViews
 {
@@ -19,9 +20,10 @@ namespace QuanLyNhaSach.Views.PhieuThuViews
     /// </summary>
     public partial class TraCuuPhieuThuWindow : Window
     {
-        public TraCuuPhieuThuWindow()
+        public TraCuuPhieuThuWindow(TraCuuPhieuThuWindowViewModel vm)
         {
             InitializeComponent();
+            DataContext = vm;
         }
     }
 }
