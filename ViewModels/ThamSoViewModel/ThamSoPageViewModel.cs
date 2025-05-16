@@ -4,8 +4,6 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 using QuanLyNhaSach.Messages;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.Extensions.DependencyInjection;
-using QuanLyNhaSach.Views.ThamSoViews;
 namespace QuanLyNhaSach.ViewModels.ThamSoViewModel
 {
     public partial class ThamSoPageViewModel :
@@ -13,19 +11,16 @@ namespace QuanLyNhaSach.ViewModels.ThamSoViewModel
         IRecipient<DataReloadMessage>
     {
         // Services
-        private readonly IThamSoService _thamsoService;
-        private readonly IServiceProvider _serviceProvider;
-        bool isFirst = true;
+        private readonly IThamSoService _thamSoService;
 
         public ThamSoPageViewModel(
-            IThamSoService thamSoService,
-            IServiceProvider serviceProvider
+            IThamSoService thamSoService
         )
         {
-            _thamsoService = thamSoService;
-            _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
+            _thamSoService = thamSoService;
 
-            // Load tham số từ cơ sở dữ liệu
+            WeakReferenceMessenger.Default.Register<DataReloadMessage>(this);
+
             _ = LoadDataAsync();
         }
 
@@ -38,7 +33,7 @@ namespace QuanLyNhaSach.ViewModels.ThamSoViewModel
         {
             try
             {
-                var thamSo = await _thamsoService.GetThamSo();
+                var thamSo = await _thamSoService.GetThamSo();
                 if (thamSo != null)
                 {
                     SoLuongNhapToiThieu = thamSo.SoLuongNhapToiThieu;
@@ -73,51 +68,35 @@ namespace QuanLyNhaSach.ViewModels.ThamSoViewModel
         {
             try
             {
-                var window = _serviceProvider.GetRequiredService<CapNhatThamSoWindow>();
-                window.Show();
+                _ = SaveChange();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Lỗi khi mở cửa sổ chỉnh sửa tham số: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Lỗi khi cập nhật tham số: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
-        private async Task SaveChangesToDatabase()
+        private async Task SaveChange()
         {
             try
             {
-                if (isFirst)
-                {
-                    var thamSo = await _thamsoService.GetThamSo();
-                    if (thamSo != null)
-                    {
-                        SoLuongNhapToiThieu = thamSo.SoLuongNhapToiThieu;
-                        SoLuongTonToiThieu = thamSo.SoLuongTonToiThieu;
-                        SoLuongTonToiDa = thamSo.SoLuongTonToiDa;
-                        TienNoToiDa = thamSo.TienNoToiDa;
-                        QuyDinhTienThuTienNo = thamSo.QuyDinhTienThuTienNo;
-                    }
-                    isFirst = false;
-                }
-                else
-                {
-                    var thamSo = await _thamsoService.GetThamSo();
+                var thamSo = await _thamSoService.GetThamSo();
 
-                    thamSo.SoLuongNhapToiThieu = SoLuongNhapToiThieu;
-                    thamSo.SoLuongTonToiThieu = SoLuongTonToiThieu;
-                    thamSo.SoLuongTonToiDa = SoLuongTonToiDa;
-                    thamSo.TienNoToiDa = TienNoToiDa;
-                    thamSo.QuyDinhTienThuTienNo = QuyDinhTienThuTienNo;
+                thamSo.SoLuongNhapToiThieu = SoLuongNhapToiThieu;
+                thamSo.SoLuongTonToiThieu = SoLuongTonToiThieu;
+                thamSo.SoLuongTonToiDa = SoLuongTonToiDa;
+                thamSo.TienNoToiDa = TienNoToiDa;
+                thamSo.QuyDinhTienThuTienNo = QuyDinhTienThuTienNo;
 
-                    await _thamsoService.UpdateThamSo(thamSo);
-                    //await Load();
-                }
+                await _thamSoService.UpdateThamSo(thamSo);
+                MessageBox.Show("Cập nhật tham số thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Có lỗi khi lưu tham số vào cơ sở dữ liệu: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
         #endregion
     }
 }
