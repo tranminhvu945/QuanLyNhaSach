@@ -1,16 +1,18 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using QuanLyNhaSach.Services;
+﻿using QuanLyNhaSach.Services;
 using System.Windows;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 using QuanLyNhaSach.Messages;
-using QuanLyNhaSach.Models;
-
+using CommunityToolkit.Mvvm.Input;
+using Microsoft.Extensions.DependencyInjection;
+using QuanLyNhaSach.Views.ThamSoViews;
 namespace QuanLyNhaSach.ViewModels.ThamSoViewModel
 {
-    public class ThamSoPageViewModel : INotifyPropertyChanged
+    public partial class ThamSoPageViewModel :
+        ObservableObject,
+        IRecipient<DataReloadMessage>
     {
+        // Services
         private readonly IThamSoService _thamsoService;
         private readonly IServiceProvider _serviceProvider;
         bool isFirst = true;
@@ -24,65 +26,26 @@ namespace QuanLyNhaSach.ViewModels.ThamSoViewModel
             _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
 
             // Load tham số từ cơ sở dữ liệu
-            _ = Load();
+            _ = LoadDataAsync();
         }
 
-        #region Bindings Properties
-        private bool _quyDinhSoLuongDaiLyToiDa = true;
-        public bool QuyDinhSoLuongDaiLyToiDa
+        public void Receive(DataReloadMessage message)
         {
-            get => _quyDinhSoLuongDaiLyToiDa;
-            set
-            {
-                if (_quyDinhSoLuongDaiLyToiDa != value)
-                {
-                    _quyDinhSoLuongDaiLyToiDa = value;
-                    OnPropertyChanged();
-                    _ = SaveChangesToDatabase();
-                }
-            }
+            _ = LoadDataAsync();
         }
 
-        private bool _quyDinhTienThuTienNo = true;
-        public bool QuyDinhTienThuTienNo
-        {
-            get => _quyDinhTienThuTienNo;
-            set
-            {
-                if (_quyDinhTienThuTienNo != value)
-                {
-                    _quyDinhTienThuTienNo = value;
-                    OnPropertyChanged();
-                    _ = SaveChangesToDatabase();
-                }
-            }
-        }
-
-        private int _soLuongDaiLyToiDa = 4;
-        public int SoLuongDaiLyToiDa
-        {
-            get => _soLuongDaiLyToiDa;
-            set
-            {
-                if (_soLuongDaiLyToiDa != value)
-                {
-                    _soLuongDaiLyToiDa = value;
-                    OnPropertyChanged();
-                    _ = SaveChangesToDatabase();
-                }
-            }
-        }
-
-        private async Task Load()
+        private async Task LoadDataAsync()
         {
             try
             {
                 var thamSo = await _thamsoService.GetThamSo();
                 if (thamSo != null)
                 {
-                    QuyDinhSoLuongDaiLyToiDa = thamSo.QuyDinhSoLuongDaiLyToiDa;
+                    SoLuongNhapToiThieu = thamSo.SoLuongNhapToiThieu;
+                    SoLuongTonToiThieu = thamSo.SoLuongTonToiThieu;
+                    SoLuongTonToiDa = thamSo.SoLuongTonToiDa;
+                    TienNoToiDa = thamSo.TienNoToiDa;
                     QuyDinhTienThuTienNo = thamSo.QuyDinhTienThuTienNo;
-                    SoLuongDaiLyToiDa = thamSo.SoLuongDaiLyToiDa;
                 }
             }
             catch (Exception ex)
@@ -91,7 +54,34 @@ namespace QuanLyNhaSach.ViewModels.ThamSoViewModel
             }
         }
 
-        // Phương thức để lưu thay đổi vào cơ sở dữ liệu
+        #region Bindings Properties
+        [ObservableProperty]
+        private int _soLuongNhapToiThieu = 0;
+        [ObservableProperty]
+        private int _soLuongTonToiThieu = 0;
+        [ObservableProperty]
+        private int _soLuongTonToiDa = 0;
+        [ObservableProperty]
+        private int _tienNoToiDa = 0;
+        [ObservableProperty]
+        private bool _quyDinhTienThuTienNo = true;
+        #endregion
+
+        #region RelayCommands
+        [RelayCommand]
+        private void EditThamSo()
+        {
+            try
+            {
+                var window = _serviceProvider.GetRequiredService<CapNhatThamSoWindow>();
+                window.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi mở cửa sổ chỉnh sửa tham số: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
         private async Task SaveChangesToDatabase()
         {
             try
@@ -101,8 +91,10 @@ namespace QuanLyNhaSach.ViewModels.ThamSoViewModel
                     var thamSo = await _thamsoService.GetThamSo();
                     if (thamSo != null)
                     {
-                        SoLuongDaiLyToiDa = thamSo.SoLuongDaiLyToiDa;
-                        QuyDinhSoLuongDaiLyToiDa = thamSo.QuyDinhSoLuongDaiLyToiDa;
+                        SoLuongNhapToiThieu = thamSo.SoLuongNhapToiThieu;
+                        SoLuongTonToiThieu = thamSo.SoLuongTonToiThieu;
+                        SoLuongTonToiDa = thamSo.SoLuongTonToiDa;
+                        TienNoToiDa = thamSo.TienNoToiDa;
                         QuyDinhTienThuTienNo = thamSo.QuyDinhTienThuTienNo;
                     }
                     isFirst = false;
@@ -111,9 +103,11 @@ namespace QuanLyNhaSach.ViewModels.ThamSoViewModel
                 {
                     var thamSo = await _thamsoService.GetThamSo();
 
-                    thamSo.QuyDinhSoLuongDaiLyToiDa = QuyDinhSoLuongDaiLyToiDa;
+                    thamSo.SoLuongNhapToiThieu = SoLuongNhapToiThieu;
+                    thamSo.SoLuongTonToiThieu = SoLuongTonToiThieu;
+                    thamSo.SoLuongTonToiDa = SoLuongTonToiDa;
+                    thamSo.TienNoToiDa = TienNoToiDa;
                     thamSo.QuyDinhTienThuTienNo = QuyDinhTienThuTienNo;
-                    thamSo.SoLuongDaiLyToiDa = SoLuongDaiLyToiDa;
 
                     await _thamsoService.UpdateThamSo(thamSo);
                     //await Load();
@@ -124,13 +118,6 @@ namespace QuanLyNhaSach.ViewModels.ThamSoViewModel
                 MessageBox.Show($"Có lỗi khi lưu tham số vào cơ sở dữ liệu: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        #endregion
     }
-}
 }
