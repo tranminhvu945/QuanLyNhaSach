@@ -48,8 +48,22 @@ namespace QuanLyNhaSach.ViewModels.ThamSoViewModel
                 MessageBox.Show($"Có lỗi khi tải tham số từ cơ sở dữ liệu: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
+        public bool IsReadOnly => !IsEditing; // for textbox binding
+        
         #region Bindings Properties
+        private bool _isEditing = false;
+        public bool IsEditing
+        {
+            get => _isEditing;
+            set
+            {
+                _isEditing = value;
+                OnPropertyChanged(nameof(IsEditing));
+                OnPropertyChanged(nameof(IsReadOnly));
+            }
+        }
+
+
         [ObservableProperty]
         private int _soLuongNhapToiThieu = 0;
         [ObservableProperty]
@@ -66,9 +80,16 @@ namespace QuanLyNhaSach.ViewModels.ThamSoViewModel
         [RelayCommand]
         private void EditThamSo()
         {
+            IsEditing = true;
+        }
+
+        [RelayCommand]
+        private void SaveChanges()
+        {
             try
             {
                 _ = SaveChange();
+                IsEditing = false;
             }
             catch (Exception ex)
             {
