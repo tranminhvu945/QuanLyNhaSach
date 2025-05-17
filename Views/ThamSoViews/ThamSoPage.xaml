@@ -5,7 +5,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:fa="http://schemas.fontawesome.io/icons/"
 
-    d:DesignHeight="1100"
+    d:DesignHeight="900"
     d:DesignWidth="1536"
     Background="White"
     mc:Ignorable="d">
@@ -57,32 +57,32 @@
             </Border.Effect>
 
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="100" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
 
-                <!--  Header with background  -->
-                <Border
+                    <!--  Header with background  -->
+                    <Border
                     Grid.Row="0"
                     Grid.ColumnSpan="2"
                     Background="#F8F9FA"
                     BorderBrush="#E0E0E0"
                     BorderThickness="0,0,0,1"
                     CornerRadius="12,12,0,0">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
 
-                        <TextBlock
+                            <TextBlock
                             Grid.Column="0"
                             Margin="20,10,0,0"
                             HorizontalAlignment="Left"
@@ -95,7 +95,7 @@
                             LineHeight="20"
                             Text="Tên Tham số" />
 
-                        <TextBlock
+                            <TextBlock
                             Grid.Column="1"
                             Margin="38,30,0,0"
                             HorizontalAlignment="Left"
@@ -107,11 +107,11 @@
                             Foreground="#333333"
                             LineHeight="20"
                             Text="Tình trạng áp dụng" />
-                    </Grid>
-                </Border>
+                        </Grid>
+                    </Border>
 
-                <!--  Parameter names and descriptions  -->
-                <StackPanel
+                    <!--  Parameter names and descriptions  -->
+                    <StackPanel
                     Grid.Row="1"
                     Grid.Column="0"
                     Margin="0,20,0,20"
@@ -119,10 +119,10 @@
                     VerticalAlignment="Stretch"
                     Orientation="Vertical">
 
-                    <!--  First parameter section  -->
-                    <Border Margin="20,0,20,20" Padding="15" >
-                        <StackPanel>
-                            <TextBlock
+                        <!--  First parameter section  -->
+                        <Border Margin="20,0,20,20" Padding="15" Height="80" >
+                            <StackPanel>
+                                <TextBlock
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center"
                                 FontFamily="Nunito"
@@ -132,7 +132,7 @@
                                 Foreground="#333333"
                                 LineHeight="20"
                                 Text="Số lượng nhập tối thiểu" />
-                            <TextBlock
+                                <TextBlock
                                 Margin="0,15,0,0"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center"
@@ -142,12 +142,12 @@
                                 Foreground="#555555"
                                 LineHeight="20"
                                 Text="{Binding SoLuongDaiLyToiDa, StringFormat='Mỗi Quận chỉ tiếp nhận tối đa {0} Đại lý'}" />
-                        </StackPanel>
-                    </Border>
+                            </StackPanel>
+                        </Border>
 
-                    <Border Margin="20,0,20,20" Padding="15" >
-                        <StackPanel>
-                            <TextBlock
+                        <Border Margin="20,0,20,20" Padding="15" Height="80">
+                            <StackPanel>
+                                <TextBlock
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center"
                                 FontFamily="Nunito"
@@ -157,7 +157,7 @@
                                 Foreground="#333333"
                                 LineHeight="20"
                                 Text="Số lượng tồn tối thiểu" />
-                            <TextBlock
+                                <TextBlock
                                 Margin="0,15,0,0"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center"
@@ -167,12 +167,12 @@
                                 Foreground="#555555"
                                 LineHeight="20"
                                 Text="{Binding SoLuongDaiLyToiDa, StringFormat='Mỗi Quận chỉ tiếp nhận tối đa {0} Đại lý'}" />
-                        </StackPanel>
-                    </Border>
+                            </StackPanel>
+                        </Border>
 
-                    <Border Margin="20,0,20,20" Padding="15">
-                        <StackPanel>
-                            <TextBlock
+                        <Border Margin="20,0,20,20" Padding="15" Height="80">
+                            <StackPanel>
+                                <TextBlock
                                  HorizontalAlignment="Left"
                                  VerticalAlignment="Center"
                                  FontFamily="Nunito"
@@ -182,7 +182,7 @@
                                  Foreground="#333333"
                                  LineHeight="20"
                                  Text="Số lượng tồn tối đa" />
-                            <TextBlock
+                                <TextBlock
                                  Margin="0,15,0,0"
                                  HorizontalAlignment="Left"
                                  VerticalAlignment="Center"
@@ -192,12 +192,12 @@
                                  Foreground="#555555"
                                  LineHeight="20"
                                  Text="{Binding SoLuongDaiLyToiDa, StringFormat='Mỗi Quận chỉ tiếp nhận tối đa {0} Đại lý'}" />
-                        </StackPanel>
-                    </Border>
+                            </StackPanel>
+                        </Border>
 
-                    <Border Margin="20,0,20,20" Padding="15" >
-                        <StackPanel>
-                            <TextBlock
+                        <Border Margin="20,0,20,20" Padding="15" Height="80">
+                            <StackPanel>
+                                <TextBlock
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center"
                                 FontFamily="Nunito"
@@ -207,7 +207,7 @@
                                 Foreground="#333333"
                                 LineHeight="20"
                                 Text="Tiền nợ tối đa" />
-                            <TextBlock
+                                <TextBlock
                                 Margin="0,15,0,0"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center"
@@ -217,17 +217,17 @@
                                 Foreground="#555555"
                                 LineHeight="20"
                                 Text="{Binding SoLuongDaiLyToiDa, StringFormat='Mỗi Quận chỉ tiếp nhận tối đa {0} Đại lý'}" />
-                        </StackPanel>
-                    </Border>
+                            </StackPanel>
+                        </Border>
 
-                    <!--  Second parameter section  -->
-                    <Border
+                        <!--  Second parameter section  -->
+                        <Border
                         Margin="20,0,20,20"
                         Padding="15"
                         CornerRadius="8"
                         >
-                        <StackPanel>
-                            <TextBlock
+                            <StackPanel>
+                                <TextBlock
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center"
                                 FontFamily="Nunito"
@@ -237,7 +237,7 @@
                                 Foreground="#333333"
                                 LineHeight="20"
                                 Text="Quy định tiền thu tiền nợ" />
-                            <TextBlock
+                                <TextBlock
                                 Margin="0,15,0,0"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center"
@@ -247,104 +247,107 @@
                                 Foreground="#555555"
                                 LineHeight="20"
                                 Text="Tiền thu không được vượt quá tiền nợ hiện tại của khách hàng" />
-                        </StackPanel>
-                    </Border>
+                            </StackPanel>
+                        </Border>
 
+                    </StackPanel>
 
-                </StackPanel>
-
-                <!--  Toggle buttons with adjusted positioning  -->
-                <StackPanel
+                    <!--  Toggle buttons with adjusted positioning  -->
+                    <StackPanel
                     Grid.Row="1"
                     Grid.Column="1"
                     Margin="0,20,0,20"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"
                     Orientation="Vertical">
-                    <Border Margin="20,0,20,20" Padding="15" CornerRadius="8" Height="110"
-                            >
-                        <Grid>
+                        <Border Margin="20,0,20,20" Padding="15" CornerRadius="8" Height="80">
+                            <Grid>
+                                
 
-
-                            <TextBox
+                                <TextBox
                                 Style="{StaticResource StandardTextBoxStyle}"
                                 Text="{Binding SoLuongNhapToiThieu}"
-                                Width="300"
-                                Height="70"
-                                Margin="0,0,10,0"
-                                VerticalAlignment="Center" />
-                        </Grid>
-                    </Border>
+                                IsReadOnly="{Binding IsReadOnly}"
+                                Width="200"
+                                Height="50"
+                                Margin="59,0,69,-1"
+                                VerticalAlignment="Bottom" />
+                            </Grid>
+                        </Border>
 
-                    <Border Margin="20,0,20,20" Padding="15" CornerRadius="8" Height="110" >
-                        <Grid>
+                        <Border Margin="20,0,20,20" Padding="15" CornerRadius="8" Height="80" >
+                            <Grid>
 
-                            <TextBox
+                                <TextBox
                                 Style="{StaticResource StandardTextBoxStyle}"
                                 Text="{Binding SoLuongTonToiThieu}"
-                                Height="70"
-                                Width="300"
+                                IsReadOnly="{Binding IsReadOnly}"
+                                Height="50"
+                                Width="200"
                                 Margin="0,0,10,0"
                                 VerticalAlignment="Center" />
 
-                        </Grid>
-                    </Border>
+                            </Grid>
+                        </Border>
 
-                    <Border Margin="20,0,20,20" Padding="15" CornerRadius="8" Height="110" >
-                        <Grid>
+                        <Border Margin="20,0,20,20" Padding="15" CornerRadius="8" Height="80" >
+                            <Grid>
 
 
-                            <TextBox
+                                <TextBox
                                 Grid.Column="0"
                                 Style="{StaticResource StandardTextBoxStyle}"
                                 Text="{Binding SoLuongTonToiDa}"
-                                Height="70"
-                                Width="300"
+                                IsReadOnly="{Binding IsReadOnly}"
+                                Height="50"
+                                Width="200"
                                 Margin="0,0,10,0"
                                 VerticalAlignment="Center" />
-                        </Grid>
-                    </Border>
+                            </Grid>
+                        </Border>
 
-                    <Border Margin="20,0,20,20" Padding="15" CornerRadius="8" Height="110" >
-                        <Grid>
+                        <Border Margin="20,0,20,20" Padding="15" CornerRadius="8" Height="80" >
+                            <Grid>
 
-                            <TextBox
+                                <TextBox
                                 Grid.Column="0"
                                 Style="{StaticResource StandardTextBoxStyle}"
                                 Text="{Binding TienNoToiDa}"
-                                Height="70"
-                                Width="300"
+                                IsReadOnly="{Binding IsReadOnly}"
+                                Height="50"
+                                Width="200"
                                 Margin="0,0,10,0"
                                 VerticalAlignment="Center" />
 
-                        </Grid>
-                    </Border>
+                            </Grid>
+                        </Border>
 
-                    <Border Margin="20,0,20,20" Padding="15" CornerRadius="8" Height="110" >
-                        <ToggleButton
+                        <Border Margin="20,0,20,20" Padding="15" CornerRadius="8" Height="80" >
+                            <ToggleButton
                          VerticalContentAlignment="Center"
                          HorizontalAlignment="Center"
                          Cursor="Hand"
                          IsChecked="{Binding QuyDinhTienThuTienNo}"
-                         Height="110" >
-                            <ToggleButton.Resources>
-                                <Style TargetType="{x:Type Border}">
-                                    <Setter Property="CornerRadius" Value="30" />
-                                </Style>
-                            </ToggleButton.Resources>
-                            <ToggleButton.Style>
-                                <Style TargetType="{x:Type ToggleButton}">
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="{x:Type ToggleButton}">
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="Auto" />
-                                                        <ColumnDefinition Width="*" />
-                                                    </Grid.ColumnDefinitions>
+                         IsHitTestVisible="{Binding IsEditing}"
+                         Height="80" Margin="0,-30,0,-30" >
+                                <ToggleButton.Resources>
+                                    <Style TargetType="{x:Type Border}">
+                                        <Setter Property="CornerRadius" Value="30" />
+                                    </Style>
+                                </ToggleButton.Resources>
+                                <ToggleButton.Style>
+                                    <Style TargetType="{x:Type ToggleButton}">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto" />
+                                                            <ColumnDefinition Width="*" />
+                                                        </Grid.ColumnDefinitions>
 
-                                                    <!--  Toggle Switch Background  -->
-                                                    <Border
+                                                        <!--  Toggle Switch Background  -->
+                                                        <Border
                                 x:Name="SwitchTrack"
                                 Grid.Column="0"
                                 Width="90"
@@ -353,8 +356,8 @@
                                 Background="#E0E0E0"
                                 CornerRadius="24">
 
-                                                        <!--  Switch Thumb/Knob  -->
-                                                        <Border
+                                                            <!--  Switch Thumb/Knob  -->
+                                                            <Border
                                     x:Name="SwitchKnob"
                                     Width="40"
                                     Height="40"
@@ -362,75 +365,99 @@
                                     HorizontalAlignment="Left"
                                     Background="White"
                                     CornerRadius="20">
-                                                            <Border.Effect>
-                                                                <DropShadowEffect
+                                                                <Border.Effect>
+                                                                    <DropShadowEffect
                                             BlurRadius="3"
                                             Opacity="0.2"
                                             ShadowDepth="1"
                                             Color="#555555" />
-                                                            </Border.Effect>
+                                                                </Border.Effect>
+                                                            </Border>
                                                         </Border>
-                                                    </Border>
-                                                </Grid>
+                                                    </Grid>
 
-                                                <!--  Visual States  -->
-                                                <ControlTemplate.Triggers>
-                                                    <Trigger Property="IsChecked" Value="True">
-                                                        <Setter TargetName="SwitchTrack" Property="Background" Value="#2871DF" />
-                                                        <Setter TargetName="SwitchKnob" Property="HorizontalAlignment" Value="Right" />
-                                                        <Setter TargetName="SwitchKnob" Property="Margin" Value="0,0,4,0" />
-                                                    </Trigger>
-                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter TargetName="SwitchTrack" Property="Background">
-                                                            <Setter.Value>
-                                                                <SolidColorBrush Opacity="0.9" Color="#CCCCCC" />
-                                                            </Setter.Value>
-                                                        </Setter>
-                                                    </Trigger>
-                                                    <MultiTrigger>
-                                                        <MultiTrigger.Conditions>
-                                                            <Condition Property="IsMouseOver" Value="True" />
-                                                            <Condition Property="IsChecked" Value="True" />
-                                                        </MultiTrigger.Conditions>
-                                                        <Setter TargetName="SwitchTrack" Property="Background">
-                                                            <Setter.Value>
-                                                                <SolidColorBrush Opacity="0.9" Color="#2871DF" />
-                                                            </Setter.Value>
-                                                        </Setter>
-                                                    </MultiTrigger>
-                                                    <Trigger Property="IsEnabled" Value="False">
-                                                        <Setter TargetName="SwitchTrack" Property="Background" Value="#E0E0E0" />
-                                                        <Setter TargetName="SwitchKnob" Property="Background" Value="#CCCCCC" />
-                                                    </Trigger>
-                                                </ControlTemplate.Triggers>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </ToggleButton.Style>
-                        </ToggleButton>
-                    </Border>
-                    
-                    
+                                                    <!--  Visual States  -->
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsChecked" Value="True">
+                                                            <Setter TargetName="SwitchTrack" Property="Background" Value="#2871DF" />
+                                                            <Setter TargetName="SwitchKnob" Property="HorizontalAlignment" Value="Right" />
+                                                            <Setter TargetName="SwitchKnob" Property="Margin" Value="0,0,4,0" />
+                                                        </Trigger>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter TargetName="SwitchTrack" Property="Background">
+                                                                <Setter.Value>
+                                                                    <SolidColorBrush Opacity="0.9" Color="#CCCCCC" />
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                        </Trigger>
+                                                        <MultiTrigger>
+                                                            <MultiTrigger.Conditions>
+                                                                <Condition Property="IsMouseOver" Value="True" />
+                                                                <Condition Property="IsChecked" Value="True" />
+                                                            </MultiTrigger.Conditions>
+                                                            <Setter TargetName="SwitchTrack" Property="Background">
+                                                                <Setter.Value>
+                                                                    <SolidColorBrush Opacity="0.9" Color="#2871DF" />
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                        </MultiTrigger>
+                                                        <Trigger Property="IsEnabled" Value="False">
+                                                            <Setter TargetName="SwitchTrack" Property="Background" Value="#E0E0E0" />
+                                                            <Setter TargetName="SwitchKnob" Property="Background" Value="#CCCCCC" />
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </ToggleButton.Style>
+                            </ToggleButton>
+                        </Border>
 
-            <Border Margin="20,0,20,20" Padding="15" CornerRadius="8" Height="110" >
-                        <Button
-                        Margin="0,0,0,0"
-                        Command="{Binding EditThamSoCommand}"
-                        Style="{StaticResource PrimaryButtonStyle}" Width="300" Height="70">
-                            <StackPanel Orientation="Horizontal">
-                                <fa:FontAwesome
-                                Margin="0,0,8,0"
-                                VerticalAlignment="Center"
-                                Icon="Edit" />
-                                <TextBlock VerticalAlignment="Center"
-                                           FontSize="25"
-                                           Text="Cập nhật tham số" />
-                            </StackPanel>
-                        </Button>
-                    </Border>
-                </StackPanel>
-            </Grid>
+
+
+                        <Border Margin="0,0,0, 0" Padding="15" CornerRadius="8" Height="110" >
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Button
+                                    Grid.Column="0"
+                                    Margin="6,5,15,5"
+                                    Command="{Binding EditThamSoCommand}"
+                                    Style="{StaticResource PrimaryButtonStyle}" Width="200" Height="70">
+                                    <StackPanel Orientation="Horizontal">
+                                        <fa:FontAwesome
+                                    Margin="0,0,0,0"
+                                    VerticalAlignment="Center"
+                                    Icon="Edit" />
+                                        <TextBlock VerticalAlignment="Center"
+                                    FontSize="25"
+                                    Text="Sửa tham số" />
+                                    </StackPanel>
+                                </Button>
+
+                                <Button
+                                    Grid.Column="1"
+                                    Margin="0,0,0,0"
+                                    Command="{Binding SaveChangesCommand}"
+                                    Style="{StaticResource PrimaryButtonStyle}" Width="200" Height="70">
+                                    <StackPanel Orientation="Horizontal">
+                                    <fa:FontAwesome
+                                    Margin="0,0,0,0"
+                                    VerticalAlignment="Center"
+                                    Icon="Save" />
+                                        <TextBlock VerticalAlignment="Center"
+                                            FontSize="25"
+                                            Text="Lưu thay đổi" />
+                                    </StackPanel>
+                                </Button>
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+                </Grid>
             </ScrollViewer>
         </Border>
     </Grid>
