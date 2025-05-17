@@ -33,9 +33,12 @@ namespace QuanLyNhaSach.Extentions
             services.AddTransient<BaoCaoChiTietViewModel>();
             services.AddTransient<BaoCaoCongNoViewModel>();
             services.AddTransient<BaoCaoTonSachViewModel>();
+
             services.AddTransient<PhieuThuPageViewModel>();
             services.AddTransient<ThemPhieuThuWindowViewModel>();
             services.AddTransient<TraCuuPhieuThuWindowViewModel>();
+
+            services.AddTransient<ViewModels.ThamSoViewModel.ThamSoPageViewModel>();
 
             // Register Views
             services.AddTransient<Views.TraCuuPhieuNhapSachWindow>();

@@ -123,7 +123,7 @@
                     <Button
                         Margin="0,0,10,0"
                         HorizontalAlignment="Right"
-                        Command="{Binding LapBaoCaoCommand}"
+                        Command="{Binding ExportToPDFCommand}"
                         Style="{StaticResource WindowPrimaryButtonStyle}">
                         <StackPanel Orientation="Horizontal">
                             <fa:FontAwesome Margin="0,0,10,0" Icon="FileText" />
@@ -164,10 +164,8 @@
                                     Width="Auto"
                                     ElementStyle="{StaticResource BaoCaoTextBlockStyle}"
                                     Header="STT"
+                                    Binding="{Binding STT}"
                                     IsReadOnly="True">
-                                    <DataGridTextColumn.Binding>
-                                        <Binding Converter="{StaticResource RowToIndexConverter}" RelativeSource="{RelativeSource AncestorType=DataGridRow}" />
-                                    </DataGridTextColumn.Binding>
                                 </DataGridTextColumn>
 
                                 <DataGridTemplateColumn
@@ -177,7 +175,7 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Border Width="200" Style="{StaticResource BaoCaoBorderStyle}">
-                                                <TextBlock Style="{StaticResource BaoCaoTemplateTextBlockStyle}" Text="{Binding TenDaiLy}" />
+                                                <TextBlock Style="{StaticResource BaoCaoTemplateTextBlockStyle}" Text="{Binding TenKhachHang}" />
                                             </Border>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
@@ -203,7 +201,7 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Border Width="400" Style="{StaticResource BaoCaoBorderStyle}">
-                                                <TextBlock Style="{StaticResource BaoCaoTemplateTextBlockStyle}" Text="{Binding GiaTriGiaoDich, StringFormat={}{0:N0} VNĐ}" />
+                                                <TextBlock Style="{StaticResource BaoCaoTemplateTextBlockStyle}" Text="{Binding PhatSinh, StringFormat={}{0:N0} VNĐ}" />
                                             </Border>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
