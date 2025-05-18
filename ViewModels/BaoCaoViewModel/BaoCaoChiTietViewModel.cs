@@ -11,7 +11,7 @@ using CommunityToolkit.Mvvm.Messaging;
 using LiveCharts;
 using LiveCharts.Wpf;
 using Microsoft.Extensions.DependencyInjection;
-using QuanLyDaiLy.Messages;
+using QuanLyNhaSach.Messages;
 using QuanLyNhaSach.Models.dto;
 using QuanLyNhaSach.Services;
 using QuanLyNhaSach.Views.BaoCaoViews;
