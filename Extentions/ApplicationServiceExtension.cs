@@ -46,6 +46,9 @@ namespace QuanLyNhaSach.Extentions
 
             services.AddTransient<ViewModels.ThamSoViewModel.ThamSoPageViewModel>();
 
+            services.AddTransient<ViewModels.PhieuNhapSachViewModel.MainWindowViewModel>();
+            services.AddTransient<ViewModels.PhieuNhapSachViewModel.LapPhieuNhapSachViewModel>();
+
             // Register Views
             services.AddTransient<Views.TraCuuPhieuNhapSachWindow>();
             services.AddTransient<Views.MainWindow>();

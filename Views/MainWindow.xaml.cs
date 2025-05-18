@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Windows.Media;
 using QuanLyNhaSach.Data;
 using System;
+using QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel;
 
 namespace QuanLyNhaSach.Views
 {
@@ -18,10 +19,12 @@ namespace QuanLyNhaSach.Views
         private readonly double expandedWidth = 200;
         private readonly IServiceProvider _serviceProvider;
 
-        public MainWindow(IServiceProvider serviceProvider)
+        public MainWindow(MainWindowViewModel viewModel, IServiceProvider serviceProvider)
         {
             InitializeComponent();
+            InitializeComponent();
             _serviceProvider = serviceProvider;
+            DataContext = viewModel;
 
             // configure the window
             WindowState = WindowState.Maximized;
@@ -32,7 +35,6 @@ namespace QuanLyNhaSach.Views
                 NavigateToPage("BaoCao");
             };
         }
-
 
         private void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
