@@ -14,6 +14,8 @@ namespace QuanLyNhaSach.Models
 
         public DateTime NgayNhap { get; set; } = DateTime.Now;
 
+
+
         /* ---------- Navigation ---------- */
         public ICollection<ChiTietPhieuNhap> DsChiTietNhap { get; set; } = [];
     }
