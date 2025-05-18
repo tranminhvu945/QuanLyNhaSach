@@ -46,7 +46,7 @@
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center">
                     <Button
-                        Command="{Binding CloseCommand}"
+                        Command="{Binding CloseWindowCommand}"
                         Content="❌"
                         Style="{StaticResource WindowCloseButtonStyle}" />
                 </StackPanel>
@@ -93,7 +93,7 @@
                             <TextBox
                                 Grid.Row="1"
                                 Style="{StaticResource ReadOnlyTextBoxStyle}"
-                                Text="{Binding MaPhieuXuat}" />
+                                Text="{Binding MaPhieuNhapSach}" />
                         </Grid>
 
                         <!--  Tên đại lý  -->
@@ -109,7 +109,7 @@
                                 Text="Ngày Nhập" />
                             <DatePicker
                                  Grid.Row="1"
-                                 SelectedDate="{Binding NgayTiepNhan}"
+                                 SelectedDate="{Binding NgayNhap}"
                                  Style="{StaticResource StandardDatePickerStyle}" />
                         </Grid>
 
@@ -152,7 +152,7 @@
                         HorizontalAlignment="Right"
                         Orientation="Horizontal">
 
-                        <Button Command="{Binding TraCuuPhieuThuCommand}" Style="{StaticResource WindowPrimaryButtonStyle}" Width="174">
+                        <Button Command="{Binding SearchSachCommand}" Style="{StaticResource WindowPrimaryButtonStyle}" Width="174">
                             <StackPanel Orientation="Horizontal">
                                 <fa:FontAwesome Margin="0,0,10,0" Icon="Search" />
                                 <TextBlock Text="Tra cứu sách" />
@@ -161,7 +161,7 @@
                         
                         <Button
                             Margin="0,0,20,0"
-                            Command="{Binding BoChonMatHangCommand}"
+                            Command="{Binding BoChonDauSachCommand}"
                             Style="{StaticResource PrimaryButtonStyle}">
                             <StackPanel Orientation="Horizontal">
                                 <fa:FontAwesome Margin="0,0,10,0" Icon="TimesCircle" />
@@ -171,7 +171,7 @@
 
                         <Button
                             Margin="0,0,20,0"
-                            Command="{Binding ThemMatHangCommand}"
+                            Command="{Binding ThemDauSachCommand}"
                             Style="{StaticResource PrimaryButtonStyle}">
                             <StackPanel Orientation="Horizontal">
                                 <fa:FontAwesome Margin="0,0,10,0" Icon="Plus" />
@@ -179,7 +179,7 @@
                             </StackPanel>
                         </Button>
 
-                        <Button Command="{Binding XoaMatHangCommand}" Style="{StaticResource PrimaryButtonStyle}">
+                        <Button Command="{Binding XoaDauSachCommand}" Style="{StaticResource PrimaryButtonStyle}">
                             <StackPanel Orientation="Horizontal">
                                 <fa:FontAwesome Margin="0,0,10,0" Icon="Trash" />
                                 <TextBlock Text="Xóa sách" />
@@ -205,10 +205,10 @@
                             GridLinesVisibility="Horizontal"
                             HeadersVisibility="Column"
                             IsReadOnly="False"
-                            ItemsSource="{Binding DanhSachMatHangPhieuXuat}"
+                            ItemsSource="{Binding DanhSachDauSachPhieuNhap}"
                             RowHeight="60"
                             ScrollViewer.VerticalScrollBarVisibility="Auto"
-                            SelectedItem="{Binding SelectedMatHangPhieuXuat}">
+                            SelectedItem="{Binding SelectedDauSachPhieuNhap}">
                             <DataGrid.Resources>
                                 <Style TargetType="DataGridCell">
                                     <Setter Property="BorderThickness" Value="0" />
@@ -299,13 +299,12 @@
                                                 Margin="0,5,0,5"
                                                 VerticalAlignment="Center"
                                                 Background="White"
-                                                IsEditable="True"
-                                                ItemsSource="{Binding DanhSachMatHang}"
-                                                SelectedItem="{Binding SelectedMatHang, UpdateSourceTrigger=PropertyChanged}"
+                                                ItemsSource="{Binding DanhSachSach}"
+                                                SelectedItem="{Binding SelectedSach, UpdateSourceTrigger=PropertyChanged}"
                                                 Style="{StaticResource StandardComboBoxStyle}">
                                                 <ComboBox.ItemTemplate>
                                                     <DataTemplate>
-                                                        <TextBlock Text="{Binding TenMatHang}" />
+                                                        <TextBlock Text="{Binding TenSach}" />
                                                     </DataTemplate>
                                                 </ComboBox.ItemTemplate>
                                             </ComboBox>
@@ -333,7 +332,7 @@
                                                     FontFamily="Open Sans"
                                                     FontSize="20"
                                                     Foreground="White"
-                                                    Text="{Binding TenDonViTinh}"
+                                                    Text="{Binding TacGia}"
                                                     TextAlignment="Center">
                                                     <TextBlock.Style>
                                                         <Style TargetType="TextBlock">
@@ -370,7 +369,7 @@
                                                     FontFamily="Open Sans"
                                                     FontSize="20"
                                                     Foreground="White"
-                                                    Text="{Binding SoLuongTon}"
+                                                    Text="{Binding TheLoai}"
                                                     TextAlignment="Center">
                                                     <TextBlock.Style>
                                                         <Style TargetType="TextBlock">
@@ -390,7 +389,7 @@
                                 <DataGridTemplateColumn Width="*" IsReadOnly="True">
                                     <DataGridTemplateColumn.HeaderTemplate>
                                         <DataTemplate>
-                                            <TextBlock Text="Số lượng tồn được nhập"
+                                            <TextBlock Text="Số lượng tồn tối thiểu để được nhập"
                                                         TextWrapping="Wrap"
                                                         TextAlignment="Center"
                                                         FontWeight="SemiBold"
@@ -404,7 +403,7 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Border Width="150" Padding="10,5" HorizontalAlignment="Center" Background="#A2A2A2" BorderBrush="#33000000" BorderThickness="1" CornerRadius="10">
-                                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Open Sans" FontSize="20" Foreground="White" Text="{Binding SoLuongTon}" TextAlignment="Center">
+                                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Open Sans" FontSize="20" Foreground="White" Text="{Binding SoLuongTonToiThieu}" TextAlignment="Center">
                                                     <TextBlock.Style>
                                                         <Style TargetType="TextBlock">
                                                             <Style.Triggers>
@@ -475,7 +474,7 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Border Width="150" Padding="10,5" HorizontalAlignment="Center" Background="#A2A2A2" BorderBrush="#33000000" BorderThickness="1" CornerRadius="10">
-                                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Open Sans" FontSize="20" Foreground="White" Text="{Binding SoLuongTon}" TextAlignment="Center">
+                                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Open Sans" FontSize="20" Foreground="White" Text="{Binding SoLuongNhapToiThieu}" TextAlignment="Center">
                                                     <TextBlock.Style>
                                                         <Style TargetType="TextBlock">
                                                             <Style.Triggers>
@@ -509,7 +508,7 @@
                                                 BorderThickness="1"
                                                 FontFamily="Open Sans"
                                                 FontSize="20"
-                                                Text="{Binding DonGiaXuat, UpdateSourceTrigger=PropertyChanged}"
+                                                Text="{Binding SoLuongNhap, UpdateSourceTrigger=PropertyChanged}"
                                                 TextAlignment="Center">
                                                 <TextBox.Resources>
                                                     <Style TargetType="{x:Type Border}">
@@ -547,21 +546,21 @@
                 VerticalAlignment="Stretch"
                 Orientation="Horizontal">
 
-                <Button Command="{Binding LapPhieuXuatCommand}" Style="{StaticResource WindowPrimaryButtonStyle}">
+                <Button Command="{Binding LapPhieuNhapSachCommand}" Style="{StaticResource WindowPrimaryButtonStyle}">
                     <StackPanel Orientation="Horizontal">
                         <fa:FontAwesome Margin="0,0,10,0" Icon="Check" />
                         <TextBlock Text="Lập phiếu nhập sách" />
                     </StackPanel>
                 </Button>
 
-                <Button Command="{Binding PhieuXuatMoiCommand}" Style="{StaticResource WindowPrimaryButtonStyle}">
+                <Button Command="{Binding PhieuNhapSachMoiCommand}" Style="{StaticResource WindowPrimaryButtonStyle}">
                     <StackPanel Orientation="Horizontal">
                         <fa:FontAwesome Margin="0,0,10,0" Icon="Refresh" />
                         <TextBlock Text="Phiếu nhập sách mới" />
                     </StackPanel>
                 </Button>
 
-                <Button Command="{Binding CloseCommand}" Style="{StaticResource WindowSignoutButtonStyle}">
+                <Button Command="{Binding CloseWindowCommand}" Style="{StaticResource WindowSignoutButtonStyle}">
                     <StackPanel Orientation="Horizontal">
                         <fa:FontAwesome Margin="0,0,10,0" Icon="SignOut" />
                         <TextBlock Text="Thoát" />
