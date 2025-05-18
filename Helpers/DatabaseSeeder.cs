@@ -202,6 +202,10 @@ namespace QuanLyNhaSach.Helpers
                     SoLuongTonToiDa = 1,
                     SoLuongTonToiThieu = 2,
                     TienNoToiDa = 3,
+                    QuyDinhSoLuongNhapToiThieu = true,
+                    QuyDinhSoLuongTonToiDa = true,
+                    QuyDinhSoLuongTonToiThieu = true,
+                    QuyDinhTienNoToiDa = true,
                     QuyDinhTienThuTienNo = true
                 }
             );
