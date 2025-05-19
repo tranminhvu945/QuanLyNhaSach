@@ -8,7 +8,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.DependencyInjection;
-using QuanLyDaiLy.Messages;
+using QuanLyNhaSach.Messages;
 using QuanLyNhaSach.Services;
 using QuanLyNhaSach.Views.BaoCaoViews;
 

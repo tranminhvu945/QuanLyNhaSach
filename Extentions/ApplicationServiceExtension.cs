@@ -5,6 +5,7 @@ using QuanLyNhaSach.Repositories;
 using QuanLyNhaSach.Services;
 using QuanLyNhaSach.ViewModels.BaoCaoViewModel;
 using QuanLyNhaSach.ViewModels.PhieuThuViewModel;
+using QuanLyNhaSach.ViewModels.HoaDonBanViewModel;
 using QuanLyNhaSach.Views.BaoCaoViews;
 
 namespace QuanLyNhaSach.Extentions
@@ -37,6 +38,10 @@ namespace QuanLyNhaSach.Extentions
             services.AddTransient<PhieuThuPageViewModel>();
             services.AddTransient<ThemPhieuThuWindowViewModel>();
             services.AddTransient<TraCuuPhieuThuWindowViewModel>();
+
+            services.AddTransient<HoaDonBanPageViewModel>();
+            services.AddTransient<ThemHoaDonBanViewModel>();
+            services.AddTransient<CapNhatHoaDonBanViewModel>();
 
             services.AddTransient<ViewModels.ThamSoViewModel.ThamSoPageViewModel>();
 

@@ -13,7 +13,7 @@ namespace QuanLyNhaSach.Services
         Task<IEnumerable<ChiTietHoaDon>> GetAllChiTietHoaDon();
         Task AddChiTietHoaDon(ChiTietHoaDon chiTietHoaDon);
         Task UpdateChiTietHoaDon(ChiTietHoaDon chiTietHoaDon);
-        Task DeleteChiTietHoaDon(int id);
+        Task DeleteChiTietHoaDon(ChiTietHoaDon chiTietHoaDon);
         Task<IEnumerable<ChiTietHoaDon>> GetChiTietHoaDonByHoaDonId(int maHoaDon);
     }
 }

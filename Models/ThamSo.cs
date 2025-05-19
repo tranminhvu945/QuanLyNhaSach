@@ -16,5 +16,6 @@ namespace QuanLyNhaSach.Models
         public int SoLuongTonToiThieu { get; set; } = 0;
         public int TienNoToiDa { get; set; } = 0;
         public bool QuyDinhTienThuTienNo { get; set; } = true;
+        //public bool QuyDinhSoLuongTonToiThieu { get; set; } = true;
     }
 }
