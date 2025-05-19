@@ -148,17 +148,17 @@
                             <lvc:CartesianChart
                                 Grid.Row="1"
                                 Margin="10"
-                                DataTooltip="{Binding DoanhSoTooltip}"
+                                DataTooltip="{Binding TonSachTooltip}"
                                 DisableAnimations="False"
                                 Hoverable="True"
                                 LegendLocation="None"
-                                Series="{Binding DoanhSoSeries}">
+                                Series="{Binding TonSachSeries}">
 
                                 <lvc:CartesianChart.AxisX>
                                     <lvc:Axis
                                         FontFamily="Nunito"
                                         FontSize="12"
-                                        Labels="{Binding DoanhSoLabels}">
+                                        Labels="{Binding TonSachLabels}">
                                         <lvc:Axis.Separator>
                                             <lvc:Separator IsEnabled="False" Step="1" />
                                         </lvc:Axis.Separator>
@@ -172,7 +172,7 @@
                                         MinValue="0"
                                         LabelFormatter="{Binding CurrencyFormatter}">
                                         <lvc:Axis.Separator>
-                                            <lvc:Separator Step="10000000" />
+                                            <lvc:Separator Step="10" />
                                         </lvc:Axis.Separator>
                                     </lvc:Axis>
                                 </lvc:CartesianChart.AxisY>
@@ -301,7 +301,7 @@
                                         MinValue="0"
                                         LabelFormatter="{Binding CurrencyFormatter}">
                                         <lvc:Axis.Separator>
-                                            <lvc:Separator Step="10000000" />
+                                            <lvc:Separator Step="100000" />
                                         </lvc:Axis.Separator>
                                     </lvc:Axis>
                                 </lvc:CartesianChart.AxisY>

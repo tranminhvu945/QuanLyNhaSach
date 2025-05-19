@@ -11,17 +11,16 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using QuanLyNhaSach.ViewModels.KhachHangViewModel;
 
 namespace QuanLyNhaSach.Views.KhachHangViews
 {
-    /// <summary>
-    /// Interaction logic for CapNhatKhachHangWindow.xaml
-    /// </summary>
     public partial class CapNhatKhachHangWindow : Window
     {
-        public CapNhatKhachHangWindow()
+        public CapNhatKhachHangWindow(CapNhatKhachHangViewModel vm)
         {
             InitializeComponent();
+            DataContext = vm;
         }
     }
 }

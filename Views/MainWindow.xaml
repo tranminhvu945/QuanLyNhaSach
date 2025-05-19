@@ -142,7 +142,7 @@
 
                             <Button
                             Margin="20,0,0,0"
-                            Command="{Binding SearchDaiLyCommand}"
+                            Command="{Binding SearchPhieuNhapSachCommand}"
                             Style="{StaticResource PrimaryButtonStyle}" Width="224">
                                 <StackPanel Orientation="Horizontal">
                                     <fa:FontAwesome
@@ -169,7 +169,7 @@
                         VerticalAlignment="Center"
                         Orientation="Horizontal">
 
-                            <Button Command="{Binding AddDaiLyCommand}" Style="{StaticResource PrimaryButtonStyle}">
+                            <Button Command="{Binding LapPhieuNhapSachCommand}" Style="{StaticResource PrimaryButtonStyle}">
                                 <StackPanel Orientation="Horizontal">
                                     <fa:FontAwesome
                                     Margin="0,0,8,0"
@@ -178,23 +178,23 @@
                                     <TextBlock VerticalAlignment="Center" Text="Lập phiếu nhập sách" />
                                 </StackPanel>
                             </Button>
-
+                            
                             <Button
                             Margin="10,0,0,0"
-                            Command="{Binding EditDaiLyCommand}"
-                            Style="{StaticResource PrimaryButtonStyle}" Width="234">
+                            Command="{Binding EditPhieuNhapSachCommand}"
+                            Style="{StaticResource PrimaryButtonStyle}">
                                 <StackPanel Orientation="Horizontal">
                                     <fa:FontAwesome
                                     Margin="0,0,8,0"
                                     VerticalAlignment="Center"
                                     Icon="Edit" />
-                                    <TextBlock VerticalAlignment="Center" Text="Cập nhật phiếu nhập sách" />
+                                    <TextBlock VerticalAlignment="Center" Text="Cập nhật phiếu nhập" />
                                 </StackPanel>
                             </Button>
-
+                            
                             <Button
                             Margin="10,0,0,0"
-                            Command="{Binding DeleteDaiLyCommand}"
+                            Command="{Binding DeletePhieuNhapSachCommand}"
                             Style="{StaticResource DeleteButtonStyle}">
                                 <StackPanel Orientation="Horizontal">
                                     <fa:FontAwesome
@@ -215,20 +215,20 @@
                     BorderBrush="#E0E0E0"
                     BorderThickness="1">
                         <DataGrid
-                        ItemsSource="{Binding DanhSachDaiLy}"
-                        SelectedItem="{Binding SelectedDaiLy}"
+                        ItemsSource="{Binding DanhSachPhieuNhapSach}"
+                        SelectedItem="{Binding SelectedPhieuNhapSach}"
                         Style="{StaticResource DefaultDataGridStyle}">
 
                             <DataGrid.Columns>
                                 <DataGridTextColumn
                                 Width="*"
-                                Binding="{Binding MaDaiLy}"
+                                Binding="{Binding MaPhieuNhapSach}"
                                 ElementStyle="{StaticResource ColumnTextBlockStyle}"
                                 Header="Mã phiếu nhập" />
 
                                 <DataGridTextColumn
                                 Width="*"
-                                Binding="{Binding TenDaiLy}"
+                                Binding="{Binding NgayNhap}"
                                 ElementStyle="{StaticResource ColumnTextBlockStyle}"
                                 Header="Ngày nhập" />
 
