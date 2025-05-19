@@ -256,10 +256,30 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
             }
             var newItem = new DisplaySachHoaDon(available);
             newItem.ThanhTienChanged += (s, e) => CalculateTongTien();
-
             DanhSachSachHoaDon.Add(newItem);
-            _danhSachSach.Remove(newItem.SelectedSach);
-            _danhSachSachDaChon.Add(newItem.SelectedSach);
+
+            // Đăng ký lắng nghe khi SelectedSach thay đổi
+            newItem.SelectedSachChanged += (sender, e) =>
+            {
+                if (e.OldSach != null)
+                {
+                    _danhSachSach.Add(e.OldSach);
+                    _danhSachSachDaChon.Remove(e.OldSach);
+                }
+                if (e.NewSach != null)
+                {
+                    _danhSachSach.Remove(e.NewSach);
+                    _danhSachSachDaChon.Add(e.NewSach);
+                }
+                UpdateAvailableLists();
+            };
+
+            // Lúc mới tạo dòng, cũng cần thêm sách đầu tiên vào danh sách đã chọn
+            if (newItem.SelectedSach != null)
+            {
+                _danhSachSach.Remove(newItem.SelectedSach);
+                _danhSachSachDaChon.Add(newItem.SelectedSach);
+            }
 
             UpdateAvailableLists();
             CalculateTongTien();
@@ -268,15 +288,22 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
         [RelayCommand]
         private void XoaSach()
         {
-            if (SelectedSachHoaDon == null)
+            if (SelectedSachHoaDon == null!)
             {
                 MessageBox.Show("Vui lòng chọn đầu sách để xóa", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             if (DanhSachSachHoaDon.Count > 0)
             {
-                _danhSachSach.Add(SelectedSachHoaDon.SelectedSach);
+                if (SelectedSachHoaDon.SelectedSach != null)
+                {
+                    _danhSachSach.Add(SelectedSachHoaDon.SelectedSach);
+                    _danhSachSachDaChon.Remove(SelectedSachHoaDon.SelectedSach);
+                }
+
                 DanhSachSachHoaDon.Remove(SelectedSachHoaDon);
+
+                UpdateAvailableLists();
                 CalculateTongTien();
             }
             else
@@ -284,6 +311,7 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
                 MessageBox.Show("Không có đầu sách nào để xóa", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
 
         [RelayCommand]
         private void BoChonSach()

@@ -48,6 +48,7 @@ namespace QuanLyNhaSach.Extentions
             services.AddTransient<HoaDonBanPageViewModel>();
             services.AddTransient<ThemHoaDonBanViewModel>();
             services.AddTransient<CapNhatHoaDonBanViewModel>();
+            services.AddTransient<TraCuuHoaDonBanViewModel>();
 
             services.AddTransient<ViewModels.ThamSoViewModel.ThamSoPageViewModel>();
 
