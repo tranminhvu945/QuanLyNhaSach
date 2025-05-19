@@ -140,13 +140,13 @@
 
                         <DataGridTextColumn
                             Width="*"
-                            Binding="{Binding DiaChi, StringFormat={}{0:N0} VNĐ}"
+                            Binding="{Binding DiaChi}"
                             ElementStyle="{StaticResource ColumnTextBlockStyle}"
                             Header="Địa chỉ" />
 
                         <DataGridTextColumn
                             Width="*"
-                            Binding="{Binding Email, StringFormat={}{0:N0} VNĐ}"
+                            Binding="{Binding Email}"
                             ElementStyle="{StaticResource ColumnTextBlockStyle}"
                             Header="Email" />
 
