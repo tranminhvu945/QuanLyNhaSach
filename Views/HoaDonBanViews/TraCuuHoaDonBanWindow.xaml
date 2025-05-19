@@ -155,7 +155,8 @@
                                 Grid.Column="2"
                                 Margin="0,25,0,0"
                                 SelectedDate="{Binding NgayLapHoaDonFrom}"
-                                Text="{Binding NgayLapHoaDonFrom, StringFormat='{}{0:dd/MM/yy}'}"
+                                SelectedDateFormat="Short"
+                                Language="vi-VN"
                                 Style="{StaticResource StandardDatePickerStyle}" />
                             <TextBlock
                                 Grid.Column="3"
@@ -166,7 +167,8 @@
                                 Grid.Column="4"
                                 Margin="0,25,0,0"
                                 SelectedDate="{Binding NgayLapHoaDonTo}"
-                                Text="{Binding NgayLapHoaDonTo, StringFormat='{}{0:dd/MM/yy}'}"
+                                SelectedDateFormat="Short"
+                                Language="vi-VN"
                                 Style="{StaticResource StandardDatePickerStyle}" />
                         </Grid>
 
