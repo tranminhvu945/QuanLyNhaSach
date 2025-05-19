@@ -54,6 +54,16 @@ namespace QuanLyNhaSach.Extentions
             services.AddTransient<ViewModels.PhieuNhapSachViewModel.MainWindowViewModel>();
             services.AddTransient<ViewModels.PhieuNhapSachViewModel.LapPhieuNhapSachViewModel>();
 
+            services.AddTransient<Func<int, ViewModels.PhieuNhapSachViewModel.CapNhatPhieuNhapSachViewModel>>(pn => phieuNhapSachId =>
+                new ViewModels.PhieuNhapSachViewModel.CapNhatPhieuNhapSachViewModel(
+                    pn.GetRequiredService <IPhieuNhapSachService>(),
+                    pn.GetRequiredService<IChiTietPhieuNhapService>(),
+                    pn.GetRequiredService<ISachService>(),
+                    pn.GetRequiredService<IThamSoService>(),
+                    phieuNhapSachId
+            )
+            );
+
             // Register Views
             services.AddTransient<Views.TraCuuPhieuNhapSachWindow>();
             services.AddTransient<Views.MainWindow>();

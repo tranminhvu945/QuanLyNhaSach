@@ -60,5 +60,20 @@ namespace QuanLyNhaSach.Repositories
                             .Where(c => c.MaPhieuNhapSach == maPhieuNhap)
                             .ToListAsync();
         }
+
+        public async Task DeleteChiTietPhieuNhapByPhieuNhapId(int maPhieuNhapSach)
+        {
+            // Lấy danh sách các chi tiết phiếu nhập có mã phiếu nhập này
+            var chiTietList = await _context.DsChiTietNhap
+                                           .Where(ct => ct.MaPhieuNhapSach == maPhieuNhapSach)
+                                           .ToListAsync();
+
+            if (chiTietList.Any())
+            {
+                _context.DsChiTietNhap.RemoveRange(chiTietList);
+                await _context.SaveChangesAsync();
+            }
+        }
+
     }
 }
