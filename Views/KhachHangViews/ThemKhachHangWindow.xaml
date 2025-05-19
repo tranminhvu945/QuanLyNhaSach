@@ -83,7 +83,7 @@
                             <TextBox
                                 Grid.Row="1"
                                 Style="{StaticResource ReadOnlyTextBoxStyle}"
-                                Text="{Binding MaDaiLy}" />
+                                Text="{Binding MaKhachHang}" />
                         </Grid>
 
                         <!--  Tên đại lý  -->
@@ -100,7 +100,7 @@
                             <TextBox
                                 Grid.Row="1"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding TenDaiLy}" />
+                                Text="{Binding TenKhachHang}" />
                         </Grid>
 
 
@@ -134,7 +134,7 @@
                             <TextBox
                                 Grid.Row="1"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding SoDienThoai}" />
+                                Text="{Binding DienThoai}" />
                         </Grid>
 
                         <!--  Email  -->
@@ -187,14 +187,14 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Stretch"
                 Orientation="Horizontal">
-                <Button Command="{Binding TiepNhanDaiLyCommand}" Style="{StaticResource WindowPrimaryButtonStyle}">
+                <Button Command="{Binding TiepNhanKhachHangCommand}" Style="{StaticResource WindowPrimaryButtonStyle}">
                     <StackPanel Orientation="Horizontal">
                         <fa:FontAwesome Margin="0,0,10,0" Icon="Plus" />
                         <TextBlock Text="Thêm khách hàng" />
                     </StackPanel>
                 </Button>
 
-                <Button Command="{Binding DaiLyMoiCommand}" Style="{StaticResource WindowPrimaryButtonStyle}">
+                <Button Command="{Binding KhachHangMoiCommand}" Style="{StaticResource WindowPrimaryButtonStyle}">
                     <StackPanel Orientation="Horizontal">
                         <fa:FontAwesome Margin="0,0,10,0" Icon="Refresh" />
                         <TextBlock Text="Khách hàng mới" />

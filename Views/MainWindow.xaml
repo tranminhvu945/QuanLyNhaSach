@@ -182,6 +182,7 @@
                             <Button
                             Margin="10,0,0,0"
                             Command="{Binding EditPhieuNhapSachCommand}"
+                                CommandParameter="{Binding SelectedPhieuNhapSach.MaPhieuNhapSach}"
                             Style="{StaticResource PrimaryButtonStyle}">
                                 <StackPanel Orientation="Horizontal">
                                     <fa:FontAwesome
