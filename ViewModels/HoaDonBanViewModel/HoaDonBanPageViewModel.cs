@@ -54,14 +54,26 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
         }
 
         [RelayCommand]
-        private async Task SearchHoaDon()
+        private void SearchHoaDon()
         {
             SelectedHoaDon = null!;
 
             var traCuuHoaDonWindow = _serviceProvider.GetRequiredService<TraCuuHoaDonBanWindow>();
+
+            if (traCuuHoaDonWindow.DataContext is TraCuuHoaDonBanViewModel viewModel)
+            {
+                viewModel.PropertyChanged += (sender, args) =>
+                {
+                    if (args.PropertyName == nameof(viewModel.SearchResults) && viewModel.SearchResults != null)
+                    {
+                        DanhSachHoaDon = viewModel.SearchResults;
+                    }
+                };
+            }
+
             traCuuHoaDonWindow.Show();
         }
-
+        
         [RelayCommand]
         private void AddHoaDon()
         {

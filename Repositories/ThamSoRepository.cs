@@ -31,15 +31,6 @@ namespace QuanLyNhaSach.Repositories
             await _context.SaveChangesAsync();
         }
 
-        //public async Task InitializeThamSo(ThamSo thamSo)
-        //{
-        //    if (!await _context.DsThamSo.AnyAsync())
-        //    {
-        //        _context.DsThamSo.Add(thamSo);
-        //        await _context.SaveChangesAsync();
-        //    }
-        //}
-
         public async Task<int> GenerateAvailableId()
         {
             int maxId = await _context.DsThamSo.MaxAsync(d => d.Id);
