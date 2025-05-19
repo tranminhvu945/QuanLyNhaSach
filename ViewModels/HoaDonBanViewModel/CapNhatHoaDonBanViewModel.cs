@@ -268,10 +268,30 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
             }
             var newItem = new DisplaySachHoaDon(available);
             newItem.ThanhTienChanged += (s, e) => CalculateTongTien();
-
             DanhSachSachHoaDon.Add(newItem);
-            DanhSachSach.Remove(newItem.SelectedSach);
-            DanhSachSachDaChon.Add(newItem.SelectedSach);
+
+            // Đăng ký lắng nghe khi SelectedSach thay đổi
+            newItem.SelectedSachChanged += (sender, e) =>
+            {
+                if (e.OldSach != null)
+                {
+                    DanhSachSach.Add(e.OldSach);
+                    DanhSachSachDaChon.Remove(e.OldSach);
+                }
+                if (e.NewSach != null)
+                {
+                    DanhSachSach.Remove(e.NewSach);
+                    DanhSachSachDaChon.Add(e.NewSach);
+                }
+                UpdateAvailableLists();
+            };
+
+            // Lúc mới tạo dòng, cũng cần thêm sách đầu tiên vào danh sách đã chọn
+            if (newItem.SelectedSach != null)
+            {
+                DanhSachSach.Remove(newItem.SelectedSach);
+                DanhSachSachDaChon.Add(newItem.SelectedSach);
+            }
 
             UpdateAvailableLists();
             CalculateTongTien();
@@ -287,8 +307,15 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
             }
             if (DanhSachSachHoaDon.Count > 0)
             {
-                DanhSachSach.Add(SelectedSachHoaDon.SelectedSach);
+                if (SelectedSachHoaDon.SelectedSach != null)
+                {
+                    DanhSachSach.Add(SelectedSachHoaDon.SelectedSach);
+                    DanhSachSachDaChon.Remove(SelectedSachHoaDon.SelectedSach);
+                }
+
                 DanhSachSachHoaDon.Remove(SelectedSachHoaDon);
+
+                UpdateAvailableLists();
                 CalculateTongTien();
             }
             else

@@ -77,6 +77,7 @@ namespace QuanLyNhaSach.Models.dto
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
+        public event EventHandler<SelectedSachChangedEventArgs> SelectedSachChanged;
         // Add an event to notify when ThanhTien changes
         public event EventHandler? ThanhTienChanged;
 
