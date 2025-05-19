@@ -40,6 +40,10 @@ namespace QuanLyNhaSach.ViewModels.ThamSoViewModel
                     SoLuongTonToiThieu = thamSo.SoLuongTonToiThieu;
                     SoLuongTonToiDa = thamSo.SoLuongTonToiDa;
                     TienNoToiDa = thamSo.TienNoToiDa;
+                    QuyDinhSoLuongNhapToiThieu = thamSo.QuyDinhSoLuongNhapToiThieu;
+                    QuyDinhSoLuongTonToiThieu = thamSo.QuyDinhSoLuongTonToiThieu;
+                    QuyDinhSoLuongTonToiDa = thamSo.QuyDinhSoLuongTonToiDa;
+                    QuyDinhTienNoToiDa = thamSo.QuyDinhTienNoToiDa;
                     QuyDinhTienThuTienNo = thamSo.QuyDinhTienThuTienNo;
                 }
             }
@@ -72,6 +76,14 @@ namespace QuanLyNhaSach.ViewModels.ThamSoViewModel
         private int _soLuongTonToiDa = 0;
         [ObservableProperty]
         private int _tienNoToiDa = 0;
+        [ObservableProperty]
+        private bool _quyDinhSoLuongNhapToiThieu = true;
+        [ObservableProperty]
+        private bool _quyDinhSoLuongTonToiThieu = true;
+        [ObservableProperty]
+        private bool _quyDinhSoLuongTonToiDa = true;
+        [ObservableProperty]
+        private bool _quyDinhTienNoToiDa = true;
         [ObservableProperty]
         private bool _quyDinhTienThuTienNo = true;
         #endregion
@@ -107,6 +119,10 @@ namespace QuanLyNhaSach.ViewModels.ThamSoViewModel
                 thamSo.SoLuongTonToiThieu = SoLuongTonToiThieu;
                 thamSo.SoLuongTonToiDa = SoLuongTonToiDa;
                 thamSo.TienNoToiDa = TienNoToiDa;
+                thamSo.QuyDinhSoLuongNhapToiThieu = QuyDinhSoLuongNhapToiThieu;
+                thamSo.QuyDinhSoLuongTonToiThieu = QuyDinhSoLuongTonToiThieu;
+                thamSo.QuyDinhSoLuongTonToiDa = QuyDinhSoLuongTonToiDa;
+                thamSo.QuyDinhTienNoToiDa = QuyDinhTienNoToiDa;
                 thamSo.QuyDinhTienThuTienNo = QuyDinhTienThuTienNo;
 
                 await _thamSoService.UpdateThamSo(thamSo);

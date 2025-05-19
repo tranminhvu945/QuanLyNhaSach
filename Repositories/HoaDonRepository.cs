@@ -18,6 +18,14 @@ namespace QuanLyNhaSach.Repositories
             }
         }
 
+        async public Task<IEnumerable<HoaDon>> GetHoaDonByKhachHangId(int maKhachHang)
+        {
+            return await _context.DsHoaDon
+                .Include(p => p.KhachHang)
+                .Where(p => p.MaKhachHang == maKhachHang)
+                .ToListAsync();
+        }
+
         public async Task<HoaDon> GetHoaDonById(int id)
         {
             HoaDon? hoaDon = await _context.DsHoaDon
