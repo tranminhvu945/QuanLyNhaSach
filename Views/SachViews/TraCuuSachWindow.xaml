@@ -92,7 +92,7 @@
                             <TextBox
                                 Grid.Row="1"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding MaDaiLy}" />
+                                Text="{Binding MaSach}" />
                         </Grid>
 
                         <!--  Tên đại lý  -->
@@ -109,7 +109,7 @@
                             <TextBox
                                 Grid.Row="1"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding TenDaiLy}" />
+                                Text="{Binding TenSach}" />
                         </Grid>
 
                         <!--  Điện thoại  -->
@@ -126,7 +126,7 @@
                             <TextBox
                                 Grid.Row="1"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding DienThoai}" />
+                                Text="{Binding TheLoai}" />
                         </Grid>
 
                         <!--  Địa chỉ  -->
@@ -143,7 +143,7 @@
                             <TextBox
                                 Grid.Row="1"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding DiaChi}" />
+                                Text="{Binding TacGia}" />
                         </Grid>
 
                         <!--  Email  -->
@@ -171,7 +171,7 @@
                                         Grid.Column="2"
                                         Margin="0,25,0,0"
                                         Style="{StaticResource StandardTextBoxStyle}"
-                                        Text="{Binding NoDaiLyFrom}" />
+                                        Text="{Binding SoLuongTonFrom}" />
                                 <TextBlock
                                         Grid.Column="3"
                                         Margin="10,25,10,0"
@@ -181,7 +181,7 @@
                                         Grid.Column="4"
                                         Margin="0,25,0,0"
                                         Style="{StaticResource StandardTextBoxStyle}"
-                                        Text="{Binding NoDaiLyTo}" />
+                                        Text="{Binding SoLuongTonTo}" />
                         </Grid>
 
                         <!--  Tên loại đại lý  -->
@@ -211,22 +211,6 @@
                             <ColumnDefinition Width="2.5*" />
                         </Grid.ColumnDefinitions>
 
-                        <Grid Grid.Column="0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="3*" />
-                                <RowDefinition Height="7*" />
-                            </Grid.RowDefinitions>
-
-                            <TextBlock
-                                Grid.Row="0"
-                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
-                                Text="Mã khách hàng" />
-                            <TextBox
-                                Grid.Row="1"
-                                Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding MaDaiLy}" />
-                        </Grid>
-
                         <Grid Grid.Column="1">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="3*" />
@@ -237,10 +221,17 @@
                                 Grid.Row="0"
                                 Style="{StaticResource FieldSmallLabelTextBlockStyle}"
                                 Text="Tên khách hàng" />
-                            <TextBox
-                                Grid.Row="1"
-                                Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding MaDaiLy}" />
+                            <ComboBox
+                            Grid.Row="1"
+                            ItemsSource="{Binding KhachHangs}"
+                            SelectedItem="{Binding SelectedKhachHang}"
+                            Style="{StaticResource StandardComboBoxStyle}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding TenKhachHang}" />
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
                         </Grid>
 
                         <!--  Nợ đại lý  -->
@@ -267,7 +258,7 @@
                                 Grid.Column="2"
                                 Margin="0,25,0,0"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding NoDaiLyFrom}" />
+                                Text="{Binding TienNoKhachHangFrom}" />
                             <TextBlock
                                 Grid.Column="3"
                                 Margin="10,25,10,0"
@@ -277,7 +268,7 @@
                                 Grid.Column="4"
                                 Margin="0,25,0,0"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding NoDaiLyTo}" />
+                                Text="{Binding TienNoKhachHangTo}" />
                         </Grid>
                     </Grid>
 
@@ -312,7 +303,7 @@
                             <TextBox
                                 Grid.Column="2"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding NoTheoToiDaLoaiDaiLyFrom}" />
+                                Text="{Binding MaHoaDonFrom}" />
                             <TextBlock
                                 Grid.Column="3"
                                 Style="{StaticResource RedHighlightTextBlockStyle}"
@@ -320,7 +311,7 @@
                             <TextBox
                                 Grid.Column="4"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding NoTheoToiDaLoaiDaiLyTo}" />
+                                Text="{Binding MaHoaDonTo}" />
                         </Grid>
 
                         <!--  Mã phiếu xuất  -->
@@ -344,7 +335,7 @@
                                 Text="từ" />
                             <DatePicker
                                 Grid.Column="2"
-                                SelectedDate="{Binding NgayLapPhieuXuatFrom}"
+                                SelectedDate="{Binding NgayLapHoaDonFrom}"
                                 Style="{StaticResource StandardDatePickerStyle}" />
                             <TextBlock
                                 Grid.Column="3"
@@ -352,7 +343,7 @@
                                 Text="đến" />
                             <DatePicker
                                 Grid.Column="4"
-                                SelectedDate="{Binding NgayLapPhieuXuatTo}"
+                                SelectedDate="{Binding NgayLapHoaDonTo}"
                                 Style="{StaticResource StandardDatePickerStyle}" />
                         </Grid>
                     </Grid>
@@ -388,7 +379,7 @@
                             <TextBox
                                 Grid.Column="2"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding SoLuongXuatCuaMatHangXuatFrom}" />
+                                Text="{Binding DonGiaBanFrom}" />
                             <TextBlock
                                 Grid.Column="3"
                                 Style="{StaticResource RedHighlightTextBlockStyle}"
@@ -396,7 +387,7 @@
                             <TextBox
                                 Grid.Column="4"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding SoLuongXuatCuaMatHangXuatTo}" />                        </Grid>
+                                Text="{Binding DonGiaBanTo}" />                        </Grid>
 
                         <!--  Tổng giá trị phiếu xuất  -->
                         <Grid Grid.Column="1">
@@ -420,7 +411,7 @@
                             <TextBox
                                 Grid.Column="2"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding TongGiaTriPhieuXuatFrom}" />
+                                Text="{Binding SoLuongBanFrom}" />
                             <TextBlock
                                 Grid.Column="3"
                                 Style="{StaticResource RedHighlightTextBlockStyle}"
@@ -428,7 +419,7 @@
                             <TextBox
                                 Grid.Column="4"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding TongGiaTriPhieuXuatTo}" />
+                                Text="{Binding SoLuongBanTo}" />
                         </Grid>
                     </Grid>
 
@@ -473,7 +464,7 @@
                             <TextBox
                                 Grid.Column="2"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding SoLuongXuatCuaMatHangXuatFrom}" />
+                                Text="{Binding ThanhTienFrom}" />
                             <TextBlock
                                 Grid.Column="3"
                                 Style="{StaticResource RedHighlightTextBlockStyle}"
@@ -481,7 +472,7 @@
                             <TextBox
                                 Grid.Column="4"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding SoLuongXuatCuaMatHangXuatTo}" />
+                                Text="{Binding ThanhTienTo}" />
                         </Grid>
 
                         <!--  Đơn giá xuất của mặt hàng xuất  -->
@@ -506,7 +497,7 @@
                             <TextBox
                                 Grid.Column="2"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding DonGiaXuatCuaMatHangXuatFrom}" />
+                                Text="{Binding TongGiaTriHoaDonFrom}" />
                             <TextBlock
                                 Grid.Column="3"
                                 Style="{StaticResource RedHighlightTextBlockStyle}"
@@ -514,7 +505,7 @@
                             <TextBox
                                 Grid.Column="4"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding DonGiaXuatCuaMatHangXuatTo}" />
+                                Text="{Binding TongGiaTriHoaDonTo}" />
                         </Grid>
                     </Grid>
 
@@ -549,7 +540,7 @@
                             <TextBox
                                 Grid.Column="2"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding ThanhTienCuaMatHangXuatFrom}" />
+                                Text="{Binding MaPhieuNhapFrom}" />
                             <TextBlock
                                 Grid.Column="3"
                                 Style="{StaticResource RedHighlightTextBlockStyle}"
@@ -557,7 +548,7 @@
                             <TextBox
                                 Grid.Column="4"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding ThanhTienCuaMatHangXuatTo}" />
+                                Text="{Binding MaPhieuNhapTo}" />
                         </Grid>
 
                         <!--  Số lượng tồn của mặt hàng xuất  -->
@@ -581,7 +572,7 @@
                                 Text="từ" />
                             <DatePicker
                                 Grid.Column="2"
-                                SelectedDate="{Binding NgayLapPhieuXuatFrom}"
+                                SelectedDate="{Binding NgayNhapFrom}"
                                 Style="{StaticResource StandardDatePickerStyle}" />
                             <TextBlock
                                 Grid.Column="3"
@@ -589,7 +580,7 @@
                                 Text="đến" />
                             <DatePicker
                                 Grid.Column="4"
-                                SelectedDate="{Binding NgayLapPhieuXuatTo}"
+                                SelectedDate="{Binding NgayNhapTo}"
                                 Style="{StaticResource StandardDatePickerStyle}" />
                         </Grid>
                     </Grid>
@@ -622,7 +613,7 @@
                             <TextBox
                                 Grid.Column="2"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding ThanhTienCuaMatHangXuatFrom}" />
+                                Text="{Binding SoLuongNhapFrom}" />
                             <TextBlock
                                 Grid.Column="3"
                                 Style="{StaticResource RedHighlightTextBlockStyle}"
@@ -630,7 +621,7 @@
                             <TextBox
                                 Grid.Column="4"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding ThanhTienCuaMatHangXuatTo}" />
+                                Text="{Binding SoLuongNhapTo}" />
 
                         </Grid>
 
@@ -646,7 +637,7 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Stretch"
                 Orientation="Horizontal">
-                <Button Command="{Binding SearchDaiLyCommand}" Style="{StaticResource WindowPrimaryButtonStyle}">
+                <Button Command="{Binding SearchSachCommand}" Style="{StaticResource WindowPrimaryButtonStyle}">
                     <StackPanel Orientation="Horizontal">
                         <fa:FontAwesome Margin="0,0,10,0" Icon="Search" />
                         <TextBlock Text="Tra cứu sách" />

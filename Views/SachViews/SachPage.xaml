@@ -42,7 +42,7 @@
 
                     <Button
                         Margin="20,0,0,0"
-                        Command="{Binding SearchPhieuXuatCommand}"
+                        Command="{Binding SearchSachCommand}"
                         Style="{StaticResource PrimaryButtonStyle}">
                         <StackPanel Orientation="Horizontal">
                             <fa:FontAwesome
@@ -69,7 +69,7 @@
                     VerticalAlignment="Center"
                     Orientation="Horizontal">
 
-                    <Button Command="{Binding AddPhieuXuatCommand}" Style="{StaticResource PrimaryButtonStyle}">
+                    <Button Command="{Binding AddSachCommand}" Style="{StaticResource PrimaryButtonStyle}">
                         <StackPanel Orientation="Horizontal">
                             <fa:FontAwesome
                                 Margin="0,0,8,0"
@@ -81,7 +81,7 @@
 
                     <Button
                         Margin="10,0,0,0"
-                        Command="{Binding EditPhieuXuatCommand}"
+                        Command="{Binding EditSachCommand}"
                         Style="{StaticResource PrimaryButtonStyle}">
                         <StackPanel Orientation="Horizontal">
                             <fa:FontAwesome
@@ -94,7 +94,7 @@
 
                     <Button
                         Margin="10,0,0,0"
-                        Command="{Binding DeletePhieuXuatCommand}"
+                        Command="{Binding DeleteSachCommand}"
                         Style="{StaticResource DeleteButtonStyle}">
                         <StackPanel Orientation="Horizontal">
                             <fa:FontAwesome
@@ -115,37 +115,37 @@
                 BorderBrush="#E0E0E0"
                 BorderThickness="1">
                 <DataGrid
-                    ItemsSource="{Binding DanhSachPhieuXuat}"
-                    SelectedItem="{Binding SelectedPhieuXuat}"
+                    ItemsSource="{Binding DanhSachSach}"
+                    SelectedItem="{Binding SelectedSach}"
                     Style="{StaticResource DefaultDataGridStyle}">
 
                     <DataGrid.Columns>
                         <DataGridTextColumn
                             Width="*"
-                            Binding="{Binding MaPhieuXuat}"
+                            Binding="{Binding MaSach}"
                             ElementStyle="{StaticResource ColumnTextBlockStyle}"
                             Header="Mã sách" />
 
                         <DataGridTextColumn
                             Width="*"
-                            Binding="{Binding DaiLy.TenDaiLy}"
+                            Binding="{Binding TenSach}"
                             ElementStyle="{StaticResource ColumnTextBlockStyle}"
                             Header="Tên sách" />
 
                         <DataGridTextColumn
                             Width="*"
-                            Binding="{Binding NgayLapPhieu, StringFormat={}{0:dd/MM/yyyy}}"
+                            Binding="{Binding TheLoai}"
                             ElementStyle="{StaticResource ColumnTextBlockStyle}"
                             Header="Thể loại" />
 
                         <DataGridTextColumn
                             Width="*"
-                            Binding="{Binding TongTriGia, StringFormat={}{0:N0} VNĐ}"
+                            Binding="{Binding TacGia}"
                             ElementStyle="{StaticResource ColumnTextBlockStyle}"
                             Header="Tác giả" />
                         <DataGridTextColumn
                             Width="*"
-                            Binding="{Binding TongTriGia, StringFormat={}{0:N0} VNĐ}"
+                            Binding="{Binding SoLuongTon}"
                             ElementStyle="{StaticResource ColumnTextBlockStyle}"
                             Header="Số lượng tồn" />
                     </DataGrid.Columns>

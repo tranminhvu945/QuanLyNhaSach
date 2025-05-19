@@ -37,9 +37,6 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
         }
 
         [ObservableProperty]
-        private ObservableCollection<HoaDon> _filteredHoaDons = [];
-
-        [ObservableProperty]
         private ObservableCollection<HoaDon> _danhSachHoaDon = [];
 
         [ObservableProperty]
