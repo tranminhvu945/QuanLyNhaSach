@@ -88,7 +88,7 @@
                             <TextBox
                                 Grid.Row="1"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding MaPhieuThu}" />
+                                Text="{Binding MaKhachHang}" />
                         </Grid>
 
                         <Grid Grid.Column="1">
@@ -103,13 +103,12 @@
                                 Text="Tên khách hàng" />
                             <ComboBox
                                 Grid.Row="1"
-                                IsEditable="True"
-                                ItemsSource="{Binding DaiLies}"
-                                SelectedItem="{Binding SelectedDaiLy}"
+                                ItemsSource="{Binding KhachHangList}"
+                                SelectedItem="{Binding SelectedKhachHang}"
                                 Style="{StaticResource StandardComboBoxStyle}">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding TenDaiLy}" />
+                                        <TextBlock Text="{Binding TenKhachHang}" />
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
@@ -217,7 +216,7 @@
                             <TextBox
                                 Grid.Column="2"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding NoDaiLyFrom}" />
+                                Text="{Binding TienNoFrom}" />
                             <TextBlock
                                 Grid.Column="3"
                                 Style="{StaticResource RedHighlightTextBlockStyle}"
@@ -225,7 +224,7 @@
                             <TextBox
                                 Grid.Column="4"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding NoDaiLyTo}" />
+                                Text="{Binding TienNoTo}" />
                         </Grid>
                     </Grid>
 
@@ -257,7 +256,9 @@
                                 Text="từ" />
                             <DatePicker
                                 Grid.Column="2"
-                                SelectedDate="{Binding NgayThuTienFrom}"
+                                SelectedDate="{Binding NgayThuFrom}"
+                                SelectedDateFormat="Short"
+                                Language="vi-VN"
                                 Style="{StaticResource StandardDatePickerStyle}" />
                             <TextBlock
                                 Grid.Column="3"
@@ -265,7 +266,9 @@
                                 Text="đến" />
                             <DatePicker
                                 Grid.Column="4"
-                                SelectedDate="{Binding NgayThuTienTo}"
+                                SelectedDate="{Binding NgayThuTo}"
+                                SelectedDateFormat="Short"
+                                Language="vi-VN"
                                 Style="{StaticResource StandardDatePickerStyle}" />
                         </Grid>
 
@@ -319,7 +322,6 @@
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-
                             <TextBlock
                                 Grid.Column="0"
                                 Style="{StaticResource FieldSmallLabelTextBlockStyle}"
@@ -330,7 +332,9 @@
                                 Text="từ" />
                             <DatePicker
                                 Grid.Column="2"
-                                SelectedDate="{Binding NgayThuTienFrom}"
+                                SelectedDate="{Binding NgayLapFrom}"
+                                SelectedDateFormat="Short"
+                                Language="vi-VN"
                                 Style="{StaticResource StandardDatePickerStyle}" />
                             <TextBlock
                                 Grid.Column="3"
@@ -338,8 +342,11 @@
                                 Text="đến" />
                             <DatePicker
                                 Grid.Column="4"
-                                SelectedDate="{Binding NgayThuTienTo}"
+                                SelectedDate="{Binding NgayLapTo}"
+                                SelectedDateFormat="Short"
+                                Language="vi-VN"
                                 Style="{StaticResource StandardDatePickerStyle}" />
+
                         </Grid>
 
                         <Grid Grid.Column="1">
@@ -363,7 +370,7 @@
                             <TextBox
                                 Grid.Column="2"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding SoTienThuFrom}" />
+                                Text="{Binding TongTienFrom}" />
                             <TextBlock
                                 Grid.Column="3"
                                 Style="{StaticResource RedHighlightTextBlockStyle}"
@@ -371,7 +378,7 @@
                             <TextBox
                                 Grid.Column="4"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding SoTienThuTo}" />
+                                Text="{Binding TongTienTo}" />
                         </Grid>
                     </Grid>
 
@@ -386,7 +393,7 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Stretch"
                 Orientation="Horizontal">
-                <Button Command="{Binding TraCuuPhieuThuCommand}" Style="{StaticResource WindowPrimaryButtonStyle}">
+                <Button Command="{Binding SearchKhachHangCommand}" Style="{StaticResource WindowPrimaryButtonStyle}">
                     <StackPanel Orientation="Horizontal">
                         <fa:FontAwesome Margin="0,0,10,0" Icon="Search" />
                         <TextBlock Text="Tra cứu khách hàng" />
