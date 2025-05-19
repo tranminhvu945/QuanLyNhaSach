@@ -188,6 +188,22 @@ namespace QuanLyNhaSach.Helpers
                     TheLoai = "Công Nghệ Thông Tin",
                     TacGia = "Nguyễn Văn A",
                     SoLuongTon = 10
+                },
+                new Sach
+                {
+                    MaSach = 2,
+                    TenSach = "AAAAAAAAAAAA",
+                    TheLoai = "AAAAAAAAAAAAA",
+                    TacGia = "Nguyễn Văn A",
+                    SoLuongTon = 15
+                },
+                new Sach
+                {
+                    MaSach = 3,
+                    TenSach = "BBBBBBBBBBBB",
+                    TheLoai = "BBBBBBBBBBBBB",
+                    TacGia = "Nguyễn Văn B",
+                    SoLuongTon = 20
                 }
             );
         }

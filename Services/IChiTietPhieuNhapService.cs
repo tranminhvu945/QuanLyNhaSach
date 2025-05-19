@@ -15,5 +15,7 @@ namespace QuanLyNhaSach.Services
         Task UpdateChiTietPhieuNhap(ChiTietPhieuNhap chiTietPhieuNhap);
         Task DeleteChiTietPhieuNhap(int id);
         Task<IEnumerable<ChiTietPhieuNhap>> GetChiTietPhieuNhapByPhieuNhapId(int maPhieuNhap);
+        Task DeleteChiTietPhieuNhapByPhieuNhapId(int maPhieuNhapSach);
+
     }
 }

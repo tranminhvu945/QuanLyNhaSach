@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel;
 
 namespace QuanLyNhaSach.Models.dto
 {
@@ -37,17 +38,29 @@ namespace QuanLyNhaSach.Models.dto
             get => _selectedSach;
             set
             {
-                _selectedSach = value;
-                OnPropertyChanged();
-                OnPropertyChanged(nameof(TenSach));
-                OnPropertyChanged(nameof(SoLuongTon));
-                ThanhTienChanged?.Invoke(this, EventArgs.Empty);
+                if (_selectedSach != value)
+                {
+                    _selectedSach = value;
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(TenSach));
+                    OnPropertyChanged(nameof(TacGia));
+                    OnPropertyChanged(nameof(TheLoai));
+                    OnPropertyChanged(nameof(SoLuongTon));  
+                    OnPropertyChanged(nameof(SoLuongTonTruocKhiNhap));
+                    SelectedSachChanged?.Invoke(this, EventArgs.Empty);
+                }
             }
         }
 
+
         public string TenSach => SelectedSach?.TenSach ?? string.Empty;
+        public string TacGia => SelectedSach?.TacGia ?? string.Empty;
+        public string TheLoai => SelectedSach?.TheLoai ?? string.Empty;
 
         public int SoLuongTon => SelectedSach?.SoLuongTon ?? 0;
+
+        public int SoLuongTonTruocKhiNhap => SelectedSach?.SoLuongTon - SoLuongNhap ?? 0;
+
 
         private int _soLuongNhap = 0;
         public int SoLuongNhap
@@ -63,10 +76,10 @@ namespace QuanLyNhaSach.Models.dto
         #endregion
 
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-        // Add an event to notify when ThanhTien changes
-        public event EventHandler? ThanhTienChanged;
+        public event EventHandler? SelectedSachChanged;
 
+        public event PropertyChangedEventHandler? PropertyChanged;
+        // Add an event to notify when ThanhTien changes    
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

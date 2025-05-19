@@ -1,46 +1,48 @@
 ﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Windows;
-using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
-using QuanLyNhaSach.Models;
 using QuanLyNhaSach.Models.dto;
+using QuanLyNhaSach.Models;
 using QuanLyNhaSach.Services;
 using QuanLyNhaSach.Views;
+using System.ComponentModel;
+using System.Windows.Input;
 
 namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
 {
-    public partial class LapPhieuNhapSachViewModel : INotifyPropertyChanged
+    public partial class CapNhatPhieuNhapSachViewModel : INotifyPropertyChanged
     {
         // Services
         private readonly IPhieuNhapSachService _phieuNhapSachService;
         private readonly IChiTietPhieuNhapService _phieuNhapSachChiTietService;
         private readonly ISachService _sachService;
         private readonly IThamSoService _thamSoService;
-
+        private readonly int _maPhieuNhapSachPassed;
 
         // Commands 
         public ICommand CloseWindowCommand { get; }
-        public ICommand LapPhieuNhapSachCommand { get; }
-        public ICommand PhieuNhapSachMoiCommand { get; }
+        public ICommand CapNhatPhieuNhapSachCommand { get; }
         public ICommand ThemDauSachCommand { get; }
         public ICommand XoaDauSachCommand { get; }
         public ICommand BoChonDauSachCommand { get; }
 
-        public LapPhieuNhapSachViewModel(
-             IPhieuNhapSachService phieuNhapSachService,
-             IChiTietPhieuNhapService phieuNhapSachChiTietService,
-             ISachService sachService,
-             IThamSoService thamSoService)
+        public CapNhatPhieuNhapSachViewModel(
+            IPhieuNhapSachService phieuNhapSachService,
+            IChiTietPhieuNhapService phieuNhapSachChiTietService,
+            ISachService sachService,
+            IThamSoService thamSoService,
+            int maPhieuNhapSachPassed
+        )
         {
             _phieuNhapSachService = phieuNhapSachService;
             _sachService = sachService;
             _phieuNhapSachChiTietService = phieuNhapSachChiTietService;
             _thamSoService = thamSoService;
+            _maPhieuNhapSachPassed = maPhieuNhapSachPassed;
 
+            // Initialize commands
             CloseWindowCommand = new RelayCommand(CloseWindow);
-            LapPhieuNhapSachCommand = new RelayCommand(LapPhieuNhapSach);
-            PhieuNhapSachMoiCommand = new RelayCommand(PhieuNhapSachMoi);
+            CapNhatPhieuNhapSachCommand = new RelayCommand(CapNhatPhieuNhapSach);
             ThemDauSachCommand = new RelayCommand(ThemDauSach);
             XoaDauSachCommand = new RelayCommand(XoaDauSach);
             BoChonDauSachCommand = new RelayCommand(BoChonDauSach);
@@ -50,14 +52,37 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
 
         private async Task LoadDataAsync()
         {
-            _danhSachSach = new List<Sach>(await _sachService.GetAllSach());
+            try
+            {
+                MaPhieuNhapSach = _maPhieuNhapSachPassed.ToString();
+                var phieuNhapSach = await _phieuNhapSachService.GetPhieuNhapById(_maPhieuNhapSachPassed);
+                NgayNhap = phieuNhapSach.NgayNhap;
+
+                _danhSachSach = [.. (await _sachService.GetAllSach())];
+
+                DanhSachDauSachPhieuNhap.Clear();
+
+                var listChiTietPhieuNhapSach = await _phieuNhapSachChiTietService.GetChiTietPhieuNhapByPhieuNhapId(_maPhieuNhapSachPassed);
+                foreach (var chiTiet in listChiTietPhieuNhapSach)
+                {
+                    DanhSachDauSachPhieuNhap.Add(new DisplayDauSachPhieuNhap(_danhSachSach)
+                    {
+                        SelectedSach = await _sachService.GetSachById(chiTiet.MaSach),
+                        SoLuongNhap = chiTiet.SoLuongNhap,
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Có lỗi xảy ra khi tải dữ liệu: {ex.Message}",
+                    "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         #region Bindings Properties
         private List<Sach> _danhSachSach = [];
         private List<Sach> _danhSachSachDaChon = [];
 
-        // Properties for binding
         private string _maPhieuNhapSach = string.Empty;
         public string MaPhieuNhapSach
         {
@@ -130,15 +155,14 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
         private void CloseWindow()
         {
             DataChanged?.Invoke(this, EventArgs.Empty);
-            Application.Current.Windows.OfType<LapPhieuNhapSachWindow>().FirstOrDefault()?.Close();
+            Application.Current.Windows.OfType<CapNhatPhieuNhapSachWindow>().FirstOrDefault()?.Close();
         }
 
-        private void LapPhieuNhapSach()
+        private void CapNhatPhieuNhapSach()
         {
-            _ = LapPhieuNhapSachAsync();
+            _ = CapNhatPhieuNhapSachAsync();
         }
-
-        private async Task LapPhieuNhapSachAsync()
+        private async Task CapNhatPhieuNhapSachAsync()
         {
             try
             {
@@ -166,58 +190,59 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
                     //}
                 }
 
-                if (string.IsNullOrEmpty(MaPhieuNhapSach))
+                var phieuNhapSach = await _phieuNhapSachService.GetPhieuNhapById(_maPhieuNhapSachPassed);
+                phieuNhapSach.NgayNhap = NgayNhap;
+                await _phieuNhapSachService.UpdatePhieuNhap(phieuNhapSach);
+
+
+                // Lấy danh sách chi tiết cũ để khôi phục tồn kho
+                var oldChiTietList = await _phieuNhapSachChiTietService.GetChiTietPhieuNhapByPhieuNhapId(_maPhieuNhapSachPassed);
+                foreach (var oldChiTiet in oldChiTietList)
                 {
-                    int newId = await _phieuNhapSachService.GenerateAvailableId();
-                    MaPhieuNhapSach = newId.ToString();
+                    var sach = await _sachService.GetSachById(oldChiTiet.MaSach);
+                    if (sach != null)
+                    {
+                        // Trừ lại số lượng tồn tương ứng với chi tiết cũ (khôi phục tồn trước khi cập nhật)
+                        sach.SoLuongTon -= oldChiTiet.SoLuongNhap;
+                        if (sach.SoLuongTon < 0) sach.SoLuongTon = 0;
+                        await _sachService.UpdateSach(sach);
+                    }
                 }
+                // Xóa chi tiết phiếu nhập cũ
+                await _phieuNhapSachChiTietService.DeleteChiTietPhieuNhapByPhieuNhapId(_maPhieuNhapSachPassed);
 
-                var phieuNhapSach = new PhieuNhapSach
-                {
-                    MaPhieuNhapSach = int.Parse(MaPhieuNhapSach),
-                    NgayNhap = NgayNhap,
-                };
 
-                await _phieuNhapSachService.AddPhieuNhap(phieuNhapSach);
-
+                // Thêm chi tiết phiếu nhập mới
                 foreach (var item in DanhSachDauSachPhieuNhap)
                 {
-                    var chiTiet = new ChiTietPhieuNhap
+                    var newChiTiet = new ChiTietPhieuNhap
                     {
                         MaPhieuNhapSach = phieuNhapSach.MaPhieuNhapSach,
                         MaSach = item.SelectedSach.MaSach,
                         SoLuongNhap = item.SoLuongNhap,
                     };
 
-                    await _phieuNhapSachChiTietService.AddChiTietPhieuNhap(chiTiet);
+                    await _phieuNhapSachChiTietService.AddChiTietPhieuNhap(newChiTiet);
 
                     var sach = await _sachService.GetSachById(item.SelectedSach.MaSach);
-                    sach.SoLuongTon += item.SoLuongNhap;
-                    await _sachService.UpdateSach(sach);
+                    if (sach != null)
+                    {
+                        sach.SoLuongTon += item.SoLuongNhap;
+                        await _sachService.UpdateSach(sach);
+                    }
                 }
 
-                MessageBox.Show($"Lập phiếu nhập sách thành công. Mã phiếu nhập sách: {MaPhieuNhapSach}",
-                    "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Cập nhật phiếu nhập sách thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Có lỗi xảy ra khi lập phiếu nhấp sách: {ex.Message}",
-                    "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Lỗi khi cập nhật phiếu nhập sách: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
-
-
-        private void PhieuNhapSachMoi()
-        {
-            SelectedDauSachPhieuNhap = null!;
-            DanhSachDauSachPhieuNhap.Clear();
-            _ = LoadDataAsync();
         }
 
         private void UpdateAvailableLists()
         {
             var selectedIds = DanhSachDauSachPhieuNhap.Select(r => r.SelectedSach.MaSach).ToHashSet();
-
             foreach (var row in DanhSachDauSachPhieuNhap)
             {
                 var own = row.SelectedSach;
@@ -225,7 +250,6 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
                     .Where(m => !selectedIds.Contains(m.MaSach))
                     .Concat(new[] { own })
                     .ToList();
-
                 row.DanhSachSach = new ObservableCollection<Sach>(available);
             }
         }
@@ -239,17 +263,17 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
                 return;
             }
             var newItem = new DisplayDauSachPhieuNhap(available);
-            DanhSachDauSachPhieuNhap.Add(newItem);
 
-            _danhSachSachDaChon.Add(newItem.SelectedSach);
+            DanhSachDauSachPhieuNhap.Add(newItem);
             _danhSachSach.Remove(newItem.SelectedSach);
+            _danhSachSachDaChon.Add(newItem.SelectedSach);
 
             UpdateAvailableLists();
         }
 
         private void XoaDauSach()
         {
-            if (SelectedDauSachPhieuNhap == null)
+            if (SelectedDauSachPhieuNhap == null!)
             {
                 MessageBox.Show("Vui lòng chọn mặt hàng để xóa", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -269,14 +293,14 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
         {
             SelectedDauSachPhieuNhap = null!;
         }
-
         #endregion
+
         public event EventHandler? DataChanged;
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-    }
 
+    }
 }

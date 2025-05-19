@@ -10,9 +10,6 @@ using QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel;
 
 namespace QuanLyNhaSach.Views
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         private readonly double collapsedWidth = 60;
@@ -21,7 +18,6 @@ namespace QuanLyNhaSach.Views
 
         public MainWindow(MainWindowViewModel viewModel, IServiceProvider serviceProvider)
         {
-            InitializeComponent();
             InitializeComponent();
             _serviceProvider = serviceProvider;
             DataContext = viewModel;

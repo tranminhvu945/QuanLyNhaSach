@@ -73,13 +73,12 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="14*" />
                             <ColumnDefinition Width="16*" />
+                            <ColumnDefinition Width="16*" />
                             <ColumnDefinition Width="14*" />
-                            <ColumnDefinition Width="14*" />
-                            <ColumnDefinition Width="14*" />
+                            <ColumnDefinition Width="16*" />
                             <ColumnDefinition Width="14*" />
                         </Grid.ColumnDefinitions>
 
-                        <!--  Mã phiếu xuất  -->
                         <Grid Grid.Column="0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="3*" />
@@ -96,7 +95,6 @@
                                 Text="{Binding MaPhieuNhapSach}" />
                         </Grid>
 
-                        <!--  Tên đại lý  -->
                         <Grid Grid.Column="1">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="3*" />
@@ -113,36 +111,68 @@
                                  Style="{StaticResource StandardDatePickerStyle}" />
                         </Grid>
 
-                        <!--  Third Column  -->
-                        <Grid Grid.Column="3">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="3*" />
-                                <RowDefinition Height="7*" />
-                            </Grid.RowDefinitions>
-                        </Grid>
-
-                        <!--  Fourth Column  -->
                         <Grid Grid.Column="2">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="3*" />
                                 <RowDefinition Height="7*" />
                             </Grid.RowDefinitions>
+                            <TextBlock
+                                 Grid.Row="0"
+                                 Style="{StaticResource FieldSmallLabelTextBlockStyle}"
+                                 Text="Số lượng tồn tối thiểu" />
+                            <TextBox
+                                 Grid.Row="1"
+                                 Grid.Column="0"
+                                 Style="{StaticResource ReadOnlyTextBoxStyle}"
+                                 Text="{Binding SoLuongTonToiThieu}" />
                         </Grid>
 
-                        <!--  Sixth Column  -->
+                        <Grid Grid.Column="3">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="3*" />
+                                <RowDefinition Height="7*" />
+                            </Grid.RowDefinitions>
+                            <TextBlock
+                                 Grid.Row="0"
+                                 Style="{StaticResource FieldSmallLabelTextBlockStyle}"
+                                 Text="Tình trạng" />
+                            <TextBox
+                                 Grid.Row="1"
+                                 Grid.Column="0"
+                                 Style="{StaticResource ReadOnlyTextBoxStyle}"
+                                 Text="{Binding aaa}" />
+                        </Grid>
+
                         <Grid Grid.Column="4">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="3*" />
                                 <RowDefinition Height="7*" />
                             </Grid.RowDefinitions>
+                            <TextBlock
+                                 Grid.Row="0"
+                                 Style="{StaticResource FieldSmallLabelTextBlockStyle}"
+                                 Text="Số lượng nhập tối thiểu" />
+                            <TextBox
+                                 Grid.Row="1"
+                                 Grid.Column="0"
+                                 Style="{StaticResource ReadOnlyTextBoxStyle}"
+                                 Text="{Binding SoLuongTonToiThieu}" />
                         </Grid>
 
-                        <!--  Tổng tiền  -->
                         <Grid Grid.Column="5">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="3*" />
                                 <RowDefinition Height="7*" />
                             </Grid.RowDefinitions>
+                            <TextBlock
+                                 Grid.Row="0"
+                                 Style="{StaticResource FieldSmallLabelTextBlockStyle}"
+                                 Text="Tình trạng" />
+                            <TextBox
+                                 Grid.Row="1"
+                                 Grid.Column="0"
+                                 Style="{StaticResource ReadOnlyTextBoxStyle}"
+                                 Text="{Binding bbb}" />
                         </Grid>
                     </Grid>
 
@@ -294,7 +324,7 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <ComboBox
-                                                Width="190"
+                                                Width="270"
                                                 Height="40"
                                                 Margin="0,5,0,5"
                                                 VerticalAlignment="Center"
@@ -319,7 +349,7 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Border
-                                                Width="150"
+                                                Width="220"
                                                 Padding="10,5"
                                                 HorizontalAlignment="Center"
                                                 Background="#A2A2A2"
@@ -356,7 +386,7 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Border
-                                                Width="150"
+                                                Width="290"
                                                 Padding="10,5"
                                                 HorizontalAlignment="Center"
                                                 Background="#A2A2A2"
@@ -386,48 +416,15 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                <DataGridTemplateColumn Width="*" IsReadOnly="True">
-                                    <DataGridTemplateColumn.HeaderTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Text="Số lượng tồn tối thiểu để được nhập"
-                                                        TextWrapping="Wrap"
-                                                        TextAlignment="Center"
-                                                        FontWeight="SemiBold"
-                                                        FontFamily="Open Sans"
-                                                        FontSize="20"
-                                                        Padding="5"
-                                                        MinHeight="60" />
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.HeaderTemplate>
-
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Border Width="150" Padding="10,5" HorizontalAlignment="Center" Background="#A2A2A2" BorderBrush="#33000000" BorderThickness="1" CornerRadius="10">
-                                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Open Sans" FontSize="20" Foreground="White" Text="{Binding SoLuongTonToiThieu}" TextAlignment="Center">
-                                                    <TextBlock.Style>
-                                                        <Style TargetType="TextBlock">
-                                                            <Style.Triggers>
-                                                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=IsSelected}" Value="True">
-                                                                    <Setter Property="FontWeight" Value="SemiBold" />
-                                                                </DataTrigger>
-                                                            </Style.Triggers>
-                                                        </Style>
-                                                    </TextBlock.Style>
-                                                </TextBlock>
-                                            </Border>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-
-                                <!--  SỐ LƯỢNG XUẤT Column  -->
+                                
                                 <DataGridTemplateColumn
-                                    Width="*"
+                                    Width="150"
                                     Header="Số lượng tồn"
                                     IsReadOnly="True">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Border
-                                                Width="150"
+                                                Width="125"
                                                 Padding="10,5"
                                                 HorizontalAlignment="Center"
                                                 Background="#A2A2A2"
@@ -457,46 +454,11 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                <DataGridTemplateColumn Width="*" IsReadOnly="True">
-                                    <DataGridTemplateColumn.HeaderTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Text="Số lượng Nhập tối thiểu"
-                                                        TextWrapping="Wrap"
-                                                        TextAlignment="Center"
-                                                        FontWeight="SemiBold"
-                                                        FontFamily="Open Sans"
-                                                        FontSize="20"
-                                                        Padding="5"
-                                                        MinHeight="60" />
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.HeaderTemplate>
-
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Border Width="150" Padding="10,5" HorizontalAlignment="Center" Background="#A2A2A2" BorderBrush="#33000000" BorderThickness="1" CornerRadius="10">
-                                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Open Sans" FontSize="20" Foreground="White" Text="{Binding SoLuongNhapToiThieu}" TextAlignment="Center">
-                                                    <TextBlock.Style>
-                                                        <Style TargetType="TextBlock">
-                                                            <Style.Triggers>
-                                                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=IsSelected}" Value="True">
-                                                                    <Setter Property="FontWeight" Value="SemiBold" />
-                                                                </DataTrigger>
-                                                            </Style.Triggers>
-                                                        </Style>
-                                                    </TextBlock.Style>
-                                                </TextBlock>
-                                            </Border>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-
-
-                                <!--  ĐƠN GIÁ XUẤT Column  -->
-                                <DataGridTemplateColumn Width="*" Header="Số lượng nhập">
+                                <DataGridTemplateColumn Width="180" Header="Số lượng nhập">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBox
-                                                Width="150"
+                                                Width="125"
                                                 Height="40"
                                                 Padding="10,5"
                                                 HorizontalAlignment="Center"
