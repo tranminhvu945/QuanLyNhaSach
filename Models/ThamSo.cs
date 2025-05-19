@@ -20,5 +20,6 @@ namespace QuanLyNhaSach.Models
         public bool QuyDinhSoLuongTonToiThieu { get; set; } = true;
         public bool QuyDinhTienNoToiDa{ get; set; } = true;
         public bool QuyDinhTienThuTienNo { get; set; } = true;
+        //public bool QuyDinhSoLuongTonToiThieu { get; set; } = true;
     }
 }

@@ -7,11 +7,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using QuanLyNhaSach.ViewModels.HoaDonBanViewModel;
+using System.Windows.Controls;
 
 namespace QuanLyNhaSach.Views.HoaDonBanViews
 {
@@ -20,9 +17,10 @@ namespace QuanLyNhaSach.Views.HoaDonBanViews
     /// </summary>
     public partial class HoaDonBanPage : Page
     {
-        public HoaDonBanPage()
+        public HoaDonBanPage(HoaDonBanPageViewModel vm)
         {
             InitializeComponent();
+            DataContext = vm;
         }
     }
 }

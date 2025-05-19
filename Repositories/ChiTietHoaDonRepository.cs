@@ -44,12 +44,12 @@ namespace QuanLyNhaSach.Repositories
             _context.Entry(chiTietHoaDon).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }
-        public async Task DeleteChiTietHoaDon(int id)
+        public async Task DeleteChiTietHoaDon(ChiTietHoaDon chiTietHoaDon)
         {
-            var chiTietHoaDon = await _context.DsChiTietHoaDon.FindAsync(id);
-            if (chiTietHoaDon != null)
+            var entity = await _context.DsChiTietHoaDon.FindAsync(chiTietHoaDon.MaHoaDon, chiTietHoaDon.MaSach);
+            if (entity != null)
             {
-                _context.DsChiTietHoaDon.Remove(chiTietHoaDon);
+                _context.DsChiTietHoaDon.Remove(entity);
                 await _context.SaveChangesAsync();
             }
         }

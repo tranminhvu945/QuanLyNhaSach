@@ -28,12 +28,12 @@ namespace QuanLyNhaSach.Repositories
 
         public async Task<HoaDon> GetHoaDonById(int id)
         {
-            HoaDon? phieuXuat = await _context.DsHoaDon
+            HoaDon? hoaDon = await _context.DsHoaDon
                                              .Include(p => p.KhachHang)
                                              .Include(p => p.DsChiTietHoaDon)
                                                  .ThenInclude(c => c.Sach)
                                              .FirstOrDefaultAsync(p => p.MaHoaDon == id);
-            return phieuXuat ?? throw new Exception("HoaDon not found!");
+            return hoaDon ?? throw new Exception("HoaDon not found!");
         }
         public async Task<IEnumerable<HoaDon>> GetAllHoaDon()
         {
@@ -43,26 +43,7 @@ namespace QuanLyNhaSach.Repositories
                                 .ThenInclude(c => c.Sach)
                             .ToListAsync();
         }
-        public async Task<IEnumerable<HoaDon>> GetHoaDonPage(int offset, int size = 20)
-        {
-            return await _context.DsHoaDon
-                            .Include(m => m.KhachHang)
-                            .Include(m => m.DsChiTietHoaDon)
-                                .ThenInclude(c => c.Sach)
-                            .Skip(offset * size)
-                            .Take(size)
-                            .ToListAsync();
-        }
-        public async Task<int> GetTotalPages(int size = 20)
-        {
-            int leftover = await _context.DsHoaDon.CountAsync() % size;
-            int totalPages = await _context.DsHoaDon.CountAsync() / size;
-            if (leftover > 0)
-            {
-                totalPages++;
-            }
-            return totalPages;
-        }
+        
         public async Task AddHoaDon(HoaDon hoaDon)
         {
             _context.DsHoaDon.Add(hoaDon);
