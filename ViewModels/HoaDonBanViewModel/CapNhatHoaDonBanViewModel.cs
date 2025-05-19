@@ -41,7 +41,6 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
             _thamsoService = thamsoService;
 
             WeakReferenceMessenger.Default.RegisterAll(this);
-            _ = LoadDataAsync();
         }
 
         public void Receive(SelectedIdMessage message)
@@ -152,21 +151,21 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
                 {
                     if (item.SoLuongBan <= 0)
                     {
-                        MessageBox.Show($"Số lượng xuất của {item.SelectedSach.TenSach} phải lớn hơn 0",
+                        MessageBox.Show($"Số lượng bán của {item.SelectedSach.TenSach} phải lớn hơn 0",
                             "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
 
                     if (item.SoLuongBan > item.SoLuongTon)
                     {
-                        MessageBox.Show($"Số lượng xuất của {item.SelectedSach.TenSach} không được vượt quá số lượng tồn",
+                        MessageBox.Show($"Số lượng bán của {item.SelectedSach.TenSach} không được vượt quá số lượng tồn",
                             "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
 
                     if (item.DonGiaBan <= 0)
                     {
-                        MessageBox.Show($"Đơn giá xuất của {item.SelectedSach.TenSach} phải lớn hơn 0",
+                        MessageBox.Show($"Đơn giá bán của {item.SelectedSach.TenSach} phải lớn hơn 0",
                             "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
@@ -214,12 +213,12 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
 
                 await _khachHangService.UpdateKhachHang(KhachHang);
 
-                MessageBox.Show("Cập nhật phiếu xuất thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Cập nhật phiếu bán thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
 
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Có lỗi xảy ra khi cập nhật phiếu xuất: {ex.Message}",
+                MessageBox.Show($"Có lỗi xảy ra khi cập nhật phiếu bán: {ex.Message}",
                     "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
