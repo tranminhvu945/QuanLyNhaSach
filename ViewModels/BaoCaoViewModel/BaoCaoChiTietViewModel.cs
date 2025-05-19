@@ -12,10 +12,7 @@ using LiveCharts;
 using LiveCharts.Wpf;
 using Microsoft.Extensions.DependencyInjection;
 using QuanLyNhaSach.Messages;
-<<<<<<< HEAD
-=======
 using QuanLyNhaSach.Models.dto;
->>>>>>> 7fbcc2a47ed33390367620730d36b0f2d621ea02
 using QuanLyNhaSach.Services;
 using QuanLyNhaSach.Views.BaoCaoViews;
 
