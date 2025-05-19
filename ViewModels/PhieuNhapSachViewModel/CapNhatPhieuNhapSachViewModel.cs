@@ -58,19 +58,49 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
                 var phieuNhapSach = await _phieuNhapSachService.GetPhieuNhapById(_maPhieuNhapSachPassed);
                 NgayNhap = phieuNhapSach.NgayNhap;
 
-                _danhSachSach = [.. (await _sachService.GetAllSach())];
+                // Lấy toàn bộ sách trong kho
+                var allSach = await _sachService.GetAllSach();
 
+                _danhSachSach = new List<Sach>(allSach);
+                _danhSachSachDaChon = new List<Sach>();
                 DanhSachDauSachPhieuNhap.Clear();
 
                 var listChiTietPhieuNhapSach = await _phieuNhapSachChiTietService.GetChiTietPhieuNhapByPhieuNhapId(_maPhieuNhapSachPassed);
                 foreach (var chiTiet in listChiTietPhieuNhapSach)
                 {
-                    DanhSachDauSachPhieuNhap.Add(new DisplayDauSachPhieuNhap(_danhSachSach)
+                    var sachDaChon = await _sachService.GetSachById(chiTiet.MaSach);
+                    if (sachDaChon != null)
                     {
-                        SelectedSach = await _sachService.GetSachById(chiTiet.MaSach),
-                        SoLuongNhap = chiTiet.SoLuongNhap,
-                    });
+                        var newItem = new DisplayDauSachPhieuNhap(_danhSachSach)
+                        {
+                            SelectedSach = sachDaChon,
+                            SoLuongNhap = chiTiet.SoLuongNhap,
+                        };
+
+                        DanhSachDauSachPhieuNhap.Add(newItem);
+                        // Cập nhật danh sách đã chọn và chưa chọn
+                        _danhSachSachDaChon.Add(sachDaChon);
+                        _danhSachSach.Remove(sachDaChon);
+
+                        // Đăng ký event lắng nghe thay đổi chọn sách
+                        newItem.SelectedSachChanged += (sender, e) =>
+                        {
+                            if (e.OldSach != null)
+                            {
+                                _danhSachSach.Add(e.OldSach);
+                                _danhSachSachDaChon.Remove(e.OldSach);
+                            }
+                            if (e.NewSach != null)
+                            {
+                                _danhSachSach.Remove(e.NewSach);
+                                _danhSachSachDaChon.Add(e.NewSach);
+                            }
+                            UpdateAvailableLists();
+                        };
+                    }
                 }
+
+                UpdateAvailableLists();
             }
             catch (Exception ex)
             {
@@ -243,6 +273,7 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
         private void UpdateAvailableLists()
         {
             var selectedIds = DanhSachDauSachPhieuNhap.Select(r => r.SelectedSach.MaSach).ToHashSet();
+
             foreach (var row in DanhSachDauSachPhieuNhap)
             {
                 var own = row.SelectedSach;
@@ -250,6 +281,7 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
                     .Where(m => !selectedIds.Contains(m.MaSach))
                     .Concat(new[] { own })
                     .ToList();
+
                 row.DanhSachSach = new ObservableCollection<Sach>(available);
             }
         }
@@ -263,25 +295,52 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
                 return;
             }
             var newItem = new DisplayDauSachPhieuNhap(available);
-
             DanhSachDauSachPhieuNhap.Add(newItem);
-            _danhSachSach.Remove(newItem.SelectedSach);
-            _danhSachSachDaChon.Add(newItem.SelectedSach);
+
+            // Đăng ký lắng nghe khi SelectedSach thay đổi
+            newItem.SelectedSachChanged += (sender, e) =>
+            {
+                if (e.OldSach != null)
+                {
+                    _danhSachSach.Add(e.OldSach);
+                    _danhSachSachDaChon.Remove(e.OldSach);
+                }
+                if (e.NewSach != null)
+                {
+                    _danhSachSach.Remove(e.NewSach);
+                    _danhSachSachDaChon.Add(e.NewSach);
+                }
+                UpdateAvailableLists();
+            };
+
+            // Lúc mới tạo dòng, cũng cần thêm sách đầu tiên vào danh sách đã chọn
+            if (newItem.SelectedSach != null)
+            {
+                _danhSachSach.Remove(newItem.SelectedSach);
+                _danhSachSachDaChon.Add(newItem.SelectedSach);
+            }
 
             UpdateAvailableLists();
         }
 
         private void XoaDauSach()
         {
-            if (SelectedDauSachPhieuNhap == null!)
+            if (SelectedDauSachPhieuNhap == null)
             {
                 MessageBox.Show("Vui lòng chọn mặt hàng để xóa", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             if (DanhSachDauSachPhieuNhap.Count > 0)
             {
-                _danhSachSach.Add(SelectedDauSachPhieuNhap.SelectedSach);
+                if (SelectedDauSachPhieuNhap.SelectedSach != null)
+                {
+                    _danhSachSach.Add(SelectedDauSachPhieuNhap.SelectedSach);
+                    _danhSachSachDaChon.Remove(SelectedDauSachPhieuNhap.SelectedSach);
+                }
+
                 DanhSachDauSachPhieuNhap.Remove(SelectedDauSachPhieuNhap);
+
+                UpdateAvailableLists();
             }
             else
             {

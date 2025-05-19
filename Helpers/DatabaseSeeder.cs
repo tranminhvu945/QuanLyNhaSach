@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using QuanLyNhaSach.Models;
 
 namespace QuanLyNhaSach.Helpers
@@ -204,7 +204,23 @@ namespace QuanLyNhaSach.Helpers
                     TheLoai = "BBBBBBBBBBBBB",
                     TacGia = "Nguyễn Văn B",
                     SoLuongTon = 20
-                }
+                },
+                                new Sach
+                                {
+                                    MaSach = 4,
+                                    TenSach = "CCCCCCCCCC",
+                                    TheLoai = "CCCCCCCCCCC",
+                                    TacGia = "Nguyễn Văn C",
+                                    SoLuongTon = 20
+                                },
+                                                new Sach
+                                                {
+                                                    MaSach = 5,
+                                                    TenSach = "DDDDDDDDDDDDDDD",
+                                                    TheLoai = "DDDDDDDDDDDDDDD",
+                                                    TacGia = "Nguyễn Văn D",
+                                                    SoLuongTon = 20
+                                                }
             );
         }
 

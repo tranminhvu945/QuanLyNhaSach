@@ -14,7 +14,7 @@ namespace QuanLyNhaSach.Models.dto
     {
         public DisplayDauSachPhieuNhap(IEnumerable<Sach> danhSachDauSach)
         {
-            DanhSachSach = [.. danhSachDauSach];
+            DanhSachSach = new ObservableCollection<Sach>(danhSachDauSach);
             if (DanhSachSach.Count > 0)
                 SelectedSach = DanhSachSach[0];
             //_parentList = parentList;
@@ -40,14 +40,18 @@ namespace QuanLyNhaSach.Models.dto
             {
                 if (_selectedSach != value)
                 {
+                    var oldSach = _selectedSach;
                     _selectedSach = value;
+                    OnPropertyChanged(nameof(SelectedSach));
                     OnPropertyChanged();
                     OnPropertyChanged(nameof(TenSach));
                     OnPropertyChanged(nameof(TacGia));
                     OnPropertyChanged(nameof(TheLoai));
-                    OnPropertyChanged(nameof(SoLuongTon));  
+                    OnPropertyChanged(nameof(SoLuongTon));
                     OnPropertyChanged(nameof(SoLuongTonTruocKhiNhap));
-                    SelectedSachChanged?.Invoke(this, EventArgs.Empty);
+
+                    // Gọi callback hoặc event để cập nhật danh sách đã chọn/chưa chọn
+                    SelectedSachChanged?.Invoke(this, new SelectedSachChangedEventArgs(oldSach, _selectedSach));
                 }
             }
         }
@@ -76,9 +80,10 @@ namespace QuanLyNhaSach.Models.dto
         #endregion
 
 
-        public event EventHandler? SelectedSachChanged;
+        public event EventHandler<SelectedSachChangedEventArgs> SelectedSachChanged;
 
         public event PropertyChangedEventHandler? PropertyChanged;
+
         // Add an event to notify when ThanhTien changes    
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {

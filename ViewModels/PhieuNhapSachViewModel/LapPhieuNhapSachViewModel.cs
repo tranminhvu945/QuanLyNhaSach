@@ -18,7 +18,6 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
         private readonly ISachService _sachService;
         private readonly IThamSoService _thamSoService;
 
-
         // Commands 
         public ICommand CloseWindowCommand { get; }
         public ICommand LapPhieuNhapSachCommand { get; }
@@ -51,6 +50,19 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
         private async Task LoadDataAsync()
         {
             _danhSachSach = new List<Sach>(await _sachService.GetAllSach());
+
+            var thamso = await _thamSoService.GetThamSo();
+            SoLuongTonToiDa = thamso.SoLuongTonToiDa;
+            if (thamso.QuyDinhSoLuongTonToiDa == true)
+                NoiDung01 = "Đang áp dụng";
+            else
+                NoiDung01 = "Không áp dụng";
+
+            SoLuongNhapToiThieu = thamso.SoLuongNhapToiThieu;
+            if (thamso.QuyDinhSoLuongNhapToiThieu == true)
+                NoiDung02 = "Đang áp dụng";
+            else
+                NoiDung02 = "Không áp dụng";
         }
 
         #region Bindings Properties
@@ -123,6 +135,51 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
                 OnPropertyChanged();
             }
         }
+
+        private int _soLuongTonToiDa = 0;
+        public int SoLuongTonToiDa
+        {
+            get => _soLuongTonToiDa;
+            set
+            {
+                _soLuongTonToiDa = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private int _soLuongNhapToiThieu = 0;
+        public int SoLuongNhapToiThieu
+        {
+            get => _soLuongNhapToiThieu;
+            set
+            {
+                _soLuongNhapToiThieu = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _noiDung01 = string.Empty;
+        public string NoiDung01
+        {
+            get => _noiDung01;
+            set
+            {
+                _noiDung01 = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _noiDung02 = string.Empty;
+        public string NoiDung02
+        {
+            get => _noiDung02;
+            set
+            {
+                _noiDung02 = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         #endregion
 
@@ -241,11 +298,32 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
             var newItem = new DisplayDauSachPhieuNhap(available);
             DanhSachDauSachPhieuNhap.Add(newItem);
 
-            _danhSachSachDaChon.Add(newItem.SelectedSach);
-            _danhSachSach.Remove(newItem.SelectedSach);
+            // Đăng ký lắng nghe khi SelectedSach thay đổi
+            newItem.SelectedSachChanged += (sender, e) =>
+            {
+                if (e.OldSach != null)
+                {
+                    _danhSachSach.Add(e.OldSach);
+                    _danhSachSachDaChon.Remove(e.OldSach);
+                }
+                if (e.NewSach != null)
+                {
+                    _danhSachSach.Remove(e.NewSach);
+                    _danhSachSachDaChon.Add(e.NewSach);
+                }
+                UpdateAvailableLists();
+            };
+
+            // Lúc mới tạo dòng, cũng cần thêm sách đầu tiên vào danh sách đã chọn
+            if (newItem.SelectedSach != null)
+            {
+                _danhSachSach.Remove(newItem.SelectedSach);
+                _danhSachSachDaChon.Add(newItem.SelectedSach);
+            }
 
             UpdateAvailableLists();
         }
+
 
         private void XoaDauSach()
         {
@@ -256,8 +334,15 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
             }
             if (DanhSachDauSachPhieuNhap.Count > 0)
             {
-                _danhSachSach.Add(SelectedDauSachPhieuNhap.SelectedSach);
+                if (SelectedDauSachPhieuNhap.SelectedSach != null)
+                {
+                    _danhSachSach.Add(SelectedDauSachPhieuNhap.SelectedSach);
+                    _danhSachSachDaChon.Remove(SelectedDauSachPhieuNhap.SelectedSach);
+                }
+
                 DanhSachDauSachPhieuNhap.Remove(SelectedDauSachPhieuNhap);
+
+                UpdateAvailableLists();
             }
             else
             {

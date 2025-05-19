@@ -12,8 +12,7 @@ namespace QuanLyNhaSach.Services
         Task<HoaDon> GetHoaDonById(int id);
         Task<IEnumerable<HoaDon>> GetAllHoaDon();
         Task<IEnumerable<HoaDon>> GetHoaDonByKhachHangId(int maKhachHang);
-        Task<IEnumerable<HoaDon>> GetHoaDonPage(int offset, int size = 20);
-        Task<int> GetTotalPages(int size = 20);
+
         Task AddHoaDon(HoaDon hoaDon);
         Task UpdateHoaDon(HoaDon hoaDon);
         Task DeleteHoaDon(int id);
