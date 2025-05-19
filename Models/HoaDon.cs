@@ -10,9 +10,9 @@ namespace QuanLyNhaSach.Models
     public class HoaDon
     {
         [Key]
-        public int MaHoaDon { get; set; }
+        public int MaHoaDon { get; set; } = 0;
 
-        public int MaKhachHang { get; set; }
+        public int MaKhachHang { get; set; } = 0;
 
         public DateTime NgayLap { get; set; } = DateTime.Now;
 

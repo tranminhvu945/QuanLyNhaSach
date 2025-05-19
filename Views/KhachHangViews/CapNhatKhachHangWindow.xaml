@@ -83,7 +83,7 @@
                             <TextBox
                                 Grid.Row="1"
                                 Style="{StaticResource ReadOnlyTextBoxStyle}"
-                                Text="{Binding MaDaiLy}" />
+                                Text="{Binding MaKhachHang}" />
                         </Grid>
 
                         <!--  Tên đại lý  -->
@@ -100,7 +100,7 @@
                             <TextBox
                                 Grid.Row="1"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding TenDaiLy}" />
+                                Text="{Binding TenKhachHang}" />
                         </Grid>
 
 
@@ -134,7 +134,7 @@
                             <TextBox
                                 Grid.Row="1"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding SoDienThoai}" />
+                                Text="{Binding DienThoai}" />
                         </Grid>
 
                         <!--  Email  -->
@@ -188,7 +188,7 @@
                 VerticalAlignment="Stretch"
                 Orientation="Horizontal">
 
-                <Button Command="{Binding CapNhatPhieuXuatCommand}" Style="{StaticResource WindowPrimaryButtonStyle}" Width="279">
+                <Button Command="{Binding CapNhatKhachHangCommand}" Style="{StaticResource WindowPrimaryButtonStyle}" Width="279">
                     <StackPanel Orientation="Horizontal">
                         <fa:FontAwesome Margin="0,0,10,0" Icon="Save" />
                         <TextBlock Text="Cập nhật khách hàng" />
