@@ -44,6 +44,19 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
 
         private async Task LoadDataAsync()
         {
+            var thamso = await _thamSoService.GetThamSo();
+            SoLuongTonToiDa = thamso.SoLuongTonToiDa;
+            if (thamso.QuyDinhSoLuongTonToiDa == true)
+                NoiDung01 = "Đang áp dụng";
+            else
+                NoiDung01 = "Không áp dụng";
+
+            SoLuongNhapToiThieu = thamso.SoLuongNhapToiThieu;
+            if (thamso.QuyDinhSoLuongNhapToiThieu == true)
+                NoiDung02 = "Đang áp dụng";
+            else
+                NoiDung02 = "Không áp dụng";
+
             try
             {
                 MaPhieuNhapSach = _phieuNhapSachId.ToString();
@@ -117,7 +130,14 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
         private Sach _selectedSach = null!;
         [ObservableProperty]
         private DateTime _ngayNhap = DateTime.Now;
-
+        [ObservableProperty]
+        private int _soLuongTonToiDa = 0;
+        [ObservableProperty]
+        private int _soLuongNhapToiThieu = 0;
+        [ObservableProperty]
+        private string _noiDung01 = string.Empty;
+        [ObservableProperty]
+        private string _noiDung02 = string.Empty;
         #endregion
 
         #region RelayCommands 
@@ -128,11 +148,7 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
             Application.Current.Windows.OfType<CapNhatPhieuNhapSachWindow>().FirstOrDefault()?.Close();
         }
         [RelayCommand]
-        private void CapNhatPhieuNhapSach()
-        {
-            _ = CapNhatPhieuNhapSachAsync();
-        }
-        private async Task CapNhatPhieuNhapSachAsync()
+        private async Task CapNhatPhieuNhapSach()
         {
             try
             {
@@ -142,22 +158,29 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
                     return;
                 }
 
+                var thamso = await _thamSoService.GetThamSo();
+
                 // Validate quantities and prices
                 foreach (var item in DanhSachDauSachPhieuNhap)
                 {
-                    if (item.SoLuongNhap <= 0)
+                    if (thamso.QuyDinhSoLuongTonToiDa && item.SoLuongTon > thamso.SoLuongTonToiDa)
                     {
-                        MessageBox.Show($"Số lượng nhập cho {item.SelectedSach.TenSach} phải lớn hơn 0",
+                        MessageBox.Show($"Chỉ nhập những đầu sách có số lượng tồn dưới {thamso.SoLuongTonToiDa}",
                             "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
-
-                    //if (item.SoLuongNhap > item.SoLuongTon)
-                    //{
-                    //    MessageBox.Show($"Số lượng xuất cho {item.SelectedSach.TenSach} không được vượt quá số lượng tồn ({item.SoLuongTon})",
-                    //        "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-                    //    return;
-                    //}
+                    if (item.SoLuongNhap <= 0)
+                    {
+                        MessageBox.Show($"Số lượng nhập phải lớn hơn 0",
+                            "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    if (thamso.QuyDinhSoLuongNhapToiThieu && item.SoLuongNhap < thamso.SoLuongNhapToiThieu)
+                    {
+                        MessageBox.Show($"Số lượng nhập của đầu sách  phải lớn hơn {thamso.SoLuongNhapToiThieu}",
+                            "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
                 }
 
                 var phieuNhapSach = await _phieuNhapSachService.GetPhieuNhapById(_phieuNhapSachId);
