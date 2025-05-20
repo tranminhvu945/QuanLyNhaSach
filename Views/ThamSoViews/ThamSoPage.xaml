@@ -379,7 +379,7 @@
                                 
 
                                 <TextBox
-                                Style="{StaticResource StandardTextBoxStyle}"
+                                Style="{Binding TextBoxStyle}"
                                 Text="{Binding SoLuongNhapToiThieu}"
                                 IsReadOnly="{Binding IsReadOnly}"
                                 Width="200"
@@ -393,7 +393,7 @@
                             <Grid>
 
                                 <TextBox
-                                Style="{StaticResource StandardTextBoxStyle}"
+                                Style="{Binding TextBoxStyle}"
                                 Text="{Binding SoLuongTonToiThieu}"
                                 IsReadOnly="{Binding IsReadOnly}"
                                 Height="50"
@@ -410,7 +410,7 @@
 
                                 <TextBox
                                 Grid.Column="0"
-                                Style="{StaticResource StandardTextBoxStyle}"
+                                Style="{Binding TextBoxStyle}"
                                 Text="{Binding SoLuongTonToiDa}"
                                 IsReadOnly="{Binding IsReadOnly}"
                                 Height="50"
@@ -425,7 +425,7 @@
 
                                 <TextBox
                                 Grid.Column="0"
-                                Style="{StaticResource StandardTextBoxStyle}"
+                                Style="{Binding TextBoxStyle}"
                                 Text="{Binding TienNoToiDa}"
                                 IsReadOnly="{Binding IsReadOnly}"
                                 Height="50"

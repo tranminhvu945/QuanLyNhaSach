@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel;
 
 namespace QuanLyNhaSach.Models.dto
 {
@@ -17,7 +11,6 @@ namespace QuanLyNhaSach.Models.dto
             DanhSachSach = new ObservableCollection<Sach>(danhSachDauSach);
             if (DanhSachSach.Count > 0)
                 SelectedSach = DanhSachSach[0];
-            //_parentList = parentList;
         }
 
         #region Bindings Properties
@@ -50,12 +43,10 @@ namespace QuanLyNhaSach.Models.dto
                     OnPropertyChanged(nameof(SoLuongTon));
                     OnPropertyChanged(nameof(SoLuongTonTruocKhiNhap));
 
-                    // Gọi callback hoặc event để cập nhật danh sách đã chọn/chưa chọn
                     SelectedSachChanged?.Invoke(this, new SelectedSachChangedEventArgs(oldSach, _selectedSach));
                 }
             }
         }
-
 
         public string TenSach => SelectedSach?.TenSach ?? string.Empty;
         public string TacGia => SelectedSach?.TacGia ?? string.Empty;
@@ -80,11 +71,10 @@ namespace QuanLyNhaSach.Models.dto
         #endregion
 
 
-        public event EventHandler<SelectedSachChangedEventArgs> SelectedSachChanged;
+        public event EventHandler<SelectedSachChangedEventArgs>? SelectedSachChanged;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        // Add an event to notify when ThanhTien changes    
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
