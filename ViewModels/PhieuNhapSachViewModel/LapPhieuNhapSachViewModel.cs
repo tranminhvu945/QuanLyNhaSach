@@ -1,8 +1,9 @@
 ﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Windows;
-using System.Windows.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
+using QuanLyNhaSach.Messages;
 using QuanLyNhaSach.Models;
 using QuanLyNhaSach.Models.dto;
 using QuanLyNhaSach.Services;
@@ -10,21 +11,13 @@ using QuanLyNhaSach.Views;
 
 namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
 {
-    public partial class LapPhieuNhapSachViewModel : INotifyPropertyChanged
+    public partial class LapPhieuNhapSachViewModel : ObservableObject
     {
         // Services
         private readonly IPhieuNhapSachService _phieuNhapSachService;
         private readonly IChiTietPhieuNhapService _phieuNhapSachChiTietService;
         private readonly ISachService _sachService;
         private readonly IThamSoService _thamSoService;
-
-        // Commands 
-        public ICommand CloseWindowCommand { get; }
-        public ICommand LapPhieuNhapSachCommand { get; }
-        public ICommand PhieuNhapSachMoiCommand { get; }
-        public ICommand ThemDauSachCommand { get; }
-        public ICommand XoaDauSachCommand { get; }
-        public ICommand BoChonDauSachCommand { get; }
 
         public LapPhieuNhapSachViewModel(
              IPhieuNhapSachService phieuNhapSachService,
@@ -36,13 +29,6 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
             _sachService = sachService;
             _phieuNhapSachChiTietService = phieuNhapSachChiTietService;
             _thamSoService = thamSoService;
-
-            CloseWindowCommand = new RelayCommand(CloseWindow);
-            LapPhieuNhapSachCommand = new RelayCommand(LapPhieuNhapSach);
-            PhieuNhapSachMoiCommand = new RelayCommand(PhieuNhapSachMoi);
-            ThemDauSachCommand = new RelayCommand(ThemDauSach);
-            XoaDauSachCommand = new RelayCommand(XoaDauSach);
-            BoChonDauSachCommand = new RelayCommand(BoChonDauSach);
 
             _ = LoadDataAsync();
         }
@@ -70,132 +56,37 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
         private List<Sach> _danhSachSachDaChon = [];
 
         // Properties for binding
+        [ObservableProperty]
         private string _maPhieuNhapSach = string.Empty;
-        public string MaPhieuNhapSach
-        {
-            get => _maPhieuNhapSach;
-            set
-            {
-                _maPhieuNhapSach = value;
-                OnPropertyChanged();
-            }
-        }
-
+        [ObservableProperty]
         private ObservableCollection<DisplayDauSachPhieuNhap> _danhSachDauSachPhieuNhap = [];
-        public ObservableCollection<DisplayDauSachPhieuNhap> DanhSachDauSachPhieuNhap
-        {
-            get => _danhSachDauSachPhieuNhap;
-            set
-            {
-                _danhSachDauSachPhieuNhap = value;
-                OnPropertyChanged();
-            }
-        }
-
+        [ObservableProperty]
         private DisplayDauSachPhieuNhap _selectedDauSachPhieuNhap = null!;
-        public DisplayDauSachPhieuNhap SelectedDauSachPhieuNhap
-        {
-            get => _selectedDauSachPhieuNhap;
-            set
-            {
-                _selectedDauSachPhieuNhap = value;
-                OnPropertyChanged();
-            }
-        }
-
+        [ObservableProperty]
         private ObservableCollection<Sach> _saches = [];
-        public ObservableCollection<Sach> Saches
-        {
-            get => _saches;
-            set
-            {
-                _saches = value;
-                OnPropertyChanged();
-            }
-        }
-
+        [ObservableProperty]
         private Sach _selectedSach = null!;
-        public Sach SelectedSach
-        {
-            get => _selectedSach;
-            set
-            {
-                _selectedSach = value;
-                OnPropertyChanged();
-            }
-        }
-
+        [ObservableProperty]
         private DateTime _ngayNhap = DateTime.Now;
-        public DateTime NgayNhap
-        {
-            get => _ngayNhap;
-            set
-            {
-                _ngayNhap = value;
-                OnPropertyChanged();
-            }
-        }
-
+        [ObservableProperty]
         private int _soLuongTonToiDa = 0;
-        public int SoLuongTonToiDa
-        {
-            get => _soLuongTonToiDa;
-            set
-            {
-                _soLuongTonToiDa = value;
-                OnPropertyChanged();
-            }
-        }
-
+        [ObservableProperty]
         private int _soLuongNhapToiThieu = 0;
-        public int SoLuongNhapToiThieu
-        {
-            get => _soLuongNhapToiThieu;
-            set
-            {
-                _soLuongNhapToiThieu = value;
-                OnPropertyChanged();
-            }
-        }
-
+        [ObservableProperty]
         private string _noiDung01 = string.Empty;
-        public string NoiDung01
-        {
-            get => _noiDung01;
-            set
-            {
-                _noiDung01 = value;
-                OnPropertyChanged();
-            }
-        }
-
+        [ObservableProperty]
         private string _noiDung02 = string.Empty;
-        public string NoiDung02
-        {
-            get => _noiDung02;
-            set
-            {
-                _noiDung02 = value;
-                OnPropertyChanged();
-            }
-        }
-
-
         #endregion
 
         #region RelayCommands 
+        [RelayCommand]
         private void CloseWindow()
         {
-            DataChanged?.Invoke(this, EventArgs.Empty);
+            WeakReferenceMessenger.Default.Send(new DataReloadMessage());
             Application.Current.Windows.OfType<LapPhieuNhapSachWindow>().FirstOrDefault()?.Close();
         }
-
-        private void LapPhieuNhapSach()
-        {
-            _ = LapPhieuNhapSachAsync();
-        }
-
-        private async Task LapPhieuNhapSachAsync()
+        [RelayCommand]
+        private async Task LapPhieuNhapSach()
         {
             try
             {
@@ -263,7 +154,7 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
             }
         }
 
-
+        [RelayCommand]
         private void PhieuNhapSachMoi()
         {
             SelectedDauSachPhieuNhap = null!;
@@ -281,12 +172,13 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
                 var available = _danhSachSach
                     .Where(m => !selectedIds.Contains(m.MaSach))
                     .Concat(new[] { own })
+                    .OrderBy(s => s.TenSach, StringComparer.CurrentCultureIgnoreCase)
                     .ToList();
 
                 row.DanhSachSach = new ObservableCollection<Sach>(available);
             }
         }
-
+        [RelayCommand]
         private void ThemDauSach()
         {
             var available = new List<Sach>(_danhSachSach);
@@ -324,7 +216,7 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
             UpdateAvailableLists();
         }
 
-
+        [RelayCommand]
         private void XoaDauSach()
         {
             if (SelectedDauSachPhieuNhap == null)
@@ -349,19 +241,13 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
                 MessageBox.Show("Không có mặt hàng nào để xóa", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
+        [RelayCommand]
         private void BoChonDauSach()
         {
             SelectedDauSachPhieuNhap = null!;
         }
 
         #endregion
-        public event EventHandler? DataChanged;
-        public event PropertyChangedEventHandler? PropertyChanged;
-        protected virtual void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string? propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 
 }

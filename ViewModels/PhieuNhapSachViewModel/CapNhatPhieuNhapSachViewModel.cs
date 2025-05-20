@@ -5,48 +5,40 @@ using QuanLyNhaSach.Models.dto;
 using QuanLyNhaSach.Models;
 using QuanLyNhaSach.Services;
 using QuanLyNhaSach.Views;
-using System.ComponentModel;
-using System.Windows.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
+using QuanLyNhaSach.Messages;
 
 namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
 {
-    public partial class CapNhatPhieuNhapSachViewModel : INotifyPropertyChanged
+    public partial class CapNhatPhieuNhapSachViewModel : ObservableObject, IRecipient<SelectedIdMessage>
     {
         // Services
         private readonly IPhieuNhapSachService _phieuNhapSachService;
         private readonly IChiTietPhieuNhapService _phieuNhapSachChiTietService;
         private readonly ISachService _sachService;
         private readonly IThamSoService _thamSoService;
-        private readonly int _maPhieuNhapSachPassed;
-
-        // Commands 
-        public ICommand CloseWindowCommand { get; }
-        public ICommand CapNhatPhieuNhapSachCommand { get; }
-        public ICommand ThemDauSachCommand { get; }
-        public ICommand XoaDauSachCommand { get; }
-        public ICommand BoChonDauSachCommand { get; }
+        private int _phieuNhapSachId;
 
         public CapNhatPhieuNhapSachViewModel(
             IPhieuNhapSachService phieuNhapSachService,
             IChiTietPhieuNhapService phieuNhapSachChiTietService,
             ISachService sachService,
-            IThamSoService thamSoService,
-            int maPhieuNhapSachPassed
+            IThamSoService thamSoService
         )
         {
             _phieuNhapSachService = phieuNhapSachService;
             _sachService = sachService;
             _phieuNhapSachChiTietService = phieuNhapSachChiTietService;
             _thamSoService = thamSoService;
-            _maPhieuNhapSachPassed = maPhieuNhapSachPassed;
 
-            // Initialize commands
-            CloseWindowCommand = new RelayCommand(CloseWindow);
-            CapNhatPhieuNhapSachCommand = new RelayCommand(CapNhatPhieuNhapSach);
-            ThemDauSachCommand = new RelayCommand(ThemDauSach);
-            XoaDauSachCommand = new RelayCommand(XoaDauSach);
-            BoChonDauSachCommand = new RelayCommand(BoChonDauSach);
+            WeakReferenceMessenger.Default.RegisterAll(this);
+        }
 
+        public void Receive(SelectedIdMessage message)
+        {
+            _phieuNhapSachId = message.Value;
+            // Load data
             _ = LoadDataAsync();
         }
 
@@ -54,8 +46,8 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
         {
             try
             {
-                MaPhieuNhapSach = _maPhieuNhapSachPassed.ToString();
-                var phieuNhapSach = await _phieuNhapSachService.GetPhieuNhapById(_maPhieuNhapSachPassed);
+                MaPhieuNhapSach = _phieuNhapSachId.ToString();
+                var phieuNhapSach = await _phieuNhapSachService.GetPhieuNhapById(_phieuNhapSachId);
                 NgayNhap = phieuNhapSach.NgayNhap;
 
                 // Lấy toàn bộ sách trong kho
@@ -65,7 +57,7 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
                 _danhSachSachDaChon = new List<Sach>();
                 DanhSachDauSachPhieuNhap.Clear();
 
-                var listChiTietPhieuNhapSach = await _phieuNhapSachChiTietService.GetChiTietPhieuNhapByPhieuNhapId(_maPhieuNhapSachPassed);
+                var listChiTietPhieuNhapSach = await _phieuNhapSachChiTietService.GetChiTietPhieuNhapByPhieuNhapId(_phieuNhapSachId);
                 foreach (var chiTiet in listChiTietPhieuNhapSach)
                 {
                     var sachDaChon = await _sachService.GetSachById(chiTiet.MaSach);
@@ -109,85 +101,33 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
             }
         }
 
+
         #region Bindings Properties
         private List<Sach> _danhSachSach = [];
         private List<Sach> _danhSachSachDaChon = [];
-
+        [ObservableProperty]
         private string _maPhieuNhapSach = string.Empty;
-        public string MaPhieuNhapSach
-        {
-            get => _maPhieuNhapSach;
-            set
-            {
-                _maPhieuNhapSach = value;
-                OnPropertyChanged();
-            }
-        }
-
+        [ObservableProperty]
         private ObservableCollection<DisplayDauSachPhieuNhap> _danhSachDauSachPhieuNhap = [];
-        public ObservableCollection<DisplayDauSachPhieuNhap> DanhSachDauSachPhieuNhap
-        {
-            get => _danhSachDauSachPhieuNhap;
-            set
-            {
-                _danhSachDauSachPhieuNhap = value;
-                OnPropertyChanged();
-            }
-        }
-
+        [ObservableProperty]
         private DisplayDauSachPhieuNhap _selectedDauSachPhieuNhap = null!;
-        public DisplayDauSachPhieuNhap SelectedDauSachPhieuNhap
-        {
-            get => _selectedDauSachPhieuNhap;
-            set
-            {
-                _selectedDauSachPhieuNhap = value;
-                OnPropertyChanged();
-            }
-        }
-
+        [ObservableProperty]
         private ObservableCollection<Sach> _saches = [];
-        public ObservableCollection<Sach> Saches
-        {
-            get => _saches;
-            set
-            {
-                _saches = value;
-                OnPropertyChanged();
-            }
-        }
-
+        [ObservableProperty]
         private Sach _selectedSach = null!;
-        public Sach SelectedSach
-        {
-            get => _selectedSach;
-            set
-            {
-                _selectedSach = value;
-                OnPropertyChanged();
-            }
-        }
-
+        [ObservableProperty]
         private DateTime _ngayNhap = DateTime.Now;
-        public DateTime NgayNhap
-        {
-            get => _ngayNhap;
-            set
-            {
-                _ngayNhap = value;
-                OnPropertyChanged();
-            }
-        }
 
         #endregion
 
         #region RelayCommands 
+        [RelayCommand]
         private void CloseWindow()
         {
-            DataChanged?.Invoke(this, EventArgs.Empty);
+            WeakReferenceMessenger.Default.Send(new DataReloadMessage());
             Application.Current.Windows.OfType<CapNhatPhieuNhapSachWindow>().FirstOrDefault()?.Close();
         }
-
+        [RelayCommand]
         private void CapNhatPhieuNhapSach()
         {
             _ = CapNhatPhieuNhapSachAsync();
@@ -220,13 +160,13 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
                     //}
                 }
 
-                var phieuNhapSach = await _phieuNhapSachService.GetPhieuNhapById(_maPhieuNhapSachPassed);
+                var phieuNhapSach = await _phieuNhapSachService.GetPhieuNhapById(_phieuNhapSachId);
                 phieuNhapSach.NgayNhap = NgayNhap;
                 await _phieuNhapSachService.UpdatePhieuNhap(phieuNhapSach);
 
 
                 // Lấy danh sách chi tiết cũ để khôi phục tồn kho
-                var oldChiTietList = await _phieuNhapSachChiTietService.GetChiTietPhieuNhapByPhieuNhapId(_maPhieuNhapSachPassed);
+                var oldChiTietList = await _phieuNhapSachChiTietService.GetChiTietPhieuNhapByPhieuNhapId(_phieuNhapSachId);
                 foreach (var oldChiTiet in oldChiTietList)
                 {
                     var sach = await _sachService.GetSachById(oldChiTiet.MaSach);
@@ -239,7 +179,7 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
                     }
                 }
                 // Xóa chi tiết phiếu nhập cũ
-                await _phieuNhapSachChiTietService.DeleteChiTietPhieuNhapByPhieuNhapId(_maPhieuNhapSachPassed);
+                await _phieuNhapSachChiTietService.DeleteChiTietPhieuNhapByPhieuNhapId(_phieuNhapSachId);
 
 
                 // Thêm chi tiết phiếu nhập mới
@@ -280,12 +220,13 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
                 var available = _danhSachSach
                     .Where(m => !selectedIds.Contains(m.MaSach))
                     .Concat(new[] { own })
+                    .OrderBy(s => s.TenSach, StringComparer.CurrentCultureIgnoreCase)
                     .ToList();
 
                 row.DanhSachSach = new ObservableCollection<Sach>(available);
             }
         }
-
+        [RelayCommand]
         private void ThemDauSach()
         {
             var available = new List<Sach>(_danhSachSach);
@@ -322,7 +263,7 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
 
             UpdateAvailableLists();
         }
-
+        [RelayCommand]
         private void XoaDauSach()
         {
             if (SelectedDauSachPhieuNhap == null)
@@ -347,19 +288,11 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
                 MessageBox.Show("Không có mặt hàng nào để xóa", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
+        [RelayCommand]
         private void BoChonDauSach()
         {
             SelectedDauSachPhieuNhap = null!;
         }
         #endregion
-
-        public event EventHandler? DataChanged;
-        public event PropertyChangedEventHandler? PropertyChanged;
-        protected virtual void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string? propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
     }
 }
