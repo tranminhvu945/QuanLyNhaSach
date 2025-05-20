@@ -104,7 +104,7 @@
                             <TextBlock
                                 Grid.Row="0"
                                 Style="{StaticResource FieldSmallLabelTextBlockStyle}"
-                                Text="Ngày Nhập" />
+                                Text="Ngày nhập" />
                             <DatePicker
                                  Grid.Row="1"
                                  SelectedDate="{Binding NgayNhap}"
