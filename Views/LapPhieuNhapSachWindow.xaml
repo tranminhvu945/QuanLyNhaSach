@@ -110,6 +110,7 @@
                                 <TextBlock
                                 Grid.Column="0"
                                 Style="{StaticResource FieldSmallLabelTextBlockStyle}"
+
                                 HorizontalAlignment="Right"
                                 Text="Ngày Nhập" />
                                 <DatePicker
@@ -118,6 +119,7 @@
                                 Style="{StaticResource StandardDatePickerStyle}" />
 
                             </Grid>
+
 
 
                         </Grid>

@@ -62,7 +62,10 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
 
                 DanhSachSach = [.. (await _sachService.GetAllSach())];
                 var listKhachHang = await _khachHangService.GetAllKhachHang();
-                KhachHangs = [.. listKhachHang];
+                // Sắp xếp theo tên khách hàng (TenKhachHang)
+                var sortedListKhachHang = listKhachHang.OrderBy(kh => kh.TenKhachHang).ToList();
+
+                KhachHangs = new ObservableCollection<KhachHang>(sortedListKhachHang);
 
 
                 DanhSachSachHoaDon.Clear();
@@ -234,6 +237,7 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
                 var available = DanhSachSach
                     .Where(m => !selectedIds.Contains(m.MaSach))
                     .Concat(new[] { own })
+                    .OrderBy(s => s.TenSach, StringComparer.CurrentCultureIgnoreCase)
                     .ToList();
                 row.DanhSachSach = new ObservableCollection<Sach>(available);
             }

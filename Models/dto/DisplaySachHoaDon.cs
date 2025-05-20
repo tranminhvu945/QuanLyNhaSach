@@ -14,6 +14,7 @@ namespace QuanLyNhaSach.Models.dto
                 SelectedSach = DanhSachSach[0];
         }
 
+        #region Bindings Properties
         private ObservableCollection<Sach> _danhSachSach = [];
         public ObservableCollection<Sach> DanhSachSach
         {
@@ -31,15 +32,25 @@ namespace QuanLyNhaSach.Models.dto
             get => _selectedSach;
             set
             {
-                _selectedSach = value;
-                OnPropertyChanged();
-                OnPropertyChanged(nameof(TheLoai));
-                //OnPropertyChanged(nameof(QuyDinhSoLuongTonToiThieu));
-                OnPropertyChanged(nameof(SoLuongTon));
-                OnPropertyChanged(nameof(ThanhTien));
-                ThanhTienChanged?.Invoke(this, EventArgs.Empty);
+                if (_selectedSach != value)
+                {
+                    var oldSach = _selectedSach;
+                    _selectedSach = value;
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(TheLoai));
+                    //OnPropertyChanged(nameof(QuyDinhSoLuongTonToiThieu));
+                    OnPropertyChanged(nameof(SoLuongTon));
+                    OnPropertyChanged(nameof(SoLuongTonTruocKhiXuat));
+                    OnPropertyChanged(nameof(ThanhTien));
+                    ThanhTienChanged?.Invoke(this, EventArgs.Empty);
+
+                    // Gọi callback hoặc event để cập nhật danh sách đã chọn/chưa chọn
+                    SelectedSachChanged?.Invoke(this, new SelectedSachChangedEventArgs(oldSach, _selectedSach));
+                }                    
             }
         }
+
+        public int SoLuongTonTruocKhiXuat => SelectedSach?.SoLuongTon + SoLuongBan ?? 0;
 
         public string TheLoai => SelectedSach?.TheLoai ?? string.Empty;
 
@@ -72,7 +83,7 @@ namespace QuanLyNhaSach.Models.dto
                 ThanhTienChanged?.Invoke(this, EventArgs.Empty);
             }
         }
-
+        #endregion
         public long ThanhTien => SoLuongBan * DonGiaBan;
 
         public event PropertyChangedEventHandler? PropertyChanged;

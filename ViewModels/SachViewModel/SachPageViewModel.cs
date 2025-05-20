@@ -15,7 +15,8 @@ namespace QuanLyNhaSach.ViewModels.SachViewModel
 {
     public partial class SachPageViewModel :
         ObservableObject,
-        IRecipient<DataReloadMessage>
+        IRecipient<DataReloadMessage>,
+        IRecipient<SearchCompletedMessage<Sach>>
     {
         private readonly ISachService _sachService;
         private readonly IServiceProvider _serviceProvider;
@@ -28,7 +29,7 @@ namespace QuanLyNhaSach.ViewModels.SachViewModel
             _serviceProvider = serviceProvider;
 
             WeakReferenceMessenger.Default.Register<DataReloadMessage>(this);
-
+            WeakReferenceMessenger.Default.Register<SearchCompletedMessage<Sach>>(this);
             _ = LoadDataAsync();
         }
 
@@ -143,6 +144,20 @@ namespace QuanLyNhaSach.ViewModels.SachViewModel
             SelectedSach = null!;
             await LoadDataAsync();
             MessageBox.Show("Tải lại danh sách thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        public void Receive(SearchCompletedMessage<Sach> message)
+        {
+            var searchResults = message.Value;
+
+            if (searchResults.Count > 0)
+            {
+                DanhSachSach = searchResults;
+            }
+            else
+            {
+                _ = LoadDataAsync();
+            }
         }
     }
 }
