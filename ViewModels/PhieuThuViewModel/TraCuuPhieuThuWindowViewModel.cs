@@ -74,6 +74,7 @@ namespace QuanLyNhaSach.ViewModels.PhieuThuViewModel
         [RelayCommand]
         private void CloseWindow()
         {
+
             Application.Current.Windows.OfType<TraCuuPhieuThuWindow>().FirstOrDefault()?.Close();
         }
 
