@@ -165,7 +165,6 @@ namespace QuanLyNhaSach.ViewModels.SachViewModel
         }
 
         // Event to notify parent view when data changes
-        public event EventHandler? DataChanged;
         public event PropertyChangedEventHandler? PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)

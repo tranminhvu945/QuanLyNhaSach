@@ -444,7 +444,7 @@
                                                     FontFamily="Open Sans"
                                                     FontSize="20"
                                                     Foreground="White"
-                                                    Text="{Binding SoLuongTon}"
+                                                    Text="{Binding SoLuongTonTruocKhiXuat}"
                                                     TextAlignment="Center">
                                                     <TextBlock.Style>
                                                         <Style TargetType="TextBlock">

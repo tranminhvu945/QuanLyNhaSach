@@ -226,6 +226,7 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
                 var available = _danhSachSach
                     .Where(m => !selectedIds.Contains(m.MaSach))
                     .Concat(new[] { own })
+                    .OrderBy(s => s.TenSach, StringComparer.CurrentCultureIgnoreCase)
                     .ToList();
                 row.DanhSachSach = new ObservableCollection<Sach>(available);
             }
