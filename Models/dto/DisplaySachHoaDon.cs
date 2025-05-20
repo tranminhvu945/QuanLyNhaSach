@@ -32,18 +32,21 @@ namespace QuanLyNhaSach.Models.dto
             get => _selectedSach;
             set
             {
-                var oldSach = _selectedSach;
-                _selectedSach = value;
-                OnPropertyChanged();
-                OnPropertyChanged(nameof(TheLoai));
-                //OnPropertyChanged(nameof(QuyDinhSoLuongTonToiThieu));
-                OnPropertyChanged(nameof(SoLuongTon));
-                OnPropertyChanged(nameof(SoLuongTonTruocKhiXuat));
-                OnPropertyChanged(nameof(ThanhTien));
-                ThanhTienChanged?.Invoke(this, EventArgs.Empty);
+                if (_selectedSach != value)
+                {
+                    var oldSach = _selectedSach;
+                    _selectedSach = value;
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(TheLoai));
+                    //OnPropertyChanged(nameof(QuyDinhSoLuongTonToiThieu));
+                    OnPropertyChanged(nameof(SoLuongTon));
+                    OnPropertyChanged(nameof(SoLuongTonTruocKhiXuat));
+                    OnPropertyChanged(nameof(ThanhTien));
+                    ThanhTienChanged?.Invoke(this, EventArgs.Empty);
 
-                // Gọi callback hoặc event để cập nhật danh sách đã chọn/chưa chọn
-                SelectedSachChanged?.Invoke(this, new SelectedSachChangedEventArgs(oldSach, _selectedSach));
+                    // Gọi callback hoặc event để cập nhật danh sách đã chọn/chưa chọn
+                    SelectedSachChanged?.Invoke(this, new SelectedSachChangedEventArgs(oldSach, _selectedSach));
+                }                    
             }
         }
 
