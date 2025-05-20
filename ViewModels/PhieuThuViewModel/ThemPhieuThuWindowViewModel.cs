@@ -115,13 +115,13 @@ namespace QuanLyNhaSach.ViewModels.PhieuThuViewModel
                     MaPhieuThu = newId.ToString();
                 }
 
-                //var thamso = await _thamSoService.GetThamSo();
-                //var QuyDinhTienThuTienNo = thamso.QuyDinhTienThuTienNo;
-                //if (QuyDinhTienThuTienNo && SoTienThu > TienNo)
-                //{
-                //    MessageBox.Show("Số tiền thu không được lớn hơn số tiền nợ của đại lý", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-                //    return;
-                //}
+                var thamso = await _thamSoService.GetThamSo();
+                var QuyDinhTienThuTienNo = thamso.QuyDinhTienThuTienNo;
+                if (QuyDinhTienThuTienNo && SoTienThu > TienNo)
+                {
+                    MessageBox.Show("Số tiền thu không được lớn hơn số tiền nợ của khách hàng ", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
 
                 var phieuThu = new PhieuThu
                 {
