@@ -2,7 +2,7 @@
 
     <!--  Page Header TextBlock Style  -->
     <Style x:Key="PageHeaderTextBlockStyle" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="Nunito" />
+        <Setter Property="FontFamily" Value="Inter" />
         <Setter Property="FontSize" Value="50" />
         <Setter Property="FontStyle" Value="Normal" />
         <Setter Property="FontWeight" Value="Bold" />
@@ -15,20 +15,20 @@
 
     <!--  Window Header TextBlock Style  -->
     <Style x:Key="WindowHeaderTextBlockStyle" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="Nunito" />
-        <Setter Property="FontSize" Value="40" />
-        <Setter Property="FontStyle" Value="Normal" />
-        <Setter Property="FontWeight" Value="SemiBold" />
-        <Setter Property="LineHeight" Value="55" />
+        <Setter Property="FontFamily" Value="Inter" />
+        <Setter Property="FontSize" Value="25" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Foreground" Value="Black" />
         <Setter Property="Margin" Value="0" />
+        <Setter Property="Height" Value="30" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
     <!--  Field Label TextBlock Style  -->
     <Style x:Key="FieldLabelTextBlockStyle" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="Nunito" />
-        <Setter Property="FontSize" Value="25" />
+        <Setter Property="FontFamily" Value="Inter" />
+        <Setter Property="FontSize" Value="17" />
         <Setter Property="FontStyle" Value="Normal" />
         <Setter Property="FontWeight" Value="Medium" />
         <Setter Property="Foreground" Value="#000000" />
@@ -39,8 +39,8 @@
 
     <!--  Field Small Label TextBlock Style  -->
     <Style x:Key="FieldSmallLabelTextBlockStyle" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="Nunito" />
-        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontFamily" Value="Inter" />
+        <Setter Property="FontSize" Value="15" />
         <Setter Property="FontStyle" Value="Normal" />
         <Setter Property="FontWeight" Value="Medium" />
         <Setter Property="Foreground" Value="#000000" />
@@ -49,9 +49,21 @@
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
+    <Style x:Key="FieldSmallLabelTextBlockGridStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Inter" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="FontStyle" Value="Normal" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="Foreground" Value="#000000" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Height" Value="25" />
+    </Style>
+
     <!--  Field Small Label TextBlock Style  -->
     <Style x:Key="MonthYearWidget" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="Nunito" />
+        <Setter Property="FontFamily" Value="Inter" />
         <Setter Property="FontSize" Value="15" />
         <Setter Property="FontStyle" Value="Normal" />
         <Setter Property="FontWeight" Value="Medium" />
@@ -63,7 +75,7 @@
 
     <!--  Red Highlight Label TextBlock Style  -->
     <Style x:Key="RedHighlightTextBlockStyle" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="Nunito" />
+        <Setter Property="FontFamily" Value="Inter" />
         <Setter Property="FontSize" Value="20" />
         <Setter Property="FontStyle" Value="Normal" />
         <Setter Property="FontWeight" Value="Medium" />
@@ -75,7 +87,7 @@
 
     <!--  Small Widget TextBlock Style  -->
     <Style x:Key="SmallWidgetTextBlockStyle" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="Nunito" />
+        <Setter Property="FontFamily" Value="Inter" />
         <Setter Property="FontSize" Value="25" />
         <Setter Property="FontStyle" Value="Normal" />
         <Setter Property="FontWeight" Value="Regular" />
@@ -88,7 +100,7 @@
 
     <!--  Big Widget TextBlock Style  -->
     <Style x:Key="BigWidgetTextBlockStyle" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="Nunito" />
+        <Setter Property="FontFamily" Value="Inter" />
         <Setter Property="FontSize" Value="28" />
         <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="Margin" Value="10,10,0,15" />

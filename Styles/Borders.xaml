@@ -6,9 +6,9 @@
         <Setter Property="Padding" Value="10" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Stretch" />
-        <Setter Property="Background" Value="#F7F9FD" />
+        <Setter Property="Background" Value="#E1ECF7" />
         <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="CornerRadius" Value="5" />
         <Setter Property="Effect">
             <Setter.Value>
                 <DropShadowEffect
@@ -22,7 +22,7 @@
 
     <!--  Window Border  -->
     <Style x:Key="WindowPopUpBorder" TargetType="{x:Type Border}">
-        <Setter Property="BorderBrush" Value="#DDDDDD" />
+        <Setter Property="BorderBrush" Value="Black" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="CornerRadius" Value="10" />
         <Setter Property="Background" Value="White" />

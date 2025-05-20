@@ -41,7 +41,7 @@
     <!--  DataGridColumnHeader Style  -->
     <Style x:Key="MyDataGridColumnHeaderStyle" TargetType="DataGridColumnHeader">
         <Setter Property="Background" Value="#EAEEF5" />
-        <Setter Property="FontFamily" Value="Open Sans" />
+        <Setter Property="FontFamily" Value="Inter" />
         <Setter Property="FontWeight" Value="SemiBold" />
         <Setter Property="FontSize" Value="22.5" />
         <Setter Property="Foreground" Value="#333333" />
@@ -54,7 +54,7 @@
 
     <!--  TextBlock Style for Columns  -->
     <Style x:Key="ColumnTextBlockStyle" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="Open Sans" />
+        <Setter Property="FontFamily" Value="Inter" />
         <Setter Property="FontSize" Value="15" />
         <Setter Property="Foreground" Value="#333333" />
         <Setter Property="VerticalAlignment" Value="Center" />
@@ -89,7 +89,7 @@
 
     <!--  BaoCao DataGrid Cell Styles  -->
     <Style x:Key="BaoCaoTextBlockStyle" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="Open Sans" />
+        <Setter Property="FontFamily" Value="Inter" />
         <Setter Property="FontSize" Value="20" />
         <Setter Property="Foreground" Value="#333333" />
         <Setter Property="VerticalAlignment" Value="Center" />
@@ -105,19 +105,82 @@
 
     <!--  BaoCao Border Style for template columns  -->
     <Style x:Key="BaoCaoBorderStyle" TargetType="Border">
-        <Setter Property="Padding" Value="10,5" />
+        <Setter Property="Padding" Value="3" />
+        <Setter Property="Height" Value="30" />
         <Setter Property="Background" Value="#A2A2A2" />
-        <Setter Property="BorderBrush" Value="#33000000" />
+        <Setter Property="BorderBrush" Value="Black" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="CornerRadius" Value="5" />
         <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+
+    <!--  TextBox Style for Columns  -->
+    <Style x:Key="ColumnTextBoxGridStyle" TargetType="{x:Type TextBox}">
+        <Setter Property="FontFamily" Value="Inter" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="Width" Value="75" />
+        <Setter Property="Height" Value="30" />
+        <Setter Property="Foreground" Value="#333333" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="TextAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Border
+                        x:Name="border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="Black"
+                        BorderThickness="1"
+                        CornerRadius="5"
+                        >
+                        <ScrollViewer
+                            x:Name="PART_ContentHost"
+                            Padding="0"
+                            Background="Transparent"
+                            Focusable="False"
+                            HorizontalScrollBarVisibility="Hidden"
+                            VerticalScrollBarVisibility="Hidden" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="BorderBrush" Value="#0088CC" />
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="border" Property="BorderBrush" Value="#0088CC" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="border" Property="Opacity" Value="0.56" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
     </Style>
 
     <!--  BaoCao TextBlock Style for template columns  -->
     <Style x:Key="BaoCaoTemplateTextBlockStyle" TargetType="TextBlock">
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="FontFamily" Value="Open Sans" />
+        <Setter Property="FontFamily" Value="Inter" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="TextAlignment" Value="Center" />
+        <Setter Property="Margin" Value="5,0,5,0" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=IsSelected}" Value="True">
+                <Setter Property="FontWeight" Value="Normal" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="TextBlockEditStyle" TargetType="TextBlock">
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="FontFamily" Value="Inter" />
         <Setter Property="FontSize" Value="20" />
         <Setter Property="Foreground" Value="White" />
         <Setter Property="TextAlignment" Value="Center" />
@@ -169,9 +232,9 @@
     <!--  BaoCao DataGridColumnHeader Style  -->
     <Style x:Key="BaoCaoDataGridColumnHeaderStyle" TargetType="DataGridColumnHeader">
         <Setter Property="Background" Value="White" />
-        <Setter Property="FontFamily" Value="Open Sans" />
+        <Setter Property="FontFamily" Value="Inter" />
         <Setter Property="FontWeight" Value="SemiBold" />
-        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontSize" Value="15" />
         <Setter Property="Foreground" Value="#333333" />
         <Setter Property="Height" Value="40" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -192,7 +255,7 @@
         <Setter Property="GridLinesVisibility" Value="Horizontal" />
         <Setter Property="HeadersVisibility" Value="Column" />
         <Setter Property="IsReadOnly" Value="False" />
-        <Setter Property="RowHeight" Value="60" />
+        <Setter Property="RowHeight" Value="45" />
         <Setter Property="RowStyle" Value="{StaticResource BaoCaoDataGridRowStyle}" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
     </Style>
