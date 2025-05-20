@@ -6,8 +6,8 @@
     xmlns:helpers="clr-namespace:QuanLyNhaSach.Helpers"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Lập phiếu nhập sách"
-    Width="1360"
-    Height="742"
+    Width="890"
+    Height="462"
     Style="{StaticResource WindowPopupStyle}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
@@ -19,11 +19,11 @@
     <Border Style="{StaticResource WindowPopUpBorder}">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="80" />
+                <RowDefinition Height="50" />
                 <RowDefinition Height="1" />
-                <RowDefinition Height="581" />
+                <RowDefinition Height="365" />
                 <RowDefinition Height="1" />
-                <RowDefinition Height="80" />
+                <RowDefinition Height="45" />
             </Grid.RowDefinitions>
 
             <!--  Header  -->
@@ -52,286 +52,169 @@
                 </StackPanel>
             </Grid>
 
-            <Border Grid.Row="1" Background="LightGray" />
-            <Border Grid.Row="3" Background="LightGray" />
+            <Border Grid.Row="1" Background="Black" />
+            <Border Grid.Row="3" Background="Black" />
 
             <!--  Body  -->
             <Border Grid.Row="2" Style="{StaticResource WindowBorderContentWrapper}">
                 <Grid Margin="10">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="20*" />
-                        <RowDefinition Height="7*" />
-                        <RowDefinition Height="73*" />
+                        <RowDefinition Height="114*" />
+                        <RowDefinition Height="178*" />
                     </Grid.RowDefinitions>
 
                     <!--  Line 1  -->
                     <Grid
                         Grid.Row="0"
-                        Margin="0,10"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Stretch">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="14*" />
-                            <ColumnDefinition Width="16*" />
-                            <ColumnDefinition Width="16*" />
-                            <ColumnDefinition Width="14*" />
-                            <ColumnDefinition Width="16*" />
-                            <ColumnDefinition Width="14*" />
-                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="10" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="10" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
 
-                        <Grid Grid.Column="0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="3*" />
-                                <RowDefinition Height="7*" />
-                            </Grid.RowDefinitions>
+                        <!-- Line 1-->
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
 
-                            <TextBlock
-                                Grid.Row="0"
-                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
+                            <Grid Grid.Column="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*" />
+                                    <ColumnDefinition Width="4*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock
+                                Grid.Column="0"
+                                Style="{StaticResource FieldLabelTextBlockStyle}"
                                 Text="Mã phiếu nhập" />
-                            <TextBox
-                                Grid.Row="1"
+                                <TextBox
+                                Grid.Column="1"
                                 Style="{StaticResource ReadOnlyTextBoxStyle}"
-                                Text="{Binding MaPhieuNhapSach}" />
-                        </Grid>
+                                Text="{Binding MaPhieuNhapSach}"/>
 
-                        <Grid Grid.Column="1">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="3*" />
-                                <RowDefinition Height="7*" />
-                            </Grid.RowDefinitions>
 
-                            <TextBlock
-                                Grid.Row="0"
+                            </Grid>
+
+                            <Grid Grid.Column="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*" />
+                                    <ColumnDefinition Width="4*" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock
+                                Grid.Column="0"
                                 Style="{StaticResource FieldSmallLabelTextBlockStyle}"
+                                HorizontalAlignment="Right"
                                 Text="Ngày Nhập" />
-                            <DatePicker
-                                 Grid.Row="1"
-                                 SelectedDate="{Binding NgayNhap}"
-                                 Style="{StaticResource StandardDatePickerStyle}" />
+                                <DatePicker
+                                Grid.Column="1"
+                                SelectedDate="{Binding NgayNhap}"
+                                Style="{StaticResource StandardDatePickerStyle}" />
+
+                            </Grid>
+
+
                         </Grid>
 
-                        <Grid Grid.Column="2">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="3*" />
-                                <RowDefinition Height="7*" />
-                            </Grid.RowDefinitions>
-                            <TextBlock
-                                 Grid.Row="0"
-                                 Style="{StaticResource FieldSmallLabelTextBlockStyle}"
-                                 Text="Số lượng tồn tối đa" />
-                            <TextBox
-                                 Grid.Row="1"
+                        <!--Line 2-->
+                        <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Column="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock
                                  Grid.Column="0"
+                                 Style="{StaticResource FieldLabelTextBlockStyle}"
+                                 Text="Số lượng tồn tối đa để được nhập" />
+                                <TextBox
+                                 Grid.Column="1"
                                  Style="{StaticResource ReadOnlyTextBoxStyle}"
                                  Text="{Binding SoLuongTonToiDa}" />
+
+                            </Grid>
+
                         </Grid>
 
-                        <Grid Grid.Column="3">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="3*" />
-                                <RowDefinition Height="7*" />
-                            </Grid.RowDefinitions>
-                            <TextBlock
-                                 Grid.Row="0"
-                                 Style="{StaticResource FieldSmallLabelTextBlockStyle}"
-                                 Text="Tình trạng" />
-                            <TextBox
-                                 Grid.Row="1"
-                                 Grid.Column="0"
-                                 Style="{StaticResource ReadOnlyTextBoxStyle}"
-                                 Text="{Binding NoiDung01}" />
+                        <!--Line 3-->
+                        <Grid Grid.Row="4">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Column="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock
+                                Grid.Column="0"
+                                Style="{StaticResource FieldLabelTextBlockStyle}"
+                                Text="Số lượng nhập tối thiểu" />
+                                <TextBox
+                                Grid.Column="1"
+                                Style="{StaticResource ReadOnlyTextBoxStyle}"
+                                Text="{Binding SoLuongNhapToiThieu}" />
+
+                            </Grid>
+
+
+
                         </Grid>
 
-                        <Grid Grid.Column="4">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="3*" />
-                                <RowDefinition Height="7*" />
-                            </Grid.RowDefinitions>
-                            <TextBlock
-                                 Grid.Row="0"
-                                 Style="{StaticResource FieldSmallLabelTextBlockStyle}"
-                                 Text="Số lượng nhập tối thiểu" />
-                            <TextBox
-                                 Grid.Row="1"
-                                 Grid.Column="0"
-                                 Style="{StaticResource ReadOnlyTextBoxStyle}"
-                                 Text="{Binding SoLuongNhapToiThieu}" />
-                        </Grid>
 
-                        <Grid Grid.Column="5">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="3*" />
-                                <RowDefinition Height="7*" />
-                            </Grid.RowDefinitions>
-                            <TextBlock
-                                 Grid.Row="0"
-                                 Style="{StaticResource FieldSmallLabelTextBlockStyle}"
-                                 Text="Tình trạng" />
-                            <TextBox
-                                 Grid.Row="1"
-                                 Grid.Column="0"
-                                 Style="{StaticResource ReadOnlyTextBoxStyle}"
-                                 Text="{Binding NoiDung02}" />
-                        </Grid>
                     </Grid>
-
-                    <StackPanel
-                        Grid.Row="1"
-                        Margin="20,0,10,0"
-                        HorizontalAlignment="Right"
-                        Orientation="Horizontal">
-
-                        <Button Command="{Binding SearchSachCommand}" Style="{StaticResource WindowPrimaryButtonStyle}" Width="174">
-                            <StackPanel Orientation="Horizontal">
-                                <fa:FontAwesome Margin="0,0,10,0" Icon="Search" />
-                                <TextBlock Text="Tra cứu sách" />
-                            </StackPanel>
-                        </Button>
-                        
-                        <Button
-                            Margin="0,0,20,0"
-                            Command="{Binding BoChonDauSachCommand}"
-                            Style="{StaticResource PrimaryButtonStyle}">
-                            <StackPanel Orientation="Horizontal">
-                                <fa:FontAwesome Margin="0,0,10,0" Icon="TimesCircle" />
-                                <TextBlock Text="Bỏ chọn" />
-                            </StackPanel>
-                        </Button>
-
-                        <Button
-                            Margin="0,0,20,0"
-                            Command="{Binding ThemDauSachCommand}"
-                            Style="{StaticResource PrimaryButtonStyle}">
-                            <StackPanel Orientation="Horizontal">
-                                <fa:FontAwesome Margin="0,0,10,0" Icon="Plus" />
-                                <TextBlock Text="Thêm sách" />
-                            </StackPanel>
-                        </Button>
-
-                        <Button Command="{Binding XoaDauSachCommand}" Style="{StaticResource PrimaryButtonStyle}">
-                            <StackPanel Orientation="Horizontal">
-                                <fa:FontAwesome Margin="0,0,10,0" Icon="Trash" />
-                                <TextBlock Text="Xóa sách" />
-                            </StackPanel>
-                        </Button>
-                    </StackPanel>
 
                     <!--  Line 3 - The DataGrid (Preserved as requested)  -->
                     <Border
-                        Grid.Row="2"
+                        Grid.Row="1"
                         Margin="10,20,10,0"
                         Background="White"
-                        BorderBrush="LightGray"
-                        BorderThickness="2"
-                        CornerRadius="10">
+                        BorderBrush="Black"
+                        BorderThickness="1"
+                        CornerRadius="5">
 
                         <DataGrid
-                            AutoGenerateColumns="False"
-                            Background="Transparent"
-                            BorderThickness="0"
-                            CanUserAddRows="False"
-                            CanUserDeleteRows="False"
-                            GridLinesVisibility="Horizontal"
-                            HeadersVisibility="Column"
-                            IsReadOnly="False"
                             ItemsSource="{Binding DanhSachDauSachPhieuNhap}"
-                            RowHeight="60"
-                            ScrollViewer.VerticalScrollBarVisibility="Auto"
-                            SelectedItem="{Binding SelectedDauSachPhieuNhap}">
-                            <DataGrid.Resources>
-                                <Style TargetType="DataGridCell">
-                                    <Setter Property="BorderThickness" Value="0" />
-                                    <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-                                    <Setter Property="Padding" Value="10,0" />
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="DataGridCell">
-                                                <Border
-                                                    Background="{TemplateBinding Background}"
-                                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                                    BorderThickness="{TemplateBinding BorderThickness}"
-                                                    SnapsToDevicePixels="True">
-                                                    <ContentPresenter
-                                                        HorizontalAlignment="Center"
-                                                        VerticalAlignment="Center"
-                                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                                                </Border>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </DataGrid.Resources>
-
-                            <DataGrid.RowStyle>
-                                <Style TargetType="DataGridRow">
-                                    <Setter Property="Background" Value="Transparent" />
-                                    <Setter Property="BorderThickness" Value="0,0,0,1" />
-                                    <Setter Property="BorderBrush" Value="#E0E0E0" />
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="#F5F9FF" />
-                                        </Trigger>
-                                        <Trigger Property="IsSelected" Value="True">
-                                            <Setter Property="Background" Value="#00AAFF" />
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </DataGrid.RowStyle>
-
-                            <DataGrid.ColumnHeaderStyle>
-                                <Style TargetType="DataGridColumnHeader">
-                                    <Setter Property="Background" Value="White" />
-                                    <Setter Property="FontFamily" Value="Open Sans" />
-                                    <Setter Property="FontWeight" Value="SemiBold" />
-                                    <Setter Property="FontSize" Value="20" />
-                                    <Setter Property="Foreground" Value="#333333" />
-                                    <Setter Property="Height" Value="50" />
-                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
-                                    <Setter Property="VerticalContentAlignment" Value="Center" />
-                                    <Setter Property="BorderThickness" Value="0" />
-                                    <Setter Property="Padding" Value="10,0" />
-                                </Style>
-                            </DataGrid.ColumnHeaderStyle>
-
+                            SelectedItem="{Binding SelectedDauSachPhieuNhap}"
+                            Style="{StaticResource BaoCaoDataGridStyle}">
+                                                    
                             <DataGrid.Columns>
                                 <DataGridTextColumn
                                     Width="Auto"
+                                    ElementStyle="{StaticResource BaoCaoTextBlockStyle}"
                                     Header="STT"
                                     IsReadOnly="True">
                                     <DataGridTextColumn.Binding>
                                         <Binding Converter="{StaticResource RowToIndexConverter}" RelativeSource="{RelativeSource AncestorType=DataGridRow}" />
                                     </DataGridTextColumn.Binding>
-                                    <DataGridTextColumn.ElementStyle>
-                                        <Style TargetType="TextBlock">
-                                            <Setter Property="FontFamily" Value="Open Sans" />
-                                            <Setter Property="FontSize" Value="20" />
-                                            <Setter Property="Foreground" Value="#333333" />
-                                            <Setter Property="VerticalAlignment" Value="Center" />
-                                            <Setter Property="HorizontalAlignment" Value="Center" />
-                                            <Setter Property="TextAlignment" Value="Center" />
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=IsSelected}" Value="True">
-                                                    <Setter Property="Foreground" Value="White" />
-                                                    <Setter Property="FontWeight" Value="SemiBold" />
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </DataGridTextColumn.ElementStyle>
                                 </DataGridTextColumn>
 
-                                <DataGridTemplateColumn Width="*" Header="Tên sách">
+                                <DataGridTemplateColumn Width="Auto" Header="Tên sách">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <ComboBox
-                                                Width="270"
-                                                Height="40"
                                                 Margin="0,5,0,5"
                                                 VerticalAlignment="Center"
                                                 Background="White"
                                                 ItemsSource="{Binding DanhSachSach}"
                                                 SelectedItem="{Binding SelectedSach, UpdateSourceTrigger=PropertyChanged}"
-                                                Style="{StaticResource StandardComboBoxStyle}">
+                                                Style="{StaticResource SmallComboBoxStyle}">
                                                 <ComboBox.ItemTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Text="{Binding TenSach}" />
@@ -348,36 +231,17 @@
                                     IsReadOnly="True">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Border
-                                                Width="220"
-                                                Padding="10,5"
-                                                HorizontalAlignment="Center"
-                                                Background="#A2A2A2"
-                                                BorderBrush="#33000000"
-                                                BorderThickness="1"
-                                                CornerRadius="10">
+                                            <Border Style="{StaticResource BaoCaoBorderStyle}"
+                                                    
+                                                    >
                                                 <TextBlock
-                                                    HorizontalAlignment="Center"
-                                                    VerticalAlignment="Center"
-                                                    FontFamily="Open Sans"
-                                                    FontSize="20"
-                                                    Foreground="White"
                                                     Text="{Binding TacGia}"
-                                                    TextAlignment="Center">
-                                                    <TextBlock.Style>
-                                                        <Style TargetType="TextBlock">
-                                                            <Style.Triggers>
-                                                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=IsSelected}" Value="True">
-                                                                    <Setter Property="FontWeight" Value="SemiBold" />
-                                                                </DataTrigger>
-                                                            </Style.Triggers>
-                                                        </Style>
-                                                    </TextBlock.Style>
-                                                </TextBlock>
+                                                    Style="{StaticResource BaoCaoTemplateTextBlockStyle}"/>
                                             </Border>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
+
 
                                 <DataGridTemplateColumn
                                     Width="*"
@@ -386,107 +250,44 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Border
-                                                Width="290"
-                                                Padding="10,5"
-                                                HorizontalAlignment="Center"
-                                                Background="#A2A2A2"
-                                                BorderBrush="#33000000"
-                                                BorderThickness="1"
-                                                CornerRadius="10">
+                                                Style="{StaticResource BaoCaoBorderStyle}">
                                                 <TextBlock
-                                                    HorizontalAlignment="Center"
-                                                    VerticalAlignment="Center"
-                                                    FontFamily="Open Sans"
-                                                    FontSize="20"
-                                                    Foreground="White"
-                                                    Text="{Binding TheLoai}"
-                                                    TextAlignment="Center">
-                                                    <TextBlock.Style>
-                                                        <Style TargetType="TextBlock">
-                                                            <Style.Triggers>
-                                                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=IsSelected}" Value="True">
-                                                                    <Setter Property="FontWeight" Value="SemiBold" />
-                                                                </DataTrigger>
-                                                            </Style.Triggers>
-                                                        </Style>
-                                                    </TextBlock.Style>
-                                                </TextBlock>
+                                                    Style="{StaticResource BaoCaoTemplateTextBlockStyle}"
+                                                    Text="{Binding TheLoai}" />
                                             </Border>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                
+
                                 <DataGridTemplateColumn
-                                    Width="150"
+                                    Width="Auto"
                                     Header="Số lượng tồn"
                                     IsReadOnly="True">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Border
-                                                Width="125"
-                                                Padding="10,5"
-                                                HorizontalAlignment="Center"
-                                                Background="#A2A2A2"
-                                                BorderBrush="#33000000"
-                                                BorderThickness="1"
-                                                CornerRadius="10">
+                                                Style="{StaticResource BaoCaoBorderStyle}"
+                                                Width="75"
+                                                >
                                                 <TextBlock
-                                                    HorizontalAlignment="Center"
-                                                    VerticalAlignment="Center"
-                                                    FontFamily="Open Sans"
-                                                    FontSize="20"
-                                                    Foreground="White"
+                                                    Style="{StaticResource BaoCaoTemplateTextBlockStyle}"
                                                     Text="{Binding SoLuongTon}"
-                                                    TextAlignment="Center">
-                                                    <TextBlock.Style>
-                                                        <Style TargetType="TextBlock">
-                                                            <Style.Triggers>
-                                                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=IsSelected}" Value="True">
-                                                                    <Setter Property="FontWeight" Value="SemiBold" />
-                                                                </DataTrigger>
-                                                            </Style.Triggers>
-                                                        </Style>
-                                                    </TextBlock.Style>
-                                                </TextBlock>
+                                                    />
                                             </Border>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                <DataGridTemplateColumn Width="180" Header="Số lượng nhập">
+                                <DataGridTemplateColumn Width="Auto" Header="Số lượng nhập">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBox
-                                                Width="125"
-                                                Height="40"
-                                                Padding="10,5"
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Center"
-                                                HorizontalContentAlignment="Center"
-                                                VerticalContentAlignment="Center"
-                                                Background="White"
-                                                BorderBrush="#33000000"
-                                                BorderThickness="1"
-                                                FontFamily="Open Sans"
-                                                FontSize="20"
-                                                Text="{Binding SoLuongNhap, UpdateSourceTrigger=PropertyChanged}"
-                                                TextAlignment="Center">
-                                                <TextBox.Resources>
-                                                    <Style TargetType="{x:Type Border}">
-                                                        <Setter Property="CornerRadius" Value="10" />
-                                                    </Style>
-                                                </TextBox.Resources>
-                                                <TextBox.Style>
-                                                    <Style TargetType="TextBox">
-                                                        <Style.Triggers>
-                                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=IsSelected}" Value="True">
-                                                                <Setter Property="FontWeight" Value="SemiBold" />
-                                                            </DataTrigger>
-                                                        </Style.Triggers>
-                                                    </Style>
-                                                </TextBox.Style>
-                                            </TextBox>
+                                                
+                                                Text="{Binding SoLuongNhap}"
+                                                Style="{StaticResource ColumnTextBoxGridStyle}"/>
+      
+
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -495,40 +296,75 @@
 
 
                             </DataGrid.Columns>
+                                
                         </DataGrid>
                     </Border>
                 </Grid>
             </Border>
 
             <!--  Footer  -->
-            <StackPanel
+            <Grid
                 Grid.Row="4"
-                Margin="20"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Stretch"
-                Orientation="Horizontal">
+                Width="815" Height="30">
 
-                <Button Command="{Binding LapPhieuNhapSachCommand}" Style="{StaticResource WindowPrimaryButtonStyle}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0"  Command="{Binding LapPhieuNhapSachCommand}" Style="{StaticResource WindowPrimaryButtonStyle}" Width="NaN" Margin="1,0,36,0">
                     <StackPanel Orientation="Horizontal">
                         <fa:FontAwesome Margin="0,0,10,0" Icon="Check" />
-                        <TextBlock Text="Lập phiếu nhập sách" />
+                        <TextBlock Text="Lập phiếu" />
                     </StackPanel>
                 </Button>
 
-                <Button Command="{Binding PhieuNhapSachMoiCommand}" Style="{StaticResource WindowPrimaryButtonStyle}">
-                    <StackPanel Orientation="Horizontal">
-                        <fa:FontAwesome Margin="0,0,10,0" Icon="Refresh" />
-                        <TextBlock Text="Phiếu nhập sách mới" />
-                    </StackPanel>
-                </Button>
-
-                <Button Command="{Binding CloseWindowCommand}" Style="{StaticResource WindowSignoutButtonStyle}">
+                <Button Grid.Column="2" HorizontalAlignment="Right" Command="{Binding CloseWindowCommand}" Style="{StaticResource WindowSignoutButtonStyle}" Width="NaN" Margin="36,0,1,0">
                     <StackPanel Orientation="Horizontal">
                         <fa:FontAwesome Margin="0,0,10,0" Icon="SignOut" />
                         <TextBlock Text="Thoát" />
                     </StackPanel>
                 </Button>
-            </StackPanel>
+
+                <StackPanel Grid.Column="1"
+                            Orientation="Horizontal" 
+                            HorizontalAlignment="Center" 
+                            VerticalAlignment="Center" 
+                            Margin="0">
+
+                    <Button
+                    Command="{Binding ThemDauSachCommand}"
+                    Style="{StaticResource PrimaryButtonStyle}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Thêm sách" />
+                        </StackPanel>
+                    </Button>
+
+                    <Button 
+                        Margin="20,0"
+                        Command="{Binding XoaDauSachCommand}" 
+                        Style="{StaticResource PrimaryButtonStyle}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Xóa dòng" />
+                        </StackPanel>
+                    </Button>
+
+                    <Button
+                    Command="{Binding ThemDauSachCommand}"
+                    Style="{StaticResource PrimaryButtonStyle}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Thêm dòng" />
+                        </StackPanel>
+                    </Button>
+
+                </StackPanel>
+
+
+
+            </Grid>
+
         </Grid>
     </Border>
 </Window>
