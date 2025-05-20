@@ -45,7 +45,7 @@
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center">
                     <Button
-                        Command="{Binding CloseCommand}"
+                        Command="{Binding CloseWindowCommand}"
                         Content="❌"
                         Style="{StaticResource WindowCloseButtonStyle}" />
                 </StackPanel>
@@ -87,7 +87,7 @@
                             <TextBox
                                 Grid.Row="1"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding MaPhieuThu}" />
+                                Text="{Binding MaPhieuNhapSach}" />
                         </Grid>
 
                         <Grid Grid.Column="1">
@@ -100,10 +100,17 @@
                                 Grid.Row="0"
                                 Style="{StaticResource FieldSmallLabelTextBlockStyle}"
                                 Text="Tên sách" />
-                            <TextBox
+                            <ComboBox
                                 Grid.Row="1"
-                                Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding DienThoai}" />
+                                ItemsSource="{Binding Saches}"
+                                SelectedItem="{Binding SelectedSach}"
+                                Style="{StaticResource StandardComboBoxStyle}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding TenSach}" />
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
                         </Grid>
 
                         <Grid Grid.Column="2">
@@ -116,10 +123,12 @@
                                 Grid.Row="0"
                                 Style="{StaticResource FieldSmallLabelTextBlockStyle}"
                                 Text="Thể loại" />
-                            <TextBox
+                            <ComboBox
                                 Grid.Row="1"
-                                Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding DiaChi}" />
+                                ItemsSource="{Binding ListTheLoai}"
+                                SelectedItem="{Binding SelectedTheLoai}"
+                                Style="{StaticResource StandardComboBoxStyle}">
+                            </ComboBox>
                         </Grid>
 
                         <Grid Grid.Column="3">
@@ -132,10 +141,12 @@
                                 Grid.Row="0"
                                 Style="{StaticResource FieldSmallLabelTextBlockStyle}"
                                 Text="Tác giả" />
-                            <TextBox
+                            <ComboBox
                                 Grid.Row="1"
-                                Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding Email}" />
+                                ItemsSource="{Binding ListTacGia}"
+                                SelectedItem="{Binding SelectedTacGia}"
+                                Style="{StaticResource StandardComboBoxStyle}">
+                            </ComboBox>
                         </Grid>
                     </Grid>
 
@@ -153,6 +164,12 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
+                                
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
                             <TextBlock
@@ -165,7 +182,7 @@
                                 Text="từ" />
                             <DatePicker
                                 Grid.Column="2"
-                                SelectedDate="{Binding NgayThuTienFrom}"
+                                SelectedDate="{Binding NgayNhapFrom}"
                                 Style="{StaticResource StandardDatePickerStyle}" />
                             <TextBlock
                                 Grid.Column="3"
@@ -173,8 +190,30 @@
                                 Text="đến" />
                             <DatePicker
                                 Grid.Column="4"
-                                SelectedDate="{Binding NgayThuTienTo}"
+                                SelectedDate="{Binding NgayNhapTo}"
                                 Style="{StaticResource StandardDatePickerStyle}" />
+
+                            <TextBlock
+                                Grid.Column="5"
+                                Margin="20,0,0,0"
+                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
+                                Text="Tổng số lượng nhập" />
+                            <TextBlock
+                                Grid.Column="6"
+                                Style="{StaticResource RedHighlightTextBlockStyle}"
+                                Text="từ" />
+                            <TextBox
+                                Grid.Column="7"
+                                Style="{StaticResource StandardTextBoxStyle}"
+                                Text="{Binding TongSoLuongNhapFrom}" />
+                            <TextBlock
+                                Grid.Column="8"
+                                Style="{StaticResource RedHighlightTextBlockStyle}"
+                                Text="đến" />
+                            <TextBox
+                                Grid.Column="9"
+                                Style="{StaticResource StandardTextBoxStyle}"
+                                Text="{Binding TongSoLuongNhapTo}" />
                         </Grid>
                     </Grid>
 
@@ -208,7 +247,7 @@
                             <TextBox
                                 Grid.Column="2"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding SoTienThuFrom}" />
+                                Text="{Binding SoLuongTonFrom}" />
                             <TextBlock
                                 Grid.Column="3"
                                 Style="{StaticResource RedHighlightTextBlockStyle}"
@@ -216,7 +255,7 @@
                             <TextBox
                                 Grid.Column="4"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding SoTienThuTo}" />
+                                Text="{Binding SoLuongTonTo}" />
                         </Grid>
 
 
@@ -241,7 +280,7 @@
                             <TextBox
                                 Grid.Column="2"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding NoDaiLyFrom}" />
+                                Text="{Binding SoLuongNhapFrom}" />
                             <TextBlock
                                 Grid.Column="3"
                                 Style="{StaticResource RedHighlightTextBlockStyle}"
@@ -249,7 +288,7 @@
                             <TextBox
                                 Grid.Column="4"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding NoDaiLyTo}" />
+                                Text="{Binding SoLuongNhapTo}" />
                         </Grid>
                     </Grid>
 
@@ -264,14 +303,14 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Stretch"
                 Orientation="Horizontal">
-                <Button Command="{Binding TraCuuPhieuThuCommand}" Style="{StaticResource WindowPrimaryButtonStyle}" Width="273">
+                <Button Command="{Binding SearchPhieuNhapSachCommand}" Style="{StaticResource WindowPrimaryButtonStyle}" Width="273">
                     <StackPanel Orientation="Horizontal">
                         <fa:FontAwesome Margin="0,0,10,0" Icon="Search" />
                         <TextBlock Text="Tra cứu phiếu nhập sách" />
                     </StackPanel>
                 </Button>
 
-                <Button Command="{Binding CloseCommand}" Style="{StaticResource WindowSignoutButtonStyle}">
+                <Button Command="{Binding CloseWindowCommand}" Style="{StaticResource WindowSignoutButtonStyle}">
                     <StackPanel Orientation="Horizontal">
                         <fa:FontAwesome Margin="0,0,10,0" Icon="SignOut" />
                         <TextBlock Text="Thoát" />
