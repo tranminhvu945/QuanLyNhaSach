@@ -171,9 +171,6 @@
                                         FontSize="14"
                                         MinValue="0"
                                         LabelFormatter="{Binding CurrencyFormatter}">
-                                        <lvc:Axis.Separator>
-                                            <lvc:Separator Step="10" />
-                                        </lvc:Axis.Separator>
                                     </lvc:Axis>
                                 </lvc:CartesianChart.AxisY>
                             </lvc:CartesianChart>
@@ -300,9 +297,6 @@
                                         FontSize="14"
                                         MinValue="0"
                                         LabelFormatter="{Binding CurrencyFormatter}">
-                                        <lvc:Axis.Separator>
-                                            <lvc:Separator Step="100000" />
-                                        </lvc:Axis.Separator>
                                     </lvc:Axis>
                                 </lvc:CartesianChart.AxisY>
                             </lvc:CartesianChart>

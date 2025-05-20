@@ -54,6 +54,26 @@ namespace QuanLyNhaSach.ViewModels.BaoCaoViewModel
             _ = InitializeTonSachData();
         }
 
+        public DefaultTooltip TonSachTooltip { get; set; } = new DefaultTooltip
+        {
+            SelectionMode = TooltipSelectionMode.OnlySender,
+            FontSize = 16,
+            FontFamily = new FontFamily("Nunito"),
+            ShowTitle = true,
+            Background = new SolidColorBrush(Color.FromRgb(250, 250, 250)),
+            BorderBrush = new SolidColorBrush(Color.FromRgb(200, 200, 200))
+        };
+
+        public DefaultTooltip CongNoTooltip { get; set; } = new DefaultTooltip
+        {
+            SelectionMode = TooltipSelectionMode.OnlySender,
+            FontSize = 16,
+            FontFamily = new FontFamily("Nunito"),
+            ShowTitle = true,
+            Background = new SolidColorBrush(Color.FromRgb(250, 250, 250)),
+            BorderBrush = new SolidColorBrush(Color.FromRgb(200, 200, 200))
+        };
+
         public void InitializeMonthYearOptions()
         {
             var currentDate = DateTime.Now;
@@ -128,7 +148,7 @@ namespace QuanLyNhaSach.ViewModels.BaoCaoViewModel
         {
             _ = InitializeCongNoData();
         }
-
+        
         [RelayCommand]
         private void TonSach()
         {
@@ -332,6 +352,7 @@ namespace QuanLyNhaSach.ViewModels.BaoCaoViewModel
 
                 // Cập nhật label và series cho biểu đồ công nợ
                 TonSachLabels = filteredData.Select(d => d.TenSach).ToArray();
+                TonSachLabels= TonSachLabels.Select(s => s.Length > 20 ? s.Substring(0, 20) + "..." : s).ToArray();
                 var sortedDebts = filteredData.Select(d => d.TonSach).ToArray();
 
                 TonSachSeries = new SeriesCollection
