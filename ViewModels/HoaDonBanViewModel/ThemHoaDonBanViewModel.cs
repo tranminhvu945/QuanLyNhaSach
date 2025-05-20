@@ -91,7 +91,11 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
         {
             _danhSachSach = new List<Sach>(await _sachService.GetAllSach());
             var listKhachHang = await _khachHangService.GetAllKhachHang();
-            KhachHangs = new ObservableCollection<KhachHang>(listKhachHang);
+
+            // Sắp xếp theo tên khách hàng (TenKhachHang)
+            var sortedListKhachHang = listKhachHang.OrderBy(kh => kh.TenKhachHang).ToList();
+
+            KhachHangs = new ObservableCollection<KhachHang>(sortedListKhachHang);
             if (KhachHangs.Count > 0)
             {
                 SelectedKhachHang = KhachHangs.First();
@@ -311,7 +315,6 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
                 MessageBox.Show("Không có đầu sách nào để xóa", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
 
         [RelayCommand]
         private void BoChonSach()

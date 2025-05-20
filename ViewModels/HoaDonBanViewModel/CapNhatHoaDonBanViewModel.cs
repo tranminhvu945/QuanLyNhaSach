@@ -62,7 +62,10 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
 
                 DanhSachSach = [.. (await _sachService.GetAllSach())];
                 var listKhachHang = await _khachHangService.GetAllKhachHang();
-                KhachHangs = [.. listKhachHang];
+                // Sắp xếp theo tên khách hàng (TenKhachHang)
+                var sortedListKhachHang = listKhachHang.OrderBy(kh => kh.TenKhachHang).ToList();
+
+                KhachHangs = new ObservableCollection<KhachHang>(sortedListKhachHang);
 
 
                 DanhSachSachHoaDon.Clear();
