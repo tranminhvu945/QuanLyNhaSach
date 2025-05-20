@@ -15,5 +15,6 @@ namespace QuanLyNhaSach.Services
         Task UpdateChiTietHoaDon(ChiTietHoaDon chiTietHoaDon);
         Task DeleteChiTietHoaDon(ChiTietHoaDon chiTietHoaDon);
         Task<IEnumerable<ChiTietHoaDon>> GetChiTietHoaDonByHoaDonId(int maHoaDon);
+        Task DeleteChiTietHoaDonByHoaDonId(int maHoaDon);
     }
 }
