@@ -49,46 +49,6 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
             _ = LoadDataAsync();
         }
 
-        // Load data 
-        private async Task LoadDataAsync()
-        {
-            try
-            {
-                MaHoaDon = _hoaDonID.ToString();
-                var existingHoaDon = await _hoaDonService.GetHoaDonById(_hoaDonID);
-                SelectedKhachHang = existingHoaDon.KhachHang;
-                NgayLap = existingHoaDon.NgayLap;
-                TongTien = existingHoaDon.TongTien;
-
-                DanhSachSach = [.. (await _sachService.GetAllSach())];
-                var listKhachHang = await _khachHangService.GetAllKhachHang();
-                // Sắp xếp theo tên khách hàng (TenKhachHang)
-                var sortedListKhachHang = listKhachHang.OrderBy(kh => kh.TenKhachHang).ToList();
-
-                KhachHangs = new ObservableCollection<KhachHang>(sortedListKhachHang);
-
-
-                DanhSachSachHoaDon.Clear();
-
-                var listChiTietHoaDon = await _hoaDonChiTietService.GetChiTietHoaDonByHoaDonId(_hoaDonID);
-                foreach (var chiTiet in listChiTietHoaDon)
-                {
-                    DanhSachSachHoaDon.Add(new DisplaySachHoaDon(DanhSachSach)
-                    {
-                        SelectedSach = await _sachService.GetSachById(chiTiet.MaSach),
-                        SoLuongBan = chiTiet.SoLuongBan,
-                        DonGiaBan = chiTiet.DonGiaBan,
-                    });
-                }
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Có lỗi xảy ra khi tải dữ liệu: {ex.Message}",
-                    "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
         [ObservableProperty]
         private ObservableCollection<Sach> _danhSachSach = [];
 
@@ -108,10 +68,16 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
         private KhachHang _selectedKhachHang = null!;
 
         [ObservableProperty]
+        private string _quyDinhTienNoToiDa = "";
+
+        [ObservableProperty]
         private long _noToiDa = 0;
 
         [ObservableProperty]
         private long _tienNo = 0;
+
+        [ObservableProperty]
+        private bool _isNoToiDaVisible;
 
         [ObservableProperty]
         private long _tongTien = 0;
@@ -126,6 +92,101 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
         private Sach _selectedSach = null!;
 
         // Methods
+        partial void OnSelectedKhachHangChanged(KhachHang value)
+        {
+            if (value != null)
+            {
+                _ = UpdateTienNoAndQuyDinhAsync(value); // Không cần await, tránh lỗi UI
+            }
+        }
+
+        private async Task UpdateTienNoAndQuyDinhAsync(KhachHang value)
+        {
+            try
+            {
+                var thamSo = await _thamsoService.GetThamSo();
+                QuyDinhTienNoToiDa = thamSo.QuyDinhTienNoToiDa ? "Đang áp dụng" : "Không áp dụng";
+                IsNoToiDaVisible = thamSo.QuyDinhTienNoToiDa;
+
+                if (IsNoToiDaVisible)
+                {
+                    NoToiDa = thamSo.TienNoToiDa;
+
+                    // TienNo hiện tại = tiền nợ khách hàng - tổng tiền cũ hóa đơn (để tránh cộng dồn sai)
+                    var existingHoaDon = await _hoaDonService.GetHoaDonById(_hoaDonID);
+                    if (existingHoaDon != null)
+                    {
+                        TienNo = value.TienNo - existingHoaDon.TongTien;
+                    }
+                    else
+                    {
+                        TienNo = value.TienNo;
+                    }
+
+                    if (TienNo > NoToiDa)
+                    {
+                        MessageBox.Show($"Khách hàng {value.TenKhachHang} đã vượt quá tiền nợ tối đa.", "Cảnh báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+                }
+                else
+                {
+                    NoToiDa = 0;
+                    TienNo = value.TienNo;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi cập nhật số tiền nợ: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private async Task LoadDataAsync()
+        {
+            try
+            {
+                MaHoaDon = _hoaDonID.ToString();
+                var existingHoaDon = await _hoaDonService.GetHoaDonById(_hoaDonID);
+
+                SelectedKhachHang = existingHoaDon.KhachHang;
+                NgayLap = existingHoaDon.NgayLap;
+                TongTien = existingHoaDon.TongTien;
+
+                DanhSachSach = new ObservableCollection<Sach>(await _sachService.GetAllSach());
+
+                var listKhachHang = await _khachHangService.GetAllKhachHang();
+                var sortedListKhachHang = listKhachHang.OrderBy(kh => kh.TenKhachHang).ToList();
+                KhachHangs = new ObservableCollection<KhachHang>(sortedListKhachHang);
+
+                var thamSo = await _thamsoService.GetThamSo();
+                QuyDinhTienNoToiDa = thamSo.QuyDinhTienNoToiDa ? "Đang áp dụng" : "Không áp dụng";
+                IsNoToiDaVisible = thamSo.QuyDinhTienNoToiDa;
+
+                NoToiDa = IsNoToiDaVisible ? thamSo.TienNoToiDa : 0;
+
+                // TienNo sẽ được cập nhật bởi OnSelectedKhachHangChanged khi gán SelectedKhachHang
+
+                DanhSachSachHoaDon.Clear();
+
+                var listChiTietHoaDon = await _hoaDonChiTietService.GetChiTietHoaDonByHoaDonId(_hoaDonID);
+                foreach (var chiTiet in listChiTietHoaDon)
+                {
+                    var item = new DisplaySachHoaDon(DanhSachSach)
+                    {
+                        SelectedSach = await _sachService.GetSachById(chiTiet.MaSach),
+                        SoLuongBan = chiTiet.SoLuongBan,
+                        DonGiaBan = chiTiet.DonGiaBan,
+                    };
+                    item.ThanhTienChanged += (s, e) => CalculateTongTien();
+
+                    DanhSachSachHoaDon.Add(item);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Có lỗi xảy ra khi tải dữ liệu: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
         [RelayCommand]
         private void Close()
         {
@@ -170,6 +231,26 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
                     {
                         MessageBox.Show($"Đơn giá bán của {item.SelectedSach.TenSach} phải lớn hơn 0",
                             "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                }
+
+                // Cập nhật tổng tiền hóa đơn trước
+                CalculateTongTien();
+
+                // Kiểm tra quy định tiền nợ tối đa
+                var thamSo = await _thamsoService.GetThamSo();
+                if (thamSo.QuyDinhTienNoToiDa)
+                {
+                    // Tiền nợ dự kiến = tiền nợ KH hiện tại + tổng tiền hóa đơn mới - tổng tiền hóa đơn cũ
+                    var khachHangHienTai = await _khachHangService.GetKhachHangById(SelectedKhachHang.MaKhachHang);
+                    var existingHoaDon = await _hoaDonService.GetHoaDonById(_hoaDonID);
+                    long tienNoDuKien = khachHangHienTai.TienNo + TongTien - existingHoaDon.TongTien;
+
+                    if (tienNoDuKien > thamSo.TienNoToiDa)
+                    {
+                        MessageBox.Show($"Khách hàng đã vượt quá tiền nợ tối đa ({thamSo.TienNoToiDa}). Không thể cập nhật hoá đơn.",
+                                        "Cảnh báo", MessageBoxButton.OK, MessageBoxImage.Warning);
                         return;
                     }
                 }
