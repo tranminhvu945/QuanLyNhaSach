@@ -9,20 +9,23 @@ namespace QuanLyNhaSach.Models.dto
         public DisplaySachHoaDon(
             IEnumerable<Sach> danhSachSach)
         {
-            DanhSachSach = [.. danhSachSach];
+            DanhSachSach = new ObservableCollection<Sach>(danhSachSach);
             if (DanhSachSach.Count > 0)
                 SelectedSach = DanhSachSach[0];
         }
 
         #region Bindings Properties
-        private ObservableCollection<Sach> _danhSachSach = [];
+        private ObservableCollection<Sach> _danhSachSach = new ObservableCollection<Sach>();
         public ObservableCollection<Sach> DanhSachSach
         {
             get => _danhSachSach;
             set
             {
-                _danhSachSach = value;
-                OnPropertyChanged();
+                if (_danhSachSach != value)
+                {
+                    _danhSachSach = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -38,23 +41,19 @@ namespace QuanLyNhaSach.Models.dto
                     _selectedSach = value;
                     OnPropertyChanged();
                     OnPropertyChanged(nameof(TheLoai));
-                    //OnPropertyChanged(nameof(QuyDinhSoLuongTonToiThieu));
                     OnPropertyChanged(nameof(SoLuongTon));
                     OnPropertyChanged(nameof(SoLuongTonTruocKhiXuat));
                     OnPropertyChanged(nameof(ThanhTien));
                     ThanhTienChanged?.Invoke(this, EventArgs.Empty);
 
-                    // Gọi callback hoặc event để cập nhật danh sách đã chọn/chưa chọn
                     SelectedSachChanged?.Invoke(this, new SelectedSachChangedEventArgs(oldSach, _selectedSach));
-                }                    
+                }
             }
         }
 
-        public int SoLuongTonTruocKhiXuat => SelectedSach?.SoLuongTon + SoLuongBan ?? 0;
+        public int SoLuongTonTruocKhiXuat => (SelectedSach?.SoLuongTon ?? 0) + SoLuongBan;
 
         public string TheLoai => SelectedSach?.TheLoai ?? string.Empty;
-
-        //public int QuyDinhSoLuongTonToiThieu => SelectedSach?.QuyDinhSoLuongTonToiThieu ?? 0;
 
         public int SoLuongTon => SelectedSach?.SoLuongTon ?? 0;
 
@@ -64,10 +63,13 @@ namespace QuanLyNhaSach.Models.dto
             get => _soLuongBan;
             set
             {
-                _soLuongBan = value;
-                OnPropertyChanged();
-                OnPropertyChanged(nameof(ThanhTien));
-                ThanhTienChanged?.Invoke(this, EventArgs.Empty);
+                if (_soLuongBan != value)
+                {
+                    _soLuongBan = value;
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(ThanhTien));
+                    ThanhTienChanged?.Invoke(this, EventArgs.Empty);
+                }
             }
         }
 
@@ -77,19 +79,22 @@ namespace QuanLyNhaSach.Models.dto
             get => _donGiaBan;
             set
             {
-                _donGiaBan = value;
-                OnPropertyChanged();
-                OnPropertyChanged(nameof(ThanhTien));
-                ThanhTienChanged?.Invoke(this, EventArgs.Empty);
+                if (_donGiaBan != value)
+                {
+                    _donGiaBan = value;
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(ThanhTien));
+                    ThanhTienChanged?.Invoke(this, EventArgs.Empty);
+                }
             }
         }
-        #endregion
+
         public long ThanhTien => SoLuongBan * DonGiaBan;
+        #endregion
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public event EventHandler<SelectedSachChangedEventArgs> SelectedSachChanged;
-        // Add an event to notify when ThanhTien changes
+        public event EventHandler<SelectedSachChangedEventArgs>? SelectedSachChanged;
         public event EventHandler? ThanhTienChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)

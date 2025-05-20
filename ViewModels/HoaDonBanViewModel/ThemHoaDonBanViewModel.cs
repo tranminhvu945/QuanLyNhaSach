@@ -43,7 +43,6 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
 
             WeakReferenceMessenger.Default.RegisterAll(this);
             _ = LoadDataAsync();
-
         }
 
         public void Receive(DataReloadMessage message)
@@ -51,7 +50,7 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
             _ = LoadDataAsync();
         }
 
-        // Other properties 
+        #region Bindings Properties
         private List<Sach> _danhSachSach = [];
         private List<Sach> _danhSachSachDaChon = [];
 
@@ -68,7 +67,13 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
         private KhachHang _selectedKhachHang = null!;
 
         [ObservableProperty]
+        private string _quyDinhTienNoToiDa = "";
+
+        [ObservableProperty]
         private long _noToiDa = 0;
+
+        [ObservableProperty]
+        private bool _isNoToiDaVisible;
 
         [ObservableProperty]
         private long _tienNo = 0;
@@ -84,7 +89,7 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
 
         [ObservableProperty]
         private Sach _selectedSach = null!;
-
+        #endregion
 
         // Load data 
         private async Task LoadDataAsync()
@@ -92,16 +97,54 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
             _danhSachSach = new List<Sach>(await _sachService.GetAllSach());
             var listKhachHang = await _khachHangService.GetAllKhachHang();
 
-            // Sắp xếp theo tên khách hàng (TenKhachHang)
             var sortedListKhachHang = listKhachHang.OrderBy(kh => kh.TenKhachHang).ToList();
-
             KhachHangs = new ObservableCollection<KhachHang>(sortedListKhachHang);
+
             if (KhachHangs.Count > 0)
             {
+                var thamSo = await _thamsoService.GetThamSo();
+                QuyDinhTienNoToiDa = thamSo.QuyDinhTienNoToiDa ? "Đang áp dụng" : "Không áp dụng";
+                IsNoToiDaVisible = thamSo.QuyDinhTienNoToiDa;
+
                 SelectedKhachHang = KhachHangs.First();
-                NoToiDa = (await _thamsoService.GetThamSo()).TienNoToiDa;
+
+                if (IsNoToiDaVisible)
+                    NoToiDa = thamSo.TienNoToiDa;
+                else
+                    NoToiDa = 0; // hoặc null nếu bạn dùng nullable
+
                 TienNo = SelectedKhachHang.TienNo;
             }
+        }
+
+        partial void OnSelectedKhachHangChanged(KhachHang oldValue, KhachHang newValue)
+        {
+            if (newValue != null)
+            {
+                _ = UpdateTienNoAndQuyDinhAsync(newValue);
+            }
+        }
+
+        private async Task UpdateTienNoAndQuyDinhAsync(KhachHang value)
+        {
+            var thamSo = await _thamsoService.GetThamSo();
+            QuyDinhTienNoToiDa = thamSo.QuyDinhTienNoToiDa ? "Đang áp dụng" : "Không áp dụng";
+            IsNoToiDaVisible = thamSo.QuyDinhTienNoToiDa;
+
+            if (IsNoToiDaVisible)
+            {
+                NoToiDa = thamSo.TienNoToiDa;
+                if (value.TienNo > NoToiDa)
+                {
+                    MessageBox.Show($"Khách hàng {value.TenKhachHang} đã vượt quá tiền nợ tối đa.", "Cảnh báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+            else
+            {
+                NoToiDa = 0;
+            }
+
+            TienNo = value.TienNo;
         }
 
         // Methods for commands
@@ -160,6 +203,23 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
                     }
                 }
 
+                // Cập nhật tổng tiền trước khi kiểm tra
+                CalculateTongTien();
+
+                // Kiểm tra quy định tiền nợ tối đa
+                var thamSo = await _thamsoService.GetThamSo();
+                if (thamSo.QuyDinhTienNoToiDa)
+                {
+                    long tienNoDuKien = SelectedKhachHang.TienNo + TongTien;
+
+                    if (tienNoDuKien > thamSo.TienNoToiDa)
+                    {
+                        MessageBox.Show($"Khách hàng đã vượt quá tiền nợ tối đa ({thamSo.TienNoToiDa}). Không thể lập hoá đơn.",
+                                        "Cảnh báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        return; // Ngăn không lập hoá đơn
+                    }
+                }
+
                 if (string.IsNullOrEmpty(MaHoaDon))
                 {
                     int newId = await _hoaDonService.GenerateAvailableId();
@@ -194,26 +254,26 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
                     await _sachService.UpdateSach(Sach);
                 }
 
-                SelectedKhachHang.TienNo += TongTien;
-                await _khachHangService.UpdateKhachHang(SelectedKhachHang);
+                // Lấy lại khách hàng từ database để đảm bảo dữ liệu mới nhất
+                var khachHangHienTai = await _khachHangService.GetKhachHangById(SelectedKhachHang.MaKhachHang);
+
+                // Cộng thêm tổng tiền hóa đơn mới vào tiền nợ
+                khachHangHienTai.TienNo += TongTien;
+
+                await _khachHangService.UpdateKhachHang(khachHangHienTai);
+
+                // Cập nhật lại SelectedKhachHang để giao diện hiển thị chính xác
+                SelectedKhachHang = khachHangHienTai;
 
                 MessageBox.Show($"Lập hoá đơn thành công. Mã hoá đơn: {MaHoaDon}",
                     "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Có lỗi xảy ra khi lập hoá đơn: {ex.Message}",
                     "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
-
-        [RelayCommand]
-        private void HoaDonMoi()
-        {
-            SelectedKhachHang = null!;
-            SelectedSachHoaDon = null!;
-            TongTien = 0;
-            _ = LoadDataAsync();
         }
 
         [RelayCommand]
@@ -239,15 +299,6 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
 
             var addKhachHangtWindow = _serviceProvider.GetRequiredService<ThemKhachHangWindow>();
             addKhachHangtWindow.Show();
-        }
-
-        [RelayCommand]
-        private async Task SearchSach()
-        {
-            SelectedSach = null!;
-
-            var traCuuSachWindow = _serviceProvider.GetRequiredService<TraCuuSachWindow>();
-            traCuuSachWindow.Show();
         }
 
         [RelayCommand]
