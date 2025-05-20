@@ -128,8 +128,15 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
 
 
                 // Populate the collections
-                KhachHangs = new ObservableCollection<KhachHang>(listKhachHang);
-                Sachs = new ObservableCollection<Sach>(listSach);
+                // Sắp xếp theo tên khách hàng (TenKhachHang)
+                var sortedListKhachHang = listKhachHang.OrderBy(kh => kh.TenKhachHang).ToList();
+
+                KhachHangs = new ObservableCollection<KhachHang>(sortedListKhachHang);
+
+                // Sắp xếp theo tên sách (TenSach)
+                var sortedListSach = listSach.OrderBy(kh => kh.TenSach).ToList();
+
+                Sachs = new ObservableCollection<Sach>(sortedListSach);
             }
             catch (Exception ex)
             {
