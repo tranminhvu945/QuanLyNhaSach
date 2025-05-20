@@ -104,7 +104,7 @@
                             <TextBlock
                                 Grid.Row="0"
                                 Style="{StaticResource FieldSmallLabelTextBlockStyle}"
-                                Text="Ngày Nhập" />
+                                Text="Ngày nhập" />
                             <DatePicker
                                  Grid.Row="1"
                                  SelectedDate="{Binding NgayNhap}"
@@ -119,12 +119,12 @@
                             <TextBlock
                                  Grid.Row="0"
                                  Style="{StaticResource FieldSmallLabelTextBlockStyle}"
-                                 Text="Số lượng tồn tối thiểu" />
+                                 Text="Số lượng tồn tối đa" />
                             <TextBox
                                  Grid.Row="1"
                                  Grid.Column="0"
                                  Style="{StaticResource ReadOnlyTextBoxStyle}"
-                                 Text="{Binding SoLuongTonToiThieu}" />
+                                 Text="{Binding SoLuongTonToiDa}" />
                         </Grid>
 
                         <Grid Grid.Column="3">
@@ -140,7 +140,7 @@
                                  Grid.Row="1"
                                  Grid.Column="0"
                                  Style="{StaticResource ReadOnlyTextBoxStyle}"
-                                 Text="{Binding aaa}" />
+                                 Text="{Binding NoiDung01}" />
                         </Grid>
 
                         <Grid Grid.Column="4">
@@ -156,7 +156,7 @@
                                  Grid.Row="1"
                                  Grid.Column="0"
                                  Style="{StaticResource ReadOnlyTextBoxStyle}"
-                                 Text="{Binding SoLuongTonToiThieu}" />
+                                 Text="{Binding SoLuongNhapToiThieu}" />
                         </Grid>
 
                         <Grid Grid.Column="5">
@@ -172,7 +172,7 @@
                                  Grid.Row="1"
                                  Grid.Column="0"
                                  Style="{StaticResource ReadOnlyTextBoxStyle}"
-                                 Text="{Binding bbb}" />
+                                 Text="{Binding NoiDung02}" />
                         </Grid>
                     </Grid>
 

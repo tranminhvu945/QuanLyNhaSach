@@ -96,22 +96,29 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
                     return;
                 }
 
+                var thamso = await _thamSoService.GetThamSo();
+
                 // Validate quantities and prices
                 foreach (var item in DanhSachDauSachPhieuNhap)
                 {
-                    if (item.SoLuongNhap <= 0)
+                    if (thamso.QuyDinhSoLuongTonToiDa && item.SoLuongTon > SoLuongTonToiDa)
                     {
-                        MessageBox.Show($"Số lượng nhập cho {item.SelectedSach.TenSach} phải lớn hơn 0",
+                        MessageBox.Show($"Chỉ nhập những đầu sách có số lượng tồn dưới {SoLuongTonToiDa}",
                             "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
-
-                    //if (item.SoLuongNhap > item.SoLuongTon)
-                    //{
-                    //    MessageBox.Show($"Số lượng xuất cho {item.SelectedSach.TenSach} không được vượt quá số lượng tồn ({item.SoLuongTon})",
-                    //        "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-                    //    return;
-                    //}
+                    if (item.SoLuongNhap <= 0)
+                    {
+                        MessageBox.Show($"Số lượng nhập phải lớn hơn 0",
+                            "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    if (thamso.QuyDinhSoLuongNhapToiThieu && item.SoLuongNhap < SoLuongNhapToiThieu)
+                    {
+                        MessageBox.Show($"Số lượng nhập của đầu sách  phải lớn hơn {SoLuongNhapToiThieu}",
+                            "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
                 }
 
                 if (string.IsNullOrEmpty(MaPhieuNhapSach))
