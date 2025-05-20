@@ -3,6 +3,7 @@ using QuanLyNhaSach.Configs;
 using QuanLyNhaSach.Helpers;
 using QuanLyNhaSach.Repositories;
 using QuanLyNhaSach.Services;
+using QuanLyNhaSach.ViewModels.SachViewModel;
 using QuanLyNhaSach.ViewModels.BaoCaoViewModel;
 using QuanLyNhaSach.ViewModels.KhachHangViewModel;
 using QuanLyNhaSach.ViewModels.PhieuThuViewModel;
@@ -32,6 +33,11 @@ namespace QuanLyNhaSach.Extentions
             services.AddSingleton<ComboBoxItemConverter>();
 
             // Register ViewModels
+            services.AddTransient<SachPageViewModel>();
+            services.AddTransient<CapNhatSachViewModel>();
+            services.AddTransient<ThemSachViewModel>();
+            services.AddTransient<TraCuuSachViewModel>();
+
             services.AddTransient<BaoCaoChiTietViewModel>();
             services.AddTransient<BaoCaoCongNoViewModel>();
             services.AddTransient<BaoCaoTonSachViewModel>();

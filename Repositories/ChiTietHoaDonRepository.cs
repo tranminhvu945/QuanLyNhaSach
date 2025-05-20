@@ -61,5 +61,18 @@ namespace QuanLyNhaSach.Repositories
                 .Where(c => c.MaHoaDon == maHoaDon)
                 .ToListAsync();
         }
+
+        public async Task DeleteChiTietHoaDonByHoaDonId(int maHoaDon)
+        {
+            var chiTietList = await _context.DsChiTietHoaDon
+                                           .Where(ct => ct.MaHoaDon == maHoaDon)
+                                           .ToListAsync();
+
+            if (chiTietList.Any())
+            {
+                _context.DsChiTietHoaDon.RemoveRange(chiTietList);
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }

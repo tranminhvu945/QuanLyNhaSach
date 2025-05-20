@@ -83,7 +83,7 @@
                             <TextBox
                                 Grid.Row="1"
                                 Style="{StaticResource ReadOnlyTextBoxStyle}"
-                                Text="{Binding MaDaiLy}" />
+                                Text="{Binding MaSach}" />
                         </Grid>
 
                         <!--  Tên đại lý  -->
@@ -100,7 +100,7 @@
                             <TextBox
                                 Grid.Row="1"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding TenDaiLy}" />
+                                Text="{Binding TenSach}" />
                         </Grid>
 
 
@@ -134,7 +134,7 @@
                             <TextBox
                                 Grid.Row="1"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding SoDienThoai}" />
+                                Text="{Binding TheLoai}" />
                         </Grid>
 
                         <!--  Email  -->
@@ -151,7 +151,7 @@
                             <TextBox
                                 Grid.Row="1"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding Email}" />
+                                Text="{Binding TacGia}" />
                         </Grid>
 
                     </Grid>
@@ -173,7 +173,7 @@
                             Grid.Row="1"
                             Margin="20,10,20,20"
                             Style="{StaticResource StandardTextBoxStyle}"
-                            Text="{Binding DiaChi}" />
+                            Text="{Binding SoLuongTon}" />
                     </Grid>
                 </Grid>
             </Border>
@@ -186,7 +186,7 @@
                 VerticalAlignment="Stretch"
                 Orientation="Horizontal">
 
-                <Button Command="{Binding CapNhatPhieuXuatCommand}" Style="{StaticResource WindowPrimaryButtonStyle}" Width="279">
+                <Button Command="{Binding CapNhatSachCommand}" Style="{StaticResource WindowPrimaryButtonStyle}" Width="279">
                     <StackPanel Orientation="Horizontal">
                         <fa:FontAwesome Margin="0,0,10,0" Icon="Save" />
                         <TextBlock Text="Cập nhật sách" />

@@ -17,13 +17,19 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
         IRecipient<DataReloadMessage>
     {
         private readonly IHoaDonService _hoaDonService;
+        private readonly IChiTietHoaDonService _phieuHoaDonChiTietService;
+        private readonly ISachService _sachService;
         private readonly IServiceProvider _serviceProvider;
 
         public HoaDonBanPageViewModel(
             IHoaDonService HoaDonService,
+            IChiTietHoaDonService phieuHoaDonChiTietService,
+            ISachService sachService,
             IServiceProvider serviceProvider)
         {
             _hoaDonService = HoaDonService;
+            _phieuHoaDonChiTietService = phieuHoaDonChiTietService;
+            _sachService = sachService;
             _serviceProvider = serviceProvider;
 
             WeakReferenceMessenger.Default.Register<DataReloadMessage>(this);
@@ -35,9 +41,6 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
         {
             _ = LoadDataAsync();
         }
-
-        [ObservableProperty]
-        private ObservableCollection<HoaDon> _filteredHoaDons = [];
 
         [ObservableProperty]
         private ObservableCollection<HoaDon> _danhSachHoaDon = [];
@@ -129,8 +132,28 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
 
                 if (result == MessageBoxResult.Yes)
                 {
+                    // Lấy danh sách chi tiết hoá đơn theo mã hoá đơn
+                    var chiTietHoaDonList = await _phieuHoaDonChiTietService.GetChiTietHoaDonByHoaDonId(SelectedHoaDon.MaHoaDon);
+
+                    // Khôi phục lại số lượng tồn cho từng sách
+                    foreach (var chiTiet in chiTietHoaDonList)
+                    {
+                        var sach = await _sachService.GetSachById(chiTiet.MaSach);
+                        if (sach != null)
+                        {
+                            sach.SoLuongTon += chiTiet.SoLuongBan;
+                            if (sach.SoLuongTon < 0) sach.SoLuongTon = 0;
+                            await _sachService.UpdateSach(sach);
+                        }
+                    }
+                    // Xóa chi tiết hoá đơn cũ
+                    await _phieuHoaDonChiTietService.DeleteChiTietHoaDonByHoaDonId(SelectedHoaDon.MaHoaDon);
+
+                    // Xóa hoá đơn sách
                     await _hoaDonService.DeleteHoaDon(SelectedHoaDon.MaHoaDon);
-                    MessageBox.Show("Đã xóa hoá đơn thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    MessageBox.Show("Đã xóa hoá đơn sách thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+
                     await LoadDataAsync();
                 }
             }
