@@ -28,10 +28,10 @@ namespace QuanLyNhaSach.ViewModels.SachViewModel
         }
 
         [ObservableProperty]
-        private string _maSach = "";
+        private ObservableCollection<Sach> _sachs = [];
 
         [ObservableProperty]
-        private string _tenSach = "";
+        private Sach _selectedSach = null!;
 
         [ObservableProperty]
         private string _theLoai = "";
@@ -118,12 +118,17 @@ namespace QuanLyNhaSach.ViewModels.SachViewModel
             try
             {
                 var listKhachHang = await _khachHangService.GetAllKhachHang();
+                var listSach = await _sachService.GetAllSach();
+
                 KhachHangs = [.. listKhachHang];
+                Sachs = [.. listSach];
 
                 KhachHangs.Clear();
+                Sachs.Clear();
 
                 // Populate the collections
                 KhachHangs = new ObservableCollection<KhachHang>(listKhachHang);
+                Sachs = new ObservableCollection<Sach>(listSach);
             }
             catch (Exception ex)
             {
@@ -144,24 +149,23 @@ namespace QuanLyNhaSach.ViewModels.SachViewModel
             {
                 var sachs = await _sachService.GetAllSach();
 
-                if (!string.IsNullOrEmpty(MaSach))
+                if (SelectedSach != null! && SelectedSach.MaSach != 0)
                 {
-                    sachs = sachs.Where(d => d.MaSach.ToString().Contains(MaSach));
+                    sachs = sachs.Where(d => d.MaSach == SelectedSach.MaSach);
                 }
 
-                if (!string.IsNullOrEmpty(TenSach))
+                if (!string.IsNullOrWhiteSpace(TheLoai))
                 {
-                    sachs = sachs.Where(d => d.TenSach.Contains(TenSach));
+                    sachs = sachs.Where(d =>
+                        !string.IsNullOrEmpty(d.TheLoai) &&
+                        d.TheLoai.IndexOf(TheLoai, StringComparison.OrdinalIgnoreCase) >= 0);
                 }
 
-                if (!string.IsNullOrEmpty(TheLoai))
+                if (!string.IsNullOrWhiteSpace(TacGia))
                 {
-                    sachs = sachs.Where(d => d.TheLoai.Contains(TheLoai));
-                }
-
-                if (!string.IsNullOrEmpty(TacGia))
-                {
-                    sachs = sachs.Where(d => d.TacGia.Contains(TacGia));
+                    sachs = sachs.Where(d =>
+                        !string.IsNullOrEmpty(d.TacGia) &&
+                        d.TacGia.IndexOf(TacGia, StringComparison.OrdinalIgnoreCase) >= 0);
                 }
 
                 if (!string.IsNullOrEmpty(SoLuongTonFrom)

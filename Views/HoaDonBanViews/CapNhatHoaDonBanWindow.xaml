@@ -111,6 +111,8 @@
                             <DatePicker
                                  Grid.Row="1"
                                  SelectedDate="{Binding NgayLap}"
+                                 SelectedDateFormat="Short"
+                                 Language="vi-VN"
                                  Style="{StaticResource StandardDatePickerStyle}" />
                         </Grid>
 
