@@ -148,7 +148,7 @@ namespace QuanLyNhaSach.ViewModels.BaoCaoViewModel
         {
             _ = InitializeCongNoData();
         }
-        
+
         [RelayCommand]
         private void TonSach()
         {
@@ -183,7 +183,7 @@ namespace QuanLyNhaSach.ViewModels.BaoCaoViewModel
             }
         }
 
-        
+
         public async Task InitializeCongNoData()
         {
             try
@@ -313,14 +313,14 @@ namespace QuanLyNhaSach.ViewModels.BaoCaoViewModel
                             var phieuNhap = await _phieuNhapSachService.GetPhieuNhapById(chiTiet.MaPhieuNhapSach);
 
                             // Tính tồn đầu tháng (tất cả tồn trước tháng được tính)
-                                if (phieuNhap.NgayNhap.Month == selectedMonth && phieuNhap.NgayNhap.Year == selectedYear)
+                            if (phieuNhap.NgayNhap.Month == selectedMonth && phieuNhap.NgayNhap.Year == selectedYear)
                                 phatSinh += chiTiet.SoLuongNhap;
                         }
 
                         foreach (var chiTiet in chiTietHoaDonTheoSach)
                         {
                             var hoaDon = await _hoaDonService.GetHoaDonById(chiTiet.MaHoaDon);
-                                if (hoaDon.NgayLap.Month == selectedMonth && hoaDon.NgayLap.Year == selectedYear)
+                            if (hoaDon.NgayLap.Month == selectedMonth && hoaDon.NgayLap.Year == selectedYear)
                                 phatSinh -= chiTiet.SoLuongBan;
                         }
 
@@ -352,7 +352,6 @@ namespace QuanLyNhaSach.ViewModels.BaoCaoViewModel
 
                 // Cập nhật label và series cho biểu đồ công nợ
                 TonSachLabels = filteredData.Select(d => d.TenSach).ToArray();
-                TonSachLabels= TonSachLabels.Select(s => s.Length > 20 ? s.Substring(0, 20) + "..." : s).ToArray();
                 var sortedDebts = filteredData.Select(d => d.TonSach).ToArray();
 
                 TonSachSeries = new SeriesCollection

@@ -4,14 +4,14 @@
     <!--  Primary Button Style  -->
     <Style x:Key="PrimaryButtonStyle" TargetType="Button">
         <!--  Add font properties here  -->
-        <Setter Property="FontFamily" Value="Roboto" />
-        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontFamily" Value="Inter" />
+        <Setter Property="FontSize" Value="17" />
         <Setter Property="FontStyle" Value="Normal" />
-        <Setter Property="FontWeight" Value="Medium" />
-        <Setter Property="Foreground" Value="#FFFFFF" />
-        <Setter Property="Background" Value="#00AAFF" />
-        <Setter Property="Width" Value="190" />
-        <Setter Property="Height" Value="35" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="Background" Value="#B9CC95" />
+        <Setter Property="Width" Value="106" />
+        <Setter Property="Height" Value="30" />
 
         <Setter Property="Template">
             <Setter.Value>
@@ -19,8 +19,10 @@
                     <Border
                         x:Name="buttonBorder"
                         Padding="8,5,8,4"
+                        BorderThickness="1"
+                        BorderBrush="Black"
                         Background="{TemplateBinding Background}"
-                        CornerRadius="6">
+                        CornerRadius="5">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         <Border.Effect>
                             <DropShadowEffect
@@ -36,7 +38,7 @@
                             <ColorAnimation
                                 Storyboard.TargetName="buttonBorder"
                                 Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
-                                To="#0088CC"
+                                To="#8AA05F"
                                 Duration="0:0:0.2" />
                             <DoubleAnimation
                                 Storyboard.TargetName="shadowEffect"
@@ -58,7 +60,7 @@
                             <ColorAnimation
                                 Storyboard.TargetName="buttonBorder"
                                 Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
-                                To="#00AAFF"
+                                To="#B9CC95"
                                 Duration="0:0:0.2" />
                             <DoubleAnimation
                                 Storyboard.TargetName="shadowEffect"
@@ -87,7 +89,7 @@
                             </Trigger.ExitActions>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="buttonBorder" Property="Background" Value="#006699" />
+                            <Setter TargetName="buttonBorder" Property="Background" Value="#708443" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -145,7 +147,7 @@
                             <ColorAnimation
                                 Storyboard.TargetName="buttonBorder"
                                 Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
-                                To="#00AAFF"
+                                To="#B9CC95"
                                 Duration="0:0:0.2" />
                             <DoubleAnimation
                                 Storyboard.TargetName="shadowEffect"
@@ -185,79 +187,83 @@
     <!--  Window Close Button Style  -->
     <Style x:Key="WindowCloseButtonStyle" TargetType="Button">
         <Setter Property="Foreground" Value="Black" />
-        <Setter Property="FontFamily" Value="Nunito" />
-        <Setter Property="FontSize" Value="35" />
+        <Setter Property="FontFamily" Value="Inter" />
+        <Setter Property="FontSize" Value="25" />
+        <!-- giảm từ 35 xuống 25 cho vừa nút 40x40 -->
         <Setter Property="FontWeight" Value="SemiBold" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="Height" Value="50" />
-        <Setter Property="Width" Value="50" />
+        <Setter Property="Height" Value="40" />
+        <!-- chỉnh thành 40 -->
+        <Setter Property="Width" Value="40" />
+        <!-- chỉnh thành 40 -->
         <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Border
-                        x:Name="buttonBorder"
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="8">
+                    x:Name="buttonBorder"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="6">
+                        <!-- giảm bo góc từ 8 xuống 6 cho vừa -->
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         <Border.Effect>
                             <DropShadowEffect
-                                x:Name="shadowEffect"
-                                BlurRadius="0"
-                                Opacity="0"
-                                ShadowDepth="0"
-                                Color="#555555" />
+                            x:Name="shadowEffect"
+                            BlurRadius="0"
+                            Opacity="0"
+                            ShadowDepth="0"
+                            Color="#555555" />
                         </Border.Effect>
                     </Border>
                     <ControlTemplate.Resources>
                         <Storyboard x:Key="HoverOn">
                             <ColorAnimation
-                                Storyboard.TargetName="buttonBorder"
-                                Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
-                                To="#D32F2F"
-                                Duration="0:0:0.2" />
+                            Storyboard.TargetName="buttonBorder"
+                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                            To="#D32F2F"
+                            Duration="0:0:0.2" />
                             <DoubleAnimation
-                                Storyboard.TargetName="shadowEffect"
-                                Storyboard.TargetProperty="BlurRadius"
-                                To="8"
-                                Duration="0:0:0.2" />
+                            Storyboard.TargetName="shadowEffect"
+                            Storyboard.TargetProperty="BlurRadius"
+                            To="8"
+                            Duration="0:0:0.2" />
                             <DoubleAnimation
-                                Storyboard.TargetName="shadowEffect"
-                                Storyboard.TargetProperty="Opacity"
-                                To="0.3"
-                                Duration="0:0:0.2" />
+                            Storyboard.TargetName="shadowEffect"
+                            Storyboard.TargetProperty="Opacity"
+                            To="0.3"
+                            Duration="0:0:0.2" />
                             <DoubleAnimation
-                                Storyboard.TargetName="shadowEffect"
-                                Storyboard.TargetProperty="ShadowDepth"
-                                To="4"
-                                Duration="0:0:0.2" />
+                            Storyboard.TargetName="shadowEffect"
+                            Storyboard.TargetProperty="ShadowDepth"
+                            To="4"
+                            Duration="0:0:0.2" />
                         </Storyboard>
                         <Storyboard x:Key="HoverOff">
                             <ColorAnimation
-                                Storyboard.TargetName="buttonBorder"
-                                Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
-                                To="Transparent"
-                                Duration="0:0:0.2" />
+                            Storyboard.TargetName="buttonBorder"
+                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                            To="Transparent"
+                            Duration="0:0:0.2" />
                             <DoubleAnimation
-                                Storyboard.TargetName="shadowEffect"
-                                Storyboard.TargetProperty="BlurRadius"
-                                To="0"
-                                Duration="0:0:0.2" />
+                            Storyboard.TargetName="shadowEffect"
+                            Storyboard.TargetProperty="BlurRadius"
+                            To="0"
+                            Duration="0:0:0.2" />
                             <DoubleAnimation
-                                Storyboard.TargetName="shadowEffect"
-                                Storyboard.TargetProperty="Opacity"
-                                To="0"
-                                Duration="0:0:0.2" />
+                            Storyboard.TargetName="shadowEffect"
+                            Storyboard.TargetProperty="Opacity"
+                            To="0"
+                            Duration="0:0:0.2" />
                             <DoubleAnimation
-                                Storyboard.TargetName="shadowEffect"
-                                Storyboard.TargetProperty="ShadowDepth"
-                                To="0"
-                                Duration="0:0:0.2" />
+                            Storyboard.TargetName="shadowEffect"
+                            Storyboard.TargetProperty="ShadowDepth"
+                            To="0"
+                            Duration="0:0:0.2" />
                         </Storyboard>
                     </ControlTemplate.Resources>
                     <ControlTemplate.Triggers>
@@ -281,14 +287,14 @@
     <!--  Window Primary Button Style  -->
     <Style x:Key="WindowPrimaryButtonStyle" TargetType="Button">
         <!--  Add font properties here  -->
-        <Setter Property="FontFamily" Value="Roboto" />
-        <Setter Property="FontSize" Value="19" />
+        <Setter Property="FontFamily" Value="Inter" />
+        <Setter Property="FontSize" Value="17" />
         <Setter Property="FontStyle" Value="Normal" />
-        <Setter Property="FontWeight" Value="Medium" />
-        <Setter Property="Foreground" Value="#FFFFFF" />
-        <Setter Property="Background" Value="#00AAFF" />
-        <Setter Property="Width" Value="250" />
-        <Setter Property="Height" Value="40" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="Background" Value="#B9CC95" />
+        <Setter Property="Width" Value="106" />
+        <Setter Property="Height" Value="30" />
         <Setter Property="Margin" Value="0,0,40,0" />
 
         <Setter Property="Template">
@@ -297,8 +303,10 @@
                     <Border
                         x:Name="buttonBorder"
                         Padding="8,5,8,4"
+                        BorderThickness="1"
+                        BorderBrush="Black"                        
                         Background="{TemplateBinding Background}"
-                        CornerRadius="6">
+                        CornerRadius="5">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         <Border.Effect>
                             <DropShadowEffect
@@ -314,7 +322,7 @@
                             <ColorAnimation
                                 Storyboard.TargetName="buttonBorder"
                                 Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
-                                To="#0088CC"
+                                To="#8AA05F"
                                 Duration="0:0:0.2" />
                             <DoubleAnimation
                                 Storyboard.TargetName="shadowEffect"
@@ -336,7 +344,7 @@
                             <ColorAnimation
                                 Storyboard.TargetName="buttonBorder"
                                 Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
-                                To="#00AAFF"
+                                To="#B9CC95"
                                 Duration="0:0:0.2" />
                             <DoubleAnimation
                                 Storyboard.TargetName="shadowEffect"
@@ -365,7 +373,7 @@
                             </Trigger.ExitActions>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="buttonBorder" Property="Background" Value="#006699" />
+                            <Setter TargetName="buttonBorder" Property="Background" Value="#B9CC95" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -385,8 +393,10 @@
                     <Border
                         x:Name="buttonBorder"
                         Padding="8,5,8,4"
+                        BorderThickness="1"
+                        BorderBrush="Black"
                         Background="{TemplateBinding Background}"
-                        CornerRadius="6">
+                        CornerRadius="5">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         <Border.Effect>
                             <DropShadowEffect
@@ -402,7 +412,7 @@
                             <ColorAnimation
                                 Storyboard.TargetName="buttonBorder"
                                 Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
-                                To="#D32F2F"
+                                To="#8AA05F"
                                 Duration="0:0:0.2" />
                             <DoubleAnimation
                                 Storyboard.TargetName="shadowEffect"
@@ -424,7 +434,7 @@
                             <ColorAnimation
                                 Storyboard.TargetName="buttonBorder"
                                 Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
-                                To="#00AAFF"
+                                To="#B9CC95"
                                 Duration="0:0:0.2" />
                             <DoubleAnimation
                                 Storyboard.TargetName="shadowEffect"
@@ -497,7 +507,7 @@
     <Style x:Key="PageButtonSelectedStyle" TargetType="Button">
         <Setter Property="Width" Value="45" />
         <Setter Property="Height" Value="45" />
-        <Setter Property="Background" Value="#00AAFF" />
+        <Setter Property="Background" Value="#B9CC95" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="FontFamily" Value="Roboto" />
         <Setter Property="FontSize" Value="18" />
@@ -514,10 +524,10 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="buttonBorder" Property="Background" Value="#0088CC" />
+                            <Setter TargetName="buttonBorder" Property="Background" Value="#8AA05F" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="buttonBorder" Property="Background" Value="#006699" />
+                            <Setter TargetName="buttonBorder" Property="Background" Value="#708443" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -568,7 +578,7 @@
         <Setter Property="FontStyle" Value="Normal" />
         <Setter Property="FontWeight" Value="Medium" />
         <Setter Property="Foreground" Value="#FFFFFF" />
-        <Setter Property="Background" Value="#00AAFF" />
+        <Setter Property="Background" Value="#B9CC95" />
         <Setter Property="Width" Value="190" />
         <Setter Property="Height" Value="28" />
 
@@ -597,7 +607,7 @@
                             <ColorAnimation
                                 Storyboard.TargetName="buttonBorder"
                                 Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
-                                To="#0088CC"
+                                To="#8AA05F"
                                 Duration="0:0:0.2" />
                             <DoubleAnimation
                                 Storyboard.TargetName="shadowEffect"
@@ -619,7 +629,7 @@
                             <ColorAnimation
                                 Storyboard.TargetName="buttonBorder"
                                 Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
-                                To="#00AAFF"
+                                To="#B9CC95"
                                 Duration="0:0:0.2" />
                             <DoubleAnimation
                                 Storyboard.TargetName="shadowEffect"
@@ -648,7 +658,7 @@
                             </Trigger.ExitActions>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="buttonBorder" Property="Background" Value="#006699" />
+                            <Setter TargetName="buttonBorder" Property="Background" Value="#8AA05F" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
