@@ -109,7 +109,7 @@
 
                                 <TextBlock
                                 Grid.Column="0"
-                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
+                                Style="{StaticResource FieldLabelTextBlockStyle}"
 
                                 HorizontalAlignment="Right"
                                 Text="Ngày Nhập" />
@@ -185,7 +185,7 @@
                     <!--  Line 3 - The DataGrid (Preserved as requested)  -->
                     <Border
                         Grid.Row="1"
-                        Margin="10,20,10,0"
+                        Margin="0,10,0,0"
                         Background="White"
                         BorderBrush="Black"
                         BorderThickness="1"
@@ -207,7 +207,7 @@
                                     </DataGridTextColumn.Binding>
                                 </DataGridTextColumn>
 
-                                <DataGridTemplateColumn Width="Auto" Header="Tên sách">
+                                <DataGridTemplateColumn Width="*" Header="Tên sách">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <ComboBox
@@ -234,7 +234,6 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Border Style="{StaticResource BaoCaoBorderStyle}"
-                                                    
                                                     >
                                                 <TextBlock
                                                     Text="{Binding TacGia}"
