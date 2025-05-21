@@ -147,6 +147,7 @@
 
                             <lvc:CartesianChart
                                 Grid.Row="1"
+                                x:Name="TonSachChart" 
                                 Margin="10"
                                 DataTooltip="{Binding TonSachTooltip}"
                                 DisableAnimations="False"

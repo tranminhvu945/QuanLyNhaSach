@@ -115,7 +115,7 @@ namespace QuanLyNhaSach.ViewModels.BaoCaoViewModel
 
                 int month = int.Parse(SelectedMonth.Replace("Tháng ", ""));
                 int year = SelectedYear;
-
+                TongTonCuoiThang = 0;
                 DateTime dauThang = new DateTime(year, month, 1);
 
                 foreach (var sach in sachList)

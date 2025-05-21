@@ -99,7 +99,7 @@ namespace QuanLyNhaSach.ViewModels.BaoCaoViewModel
                 int year = SelectedYear;
 
                 DateTime dauThang = new DateTime(year, month, 1);
-
+                TongNoCuoiThang = 0;
                 foreach (var kh in khachHangList)
                 {
                     var hoaDonList = await _hoaDonService.GetAllHoaDon();
