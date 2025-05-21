@@ -286,7 +286,7 @@
                                         <DataTemplate>
                                             <TextBox
                                                 
-                                                Text="{Binding SoLuongNhap}"
+                                                Text="{Binding SoLuongNhap, UpdateSourceTrigger=PropertyChanged}"
                                                 Style="{StaticResource ColumnTextBoxGridStyle}"/>
 
 
@@ -316,7 +316,7 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="0"  Command="{Binding LapPhieuNhapSachCommand}" Style="{StaticResource WindowPrimaryButtonStyle}" Width="NaN" Margin="1,0,36,0">
+                <Button Grid.Column="0"  Command="{Binding CapNhatPhieuNhapSachCommand}" Style="{StaticResource WindowPrimaryButtonStyle}" Width="NaN" Margin="1,0,36,0">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Cập nhật phiếu" />
                     </StackPanel>
@@ -336,7 +336,7 @@
                             Margin="0">
 
                     <Button
-                    Command="{Binding ThemDauSachCommand}"
+                    Command="{Binding ThemSachMoiCommand}"
                     Style="{StaticResource PrimaryButtonStyle}">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Thêm sách" />

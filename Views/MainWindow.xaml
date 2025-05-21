@@ -143,7 +143,7 @@
                             <Button
                             Margin="20,0,0,0"
                             Command="{Binding SearchPhieuNhapSachCommand}"
-                            Style="{StaticResource PrimaryButtonStyle}" Width="224">
+                            Style="{StaticResource PrimaryButtonStyle}" Width="230">
                                 <StackPanel Orientation="Horizontal">
                                     <fa:FontAwesome
                                     Margin="0,0,8,0"
@@ -169,13 +169,13 @@
                         VerticalAlignment="Center"
                         Orientation="Horizontal">
 
-                            <Button Command="{Binding LapPhieuNhapSachCommand}" Style="{StaticResource PrimaryButtonStyle}">
+                            <Button Command="{Binding LapPhieuNhapSachCommand}" Style="{StaticResource PrimaryButtonStyle}" Width="170">
                                 <StackPanel Orientation="Horizontal">
                                     <fa:FontAwesome
                                     Margin="0,0,8,0"
                                     VerticalAlignment="Center"
                                     Icon="Plus" />
-                                    <TextBlock VerticalAlignment="Center" Text="Lập phiếu nhập sách" />
+                                    <TextBlock VerticalAlignment="Center" Text="Lập phiếu nhập " />
                                 </StackPanel>
                             </Button>
                             
@@ -183,7 +183,7 @@
                             Margin="10,0,0,0"
                             Command="{Binding EditPhieuNhapSachCommand}"
                                 CommandParameter="{Binding SelectedPhieuNhapSach.MaPhieuNhapSach}"
-                            Style="{StaticResource PrimaryButtonStyle}">
+                            Style="{StaticResource PrimaryButtonStyle}" Width="205">
                                 <StackPanel Orientation="Horizontal">
                                     <fa:FontAwesome
                                     Margin="0,0,8,0"
@@ -196,7 +196,7 @@
                             <Button
                             Margin="10,0,0,0"
                             Command="{Binding DeletePhieuNhapSachCommand}"
-                            Style="{StaticResource DeleteButtonStyle}">
+                            Style="{StaticResource DeleteButtonStyle}" Width="200">
                                 <StackPanel Orientation="Horizontal">
                                     <fa:FontAwesome
                                     Margin="0,0,8,0"
