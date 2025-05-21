@@ -84,8 +84,8 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="2.5*" />
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="2*"/>
                                 <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="2*"/>
                             </Grid.ColumnDefinitions>
 
                             <Grid Grid.Column="0">
@@ -105,7 +105,7 @@
 
                             </Grid>
 
-                            <Grid Grid.Column="2">
+                            <Grid Grid.Column="3">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="3*" />
                                     <ColumnDefinition Width="4*" />
@@ -134,8 +134,8 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="2.5*" />
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="2*"/>
                                 <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="2*"/>
                             </Grid.ColumnDefinitions>
 
                             <Grid Grid.Column="0">
@@ -150,12 +150,24 @@
                                  Text="Họ tên khách hàng" />
                                 <TextBox
                                  Grid.Column="1"
-                                 Style="{StaticResource StandardTextBoxStyle}"
+                                 Style="{StaticResource ReadOnlyTextBoxStyle}"
                                  Text="{Binding TenKhachHang}" />
 
                             </Grid>
 
-                            <Grid Grid.Column="2">
+                            <TextBlock
+                                Margin="30,0,0,0"
+                                 Grid.Column="1"
+                                 Style="{StaticResource FieldLabelTextBlockStyle}"
+                                 Text="Số điện thoại" />
+
+                            <TextBox
+                                 Margin="0,0,20,0"
+                                 Grid.Column="2"
+                                 Style="{StaticResource StandardTextBoxStyle}"
+                                 Text="{Binding TienNo}" />
+
+                            <Grid Grid.Column="3">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="3*" />
                                     <ColumnDefinition Width="4*" />
@@ -180,8 +192,8 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="2.5*" />
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="2*"/>
                                 <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="2*"/>
                             </Grid.ColumnDefinitions>
 
                             <Grid Grid.Column="0">
@@ -201,7 +213,7 @@
 
                             </Grid>
 
-                            <Grid Grid.Column="2">
+                            <Grid Grid.Column="3">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="3*" />
                                     <ColumnDefinition Width="4*" />
@@ -426,19 +438,9 @@
                         Margin="0,0,20,0"
                         Command="{Binding AddKhachHangCommand}" 
                         Style="{StaticResource PrimaryButtonStyle}" 
-                        Width="158">
+                        Width="189">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Thêm khách hàng" />
-                        </StackPanel>
-                    </Button>
-
-                    <Button 
-                        Margin="0,0,20,0"
-                        Command="{Binding AddKhachHangCommand}" 
-                        Style="{StaticResource PrimaryButtonStyle}" 
-                        Width="149">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Tìm khách hàng" />
+                            <TextBlock Text="Thông tin khách hàng" />
                         </StackPanel>
                     </Button>
 
