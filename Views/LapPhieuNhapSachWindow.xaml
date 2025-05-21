@@ -284,11 +284,8 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBox
-                                                
-                                                Text="{Binding SoLuongNhap}"
+                                                Text="{Binding SoLuongNhap, UpdateSourceTrigger=PropertyChanged}"
                                                 Style="{StaticResource ColumnTextBoxGridStyle}"/>
-      
-
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -336,7 +333,7 @@
                             Margin="0">
 
                     <Button
-                    Command="{Binding ThemDauSachCommand}"
+                    Command="{Binding ThemSachMoiCommand}"
                     Style="{StaticResource PrimaryButtonStyle}">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Thêm sách" />
