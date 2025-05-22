@@ -4,7 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:fa="http://schemas.fontawesome.io/icons/"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="ThemSachWindow"
+    Title="ThemKhachHangWindow"
     Width="890"
     Height="299"
     Style="{StaticResource WindowPopupStyle}"
