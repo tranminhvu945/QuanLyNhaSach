@@ -3,11 +3,13 @@ using System.Windows;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using Microsoft.Extensions.DependencyInjection;
 using QuanLyNhaSach.Messages;
 using QuanLyNhaSach.Models;
 using QuanLyNhaSach.Models.dto;
 using QuanLyNhaSach.Services;
 using QuanLyNhaSach.Views;
+using QuanLyNhaSach.Views.SachViews;
 
 namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
 {
@@ -18,19 +20,24 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
         private readonly IChiTietPhieuNhapService _phieuNhapSachChiTietService;
         private readonly ISachService _sachService;
         private readonly IThamSoService _thamSoService;
+        private readonly IServiceProvider _serviceProvider;
 
         public LapPhieuNhapSachViewModel(
              IPhieuNhapSachService phieuNhapSachService,
              IChiTietPhieuNhapService phieuNhapSachChiTietService,
              ISachService sachService,
-             IThamSoService thamSoService)
+             IThamSoService thamSoService,
+             IServiceProvider serviceProvider
+        )
         {
             _phieuNhapSachService = phieuNhapSachService;
             _sachService = sachService;
             _phieuNhapSachChiTietService = phieuNhapSachChiTietService;
             _thamSoService = thamSoService;
+            _serviceProvider = serviceProvider;
 
             _ = LoadDataAsync();
+            _serviceProvider = serviceProvider;
         }
 
         private async Task LoadDataAsync()
@@ -38,17 +45,16 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
             _danhSachSach = new List<Sach>(await _sachService.GetAllSach());
 
             var thamso = await _thamSoService.GetThamSo();
-            SoLuongTonToiDa = thamso.SoLuongTonToiDa;
             if (thamso.QuyDinhSoLuongTonToiDa == true)
-                NoiDung01 = "Đang áp dụng";
+                SoLuongTonToiDa = thamso.SoLuongTonToiDa.ToString();
             else
-                NoiDung01 = "Không áp dụng";
+                SoLuongTonToiDa = "XXX";
 
-            SoLuongNhapToiThieu = thamso.SoLuongNhapToiThieu;
             if (thamso.QuyDinhSoLuongNhapToiThieu == true)
-                NoiDung02 = "Đang áp dụng";
+                SoLuongNhapToiThieu = thamso.SoLuongNhapToiThieu.ToString();
+
             else
-                NoiDung02 = "Không áp dụng";
+                SoLuongTonToiDa = "XXX";
         }
 
         #region Bindings Properties
@@ -69,13 +75,9 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
         [ObservableProperty]
         private DateTime _ngayNhap = DateTime.Now;
         [ObservableProperty]
-        private int _soLuongTonToiDa = 0;
+        private string _soLuongTonToiDa = string.Empty;
         [ObservableProperty]
-        private int _soLuongNhapToiThieu = 0;
-        [ObservableProperty]
-        private string _noiDung01 = string.Empty;
-        [ObservableProperty]
-        private string _noiDung02 = string.Empty;
+        private string _soLuongNhapToiThieu = string.Empty;
         #endregion
 
         #region RelayCommands 
@@ -101,9 +103,9 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
                 // Validate quantities and prices
                 foreach (var item in DanhSachDauSachPhieuNhap)
                 {
-                    if (thamso.QuyDinhSoLuongTonToiDa && item.SoLuongTon > SoLuongTonToiDa)
+                    if (thamso.QuyDinhSoLuongTonToiDa && item.SoLuongTon > thamso.SoLuongTonToiDa)
                     {
-                        MessageBox.Show($"Chỉ nhập những đầu sách có số lượng tồn dưới {SoLuongTonToiDa}",
+                        MessageBox.Show($"Chỉ nhập những đầu sách có số lượng tồn dưới {thamso.SoLuongTonToiDa}",
                             "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
@@ -113,9 +115,9 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
                             "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
-                    if (thamso.QuyDinhSoLuongNhapToiThieu && item.SoLuongNhap < SoLuongNhapToiThieu)
+                    if (thamso.QuyDinhSoLuongNhapToiThieu && item.SoLuongNhap < thamso.SoLuongNhapToiThieu)
                     {
-                        MessageBox.Show($"Số lượng nhập của đầu sách  phải lớn hơn {SoLuongNhapToiThieu}",
+                        MessageBox.Show($"Số lượng nhập của đầu sách  phải lớn hơn {thamso.SoLuongNhapToiThieu}",
                             "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
@@ -249,9 +251,18 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
             }
         }
         [RelayCommand]
-        private void BoChonDauSach()
+        private void ThemSachMoi()
         {
-            SelectedDauSachPhieuNhap = null!;
+            SelectedSach = null!;
+            try
+            {
+                var window = _serviceProvider.GetRequiredService<ThemSachWindow>();
+                window.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi mở cửa sổ thêm đầu sách mới: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         #endregion
