@@ -71,7 +71,7 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
+
                         </Grid.ColumnDefinitions>
 
                         <Grid Grid.Column="0">
@@ -89,6 +89,54 @@
                                 Style="{StaticResource StandardTextBoxStyle}"
                                 Text="{Binding MaPhieuNhapSach}" />
                         </Grid>
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="3*" />
+                                <RowDefinition Height="7*" />
+                            </Grid.RowDefinitions>
+                            
+
+                            <TextBlock
+                                Grid.Row="0"
+                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
+                                Text="Ngày nhập" />
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock
+                                Grid.Column="0"
+                                Style="{StaticResource RedHighlightTextBlockStyle}"
+                                Text="từ" />
+                                <DatePicker
+                                Grid.Column="1"
+                                SelectedDate="{Binding NgayNhapFrom}"
+                                Style="{StaticResource StandardDatePickerStyle}" />
+                                <TextBlock
+                                Grid.Column="2"
+                                Style="{StaticResource RedHighlightTextBlockStyle}"
+                                Text="đến" />
+                                <DatePicker
+                                Grid.Column="3"
+                                SelectedDate="{Binding NgayNhapTo}"
+                                Style="{StaticResource StandardDatePickerStyle}" />
+                            </Grid>
+
+                        </Grid>
+
+
+                    </Grid>
+
+                    <Grid
+                        Grid.Row="1"
+                        Margin="10"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch">
+
+
 
                         <Grid Grid.Column="1">
                             <Grid.RowDefinitions>
@@ -147,73 +195,6 @@
                                 SelectedItem="{Binding SelectedTacGia}"
                                 Style="{StaticResource StandardComboBoxStyle}">
                             </ComboBox>
-                        </Grid>
-                    </Grid>
-
-                    <Grid
-                        Grid.Row="1"
-                        Margin="10"
-                        HorizontalAlignment="Stretch"
-                        VerticalAlignment="Stretch">
-
-
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                                
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-
-                            <TextBlock
-                                Grid.Column="0"
-                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
-                                Text="Ngày nhập" />
-                            <TextBlock
-                                Grid.Column="1"
-                                Style="{StaticResource RedHighlightTextBlockStyle}"
-                                Text="từ" />
-                            <DatePicker
-                                Grid.Column="2"
-                                SelectedDate="{Binding NgayNhapFrom}"
-                                Style="{StaticResource StandardDatePickerStyle}" />
-                            <TextBlock
-                                Grid.Column="3"
-                                Style="{StaticResource RedHighlightTextBlockStyle}"
-                                Text="đến" />
-                            <DatePicker
-                                Grid.Column="4"
-                                SelectedDate="{Binding NgayNhapTo}"
-                                Style="{StaticResource StandardDatePickerStyle}" />
-
-                            <TextBlock
-                                Grid.Column="5"
-                                Margin="20,0,0,0"
-                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
-                                Text="Tổng số lượng nhập" />
-                            <TextBlock
-                                Grid.Column="6"
-                                Style="{StaticResource RedHighlightTextBlockStyle}"
-                                Text="từ" />
-                            <TextBox
-                                Grid.Column="7"
-                                Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding TongSoLuongNhapFrom}" />
-                            <TextBlock
-                                Grid.Column="8"
-                                Style="{StaticResource RedHighlightTextBlockStyle}"
-                                Text="đến" />
-                            <TextBox
-                                Grid.Column="9"
-                                Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding TongSoLuongNhapTo}" />
                         </Grid>
                     </Grid>
 

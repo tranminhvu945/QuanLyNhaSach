@@ -1,11 +1,11 @@
-﻿<Window x:Class="QuanLyNhaSach.Views.CapNhatPhieuNhapSachWindow"
+<Window x:Class="QuanLyNhaSach.Views.CapNhatPhieuNhapSachWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:fa="http://schemas.fontawesome.io/icons/"
     xmlns:helpers="clr-namespace:QuanLyNhaSach.Helpers"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="Cập nhật phiếu nhập sách"
+    Title="Lập phiếu nhập sách"
     Width="890"
     Height="462"
     Style="{StaticResource WindowPopupStyle}"
@@ -207,10 +207,11 @@
                                     </DataGridTextColumn.Binding>
                                 </DataGridTextColumn>
 
-                                <DataGridTemplateColumn Width="Auto" Header="Tên sách">
+                                <DataGridTemplateColumn Width="200" Header="Tên sách">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <ComboBox
+                                                Width="180"
                                                 Margin="0,5,0,5"
                                                 VerticalAlignment="Center"
                                                 Background="White"
@@ -228,15 +229,17 @@
                                 </DataGridTemplateColumn>
 
                                 <DataGridTemplateColumn
-                                    Width="*"
+                                    Width="150"
                                     Header="Tác giả"
                                     IsReadOnly="True">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Border Style="{StaticResource BaoCaoBorderStyle}"
-                                                    
+                                            <Border 
+                                                Width="130"
+                                                Style="{StaticResource BaoCaoBorderStyle}"
                                                     >
                                                 <TextBlock
+                                                    HorizontalAlignment="Left"
                                                     Text="{Binding TacGia}"
                                                     Style="{StaticResource BaoCaoTemplateTextBlockStyle}"/>
                                             </Border>
@@ -246,14 +249,16 @@
 
 
                                 <DataGridTemplateColumn
-                                    Width="*"
+                                    Width="180"
                                     Header="Thể loại"
                                     IsReadOnly="True">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Border
+                                                Width="160"
                                                 Style="{StaticResource BaoCaoBorderStyle}">
                                                 <TextBlock
+                                                    HorizontalAlignment="Left"
                                                     Style="{StaticResource BaoCaoTemplateTextBlockStyle}"
                                                     Text="{Binding TheLoai}" />
                                             </Border>
@@ -286,7 +291,7 @@
                                         <DataTemplate>
                                             <TextBox
                                                 
-                                                Text="{Binding SoLuongNhap, UpdateSourceTrigger=PropertyChanged}"
+                                                Text="{Binding SoLuongNhap}"
                                                 Style="{StaticResource ColumnTextBoxGridStyle}"/>
 
 
@@ -311,12 +316,12 @@
                 Width="815" Height="30">
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1.2*" />
+                    <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="3*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="0"  Command="{Binding CapNhatPhieuNhapSachCommand}" Style="{StaticResource WindowPrimaryButtonStyle}" Width="NaN" Margin="1,0,36,0">
+                <Button Grid.Column="0"  Command="{Binding LapPhieuNhapSachCommand}" Style="{StaticResource WindowPrimaryButtonStyle}" Width="NaN" Margin="1,0,22,0">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Cập nhật phiếu" />
                     </StackPanel>
@@ -336,7 +341,7 @@
                             Margin="0">
 
                     <Button
-                    Command="{Binding ThemSachMoiCommand}"
+                    Command="{Binding ThemDauSachCommand}"
                     Style="{StaticResource PrimaryButtonStyle}">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Thêm sách" />
@@ -369,6 +374,7 @@
         </Grid>
     </Border>
 </Window>
+
 
 
 
