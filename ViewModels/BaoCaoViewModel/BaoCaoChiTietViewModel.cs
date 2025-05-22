@@ -188,16 +188,14 @@ namespace QuanLyNhaSach.ViewModels.BaoCaoViewModel
         {
             try
             {
-                // Lấy tháng từ chuỗi "Tháng x"
+                // Trích xuất số tháng từ chuỗi "Tháng x"
                 if (!int.TryParse(new string(SelectedCongNoMonth.Where(char.IsDigit).ToArray()), out int selectedMonth))
                     return;
 
                 int selectedYear = SelectedCongNoYear;
 
-                // Lấy danh sách khách hàng
                 var khachHangList = await _khachHangService.GetAllKhachHang();
 
-                // Trường hợp không có khách hàng
                 if (khachHangList == null || !khachHangList.Any())
                 {
                     CongNoLabels = Array.Empty<string>();
@@ -205,66 +203,66 @@ namespace QuanLyNhaSach.ViewModels.BaoCaoViewModel
                     return;
                 }
 
-                // Khởi tạo danh sách các tác vụ bất đồng bộ cho các khách hàng
-                var tasks = khachHangList.Select(async khachHang =>
+                var tasks = khachHangList.Select(async kh =>
                 {
                     try
                     {
-                        // Lấy dữ liệu phiếu thu và phiếu xuất cho đại lý
-                        var phieuThu = await _phieuThuService.GetPhieuThuByKhachHangId(khachHang.MaKhachHang);
-                        var hoaDon = await _hoaDonService.GetHoaDonByKhachHangId(khachHang.MaKhachHang);
+                        var phieuThuList = await _phieuThuService.GetPhieuThuByKhachHangId(kh.MaKhachHang);
+                        var hoaDonList = await _hoaDonService.GetHoaDonByKhachHangId(kh.MaKhachHang);
 
-                        var phieuThus = phieuThu
-                            .Where(p => p.NgayThu.Month == selectedMonth && p.NgayThu.Year == selectedYear);
-                        var hoaDons = hoaDon
-                            .Where(p => p.NgayLap.Month == selectedMonth && p.NgayLap.Year == selectedYear);
+                        // Lọc theo tháng + năm
+                        static bool IsInSelectedMonthYear(DateTime date, int month, int year)
+                            => date.Month == month && date.Year == year;
 
-                        double tongPhieuThu = phieuThus.Sum(p => p.SoTienThu);
-                        double tongHoaDon = hoaDons.Sum(p => p.TongTien);
+                        double tongPhieuThu = phieuThuList
+                            .Where(p => IsInSelectedMonthYear(p.NgayThu, selectedMonth, selectedYear))
+                            .Sum(p => p.SoTienThu);
+
+                        double tongHoaDon = hoaDonList
+                            .Where(p => IsInSelectedMonthYear(p.NgayLap, selectedMonth, selectedYear))
+                            .Sum(p => p.TongTien);
+
                         double congNo = tongHoaDon - tongPhieuThu;
 
-                        return (TenKhachHang: khachHang.TenKhachHang, CongNo: congNo);
+                        return (kh.TenKhachHang, CongNo: congNo);
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine($"Lỗi khi xử lý đại lý {khachHang.TenKhachHang}: {ex.Message}");
-                        return (TenKhachHang: khachHang.TenKhachHang, CongNo: 0);
+                        Console.WriteLine($"Lỗi xử lý khách hàng {kh.TenKhachHang}: {ex.Message}");
+                        return (kh.TenKhachHang, CongNo: 0);
                     }
                 }).ToList();
 
-                // Chờ tất cả các tác vụ hoàn thành và lấy kết quả
-                var khachHangCongNoList = await Task.WhenAll(tasks);
+                var results = await Task.WhenAll(tasks);
 
-                // Sắp xếp và lọc ra top 10 công nợ lớn nhất
-                var filteredData = khachHangCongNoList
-                    .OrderByDescending(d => d.CongNo)
+                var top10CongNo = results
+                    .OrderByDescending(r => r.CongNo)
                     .Take(10)
                     .ToArray();
 
-                // Trường hợp không có dữ liệu
-                if (!filteredData.Any())
+                if (!top10CongNo.Any())
                 {
                     TonSachLabels = Array.Empty<string>();
                     TonSachSeries = new SeriesCollection();
                     return;
                 }
 
-                // Cập nhật label và series cho biểu đồ công nợ
-                CongNoLabels = filteredData.Select(d => d.TenKhachHang).ToArray();
-                var sortedDebts = filteredData.Select(d => d.CongNo).ToArray();
+                // Cập nhật biểu đồ
+                CongNoLabels = top10CongNo.Select(r => r.TenKhachHang).ToArray();
+                var debtValues = top10CongNo.Select(r => r.CongNo).ToArray();
 
                 CongNoSeries = new SeriesCollection
-                {
-                    new ColumnSeries
-                    {
-                        Title = "Công nợ",
-                        Values = new ChartValues<double>(sortedDebts),
-                        DataLabels = true,
-                        LabelPoint = point => point.Y.ToString("N0") + " đ",
-                        Fill = new SolidColorBrush(Color.FromRgb(233, 30, 99)),
-                        MaxColumnWidth = 50
-                    }
-                };
+        {
+            new ColumnSeries
+            {
+                Title = "Công nợ",
+                Values = new ChartValues<double>(debtValues),
+                DataLabels = true,
+                LabelPoint = point => point.Y.ToString("N0") + " VNĐ",
+                Fill = new SolidColorBrush(Color.FromRgb(233, 30, 99)),
+                MaxColumnWidth = 50
+            }
+        };
             }
             catch (Exception ex)
             {
@@ -272,19 +270,17 @@ namespace QuanLyNhaSach.ViewModels.BaoCaoViewModel
             }
         }
 
+
         public async Task InitializeTonSachData()
         {
             try
             {
-                // Lấy tháng từ chuỗi "Tháng x"
                 if (!int.TryParse(new string(SelectedTonSachMonth.Where(char.IsDigit).ToArray()), out int selectedMonth))
                     return;
 
                 int selectedYear = SelectedTonSachYear;
 
-                // Lấy danh sách các sách
                 var sachList = await _sachService.GetAllSach();
-
                 if (sachList == null || !sachList.Any())
                 {
                     TonSachLabels = Array.Empty<string>();
@@ -292,67 +288,56 @@ namespace QuanLyNhaSach.ViewModels.BaoCaoViewModel
                     return;
                 }
 
-                // Khởi tạo danh sách các tác vụ bất đồng bộ cho các khách hàng
-                var tasks = sachList.Select(async sach =>
+                // Load toàn bộ dữ liệu một lần
+                var chiTietPhieuNhapList = await _chiTietPhieuNhapService.GetAllChiTietPhieuNhap();
+                var phieuNhapDict = (await _phieuNhapSachService.GetAllPhieuNhap()).ToDictionary(p => p.MaPhieuNhapSach);
+
+                var chiTietHoaDonList = await _chiTietHoaDonService.GetAllChiTietHoaDon();
+                var hoaDonDict = (await _hoaDonService.GetAllHoaDon()).ToDictionary(h => h.MaHoaDon);
+
+                // Gom nhóm theo mã sách để truy vấn nhanh hơn
+                var phieuNhapLookup = chiTietPhieuNhapList.ToLookup(ct => ct.MaSach);
+                var hoaDonLookup = chiTietHoaDonList.ToLookup(ct => ct.MaSach);
+
+                // Tính tồn sách cho từng quyển
+                var result = sachList.Select(sach =>
                 {
-                    try
+                    int tonSach = 0;
+
+                    foreach (var chiTiet in phieuNhapLookup[sach.MaSach])
                     {
-                        var chiTietPhieuNhapList = await _chiTietPhieuNhapService.GetAllChiTietPhieuNhap();
-                        var chiTietPhieuNhapTheoSach = chiTietPhieuNhapList
-                            .Where(ct => ct.MaSach == sach.MaSach)
-                            .ToList();
-
-                        var chiTietHoaDonList = await _chiTietHoaDonService.GetAllChiTietHoaDon();
-                        var chiTietHoaDonTheoSach = chiTietHoaDonList
-                            .Where(ct => ct.MaSach == sach.MaSach)
-                            .ToList();
-
-                        int phatSinh = 0;
-                        foreach (var chiTiet in chiTietPhieuNhapTheoSach)
+                        if (phieuNhapDict.TryGetValue(chiTiet.MaPhieuNhapSach, out var phieuNhap))
                         {
-                            var phieuNhap = await _phieuNhapSachService.GetPhieuNhapById(chiTiet.MaPhieuNhapSach);
-
-                            // Tính tồn đầu tháng (tất cả tồn trước tháng được tính)
                             if (phieuNhap.NgayNhap.Month == selectedMonth && phieuNhap.NgayNhap.Year == selectedYear)
-                                phatSinh += chiTiet.SoLuongNhap;
+                                tonSach += chiTiet.SoLuongNhap;
                         }
-
-                        foreach (var chiTiet in chiTietHoaDonTheoSach)
-                        {
-                            var hoaDon = await _hoaDonService.GetHoaDonById(chiTiet.MaHoaDon);
-                            if (hoaDon.NgayLap.Month == selectedMonth && hoaDon.NgayLap.Year == selectedYear)
-                                phatSinh -= chiTiet.SoLuongBan;
-                        }
-
-                        return (TenSach: sach.TenSach, TonSach: phatSinh);
                     }
-                    catch (Exception ex)
+
+                    foreach (var chiTiet in hoaDonLookup[sach.MaSach])
                     {
-                        Console.WriteLine($"Lỗi khi xử lý đại lý {sach.TenSach}: {ex.Message}");
-                        return (TenSach: sach.TenSach, TonSach: 0);
+                        if (hoaDonDict.TryGetValue(chiTiet.MaHoaDon, out var hoaDon))
+                        {
+                            if (hoaDon.NgayLap.Month == selectedMonth && hoaDon.NgayLap.Year == selectedYear)
+                                tonSach -= chiTiet.SoLuongBan;
+                        }
                     }
-                }).ToList();
 
-                // Chờ tất cả các tác vụ hoàn thành và lấy kết quả
-                var khachHangCongNoList = await Task.WhenAll(tasks);
+                    return (TenSach: sach.TenSach, TonSach: tonSach);
+                })
+                .OrderByDescending(d => d.TonSach)
+                .Take(10)
+                .ToArray();
 
-                // Sắp xếp và lọc ra top 10 công nợ lớn nhất
-                var filteredData = khachHangCongNoList
-                    .OrderByDescending(d => d.TonSach)
-                    .Take(10)
-                    .ToArray();
-
-                // Trường hợp không có dữ liệu
-                if (!filteredData.Any())
+                // Hiển thị biểu đồ
+                if (!result.Any())
                 {
                     TonSachLabels = Array.Empty<string>();
                     TonSachSeries = new SeriesCollection();
                     return;
                 }
 
-                // Cập nhật label và series cho biểu đồ công nợ
-                TonSachLabels = filteredData.Select(d => d.TenSach).ToArray();
-                var sortedDebts = filteredData.Select(d => d.TonSach).ToArray();
+                TonSachLabels = result.Select(d => d.TenSach).ToArray();
+                var sortedDebts = result.Select(d => d.TonSach).ToArray();
 
                 TonSachSeries = new SeriesCollection
                 {
@@ -369,8 +354,9 @@ namespace QuanLyNhaSach.ViewModels.BaoCaoViewModel
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Lỗi khi khởi tạo dữ liệu công nợ: {ex.Message}");
+                Console.WriteLine($"Lỗi khi khởi tạo dữ liệu tồn sách: {ex.Message}");
             }
         }
+
     }
 }
