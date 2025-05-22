@@ -14,6 +14,7 @@
 
     <Window.Resources>
         <helpers:RowToIndexConverter x:Key="RowToIndexConverter" />
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </Window.Resources>
 
     <Border Style="{StaticResource WindowPopUpBorder}">
@@ -219,6 +220,7 @@
                                     <ColumnDefinition Width="3*" />
                                     <ColumnDefinition Width="4*" />
                                 </Grid.ColumnDefinitions>
+
 
                                 <TextBlock
                                  Grid.Column="0"
