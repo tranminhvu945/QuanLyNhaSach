@@ -11,8 +11,8 @@ namespace QuanLyNhaSach.Models.dto
     {
         public int STT { get; set; }
         public string TenSach { get; set; }
-        public decimal TonDau { get; set; }
-        public decimal TonCuoi { get; set; }
-        public decimal PhatSinh { get; set; }
+        public int TonDau { get; set; }
+        public int TonCuoi { get; set; }
+        public int PhatSinh { get; set; }
     }
 }

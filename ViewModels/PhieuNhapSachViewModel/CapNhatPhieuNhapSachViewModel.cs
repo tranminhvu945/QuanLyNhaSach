@@ -8,6 +8,8 @@ using QuanLyNhaSach.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 using QuanLyNhaSach.Messages;
+using Microsoft.Extensions.DependencyInjection;
+using QuanLyNhaSach.Views.SachViews;
 
 namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
 {
@@ -18,19 +20,22 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
         private readonly IChiTietPhieuNhapService _phieuNhapSachChiTietService;
         private readonly ISachService _sachService;
         private readonly IThamSoService _thamSoService;
+        private readonly IServiceProvider _serviceProvider;
         private int _phieuNhapSachId;
 
         public CapNhatPhieuNhapSachViewModel(
             IPhieuNhapSachService phieuNhapSachService,
             IChiTietPhieuNhapService phieuNhapSachChiTietService,
             ISachService sachService,
-            IThamSoService thamSoService
+            IThamSoService thamSoService,
+            IServiceProvider serviceProvider
         )
         {
             _phieuNhapSachService = phieuNhapSachService;
             _sachService = sachService;
             _phieuNhapSachChiTietService = phieuNhapSachChiTietService;
             _thamSoService = thamSoService;
+            _serviceProvider = serviceProvider;
 
             WeakReferenceMessenger.Default.RegisterAll(this);
         }
@@ -45,17 +50,15 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
         private async Task LoadDataAsync()
         {
             var thamso = await _thamSoService.GetThamSo();
-            SoLuongTonToiDa = thamso.SoLuongTonToiDa;
             if (thamso.QuyDinhSoLuongTonToiDa == true)
-                NoiDung01 = "Đang áp dụng";
+                SoLuongTonToiDa = thamso.SoLuongTonToiDa.ToString();
             else
-                NoiDung01 = "Không áp dụng";
+                SoLuongTonToiDa = "XXX";
 
-            SoLuongNhapToiThieu = thamso.SoLuongNhapToiThieu;
             if (thamso.QuyDinhSoLuongNhapToiThieu == true)
-                NoiDung02 = "Đang áp dụng";
+                SoLuongNhapToiThieu = thamso.SoLuongNhapToiThieu.ToString();
             else
-                NoiDung02 = "Không áp dụng";
+                SoLuongNhapToiThieu = "XXX";
 
             try
             {
@@ -131,13 +134,9 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
         [ObservableProperty]
         private DateTime _ngayNhap = DateTime.Now;
         [ObservableProperty]
-        private int _soLuongTonToiDa = 0;
+        private string _soLuongTonToiDa = string.Empty;
         [ObservableProperty]
-        private int _soLuongNhapToiThieu = 0;
-        [ObservableProperty]
-        private string _noiDung01 = string.Empty;
-        [ObservableProperty]
-        private string _noiDung02 = string.Empty;
+        private string _soLuongNhapToiThieu = string.Empty;
         #endregion
 
         #region RelayCommands 
@@ -312,9 +311,18 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
             }
         }
         [RelayCommand]
-        private void BoChonDauSach()
+        private void ThemSachMoi()
         {
-            SelectedDauSachPhieuNhap = null!;
+            SelectedSach = null!;
+            try
+            {
+                var window = _serviceProvider.GetRequiredService<ThemSachWindow>();
+                window.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi mở cửa sổ thêm đầu sách mới: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
         #endregion
     }
