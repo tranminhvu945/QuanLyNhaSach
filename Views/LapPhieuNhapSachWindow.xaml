@@ -207,10 +207,11 @@
                                     </DataGridTextColumn.Binding>
                                 </DataGridTextColumn>
 
-                                <DataGridTemplateColumn Width="*" Header="Tên sách">
+                                <DataGridTemplateColumn Width="200" Header="Tên sách">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <ComboBox
+                                                Width="180"
                                                 Margin="0,5,0,5"
                                                 VerticalAlignment="Center"
                                                 Background="White"
@@ -228,14 +229,17 @@
                                 </DataGridTemplateColumn>
 
                                 <DataGridTemplateColumn
-                                    Width="*"
+                                    Width="150"
                                     Header="Tác giả"
                                     IsReadOnly="True">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Border Style="{StaticResource BaoCaoBorderStyle}"
+                                            <Border 
+                                                Width="130"
+                                                Style="{StaticResource BaoCaoBorderStyle}"
                                                     >
                                                 <TextBlock
+                                                    HorizontalAlignment="Left"
                                                     Text="{Binding TacGia}"
                                                     Style="{StaticResource BaoCaoTemplateTextBlockStyle}"/>
                                             </Border>
@@ -245,14 +249,16 @@
 
 
                                 <DataGridTemplateColumn
-                                    Width="*"
+                                    Width="180"
                                     Header="Thể loại"
                                     IsReadOnly="True">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Border
+                                                Width="160"
                                                 Style="{StaticResource BaoCaoBorderStyle}">
                                                 <TextBlock
+                                                    HorizontalAlignment="Left"
                                                     Style="{StaticResource BaoCaoTemplateTextBlockStyle}"
                                                     Text="{Binding TheLoai}" />
                                             </Border>

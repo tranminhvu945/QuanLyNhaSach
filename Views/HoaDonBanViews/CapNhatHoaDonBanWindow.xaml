@@ -5,7 +5,7 @@
     xmlns:fa="http://schemas.fontawesome.io/icons/"
     xmlns:helpers="clr-namespace:QuanLyNhaSach.Helpers"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="Cập nhật hóa đơn bán sách"
+    Title="Thêm hóa đơn bán sách"
     Width="1069"
     Height="505"
     Style="{StaticResource WindowPopupStyle}"
@@ -57,6 +57,7 @@
 
             <!--  Body  -->
             <Border Grid.Row="2" Style="{StaticResource WindowBorderContentWrapper}">
+
                 <Grid Margin="10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="114*" />
@@ -165,7 +166,7 @@
                                  Margin="0,0,20,0"
                                  Grid.Column="2"
                                  Style="{StaticResource StandardTextBoxStyle}"
-                                 Text="{Binding TienNo}" />
+                                 Text="{Binding TienNo}" Height="32" VerticalAlignment="Top" />
 
                             <Grid Grid.Column="3">
                                 <Grid.ColumnDefinitions>
@@ -246,8 +247,8 @@
                         CornerRadius="5">
 
                         <DataGrid
-                            ItemsSource="{Binding DanhSachDauSachPhieuNhap}"
-                            SelectedItem="{Binding SelectedDauSachPhieuNhap}"
+                            ItemsSource="{Binding DanhSachSachHoaDon}"
+                            SelectedItem="{Binding SelectedSachHoaDon}"
                             Style="{StaticResource BaoCaoDataGridStyle}">
 
                             <DataGrid.Columns>
@@ -276,12 +277,14 @@
                                     </DataGridTextColumn.ElementStyle>
                                 </DataGridTextColumn>
 
-                                <DataGridTemplateColumn Width="*" Header="Tên sách">
+                                <DataGridTemplateColumn Width="250" Header="Tên sách">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <ComboBox
+                                                Width="230"
                                                 Margin="0,5,0,5"
                                                 VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"
                                                 Background="White"                                              
                                                 ItemsSource="{Binding DanhSachSach}"
                                                 SelectedItem="{Binding SelectedSach, UpdateSourceTrigger=PropertyChanged}"
@@ -297,14 +300,16 @@
                                 </DataGridTemplateColumn>
 
                                 <DataGridTemplateColumn
-                                    Width="*"
+                                    Width="200"
                                     Header="Thể loại"
                                     IsReadOnly="True">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Border
+                                                Width="180"
                                                 Style="{StaticResource BaoCaoBorderStyle}">
                                                 <TextBlock
+                                                    HorizontalAlignment="Left"
                                                     Style="{StaticResource BaoCaoTemplateTextBlockStyle}"
                                                     Text="{Binding TheLoai}" />
                                             </Border>
@@ -342,10 +347,11 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                <DataGridTemplateColumn Width="Auto" Header="Đơn giá bán">
+                                <DataGridTemplateColumn Width="0.7*" Header="Đơn giá bán">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBox 
+                                                Width="100"
                                                 Text="{Binding DonGiaBan}"
                                                 Style="{StaticResource ColumnTextBoxGridStyle}"/>
                                         </DataTemplate>
@@ -360,7 +366,7 @@
                                         <DataTemplate>
                                             <Border
                                                 Style="{StaticResource BaoCaoBorderStyle}"
-                                                Width="75"
+                                                Width="130"
                                                 >
                                                 <TextBlock
                                                     Style="{StaticResource BaoCaoTemplateTextBlockStyle}"
@@ -421,7 +427,7 @@
                 <Button 
                     HorizontalAlignment="Left"
                     Grid.Column="0" 
-                    Command="{Binding LapHoaDonCommand}" Style="{StaticResource WindowPrimaryButtonStyle}" Width="164">
+                    Command="{Binding LapHoaDonCommand}" Style="{StaticResource WindowPrimaryButtonStyle}" Width="168">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Cập nhật hóa đơn" />
                     </StackPanel>
@@ -474,6 +480,9 @@
         </Grid>
     </Border>
 </Window>
+
+
+
 
 
   
