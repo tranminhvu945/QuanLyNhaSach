@@ -20,8 +20,8 @@
                 <RowDefinition Height="45" />
             </Grid.RowDefinitions>
 
-            <Border Grid.Row="1" Background="LightGray" />
-            <Border Grid.Row="3" Background="LightGray" />
+            <Border Grid.Row="1" Background="Black" />
+            <Border Grid.Row="3" Background="Black" />
 
             <!--  Header  -->
             <Grid Grid.Row="0">
@@ -108,10 +108,10 @@
                         <Grid Grid.Row="0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="130" />
-                                <ColumnDefinition Width="170" />
-                                <ColumnDefinition Width="115" />
-                                <ColumnDefinition Width="130" />
+                                <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
 
                             <TextBlock
@@ -120,6 +120,7 @@
                                 Text="Tên sách" Margin="0,0,0,0" />
                             <TextBox
                                 Grid.Column="1"
+                                MinWidth="170"
                                 Style="{StaticResource StandardTextBoxStyle}"
                                 Text="{Binding TenSach}" Margin="0,0,0,0" />
 
@@ -129,6 +130,7 @@
                                 Text="Thể loại" Margin="0,0,0,0" />
                             <TextBox
                                 Grid.Column="4"
+                                MinWidth="170"
                                 Style="{StaticResource StandardTextBoxStyle}"
                                 Text="{Binding TheLoai}" Margin="0,0,0,0" />
                         </Grid>
@@ -158,7 +160,7 @@
 
             <!--  Footer  -->
             <Grid
-                Margin="15,0,15,0"
+                Margin="38,0,38,0"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Center" Grid.Row="4">
 

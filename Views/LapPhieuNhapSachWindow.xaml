@@ -194,7 +194,7 @@
                         <DataGrid
                             ItemsSource="{Binding DanhSachDauSachPhieuNhap}"
                             SelectedItem="{Binding SelectedDauSachPhieuNhap}"
-                            Style="{StaticResource BaoCaoDataGridStyle}">
+                            Style="{StaticResource BaoCaoDataGridStyle}" SelectionChanged="DataGrid_SelectionChanged">
                                                     
                             <DataGrid.Columns>
                                 <DataGridTextColumn
