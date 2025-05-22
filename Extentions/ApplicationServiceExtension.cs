@@ -6,6 +6,7 @@ using QuanLyNhaSach.Services;
 using QuanLyNhaSach.ViewModels.SachViewModel;
 using QuanLyNhaSach.ViewModels.BaoCaoViewModel;
 using QuanLyNhaSach.ViewModels.KhachHangViewModel;
+using QuanLyNhaSach.ViewModels.KhachHangHoaDonViewModel;
 using QuanLyNhaSach.ViewModels.PhieuThuViewModel;
 using QuanLyNhaSach.ViewModels.HoaDonBanViewModel;
 using QuanLyNhaSach.Views.BaoCaoViews;
@@ -46,6 +47,10 @@ namespace QuanLyNhaSach.Extentions
             services.AddTransient<CapNhatKhachHangViewModel>();
             services.AddTransient<ThemKhachHangViewModel>();
             services.AddTransient<TraCuuKhachHangViewModel>();
+
+            services.AddTransient<KhachHangHoaDonWindowViewModel>();
+            services.AddTransient<ThemKhachHangHoaDonWindowViewModel>();
+            services.AddTransient<TraCuuKhachHangHoaDonWindowViewModel>();
 
             services.AddTransient<PhieuThuPageViewModel>();
             services.AddTransient<ThemPhieuThuWindowViewModel>();
@@ -89,6 +94,10 @@ namespace QuanLyNhaSach.Extentions
             services.AddTransient<Views.KhachHangViews.CapNhatKhachHangWindow>();
             services.AddTransient<Views.KhachHangViews.ThemKhachHangWindow>();
             services.AddTransient<Views.KhachHangViews.TraCuuKhachHangWindow>();
+
+            services.AddTransient<Views.KhachHangHoaDonViews.KhachHangHoaDonWindow>();
+            services.AddTransient<Views.KhachHangHoaDonViews.ThemKhachHangHoaDonWindow>();
+            services.AddTransient<Views.KhachHangHoaDonViews.TraCuuKhachHangHoaDonWindow>();
 
             services.AddTransient<Views.PhieuThuViews.PhieuThuPage>();
             services.AddTransient<Views.PhieuThuViews.ThemPhieuThuWindow>();

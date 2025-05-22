@@ -11,6 +11,7 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using QuanLyNhaSach.Messages;
 using QuanLyNhaSach.Views.KhachHangViews;
+using QuanLyNhaSach.Views.KhachHangHoaDonViews;
 using QuanLyNhaSach.Views.SachViews;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -67,13 +68,13 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
         private KhachHang _selectedKhachHang = null!;
 
         [ObservableProperty]
-        private string _quyDinhTienNoToiDa = "";
+        private string _dienThoai = "";
 
         [ObservableProperty]
-        private long _noToiDa = 0;
+        private string _soLuongTonToiThieuSauBan = "XXX";
 
         [ObservableProperty]
-        private bool _isNoToiDaVisible;
+        private string _noToiDa = "XXX";
 
         [ObservableProperty]
         private long _tienNo = 0;
@@ -91,7 +92,8 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
         private Sach _selectedSach = null!;
         #endregion
 
-        // Load data 
+        #region Functional
+        // Load data
         private async Task LoadDataAsync()
         {
             _danhSachSach = new List<Sach>(await _sachService.GetAllSach());
@@ -100,26 +102,65 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
             var sortedListKhachHang = listKhachHang.OrderBy(kh => kh.TenKhachHang).ToList();
             KhachHangs = new ObservableCollection<KhachHang>(sortedListKhachHang);
 
-            if (KhachHangs.Count > 0)
+            // Khởi tạo không chọn khách hàng và không hiển thị tên, tiền nợ
+            SelectedKhachHang = null!;
+            TienNo = 0;
+
+            var thamSo = await _thamsoService.GetThamSo();
+
+            if (thamSo.QuyDinhTienNoToiDa)
+                NoToiDa = thamSo.TienNoToiDa.ToString("N0");
+            else
+                NoToiDa = "XXX";
+
+            if (thamSo.QuyDinhSoLuongTonToiThieu)
+                SoLuongTonToiThieuSauBan = thamSo.SoLuongTonToiThieu.ToString();
+            else
+                SoLuongTonToiThieuSauBan = "XXX";
+        }
+
+        partial void OnDienThoaiChanged(string oldValue, string newValue)
+        {
+            if (!string.IsNullOrWhiteSpace(newValue) && (newValue.Length == 10 || newValue.Length == 11))
             {
-                var thamSo = await _thamsoService.GetThamSo();
-                QuyDinhTienNoToiDa = thamSo.QuyDinhTienNoToiDa ? "Đang áp dụng" : "Không áp dụng";
-                IsNoToiDaVisible = thamSo.QuyDinhTienNoToiDa;
+                _ = TimKhachHangTheoDienThoai();
+            }
+            else
+            {
+                SelectedKhachHang = null!;
+                TienNo = 0;
+            }
+        }
 
-                SelectedKhachHang = KhachHangs.First();
+        [RelayCommand]
+        public async Task TimKhachHangTheoDienThoai()
+        {
+            if (string.IsNullOrWhiteSpace(DienThoai))
+            {
+                SelectedKhachHang = null!;
+                TienNo = 0;
+                return;
+            }
 
-                if (IsNoToiDaVisible)
-                    NoToiDa = thamSo.TienNoToiDa;
-                else
-                    NoToiDa = 0; // hoặc null nếu bạn dùng nullable
+            var khachHang = KhachHangs.FirstOrDefault(kh => kh.DienThoai == DienThoai);
 
-                TienNo = SelectedKhachHang.TienNo;
+            if (khachHang != null!)
+            {
+                SelectedKhachHang = khachHang;
+                TienNo = khachHang.TienNo;
+                // Nếu muốn cập nhật thêm UI khác khi chọn khách hàng, gọi ở đây
+            }
+            else
+            {
+                SelectedKhachHang = null!;
+                TienNo = 0;
+                MessageBox.Show("Không tìm thấy khách hàng với số điện thoại này", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
         partial void OnSelectedKhachHangChanged(KhachHang oldValue, KhachHang newValue)
         {
-            if (newValue != null)
+            if (newValue != null!)
             {
                 _ = UpdateTienNoAndQuyDinhAsync(newValue);
             }
@@ -128,20 +169,27 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
         private async Task UpdateTienNoAndQuyDinhAsync(KhachHang value)
         {
             var thamSo = await _thamsoService.GetThamSo();
-            QuyDinhTienNoToiDa = thamSo.QuyDinhTienNoToiDa ? "Đang áp dụng" : "Không áp dụng";
-            IsNoToiDaVisible = thamSo.QuyDinhTienNoToiDa;
-
-            if (IsNoToiDaVisible)
+  
+            if (thamSo.QuyDinhTienNoToiDa)
             {
-                NoToiDa = thamSo.TienNoToiDa;
-                if (value.TienNo > NoToiDa)
+                NoToiDa = thamSo.TienNoToiDa.ToString();
+                if (value.TienNo > thamSo.TienNoToiDa)
                 {
                     MessageBox.Show($"Khách hàng {value.TenKhachHang} đã vượt quá tiền nợ tối đa.", "Cảnh báo", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
             else
             {
-                NoToiDa = 0;
+                NoToiDa = "XXX";
+            }
+
+            if (thamSo.QuyDinhSoLuongTonToiThieu)
+            {
+                SoLuongTonToiThieuSauBan = thamSo.SoLuongTonToiThieu.ToString();
+            }
+            else
+            {
+                SoLuongTonToiThieuSauBan = "XXX";
             }
 
             TienNo = value.TienNo;
@@ -166,7 +214,7 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
         {
             try
             {
-                if (SelectedKhachHang == null)
+                if (SelectedKhachHang == null!)
                 {
                     MessageBox.Show("Vui lòng chọn khách hàng", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
@@ -178,7 +226,8 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
                     return;
                 }
 
-                // Validate quantities and prices
+                var thamSo = await _thamsoService.GetThamSo();
+
                 foreach (var item in DanhSachSachHoaDon)
                 {
                     if (item.SoLuongBan <= 0)
@@ -201,13 +250,22 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
                             "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
+
+                    // Kiểm tra quy định số lượng tồn tối thiểu sau bán (nếu áp dụng)
+                    if (thamSo.QuyDinhSoLuongTonToiThieu)
+                    {
+                        int soLuongTonSauBan = item.SoLuongTon - item.SoLuongBan;
+                        if (soLuongTonSauBan < thamSo.SoLuongTonToiThieu)
+                        {
+                            MessageBox.Show($"Số lượng tồn của sách '{item.SelectedSach.TenSach}' sau khi bán phải lớn hơn hoặc bằng {thamSo.SoLuongTonToiThieu}. Hiện tại còn {soLuongTonSauBan}.",
+                                "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                            return;
+                        }
+                    }
                 }
 
-                // Cập nhật tổng tiền trước khi kiểm tra
                 CalculateTongTien();
 
-                // Kiểm tra quy định tiền nợ tối đa
-                var thamSo = await _thamsoService.GetThamSo();
                 if (thamSo.QuyDinhTienNoToiDa)
                 {
                     long tienNoDuKien = SelectedKhachHang.TienNo + TongTien;
@@ -216,10 +274,10 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
                     {
                         MessageBox.Show($"Khách hàng đã vượt quá tiền nợ tối đa ({thamSo.TienNoToiDa}). Không thể lập hoá đơn.",
                                         "Cảnh báo", MessageBoxButton.OK, MessageBoxImage.Warning);
-                        return; // Ngăn không lập hoá đơn
+                        return;
                     }
                 }
-
+                
                 if (string.IsNullOrEmpty(MaHoaDon))
                 {
                     int newId = await _hoaDonService.GenerateAvailableId();
@@ -254,22 +312,17 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
                     await _sachService.UpdateSach(Sach);
                 }
 
-                // Lấy lại khách hàng từ database để đảm bảo dữ liệu mới nhất
                 var khachHangHienTai = await _khachHangService.GetKhachHangById(SelectedKhachHang.MaKhachHang);
-
-                // Cộng thêm tổng tiền hóa đơn mới vào tiền nợ
                 khachHangHienTai.TienNo += TongTien;
-
                 await _khachHangService.UpdateKhachHang(khachHangHienTai);
 
-                // Cập nhật lại SelectedKhachHang để giao diện hiển thị chính xác
                 SelectedKhachHang = khachHangHienTai;
 
                 MessageBox.Show($"Lập hoá đơn thành công. Mã hoá đơn: {MaHoaDon}",
                     "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                 Close();
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 MessageBox.Show($"Có lỗi xảy ra khi lập hoá đơn: {ex.Message}",
                     "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -293,12 +346,12 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
         }
 
         [RelayCommand]
-        private void AddKhachHang()
+        private void ThongTinKhachHang()
         {
             SelectedKhachHang = null!;
 
-            var addKhachHangtWindow = _serviceProvider.GetRequiredService<ThemKhachHangWindow>();
-            addKhachHangtWindow.Show();
+            var thongTinKhachHangWindow = _serviceProvider.GetRequiredService<KhachHangHoaDonWindow>();
+            thongTinKhachHangWindow.Show();
         }
 
         [RelayCommand]
@@ -317,12 +370,12 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
             // Đăng ký lắng nghe khi SelectedSach thay đổi
             newItem.SelectedSachChanged += (sender, e) =>
             {
-                if (e.OldSach != null)
+                if (e.OldSach != null!)
                 {
                     _danhSachSach.Add(e.OldSach);
                     _danhSachSachDaChon.Remove(e.OldSach);
                 }
-                if (e.NewSach != null)
+                if (e.NewSach != null!)
                 {
                     _danhSachSach.Remove(e.NewSach);
                     _danhSachSachDaChon.Add(e.NewSach);
@@ -331,7 +384,7 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
             };
 
             // Lúc mới tạo dòng, cũng cần thêm sách đầu tiên vào danh sách đã chọn
-            if (newItem.SelectedSach != null)
+            if (newItem.SelectedSach != null!)
             {
                 _danhSachSach.Remove(newItem.SelectedSach);
                 _danhSachSachDaChon.Add(newItem.SelectedSach);
@@ -351,7 +404,7 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
             }
             if (DanhSachSachHoaDon.Count > 0)
             {
-                if (SelectedSachHoaDon.SelectedSach != null)
+                if (SelectedSachHoaDon.SelectedSach != null!)
                 {
                     _danhSachSach.Add(SelectedSachHoaDon.SelectedSach);
                     _danhSachSachDaChon.Remove(SelectedSachHoaDon.SelectedSach);
@@ -378,7 +431,7 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
         private void CalculateTongTien()
         {
             TongTien = DanhSachSachHoaDon.Sum(item => item.ThanhTien);
-            OnPropertyChanged();
+            OnPropertyChanged(nameof(TongTien));
         }
 
         [RelayCommand]
@@ -386,13 +439,17 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
         {
             try
             {
-                NoToiDa = (await _thamsoService.GetThamSo()).TienNoToiDa;
-                TienNo = SelectedKhachHang.TienNo;
+                var thamSo = await _thamsoService.GetThamSo();
+                NoToiDa = thamSo.TienNoToiDa.ToString();
+                if (SelectedKhachHang != null!)
+                    TienNo = SelectedKhachHang.TienNo;
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
-                MessageBox.Show(ex.Message, "Please god don't go in here");
+                MessageBox.Show(ex.Message, "Error updating TienNo");
             }
         }
+
+        #endregion
     }
 }
