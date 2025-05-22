@@ -26,5 +26,10 @@ namespace QuanLyNhaSach.Views
             InitializeComponent();
             DataContext = vm;
         }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
