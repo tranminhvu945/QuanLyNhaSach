@@ -151,7 +151,8 @@
                                 <TextBox
                                  Grid.Column="1"
                                  Style="{StaticResource ReadOnlyTextBoxStyle}"
-                                 Text="{Binding TenKhachHang}" />
+                                 Text="{Binding SelectedKhachHang.TenKhachHang}" 
+                                 IsReadOnly="True"/>
 
                             </Grid>
 
@@ -162,10 +163,13 @@
                                  Text="Số điện thoại" />
 
                             <TextBox
-                                 Margin="0,0,20,0"
-                                 Grid.Column="2"
-                                 Style="{StaticResource StandardTextBoxStyle}"
-                                 Text="{Binding TienNo}" Height="32" VerticalAlignment="Top" />
+                            Margin="0,0,20,0"
+                            Grid.Column="2"
+                            Style="{StaticResource StandardTextBoxStyle}"
+                            Text="{Binding DienThoai, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                            Height="32"
+                            VerticalAlignment="Top"
+                            LostFocus="DienThoaiTextBox_LostFocus"/>
 
                             <Grid Grid.Column="3">
                                 <Grid.ColumnDefinitions>
@@ -209,7 +213,7 @@
                                 <TextBox
                                 Grid.Column="1"
                                 Style="{StaticResource ReadOnlyTextBoxStyle}"
-                                Text="{Binding SoLuongNhapToiThieu}" />
+                                Text="{Binding SoLuongTonToiThieuSauBan}" />
 
                             </Grid>
 
@@ -328,7 +332,7 @@
                                                 >
                                                 <TextBlock
                                                     Style="{StaticResource BaoCaoTemplateTextBlockStyle}"
-                                                    Text="{Binding SoLuongTon}"
+                                                    Text="{Binding SoLuongTonBanDau}"
                                                     />
                                             </Border>
                                         </DataTemplate>
@@ -340,7 +344,7 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBox 
-                                                Text="{Binding SoLuongBan}"
+                                                Text="{Binding SoLuongBan, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                 Style="{StaticResource ColumnTextBoxGridStyle}"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
@@ -351,7 +355,7 @@
                                         <DataTemplate>
                                             <TextBox 
                                                 Width="100"
-                                                Text="{Binding DonGiaBan}"
+                                                Text="{Binding DonGiaBan, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                 Style="{StaticResource ColumnTextBoxGridStyle}"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
@@ -426,7 +430,7 @@
                 <Button 
                     HorizontalAlignment="Left"
                     Grid.Column="0" 
-                    Command="{Binding LapHoaDonCommand}" Style="{StaticResource WindowPrimaryButtonStyle}" Width="168">
+                    Command="{Binding CapNhatHoaDonCommand}" Style="{StaticResource WindowPrimaryButtonStyle}" Width="168">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Cập nhật hóa đơn" />
                     </StackPanel>
@@ -440,7 +444,7 @@
 
                     <Button 
                         Margin="0,0,20,0"
-                        Command="{Binding AddKhachHangCommand}" 
+                        Command="{Binding ThongTinKhachHangCommand}" 
                         Style="{StaticResource PrimaryButtonStyle}" 
                         Width="189">
                         <StackPanel Orientation="Horizontal">
@@ -479,15 +483,3 @@
         </Grid>
     </Border>
 </Window>
-
-
-
-
-
-  
-
-
-
-
-
-

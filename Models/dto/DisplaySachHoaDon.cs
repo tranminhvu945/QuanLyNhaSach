@@ -39,6 +39,7 @@ namespace QuanLyNhaSach.Models.dto
                 {
                     var oldSach = _selectedSach;
                     _selectedSach = value;
+
                     OnPropertyChanged();
                     OnPropertyChanged(nameof(TheLoai));
                     OnPropertyChanged(nameof(SoLuongTon));
@@ -51,7 +52,26 @@ namespace QuanLyNhaSach.Models.dto
             }
         }
 
-        public int SoLuongTonTruocKhiXuat => (SelectedSach?.SoLuongTon ?? 0) + SoLuongBan;
+        // Lưu tồn kho gốc khi bắt đầu chỉnh sửa
+        private int _soLuongTonBanDau;
+
+        public int SoLuongTonBanDau
+        {
+            get => _soLuongTonBanDau;
+            set
+            {
+                if (_soLuongTonBanDau != value)
+                {
+                    _soLuongTonBanDau = value;
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(SoLuongTonTruocKhiXuat));
+                }
+            }
+        }
+
+        public int SoLuongTonTruocKhiXuat => _soLuongTonBanDau;
+
+        //public int SoLuongTonTruocKhiXuat => (SelectedSach?.SoLuongTon ?? 0) + SoLuongBan;
 
         public string TheLoai => SelectedSach?.TheLoai ?? string.Empty;
 
