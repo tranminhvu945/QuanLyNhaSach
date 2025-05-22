@@ -129,7 +129,7 @@
                                 </StackPanel>
                             </Button>
 
-                            <Button Command="{Binding CloseWindowCommand}" Style="{StaticResource WindowSignoutButtonStyle}" Width="NaN" Margin="36,0,1,0">
+                            <Button Command="{Binding CloseCommand}" Style="{StaticResource WindowSignoutButtonStyle}" Width="NaN" Margin="36,0,1,0">
                                 <StackPanel Orientation="Horizontal">
                                     <fa:FontAwesome Margin="0,0,10,0" Icon="SignOut" />
                                     <TextBlock Text="Thoát" />
@@ -154,9 +154,8 @@
                                 Text="Người báo cáo" />
                             <TextBox
                                 Grid.Column="2"
-                                IsReadOnly="True"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding TongTonCuoiThang, StringFormat={}{0:N0}}" />
+                                Text="{Binding NguoiLap, UpdateSourceTrigger=PropertyChanged}" />
 
                         </Grid>
 
