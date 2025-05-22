@@ -6,8 +6,8 @@
     xmlns:helpers="clr-namespace:QuanLyNhaSach.Helpers"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Tra cứu Phiếu thu tiền"
-    Width="1360"
-    Height="560"
+    Width="1045"
+    Height="419"
     Style="{StaticResource WindowPopupStyle}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
@@ -15,11 +15,11 @@
     <Border Style="{StaticResource WindowPopUpBorder}">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="80" />
-                <RowDefinition Height="1" />
-                <RowDefinition Height="381" />
-                <RowDefinition Height="1" />
-                <RowDefinition Height="80" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="0" />
+                <RowDefinition Height="326" />
+                <RowDefinition Height="0" />
+                <RowDefinition Height="45" />
             </Grid.RowDefinitions>
 
             <Border Grid.Row="1" Background="LightGray" />
@@ -28,16 +28,21 @@
             <!--  Header  -->
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width=".5*" />
-                    <ColumnDefinition Width=".5*" />
+                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="5*" />
                 </Grid.ColumnDefinitions>
 
-                <StackPanel
+                <Grid
                     Grid.Column="0"
                     Margin="20,15,0,0"
+                   
                     VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="389*"/>
+                        <ColumnDefinition Width="113*"/>
+                    </Grid.ColumnDefinitions>
                     <TextBlock Style="{StaticResource WindowHeaderTextBlockStyle}" Text="Tra cứu Phiếu thu tiền" />
-                </StackPanel>
+                </Grid>
 
                 <StackPanel
                     Grid.Column="1"
@@ -52,277 +57,357 @@
             </Grid>
 
             <!--  Body  -->
-            <Border Grid.Row="2" Style="{StaticResource WindowBorderContentWrapper}">
-                <Grid Margin="10">
+            <Border Grid.Row="2" Style="{StaticResource WindowBorderContentWrapper}" >
+                <Grid Margin="0">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="1.5*" />
+                        <RowDefinition Height="*" />
                         <RowDefinition Height="*" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
-                    <!--  Line 1  -->
                     <Grid
                         Grid.Row="0"
-                        Margin="10"
-                        HorizontalAlignment="Stretch"
-                        VerticalAlignment="Stretch">
+                        Width="970"
+                        Height="65">
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="170" />
                             <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="370" />
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="370" />
                         </Grid.ColumnDefinitions>
 
                         <Grid Grid.Column="0">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="3*" />
-                                <RowDefinition Height="7*" />
+                                <RowDefinition Height="21*" />
+                                <RowDefinition Height="14"/>
+                                <RowDefinition Height="30*" />
                             </Grid.RowDefinitions>
 
                             <TextBlock
                                 Grid.Row="0"
-                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
-                                Text="Mã phiếu thu tiền" />
+                                Margin="0"
+                                Style="{StaticResource FieldLabelTextBlockStyle}"
+                                Text="Mã phiếu thu" />
                             <TextBox
-                                Grid.Row="1"
+                                Grid.Row="2"
+                                Margin="0"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding MaPhieuThu}" Margin="10,10,10,21" />
+                                Text="{Binding MaPhieuThu}" />
                         </Grid>
 
-                        <Grid Grid.Column="1">
+                        <Grid Width="370" Height="65" Grid.Column="2">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="3*" />
-                                <RowDefinition Height="7*" />
+                                <RowDefinition Height="21*" />
+                                <RowDefinition Height="14"/>
+                                <RowDefinition Height="30*" />
                             </Grid.RowDefinitions>
 
                             <TextBlock
                                 Grid.Row="0"
-                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
-                                Text="Tên khách hàng" />
-                            <ComboBox
-                                Grid.Row="1"
-                                ItemsSource="{Binding Khachhanges}"
-                                SelectedItem="{Binding SelectedKhachHang}"
-                                Style="{StaticResource StandardComboBoxStyle}" Margin="10,10,10,21">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding TenKhachHang}" />
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
+                                Margin="0"
+                                Style="{StaticResource FieldLabelTextBlockStyle}"
+                                Text="Ngày thu tiền" />
+
+                            <Grid Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="140" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="140" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock
+                                    Grid.Column="0"
+                                    Style="{StaticResource RedHighlightTextBlockStyle}"
+                                    Text="Từ" />
+                                <DatePicker
+                                    Grid.Column="1"
+                                    Width="140"
+                                    Height="30"
+                                    Margin="0"
+                                    SelectedDate="{Binding NgayThuFrom}"
+                                    SelectedDateFormat="Short"
+                                    Language="vi-VN"
+                                    Style="{StaticResource StandardDatePickerStyle}" />
+                                <TextBlock
+                                    Grid.Column="2"
+                                    HorizontalAlignment="Center"
+                                    Style="{StaticResource RedHighlightTextBlockStyle}"
+                                    Text="Đến" />
+                                <DatePicker
+                                    Grid.Column="3"
+                                    Width="140"
+                                    Height="30"
+                                    Margin="0"
+                                    SelectedDate="{Binding NgayThuTo}"
+                                    SelectedDateFormat="Short"
+                                    Language="vi-VN"
+                                    Style="{StaticResource StandardDatePickerStyle}" />
+                            </Grid>
                         </Grid>
 
-                        <Grid Grid.Column="2">
+                        <Grid Grid.Column="4" Width="370" Height="65">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="3*" />
-                                <RowDefinition Height="7*" />
+                                <RowDefinition Height="21*" />
+                                <RowDefinition Height="14"/>
+                                <RowDefinition Height="30*" />
                             </Grid.RowDefinitions>
 
                             <TextBlock
                                 Grid.Row="0"
-                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
-                                Text="Điện thoại" />
+                                Margin="0"
+                                Style="{StaticResource FieldLabelTextBlockStyle}"
+                                Text="Số tiền thu" />
+
+                            <Grid Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="140" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="140" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock
+                                    Grid.Column="0"
+                                    Style="{StaticResource RedHighlightTextBlockStyle}"
+                                    Text="Từ" />
+                                <TextBox
+                                    Grid.Column="1"
+                                    Width="140"
+                                    Height="30"
+                                    Margin="0"
+                                    Style="{StaticResource StandardTextBoxStyle}"
+                                    Text="{Binding SoTienThuFrom}" />
+
+                                <TextBlock
+                                    Grid.Column="2"
+                                    HorizontalAlignment="Center"
+                                    Style="{StaticResource RedHighlightTextBlockStyle}"
+                                    Text="Đến" />
+
+                                <TextBox
+                                    Grid.Column="3"
+                                    Width="140"
+                                    Height="30"
+                                    Margin="0"
+                                    Style="{StaticResource StandardTextBoxStyle}"
+                                    Text="{Binding SoTienThuTo}" />
+                            </Grid>
+                        </Grid>
+                    </Grid>
+
+                    <!--Line 2-->
+                    <Grid
+                        Grid.Row="1"
+                        Width="970"
+                        Height="86">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0"
+                            Width="425"
+                            Height="86"
+                            HorizontalAlignment="Left">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="170" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="225" />
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Tên khách hàng -->
+                            <Grid Grid.Column="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="42" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="30" />
+                                </Grid.RowDefinitions>
+
+                                <TextBlock
+                                    Grid.Row="0"
+                                    Width="132"
+                                    Height="42"
+                                    TextWrapping="Wrap"
+                                    Margin="0"
+                                    Style="{StaticResource FieldLabelTextBlockStyle}"
+                                    Text="Tên khách hàng được nhập" />
+                                <TextBox
+                                    Grid.Row="2"
+                                    Margin="0"
+                                    Width="170"
+                                    Height="30"
+                                    HorizontalAlignment="Left"
+                                    Style="{StaticResource StandardTextBoxStyle}"
+                                    Text="{Binding TenKhachHang}"/>
+                            </Grid>
+
+                            <!--Điện thoại-->
+                            <Grid Grid.Column="2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="42" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="30" />
+                                </Grid.RowDefinitions>
+
+                                <TextBlock
+                                    Grid.Row="0"
+                                    Width="200"
+                                    Height="42"
+                                    TextWrapping="Wrap"
+                                    Margin="0"
+                                    Style="{StaticResource FieldLabelTextBlockStyle}"
+                                    Text="Điện thoại của khách hàng được nhập" />
+                                <TextBox
+                                    Grid.Row="2"
+                                    Margin="0"
+                                    Width="170"
+                                    Height="30"
+                                    HorizontalAlignment="Left"
+                                    Style="{StaticResource StandardTextBoxStyle}"
+                                    Text="{Binding DienThoai}" />
+                            </Grid>
+                        </Grid>
+
+                        <!-- Địa chỉ -->
+                        <Grid Grid.Column="3" 
+                            HorizontalAlignment="Right"
+                            Width="370"
+                            Height="86">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="42" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="30" />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock
+                                Grid.Row="0"
+                                Width="200"
+                                Height="42"
+                                TextWrapping="Wrap"
+                                Margin="0"
+                                Style="{StaticResource FieldLabelTextBlockStyle}"
+                                Text="Địa chỉ của khách hàng được nhập" />
                             <TextBox
-                                Grid.Row="1"
-                                Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding DienThoai}" Margin="10,10,10,22" />
-                        </Grid>
-
-                        <Grid Grid.Column="3">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="3*" />
-                                <RowDefinition Height="7*" />
-                            </Grid.RowDefinitions>
-
-                            <TextBlock
-                                Grid.Row="0"
-                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
-                                Text="Địa chỉ" />
-                            <TextBox
-                                Grid.Row="1"
+                                Grid.Row="2"
+                                Margin="0"
                                 Style="{StaticResource StandardTextBoxStyle}"
                                 Text="{Binding DiaChi}" />
                         </Grid>
+                    </Grid>
 
-                        <Grid Grid.Column="4">
+                    <!--Line 3-->
+                    <Grid
+                        Grid.Row="4"
+                        Width="970"
+                        Height="86">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="370" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="370" />
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Email -->
+                        <Grid Grid.Column="0" Width="370" Height="86" >
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="3*" />
-                                <RowDefinition Height="7*" />
+                                <RowDefinition Height="42" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="30" />
                             </Grid.RowDefinitions>
 
                             <TextBlock
                                 Grid.Row="0"
-                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
-                                Text="Email" />
+                                Width="200"
+                                Height="42"
+                                TextWrapping="Wrap"
+                                Margin="0"
+                                Style="{StaticResource FieldLabelTextBlockStyle}"
+                                Text="Email của khách hàng được nhập" />
                             <TextBox
-                                Grid.Row="1"
+                                Grid.Row="2"
+                                Margin="0"
                                 Style="{StaticResource StandardTextBoxStyle}"
                                 Text="{Binding Email}" />
                         </Grid>
-                    </Grid>
-
-                    <Grid
-                        Grid.Row="1"
-                        Margin="10"
-                        HorizontalAlignment="Stretch"
-                        VerticalAlignment="Stretch">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                    </Grid>
-
-                    <Grid
-                        Grid.Row="1"
-                        HorizontalAlignment="Stretch"
-                        VerticalAlignment="Stretch">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="50*" />
-                            <ColumnDefinition Width="50*" />
-                        </Grid.ColumnDefinitions>
-
-                        <Grid Grid.Column="0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                        </Grid>
-
-                        <Grid Grid.Column="0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-
+                        <!--Tiền nợ-->
+                        <Grid Grid.Column="2" Width="370" Height="86" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="42" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="30" />
+                            </Grid.RowDefinitions>
                             <TextBlock
-                                Grid.Column="0"
-                                Margin="20,0,0,0"
-                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
-                                Text="Tiền nợ" />
-                            <TextBlock
-                                Grid.Column="1"
-                                Style="{StaticResource RedHighlightTextBlockStyle}"
-                                Text="từ" />
-                            <TextBox
-                                Grid.Column="2"
-                                Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding TienNoFrom}" Margin="10,10,10,10" />
-                            <TextBlock
-                                Grid.Column="3"
-                                Style="{StaticResource RedHighlightTextBlockStyle}"
-                                Text="đến" />
-                            <TextBox
-                                Grid.Column="4"
-                                Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding TienNoTo}" />
-                        </Grid>
-                    </Grid>
+                                Grid.Row="0"
+                                Width="200"
+                                Height="42"
+                                Margin="0"
+                                TextWrapping="Wrap"
+                                Style="{StaticResource FieldLabelTextBlockStyle}"
+                                Text="Tiền nợ của khách hàng được nhập" />
 
-                    <Grid
-                        Grid.Row="2"
-                        HorizontalAlignment="Stretch"
-                        VerticalAlignment="Stretch">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="50*" />
-                            <ColumnDefinition Width="50*" />
-                        </Grid.ColumnDefinitions>
+                            <Grid Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="140" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="140" />
+                                </Grid.ColumnDefinitions>
 
-                        <Grid Grid.Column="0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
+                                <TextBlock
+                                    Grid.Column="0"
+                                    Style="{StaticResource RedHighlightTextBlockStyle}"
+                                    Text="Từ" />
+                                <TextBox
+                                    Grid.Column="1"
+                                    Width="140"
+                                    Height="30"
+                                    Margin="0"
+                                    Style="{StaticResource StandardTextBoxStyle}"
+                                    Text="{Binding TienNoFrom}" />
+                                <TextBlock
+                                    Grid.Column="2"
+                                    HorizontalAlignment="Center"
+                                    Style="{StaticResource RedHighlightTextBlockStyle}"
+                                    Text="Đến" />
 
-                            <TextBlock
-                                Grid.Column="0"
-                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
-                                Text="Ngày thu tiền" />
-                            <TextBlock
-                                Grid.Column="1"
-                                Style="{StaticResource RedHighlightTextBlockStyle}"
-                                Text="từ" />
-                            <DatePicker
-                                Grid.Column="2"
-                                SelectedDate="{Binding NgayThuTienFrom}"
-                                Style="{StaticResource StandardDatePickerStyle}" />
-                            <TextBlock
-                                Grid.Column="3"
-                                Style="{StaticResource RedHighlightTextBlockStyle}"
-                                Text="đến" />
-                            <DatePicker
-                                Grid.Column="4"
-                                SelectedDate="{Binding NgayThuTienTo}"
-                                Style="{StaticResource StandardDatePickerStyle}" />
-                        </Grid>
-
-                        <Grid Grid.Column="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-
-                            <TextBlock
-                                Grid.Column="0"
-                                Margin="20,0,0,0"
-                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
-                                Text="Số tiền thu" />
-                            <TextBlock
-                                Grid.Column="1"
-                                Style="{StaticResource RedHighlightTextBlockStyle}"
-                                Text="từ" />
-                            <TextBox
-                                Grid.Column="2"
-                                Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding SoTienThuFrom}" />
-                            <TextBlock
-                                Grid.Column="3"
-                                Style="{StaticResource RedHighlightTextBlockStyle}"
-                                Text="đến" />
-                            <TextBox
-                                Grid.Column="4"
-                                Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding SoTienThuTo}" />
+                                <TextBox
+                                    Grid.Column="3"
+                                    Width="140"
+                                    Height="30"
+                                    Margin="0"
+                                    Style="{StaticResource StandardTextBoxStyle}"
+                                    Text="{Binding TienNoTo}" />
+                            </Grid>
                         </Grid>
                     </Grid>
                 </Grid>
             </Border>
 
             <!--  Footer  -->
-            <StackPanel
+            <Grid
                 Grid.Row="4"
-                Margin="20"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Stretch"
-                Orientation="Horizontal">
-                <Button Command="{Binding SearchPhieuThuCommand}" Style="{StaticResource WindowPrimaryButtonStyle}">
+                Width="970"
+                Height="30">
+                <Button 
+                    HorizontalAlignment="Left"
+                    Command="{Binding SearchPhieuThuCommand}" Style="{StaticResource WindowPrimaryButtonStyle}" Width="190">
                     <StackPanel Orientation="Horizontal">
                         <fa:FontAwesome Margin="0,0,10,0" Icon="Search" />
-                        <TextBlock Text="Tra cứu Phiếu thu" />
+                        <TextBlock Text="Tra cứu phiếu thu" />
                     </StackPanel>
                 </Button>
 
-                <Button Command="{Binding CloseWindowCommand}" Style="{StaticResource WindowSignoutButtonStyle}">
+                <Button 
+                    HorizontalAlignment="Right"
+                    Command="{Binding CloseWindowCommand}" Style="{StaticResource WindowSignoutButtonStyle}">
                     <StackPanel Orientation="Horizontal">
                         <fa:FontAwesome Margin="0,0,10,0" Icon="SignOut" />
                         <TextBlock Text="Thoát" />
                     </StackPanel>
                 </Button>
-            </StackPanel>
+            </Grid>
         </Grid>
     </Border>
 </Window>

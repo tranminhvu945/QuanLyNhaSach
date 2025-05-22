@@ -1,4 +1,4 @@
-﻿<Window x:Class="QuanLyNhaSach.Views.PhieuThuViews.ThemPhieuThuWindow"
+﻿<Window x:Class="QuanLyNhaSach.Views.PhieuThuViews.CapNhatPhieuThuWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -35,7 +35,7 @@
                     Grid.Column="0"
                     Margin="20,15,0,0"
                     VerticalAlignment="Center">
-                    <TextBlock Style="{StaticResource WindowHeaderTextBlockStyle}" Text="Lập Phiếu Thu Tiền" />
+                    <TextBlock Style="{StaticResource WindowHeaderTextBlockStyle}" Text="Cập Nhật Phiếu Thu Tiền" />
                 </StackPanel>
 
                 <StackPanel
@@ -327,11 +327,11 @@
                     HorizontalAlignment="Left" 
                     Command="{Binding LapPhieuThuCommand}" 
                     Style="{StaticResource WindowPrimaryButtonStyle}" 
-                    Width="120">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Lập Phiếu" />
-                            <fa:FontAwesome />
-                        </StackPanel>
+                    Width="150">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Cập Nhật Phiếu" />
+                        <fa:FontAwesome />
+                    </StackPanel>
                 </Button>
 
                 <Button 
