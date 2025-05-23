@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using QuanLyNhaSach.Messages;
 using QuanLyNhaSach.Models;
 using QuanLyNhaSach.Services;
+using QuanLyNhaSach.Views.KhachHangHoaDonViews;
 using QuanLyNhaSach.Views.KhachHangViews;
 using QuanLyNhaSach.Views.PhieuThuViews;
 
@@ -191,11 +192,11 @@ namespace QuanLyNhaSach.ViewModels.PhieuThuViewModel
         }
 
         [RelayCommand]
-        private void ThemKhachHang()
+        private void TimKhachHang()
         {
             try
             {
-                var window = _serviceProvider.GetRequiredService<ThemKhachHangWindow>();
+                var window = _serviceProvider.GetRequiredService<KhachHangHoaDonWindow>();
                 window.Show();
             }
             catch (Exception ex)
