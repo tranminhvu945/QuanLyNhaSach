@@ -172,7 +172,7 @@
                                 <TextBox
                                  Grid.Column="1"
                                  Style="{StaticResource StandardTextBoxStyle}"
-                                 Text="{Binding DienThoai, UpdateSourceTrigger=PropertyChanged}" />
+                                 Text="{Binding DienThoai, UpdateSourceTrigger=PropertyChanged}"
                                  LostFocus="DienThoaiTextBox_LostFocus"/>
 
                             </Grid>
