@@ -484,7 +484,7 @@
                                 Style="{StaticResource StandardComboBoxStyle}">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding TenTheLoai}" />
+                                        <TextBlock Text="{Binding}" />
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
@@ -514,7 +514,7 @@
                                 Style="{StaticResource StandardComboBoxStyle}">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding TenTacGia}" />
+                                        <TextBlock Text="{Binding}" />
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
