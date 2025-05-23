@@ -108,7 +108,7 @@
                                 Text="Tên sách" Margin="0,0,0,0" VerticalAlignment="Top" Height="21" Width="70" FontSize="17" FontWeight="Bold" />
                             <ComboBox
                             Grid.Row="1"
-                            MinWidth="170"
+                            Width="170"
                             ItemsSource="{Binding Sachs}"
                             SelectedItem="{Binding SelectedSach}"
                             Style="{StaticResource StandardComboBoxStyle}">
@@ -192,6 +192,7 @@
                             <TextBox
                                         Grid.Column="2"
                                         Margin="0,25,0,0"
+                                        Height="30"
                                         Style="{StaticResource StandardTextBoxStyle}"
                                         Text="{Binding SoLuongTonFrom}" />
                             <TextBlock
@@ -202,6 +203,7 @@
                             <TextBox
                                         Grid.Column="4"
                                         Margin="0,25,0,0"
+                                        Height="30"
                                         Style="{StaticResource StandardTextBoxStyle}"
                                         Text="{Binding SoLuongTonTo}" />
                         </Grid>
@@ -235,7 +237,7 @@
 
                 <Button 
                 Grid.Column="2"
-                Command="{Binding CloseWindowCommand}" Style="{StaticResource WindowSignoutButtonStyle}" Click="Button_Click">
+                Command="{Binding CloseWindowCommand}" Style="{StaticResource WindowSignoutButtonStyle}">
                     <StackPanel Orientation="Horizontal">
                         <fa:FontAwesome Margin="0,0,10,0" Icon="SignOut" />
                         <TextBlock Text="Thoát" />
