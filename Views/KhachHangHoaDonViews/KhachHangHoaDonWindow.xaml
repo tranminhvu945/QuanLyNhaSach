@@ -85,13 +85,13 @@
                     Margin="10,0,0,0"
                     Command="{Binding TroVeHoaDonCommand}"
                     Style="{StaticResource DeleteButtonStyle}"
-                    MinWidth="250">
+                    MinWidth="100">
                         <StackPanel Orientation="Horizontal">
                             <fa:FontAwesome
                             Margin="0,0,8,0"
                             VerticalAlignment="Center"
                             Icon="ArrowLeft" />
-                            <TextBlock VerticalAlignment="Center" Text="Trở về trang lập hoá đơn" />
+                            <TextBlock VerticalAlignment="Center" Text="Trở về" />
                         </StackPanel>
                     </Button>
 

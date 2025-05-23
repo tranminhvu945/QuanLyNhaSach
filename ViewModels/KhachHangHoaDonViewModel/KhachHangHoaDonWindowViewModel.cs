@@ -62,7 +62,7 @@ namespace QuanLyNhaSach.ViewModels.KhachHangHoaDonViewModel
             SelectedKhachHang = null;
             try
             {
-                var addKhachHangWindow = _serviceProvider.GetRequiredService<ThemKhachHangHoaDonWindow>();
+                var addKhachHangWindow = _serviceProvider.GetRequiredService<ThemKhachHangWindow>();
                 addKhachHangWindow.ShowDialog();
 
                 // Reload data sau khi thêm
