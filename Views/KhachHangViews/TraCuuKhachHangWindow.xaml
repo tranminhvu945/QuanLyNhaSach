@@ -110,18 +110,13 @@
                                 Margin="0,0,0,0"
                                 Style="{StaticResource FieldSmallLabelTextBlockStyle}"
                                 Text="Tên khách hàng" />
-                            <ComboBox
+                            <TextBox
                                 HorizontalAlignment="Left"
                                 Width="179"
-                                ItemsSource="{Binding KhachHangList}"
-                                SelectedItem="{Binding SelectedKhachHang}"
-                                Style="{StaticResource StandardComboBoxStyle}" Margin="0,34,0,0" Grid.RowSpan="2">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding TenKhachHang}" />
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
+                                Text="{Binding TenKhachHang}"
+                                Style="{StaticResource StandardTextBoxStyle}" Margin="0,34,0,0" Grid.RowSpan="2">
+                                
+                            </TextBox>
                         </Grid>
 
                         <Grid Grid.Column="1">

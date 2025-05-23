@@ -136,6 +136,11 @@
 
                                 <DataGridTextColumn
                                     Width="*"
+                                    Binding="{Binding KhachHang.MaKhachHang}"
+                                    ElementStyle="{StaticResource ColumnTextBlockStyle}"
+                                    Header="Mã khách hàng" />
+                                <DataGridTextColumn
+                                    Width="*"
                                     Binding="{Binding KhachHang.TenKhachHang}"
                                     ElementStyle="{StaticResource ColumnTextBlockStyle}"
                                     Header="Tên khách hàng" />

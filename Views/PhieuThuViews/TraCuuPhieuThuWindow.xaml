@@ -22,8 +22,8 @@
                 <RowDefinition Height="45" />
             </Grid.RowDefinitions>
 
-            <Border Grid.Row="1" Background="LightGray" />
-            <Border Grid.Row="3" Background="LightGray" />
+            <Border Grid.Row="1" Background="Black" />
+            <Border Grid.Row="3" Background="Black" />
 
             <!--  Header  -->
             <Grid Grid.Row="0">
