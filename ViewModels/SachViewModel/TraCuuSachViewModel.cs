@@ -26,12 +26,15 @@ namespace QuanLyNhaSach.ViewModels.SachViewModel
 
             _ = LoadDataAsync();
         }
-
+        #region binding
         [ObservableProperty]
         private ObservableCollection<Sach> _sachs = [];
 
         [ObservableProperty]
         private Sach _selectedSach = null!;
+
+        [ObservableProperty]
+        private string _maSach = "";
 
         [ObservableProperty]
         private string _theLoai = "";
@@ -112,6 +115,7 @@ namespace QuanLyNhaSach.ViewModels.SachViewModel
         private string _soLuongNhapTo = "";
 
         public ObservableCollection<Sach> SearchResults = [];
+        #endregion
 
         private async Task LoadDataAsync()
         {
@@ -149,9 +153,10 @@ namespace QuanLyNhaSach.ViewModels.SachViewModel
             {
                 var sachs = await _sachService.GetAllSach();
 
-                if (SelectedSach != null! && SelectedSach.MaSach != 0)
+                if (!string.IsNullOrWhiteSpace(MaSach))
                 {
-                    sachs = sachs.Where(d => d.MaSach == SelectedSach.MaSach);
+                    sachs = sachs.Where(d =>
+                        d.MaSach.ToString().IndexOf(MaSach, StringComparison.OrdinalIgnoreCase) >= 0);
                 }
 
                 if (!string.IsNullOrWhiteSpace(TheLoai))

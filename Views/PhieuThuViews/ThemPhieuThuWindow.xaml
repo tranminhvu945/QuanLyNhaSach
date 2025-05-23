@@ -21,8 +21,8 @@
                 <RowDefinition Height="45" />
             </Grid.RowDefinitions>
 
-            <Border Grid.Row="1" Background="LightGray" />
-            <Border Grid.Row="3" Background="LightGray" />
+            <Border Grid.Row="1" Background="Black" />
+            <Border Grid.Row="3" Background="Black" />
 
             <!--  Header  -->
             <Grid Grid.Row="0">
@@ -110,6 +110,8 @@
                                 Grid.Column="1"
                                 SelectedDate="{Binding NgayThuTien}"
                                 HorizontalAlignment="Right"
+                                SelectedDateFormat="Short"
+                                Language="vi-VN"
                                 Width="170"
                                 Language="vi-VN"
                                 Style="{StaticResource StandardDatePickerStyle}" />
@@ -187,7 +189,7 @@
 
                             <TextBlock
                                 Grid.Column="0"
-                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
+                                Style="{StaticResource FieldLabelTextBlockStyle}"
                                 HorizontalAlignment="Left"
 
                                 Text="Email" />
@@ -215,7 +217,7 @@
 
                             <TextBlock
                                 Grid.Column="0"
-                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
+                                Style="{StaticResource FieldLabelTextBlockStyle}"
                                 HorizontalAlignment="Left"
                                 Text="Địa chỉ" />
                             <TextBox
@@ -295,7 +297,7 @@
 
                             <TextBlock
                                 Grid.Column="0"
-                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
+                                Style="{StaticResource FieldLabelTextBlockStyle}"
                                 HorizontalAlignment="Left"
 
                             Text="Số tiền thu" />

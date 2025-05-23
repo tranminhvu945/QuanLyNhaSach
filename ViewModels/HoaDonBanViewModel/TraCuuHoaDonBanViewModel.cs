@@ -84,10 +84,16 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
         private Sach _selectedSach = new();
 
         [ObservableProperty]
-        private string _theLoai = string.Empty;
+        private ObservableCollection<string> _theLoais = new();
 
         [ObservableProperty]
-        private string _tacGia = string.Empty;
+        private string _selectedTheLoai = string.Empty;
+
+        [ObservableProperty]
+        private ObservableCollection<string> _tacGias = new();
+
+        [ObservableProperty]
+        private string _selectedTacGia = string.Empty;
 
         [ObservableProperty]
         private string _soLuongTonFrom = string.Empty;
@@ -125,18 +131,34 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
 
                 KhachHangs.Clear();
                 Sachs.Clear();
+                TheLoais.Clear();
+                TacGias.Clear();
 
 
-                // Populate the collections
-                // Sắp xếp theo tên khách hàng (TenKhachHang)
-                var sortedListKhachHang = listKhachHang.OrderBy(kh => kh.TenKhachHang).ToList();
 
-                KhachHangs = new ObservableCollection<KhachHang>(sortedListKhachHang);
+                KhachHangs = new ObservableCollection<KhachHang>(listKhachHang.OrderBy(kh => kh.TenKhachHang));
+                Sachs = new ObservableCollection<Sach>(listSach.OrderBy(s => s.TenSach));
 
-                // Sắp xếp theo tên sách (TenSach)
-                var sortedListSach = listSach.OrderBy(kh => kh.TenSach).ToList();
+                // Lấy danh sách thể loại duy nhất (loại bỏ null và khoảng trắng)
+                var distinctTheLoais = listSach
+                    .Select(s => s.TheLoai?.Trim())
+                    .Where(t => !string.IsNullOrEmpty(t))
+                    .Distinct()
+                    .OrderBy(t => t);
 
-                Sachs = new ObservableCollection<Sach>(sortedListSach);
+                TheLoais = new ObservableCollection<string>(distinctTheLoais);
+
+                // Lấy danh sách tác giả duy nhất (loại bỏ null và khoảng trắng)
+                var distinctTacGias = listSach
+                    .Select(s => s.TacGia?.Trim())
+                    .Where(t => !string.IsNullOrEmpty(t))
+                    .Distinct()
+                    .OrderBy(t => t);
+
+                TacGias = new ObservableCollection<string>(distinctTacGias);
+
+                SelectedTheLoai = string.Empty;
+                SelectedTacGia = string.Empty;
             }
             catch (Exception ex)
             {
@@ -248,21 +270,20 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
                     hoaDons = hoaDons.Where(d => d.DsChiTietHoaDon.Any(ct => ct.Sach.MaSach == SelectedSach.MaSach));
                 }
 
-                if (!string.IsNullOrWhiteSpace(TheLoai))
+                if (!string.IsNullOrEmpty(SelectedTheLoai))
                 {
-                    hoaDons = hoaDons.Where(d =>
-                        d.DsChiTietHoaDon.Any(ct =>
-                            !string.IsNullOrEmpty(ct.Sach.TheLoai) &&
-                            ct.Sach.TheLoai.IndexOf(TheLoai, StringComparison.OrdinalIgnoreCase) >= 0));
+                    hoaDons = hoaDons.Where(d => d.DsChiTietHoaDon.Any(ct =>
+                        !string.IsNullOrEmpty(ct.Sach.TheLoai) &&
+                        ct.Sach.TheLoai.Equals(SelectedTheLoai, StringComparison.OrdinalIgnoreCase)));
                 }
 
-                if (!string.IsNullOrWhiteSpace(TacGia))
+                if (!string.IsNullOrEmpty(SelectedTacGia))
                 {
-                    hoaDons = hoaDons.Where(d =>
-                        d.DsChiTietHoaDon.Any(ct =>
-                            !string.IsNullOrEmpty(ct.Sach.TacGia) &&
-                            ct.Sach.TacGia.IndexOf(TacGia, StringComparison.OrdinalIgnoreCase) >= 0));
+                    hoaDons = hoaDons.Where(d => d.DsChiTietHoaDon.Any(ct =>
+                        !string.IsNullOrEmpty(ct.Sach.TacGia) &&
+                        ct.Sach.TacGia.Equals(SelectedTacGia, StringComparison.OrdinalIgnoreCase)));
                 }
+
 
                 if (!string.IsNullOrEmpty(SoLuongTonFrom) && !string.IsNullOrEmpty(SoLuongTonTo)
                     && int.TryParse(SoLuongTonFrom, out var fromSoLuongTon) && int.TryParse(SoLuongTonTo, out var toSoLuongTon))
