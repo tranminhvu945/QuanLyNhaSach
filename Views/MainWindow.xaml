@@ -5,8 +5,8 @@
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         Title="Danh sách phiếu nhập sách"
-        d:DesignHeight="1536"
-        d:DesignWidth="1536"
+      d:DesignHeight="800"
+      d:DesignWidth="1200"
         Background="#F7F9FD"
         WindowState="Maximized"
         mc:Ignorable="d">
@@ -106,152 +106,151 @@
 
 
         <Grid
-        Grid.Row="1"
-        HorizontalAlignment="Stretch"
-        VerticalAlignment="Stretch">
+    Grid.Row="1"
+    HorizontalAlignment="Stretch"
+    VerticalAlignment="Stretch">
+
             <Border
-            Margin="10"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch"
-            Background="White"
-            CornerRadius="10">
+        Margin="0"
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Stretch"
+        Background="White"
+        CornerRadius="10">
+
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="15*" />
+                        <RowDefinition Height="50" />
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="80*" />
-                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
-                    <TextBlock
-                    Grid.Row="0"
+                    <!-- Tiêu đề -->
+                    <Grid Grid.Row="0" Background="White">
+                        <TextBlock
+                    FontSize="30"
                     Style="{StaticResource PageHeaderTextBlockStyle}"
                     Text="Danh sách phiếu nhập sách" />
+                    </Grid>
 
-                    <Grid Grid.Row="1">
+                    <!-- Thanh công cụ nút bấm -->
+                    <Grid Grid.Row="1" Margin="0,10,0,0">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width=".5*" />
-                            <ColumnDefinition Width=".5*" />
+                            <ColumnDefinition Width=".4*" />
+                            <ColumnDefinition Width=".6*" />
                         </Grid.ColumnDefinitions>
 
                         <StackPanel
-                        Grid.Column="0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
-                        Orientation="Horizontal">
+                    Grid.Column="0"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center">
 
                             <Button
-                            Margin="20,0,0,0"
-                            Command="{Binding SearchPhieuNhapSachCommand}"
-                            Style="{StaticResource PrimaryButtonStyle}" Width="230">
+                        Margin="20,0,0,0"
+                        Height="41"
+                        Width="277"
+                        Command="{Binding SearchPhieuNhapSachCommand}"
+                        Style="{StaticResource PrimaryButtonStyle}">
                                 <StackPanel Orientation="Horizontal">
-                                    <fa:FontAwesome
-                                    Margin="0,0,8,0"
-                                    VerticalAlignment="Center"
-                                    Icon="Search" />
-                                    <TextBlock VerticalAlignment="Center" Text="Tra cứu phiếu nhập sách" />
+                                    <fa:FontAwesome Margin="0,0,8,0" VerticalAlignment="Center" Icon="Search" />
+                                    <TextBlock FontSize="20" VerticalAlignment="Center" Text="Tra cứu phiếu nhập sách" />
                                 </StackPanel>
                             </Button>
+
                             <Button
-                            Width="50"
-                            Margin="10,0,0,0"
-                            Command="{Binding LoadDataCommand}"
-                            Style="{StaticResource PrimaryButtonStyle}">
+                        Width="50"
+                        Height="41"
+                        Margin="10,0,0,0"
+                        Command="{Binding LoadDataCommand}"
+                        Style="{StaticResource PrimaryButtonStyle}">
                                 <fa:FontAwesome VerticalAlignment="Center" Icon="Refresh" />
                             </Button>
-
                         </StackPanel>
 
                         <StackPanel
-                        Grid.Column="1"
-                        Margin="0,0,20,0"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Center"
-                        Orientation="Horizontal">
+                    Grid.Column="1"
+                    Orientation="Horizontal"
+                    Margin="0,0,20,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center">
 
-                            <Button Command="{Binding LapPhieuNhapSachCommand}" Style="{StaticResource PrimaryButtonStyle}" Width="170">
-                                <StackPanel Orientation="Horizontal">
-                                    <fa:FontAwesome
-                                    Margin="0,0,8,0"
-                                    VerticalAlignment="Center"
-                                    Icon="Plus" />
-                                    <TextBlock VerticalAlignment="Center" Text="Lập phiếu nhập " />
-                                </StackPanel>
-                            </Button>
-                            
                             <Button
-                            Margin="10,0,0,0"
-                            Command="{Binding EditPhieuNhapSachCommand}"
-                                CommandParameter="{Binding SelectedPhieuNhapSach.MaPhieuNhapSach}"
-                            Style="{StaticResource PrimaryButtonStyle}" Width="205">
+                        Height="41"
+                        Width="190"
+                        Command="{Binding LapPhieuNhapSachCommand}"
+                        Style="{StaticResource PrimaryButtonStyle}">
                                 <StackPanel Orientation="Horizontal">
-                                    <fa:FontAwesome
-                                    Margin="0,0,8,0"
-                                    VerticalAlignment="Center"
-                                    Icon="Edit" />
-                                    <TextBlock VerticalAlignment="Center" Text="Cập nhật phiếu nhập" />
-                                </StackPanel>
-                            </Button>
-                            
-                            <Button
-                            Margin="10,0,0,0"
-                            Command="{Binding DeletePhieuNhapSachCommand}"
-                            Style="{StaticResource DeleteButtonStyle}" Width="200">
-                                <StackPanel Orientation="Horizontal">
-                                    <fa:FontAwesome
-                                    Margin="0,0,8,0"
-                                    VerticalAlignment="Center"
-                                    Icon="Trash" />
-                                    <TextBlock VerticalAlignment="Center" Text="Xóa phiếu nhập sách" />
+                                    <fa:FontAwesome Margin="0,0,8,0" VerticalAlignment="Center" Icon="Plus" />
+                                    <TextBlock FontSize="20" VerticalAlignment="Center" Text="Lập phiếu nhập" />
                                 </StackPanel>
                             </Button>
 
+                            <Button
+                        Height="41"
+                        Width="235"
+                        Margin="10,0,0,0"
+                        Command="{Binding EditPhieuNhapSachCommand}"
+                        CommandParameter="{Binding SelectedPhieuNhapSach.MaPhieuNhapSach}"
+                        Style="{StaticResource PrimaryButtonStyle}">
+                                <StackPanel Orientation="Horizontal">
+                                    <fa:FontAwesome Margin="0,0,8,0" VerticalAlignment="Center" Icon="Edit" />
+                                    <TextBlock FontSize="20" VerticalAlignment="Center" Text="Cập nhật phiếu nhập" />
+                                </StackPanel>
+                            </Button>
+
+                            <Button
+                        Height="41"
+                        Width="230"
+                        Margin="10,0,0,0"
+                        Command="{Binding DeletePhieuNhapSachCommand}"
+                        Style="{StaticResource DeleteButtonStyle}">
+                                <StackPanel Orientation="Horizontal">
+                                    <fa:FontAwesome Margin="0,0,8,0" VerticalAlignment="Center" Icon="Trash" />
+                                    <TextBlock FontSize="20" VerticalAlignment="Center" Text="Xóa phiếu nhập sách" />
+                                </StackPanel>
+                            </Button>
                         </StackPanel>
                     </Grid>
 
+                    <!-- DataGrid -->
                     <Border
-                    Grid.Row="2"
-                    Margin="20"
-                    Background="#F7F9FD"
-                    BorderBrush="#E0E0E0"
-                    BorderThickness="1">
+                Grid.Row="2"
+                Style="{StaticResource WindowBorderContentWrapper}">
+
                         <DataGrid
-                        ItemsSource="{Binding DanhSachPhieuNhapSach}"
-                        SelectedItem="{Binding SelectedPhieuNhapSach}"
-                        Style="{StaticResource DefaultDataGridStyle}">
+                    ItemsSource="{Binding DanhSachPhieuNhapSach}"
+                    SelectedItem="{Binding SelectedPhieuNhapSach}"
+                    Style="{StaticResource DefaultDataGridStyle}">
 
                             <DataGrid.Columns>
                                 <DataGridTextColumn
-                                Width="*"
-                                Binding="{Binding MaPhieuNhapSach}"
-                                ElementStyle="{StaticResource ColumnTextBlockStyle}"
-                                Header="Mã phiếu nhập" />
+                            Width="*"
+                            Binding="{Binding MaPhieuNhapSach}"
+                            ElementStyle="{StaticResource ColumnTextBlockStyle}"
+                            Header="Mã phiếu nhập" />
 
                                 <DataGridTextColumn
-                                Width="*"
-                                Binding="{Binding NgayNhap}"
-                                ElementStyle="{StaticResource ColumnTextBlockStyle}"
-                                Header="Ngày nhập" />
-
-
+                            Width="*"
+                            Binding="{Binding NgayNhap, StringFormat={}{0:dd/MM/yyyy}}"
+                            ElementStyle="{StaticResource ColumnTextBlockStyle}"
+                            Header="Ngày nhập" />
                             </DataGrid.Columns>
                         </DataGrid>
                     </Border>
-
-
                 </Grid>
             </Border>
 
+            <!-- Frame nếu có -->
             <Frame
-            x:Name="MainContent"
-            Grid.Column="1"
-            VerticalAlignment="Stretch"
-            Panel.ZIndex="1"
-            ContentRendered="MainContent_ContentRendered"
-            IsHitTestVisible="True"
-            Navigated="MainContent_Navigated"
-            NavigationUIVisibility="Hidden" />
+        x:Name="MainContent"
+        VerticalAlignment="Stretch"
+        Panel.ZIndex="1"
+        ContentRendered="MainContent_ContentRendered"
+        IsHitTestVisible="True"
+        Navigated="MainContent_Navigated"
+        NavigationUIVisibility="Hidden" />
         </Grid>
+
     </Grid>
 </Window>
 
