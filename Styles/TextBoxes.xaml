@@ -60,7 +60,7 @@
         <Setter Property="FontStyle" Value="Normal" />
         <Setter Property="FontWeight" Value="SemiBold" />
         <Setter Property="Foreground" Value="Black" />
-        <Setter Property="Background" Value="#A2A2A2" />
+        <Setter Property="Background" Value="#D9D9D9" />
         <Setter Property="BorderBrush" Value="Black" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Padding" Value="10,0,10,0" />

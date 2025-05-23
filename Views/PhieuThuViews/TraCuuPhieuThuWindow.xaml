@@ -22,8 +22,8 @@
                 <RowDefinition Height="45" />
             </Grid.RowDefinitions>
 
-            <Border Grid.Row="1" Background="LightGray" />
-            <Border Grid.Row="3" Background="LightGray" />
+            <Border Grid.Row="1" Background="Black" />
+            <Border Grid.Row="3" Background="Black" />
 
             <!--  Header  -->
             <Grid Grid.Row="0">
@@ -126,7 +126,7 @@
                                     Width="140"
                                     Height="30"
                                     Margin="0"
-                                    SelectedDate="{Binding NgayThuFrom}"
+                                    SelectedDate="{Binding NgayThuTienFrom}"
                                     SelectedDateFormat="Short"
                                     Language="vi-VN"
                                     Style="{StaticResource StandardDatePickerStyle}" />
@@ -140,7 +140,7 @@
                                     Width="140"
                                     Height="30"
                                     Margin="0"
-                                    SelectedDate="{Binding NgayThuTo}"
+                                    SelectedDate="{Binding NgayThuTienTo}"
                                     SelectedDateFormat="Short"
                                     Language="vi-VN"
                                     Style="{StaticResource StandardDatePickerStyle}" />

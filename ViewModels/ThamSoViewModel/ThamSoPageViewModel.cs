@@ -95,6 +95,13 @@ namespace QuanLyNhaSach.ViewModels.ThamSoViewModel
         }
         #endregion
 
+        private string _buttonText = " Sửa tham số";
+        public string ButtonText
+        {
+            get => _buttonText;
+            set => SetProperty(ref _buttonText, value);
+        }
+
         #region Binding Properties
         private string _soLuongNhapToiThieu = string.Empty;
         public string SoLuongNhapToiThieu
@@ -138,20 +145,14 @@ namespace QuanLyNhaSach.ViewModels.ThamSoViewModel
 
         #region RelayCommands
         [RelayCommand]
-        private void EditThamSo()
-        {
-            IsEditing = true;
-        }
-
-        [RelayCommand]
-        private async Task SaveChanges()
+        private async Task<bool> SaveChanges()
         {
             if (!ValidateInputs(out int soLuongNhapToiThieu,
                                 out int soLuongTonToiThieu,
                                 out int soLuongTonToiDa,
                                 out int tienNoToiDa))
             {
-                return;
+                return false;
             }
 
             try
@@ -160,7 +161,7 @@ namespace QuanLyNhaSach.ViewModels.ThamSoViewModel
                 if (thamSo == null)
                 {
                     MessageBox.Show("Không tìm thấy tham số để cập nhật.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
+                    return false;
                 }
 
                 // Gán giá trị số sau khi parse
@@ -176,10 +177,12 @@ namespace QuanLyNhaSach.ViewModels.ThamSoViewModel
 
                 await _thamSoService.UpdateThamSo(thamSo);
                 MessageBox.Show("Cập nhật tham số thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                return true;
             }
             catch (System.Exception ex)
             {
                 MessageBox.Show($"Lỗi khi cập nhật tham số: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
             }
         }
 
@@ -234,6 +237,22 @@ namespace QuanLyNhaSach.ViewModels.ThamSoViewModel
             return true;
         }
 
+        [RelayCommand]
+        private async Task EditOrSaveAsync()
+        {
+            if (!IsEditing)
+            {
+                IsEditing = true;
+                ButtonText = "Lưu thay đổi";
+            }
+            else
+            {
+                await SaveChanges();
+
+                IsEditing = false;
+                ButtonText = "Sửa tham số";
+            }
+        }
         #endregion
     }
 }

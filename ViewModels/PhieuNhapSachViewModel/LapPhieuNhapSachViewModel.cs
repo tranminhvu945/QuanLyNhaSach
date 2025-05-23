@@ -105,19 +105,19 @@ namespace QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel
                 {
                     if (thamso.QuyDinhSoLuongTonToiDa && item.SoLuongTon > thamso.SoLuongTonToiDa)
                     {
-                        MessageBox.Show($"Chỉ nhập những đầu sách có số lượng tồn dưới {thamso.SoLuongTonToiDa}",
+                        MessageBox.Show($"Số lượng tồn của sach: '{item.SelectedSach.TenSach}' phải nhỏ hơn {thamso.SoLuongTonToiDa} mới được nhập",
                             "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
                     if (item.SoLuongNhap <= 0)
                     {
-                        MessageBox.Show($"Số lượng nhập phải lớn hơn 0",
+                        MessageBox.Show($"Số lượng nhập của sách: '{item.SelectedSach.TenSach}' phải lớn hơn 0",
                             "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
                     if (thamso.QuyDinhSoLuongNhapToiThieu && item.SoLuongNhap < thamso.SoLuongNhapToiThieu)
                     {
-                        MessageBox.Show($"Số lượng nhập của đầu sách  phải lớn hơn {thamso.SoLuongNhapToiThieu}",
+                        MessageBox.Show($"Số lượng nhập của sách: '{item.SelectedSach.TenSach}' phải lớn hơn {thamso.SoLuongNhapToiThieu}",
                             "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }

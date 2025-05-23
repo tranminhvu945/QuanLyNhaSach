@@ -100,6 +100,21 @@
                             <Button
                                 Height="41"
                                 Margin="10,0,0,0"
+                                Command="{Binding EditPhieuThuCommand}"
+                                Style="{StaticResource PrimaryButtonStyle}"
+                                Width="220">
+                                <StackPanel Orientation="Horizontal">
+                                    <fa:FontAwesome
+                                        Margin="0,0,8,0"
+                                        VerticalAlignment="Center"
+                                        Icon="Edit" />
+                                    <TextBlock FontSize="20" VerticalAlignment="Center" Text="Cập nhật phiếu thu" />
+                                </StackPanel>
+                            </Button>
+
+                            <Button
+                                Height="41"
+                                Margin="10,0,0,0"
                                 Command="{Binding DeletePhieuThuCommand}"
                                 Style="{StaticResource DeleteButtonStyle}"
                                 Width="192">
@@ -134,6 +149,11 @@
                                     ElementStyle="{StaticResource ColumnTextBlockStyle}"
                                     Header="Mã phiếu thu" />
 
+                                <DataGridTextColumn
+                                    Width="*"
+                                    Binding="{Binding KhachHang.MaKhachHang}"
+                                    ElementStyle="{StaticResource ColumnTextBlockStyle}"
+                                    Header="Mã khách hàng" />
                                 <DataGridTextColumn
                                     Width="*"
                                     Binding="{Binding KhachHang.TenKhachHang}"

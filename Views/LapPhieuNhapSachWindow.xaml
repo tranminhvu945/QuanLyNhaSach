@@ -116,6 +116,8 @@
                                 <DatePicker
                                 Grid.Column="1"
                                 SelectedDate="{Binding NgayNhap}"
+                                SelectedDateFormat="Short"
+                                Language="vi-VN"
                                 Style="{StaticResource StandardDatePickerStyle}" />
 
                             </Grid>
