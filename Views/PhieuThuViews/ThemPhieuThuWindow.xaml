@@ -340,12 +340,12 @@
                 <Button 
                     Grid.Column="1"
                     HorizontalAlignment="Center" 
-                    Command="{Binding ThemKhachHangCommand}" 
+                    Command="{Binding TimKhachHangCommand}" 
                     Style="{StaticResource WindowPrimaryButtonStyle}" 
-                    Width="200">
+                    Width="160">
                     <StackPanel Orientation="Horizontal">
                         <fa:FontAwesome/>
-                        <TextBlock Text="Thêm khách hàng mới" />
+                        <TextBlock Text="Tìm khách hàng" />
                     </StackPanel>
                 </Button>
 
