@@ -130,6 +130,7 @@
                                 SelectedDateFormat="Short"
                                 Language="vi-VN"                                    
                                 Style="{StaticResource StandardDatePickerStyle}" />
+
                                 <TextBlock
                                 Grid.Column="2"
                                     HorizontalAlignment="Center"

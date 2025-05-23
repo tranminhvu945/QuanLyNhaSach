@@ -74,7 +74,7 @@
                          VerticalContentAlignment="Center"
                          HorizontalAlignment="Center"
                          Cursor="Hand"
-                         IsChecked="{Binding QuyDinhSoLuongNhapToiThieu}"
+                         IsChecked="{Binding QuyDinhSoLuongTonToiDa}"
                          IsHitTestVisible="{Binding IsEditing}"
                          Height="80" Margin="0,-20,0,-20" >
                                     <ToggleButton.Resources>
@@ -179,10 +179,9 @@
                             <TextBox Grid.Column="1"
                                      Margin="30,20,30,20"
                                      FontSize="20"
-                                     Style="{StaticResource StandardTextBoxStyle}"
+                                     HorizontalContentAlignment="Center"
+                                     Style="{Binding TextBoxStyle}"
                                      Text="{Binding SoLuongTonToiDa}"/>
-
-
                         </Grid>
 
 
@@ -213,7 +212,7 @@
                          VerticalContentAlignment="Center"
                          HorizontalAlignment="Center"
                          Cursor="Hand"
-                         IsChecked="{Binding QuyDinhSoLuongNhapToiThieu}"
+                         IsChecked="{Binding QuyDinhSoLuongTonToiThieu}"
                          IsHitTestVisible="{Binding IsEditing}"
                          Height="80" Margin="0,-20,0,-20" >
                                     <ToggleButton.Resources>
@@ -318,7 +317,8 @@
                             <TextBox Grid.Column="1"
                                      Margin="30,20,30,20"
                                      FontSize="20"
-                                     Style="{StaticResource StandardTextBoxStyle}"
+                                     HorizontalContentAlignment="Center"
+                                     Style="{Binding TextBoxStyle}"
                                      Text="{Binding SoLuongTonToiThieu}"/>
 
 
@@ -472,8 +472,9 @@
                             <TextBox Grid.Column="1"
                                      Margin="30,20,30,20"
                                      FontSize="20"
-                                     Style="{StaticResource StandardTextBoxStyle}"
-                                     Text="{Binding SoLuongTonToiDa}"/>
+                                     HorizontalContentAlignment="Center"
+                                     Style="{Binding TextBoxStyle}"
+                                     Text="{Binding SoLuongNhapToiThieu}"/>
 
 
                         </Grid>
@@ -522,7 +523,7 @@
                          VerticalContentAlignment="Center"
                          HorizontalAlignment="Center"
                          Cursor="Hand"
-                         IsChecked="{Binding QuyDinhSoLuongNhapToiThieu}"
+                         IsChecked="{Binding QuyDinhTienNoToiDa}"
                          IsHitTestVisible="{Binding IsEditing}"
                          Height="80" Margin="0,-20,0,-20" >
                                     <ToggleButton.Resources>
@@ -627,8 +628,9 @@
                             <TextBox Grid.Column="1"
                                      Margin="30,20,30,20"
                                      FontSize="20"
-                                     Style="{StaticResource StandardTextBoxStyle}"
-                                     Text="{Binding SoLuongTonToiDa}"/>
+                                     HorizontalContentAlignment="Center"
+                                     Style="{Binding TextBoxStyle}"
+                                     Text="{Binding TienNoToiDa}"/>
 
 
                         </Grid>
@@ -661,7 +663,7 @@
                          VerticalContentAlignment="Center"
                          HorizontalAlignment="Center"
                          Cursor="Hand"
-                         IsChecked="{Binding QuyDinhSoLuongNhapToiThieu}"
+                         IsChecked="{Binding QuyDinhTienThuTienNo}"
                          IsHitTestVisible="{Binding IsEditing}"
                          Height="80" Margin="0,-20,0,-20" >
                                     <ToggleButton.Resources>
@@ -760,13 +762,13 @@
                         Height="50"
                         Margin="0,0,30,0"
                             HorizontalAlignment="Right" 
-                            Command="{Binding SearchKhachHangCommand}" 
+                            Command="{Binding EditOrSaveCommand}" 
                             Style="{StaticResource WindowPrimaryButtonStyle}"
                        Width="164"
                         >
                         <StackPanel Orientation="Horizontal">
                             <fa:FontAwesome Margin="0,0,10,0" Icon="Edit" />
-                            <TextBlock Text="Sửa tham số" FontSize="20" />
+                            <TextBlock Text="{Binding ButtonText}" FontSize="20" />
                         </StackPanel>
                     </Button>
                 </Grid>

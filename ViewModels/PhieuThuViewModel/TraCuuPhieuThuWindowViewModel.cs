@@ -23,7 +23,7 @@ namespace QuanLyNhaSach.ViewModels.PhieuThuViewModel
             _phieuThuService = phieuThuService;
             _khachHangService = khachHangService;
 
-            LoadDataAsync();
+            _ = LoadDataAsync();
         }
 
         private async Task LoadDataAsync()
@@ -45,7 +45,7 @@ namespace QuanLyNhaSach.ViewModels.PhieuThuViewModel
         [ObservableProperty]
         private ObservableCollection<KhachHang> _khachHanges = [];
         [ObservableProperty]
-        private KhachHang _selectedKhachHang = new();
+        private string _tenKhachHang = string.Empty;
         [ObservableProperty]
         private string _maPhieuThu = string.Empty;
         [ObservableProperty]
@@ -74,7 +74,6 @@ namespace QuanLyNhaSach.ViewModels.PhieuThuViewModel
         [RelayCommand]
         private void CloseWindow()
         {
-
             Application.Current.Windows.OfType<TraCuuPhieuThuWindow>().FirstOrDefault()?.Close();
         }
 
@@ -90,17 +89,21 @@ namespace QuanLyNhaSach.ViewModels.PhieuThuViewModel
                 {
                     filteredResults = [.. filteredResults.Where(d => d.MaPhieuThu.ToString().Contains(MaPhieuThu))];
                 }
+                if (!string.IsNullOrEmpty(TenKhachHang))
+                {
+                    filteredResults = new ObservableCollection<PhieuThu>(filteredResults.Where(d => d.KhachHang.TenKhachHang != null && d.KhachHang.TenKhachHang.Contains(TenKhachHang)));
+                }
                 if (!string.IsNullOrEmpty(DienThoai))
                 {
-                    filteredResults = [.. filteredResults.Where(d => d.KhachHang.DienThoai.Contains(DienThoai))];
+                    filteredResults = [.. filteredResults.Where(d => d.KhachHang.DienThoai != null  && d.KhachHang.DienThoai.Contains(DienThoai))];
                 }
                 if (!string.IsNullOrEmpty(DiaChi))
                 {
-                    filteredResults = [.. filteredResults.Where(d => d.KhachHang.DiaChi.Contains(DiaChi))];
+                    filteredResults = [.. filteredResults.Where(d => d.KhachHang.DiaChi != null && d.KhachHang.DiaChi.Contains(DiaChi))];
                 }
                 if (!string.IsNullOrEmpty(Email))
                 {
-                    filteredResults = [.. filteredResults.Where(d => d.KhachHang.Email.Contains(Email))];
+                    filteredResults = [.. filteredResults.Where(d => d.KhachHang.Email != null && d.KhachHang.Email.Contains(Email))];
                 }
                 if (TienNoFrom != 0 || TienNoTo != long.MaxValue)
                 {
