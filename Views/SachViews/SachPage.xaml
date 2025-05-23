@@ -1,157 +1,171 @@
 ﻿<Page x:Class="QuanLyNhaSach.Views.SachViews.SachPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:fa="http://schemas.fontawesome.io/icons/"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="1536"
-    d:DesignWidth="1536"
-    Background="#F7F9FD"
-    mc:Ignorable="d">
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:fa="http://schemas.fontawesome.io/icons/"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      d:DesignHeight="800"
+      d:DesignWidth="1200"
+      Background="#F7F9FD"
+      mc:Ignorable="d">
 
     <Border
-        Margin="10"
+        Margin="0"
         HorizontalAlignment="Stretch"
         VerticalAlignment="Stretch"
         Background="White"
         CornerRadius="10">
+
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="15*" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="80*" />
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <TextBlock
-                Grid.Row="0"
-                Style="{StaticResource PageHeaderTextBlockStyle}"
-                Text="Danh sách Sách" />
-
-            <Grid Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width=".5*" />
-                    <ColumnDefinition Width=".5*" />
-                </Grid.ColumnDefinitions>
-
-                <StackPanel
-                    Grid.Column="0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Orientation="Horizontal">
-
-                    <Button
-                        Margin="20,0,0,0"
-                        Command="{Binding SearchSachCommand}"
-                        Style="{StaticResource PrimaryButtonStyle}">
-                        <StackPanel Orientation="Horizontal">
-                            <fa:FontAwesome
-                                Margin="0,0,8,0"
-                                VerticalAlignment="Center"
-                                Icon="Search" />
-                            <TextBlock VerticalAlignment="Center" Text="Tra cứu sách" />
-                        </StackPanel>
-                    </Button>
-                    <Button
-                        Width="50"
-                        Margin="10,0,0,0"
-                        Command="{Binding LoadDataCommand}"
-                        Style="{StaticResource PrimaryButtonStyle}">
-                        <fa:FontAwesome VerticalAlignment="Center" Icon="Refresh" />
-                    </Button>
-
-                </StackPanel>
-
-                <StackPanel
-                    Grid.Column="1"
-                    Margin="0,0,20,0"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Center"
-                    Orientation="Horizontal">
-
-                    <Button Command="{Binding AddSachCommand}" Style="{StaticResource PrimaryButtonStyle}">
-                        <StackPanel Orientation="Horizontal">
-                            <fa:FontAwesome
-                                Margin="0,0,8,0"
-                                VerticalAlignment="Center"
-                                Icon="Plus" />
-                            <TextBlock VerticalAlignment="Center" Text="Thêm sách mới" />
-                        </StackPanel>
-                    </Button>
-
-                    <Button
-                        Margin="10,0,0,0"
-                        Command="{Binding EditSachCommand}"
-                        Style="{StaticResource PrimaryButtonStyle}">
-                        <StackPanel Orientation="Horizontal">
-                            <fa:FontAwesome
-                                Margin="0,0,8,0"
-                                VerticalAlignment="Center"
-                                Icon="Edit" />
-                            <TextBlock VerticalAlignment="Center" Text="Cập nhật sách" />
-                        </StackPanel>
-                    </Button>
-
-                    <Button
-                        Margin="10,0,0,0"
-                        Command="{Binding DeleteSachCommand}"
-                        Style="{StaticResource DeleteButtonStyle}">
-                        <StackPanel Orientation="Horizontal">
-                            <fa:FontAwesome
-                                Margin="0,0,8,0"
-                                VerticalAlignment="Center"
-                                Icon="Trash" />
-                            <TextBlock VerticalAlignment="Center" Text="Xóa sách" />
-                        </StackPanel>
-                    </Button>
-
-                </StackPanel>
+            <!-- Tiêu đề màn hình -->
+            <Grid Grid.Row="0" Background="White">
+                <TextBlock
+                    FontSize="30"
+                    Style="{StaticResource PageHeaderTextBlockStyle}"
+                    Text="Danh sách Sách" />
             </Grid>
 
-            <Border
-                Grid.Row="2"
-                Margin="20"
-                Background="#F7F9FD"
-                BorderBrush="#E0E0E0"
-                BorderThickness="1">
-                <DataGrid
-                    ItemsSource="{Binding DanhSachSach}"
-                    SelectedItem="{Binding SelectedSach}"
-                    Style="{StaticResource DefaultDataGridStyle}">
+            <!-- Nội dung chính -->
+            <Border Grid.Row="1" Style="{StaticResource WindowBorderContentWrapper}">
+                <Grid Margin="0,10,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
 
-                    <DataGrid.Columns>
-                        <DataGridTextColumn
-                            Width="*"
-                            Binding="{Binding MaSach}"
-                            ElementStyle="{StaticResource ColumnTextBlockStyle}"
-                            Header="Mã sách" />
+                    <!-- Thanh công cụ nút bấm -->
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".4*" />
+                            <ColumnDefinition Width=".6*" />
+                        </Grid.ColumnDefinitions>
 
-                        <DataGridTextColumn
-                            Width="*"
-                            Binding="{Binding TenSach}"
-                            ElementStyle="{StaticResource ColumnTextBlockStyle}"
-                            Header="Tên sách" />
+                        <StackPanel
+                            Grid.Column="0"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center">
 
-                        <DataGridTextColumn
-                            Width="*"
-                            Binding="{Binding TheLoai}"
-                            ElementStyle="{StaticResource ColumnTextBlockStyle}"
-                            Header="Thể loại" />
+                            <Button
+                                Margin="20,0,0,0"
+                                Height="41"
+                                Command="{Binding SearchSachCommand}"
+                                Style="{StaticResource PrimaryButtonStyle}"
+                                Width="194">
+                                <StackPanel Orientation="Horizontal">
+                                    <fa:FontAwesome Margin="0,0,8,0" VerticalAlignment="Center" Icon="Search" />
+                                    <TextBlock FontSize="20" VerticalAlignment="Center" Text="Tra cứu sách" />
+                                </StackPanel>
+                            </Button>
 
-                        <DataGridTextColumn
-                            Width="*"
-                            Binding="{Binding TacGia}"
-                            ElementStyle="{StaticResource ColumnTextBlockStyle}"
-                            Header="Tác giả" />
-                        <DataGridTextColumn
-                            Width="*"
-                            Binding="{Binding SoLuongTon}"
-                            ElementStyle="{StaticResource ColumnTextBlockStyle}"
-                            Header="Số lượng tồn" />
-                    </DataGrid.Columns>
-                </DataGrid>
+                            <Button
+                                Width="50"
+                                Height="41"
+                                Margin="10,0,0,0"
+                                Command="{Binding LoadDataCommand}"
+                                Style="{StaticResource PrimaryButtonStyle}">
+                                <fa:FontAwesome VerticalAlignment="Center" Icon="Refresh" />
+                            </Button>
+                        </StackPanel>
+
+                        <StackPanel
+                            Grid.Column="1"
+                            Orientation="Horizontal"
+                            Margin="0,0,20,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center">
+
+                            <Button
+                                Height="41"
+                                Command="{Binding AddSachCommand}"
+                                Style="{StaticResource PrimaryButtonStyle}"
+                                Width="193">
+                                <StackPanel Orientation="Horizontal">
+                                    <fa:FontAwesome Margin="0,0,8,0" VerticalAlignment="Center" Icon="Plus" />
+                                    <TextBlock FontSize="20" VerticalAlignment="Center" Text="Thêm sách mới" />
+                                </StackPanel>
+                            </Button>
+
+                            <Button
+                                Height="41"
+                                Margin="10,0,0,0"
+                                Command="{Binding EditSachCommand}"
+                                Style="{StaticResource PrimaryButtonStyle}"
+                                Width="192">
+                                <StackPanel Orientation="Horizontal">
+                                    <fa:FontAwesome Margin="0,0,8,0" VerticalAlignment="Center" Icon="Edit" />
+                                    <TextBlock FontSize="20" VerticalAlignment="Center" Text="Cập nhật sách" />
+                                </StackPanel>
+                            </Button>
+
+                            <Button
+                                Height="41"
+                                Margin="10,0,0,0"
+                                Command="{Binding DeleteSachCommand}"
+                                Style="{StaticResource DeleteButtonStyle}"
+                                Width="159">
+                                <StackPanel Orientation="Horizontal">
+                                    <fa:FontAwesome Margin="0,0,8,0" VerticalAlignment="Center" Icon="Trash" />
+                                    <TextBlock FontSize="20" VerticalAlignment="Center" Text="Xóa sách" />
+                                </StackPanel>
+                            </Button>
+
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- DataGrid hiển thị danh sách sách -->
+                    <Border
+                        Grid.Row="1"
+                        Margin="20,20,20,0"
+                        Background="#F7F9FD"
+                        BorderBrush="#E0E0E0"
+                        BorderThickness="1">
+
+                        <DataGrid
+                            ItemsSource="{Binding DanhSachSach}"
+                            SelectedItem="{Binding SelectedSach}"
+                            Style="{StaticResource DefaultDataGridStyle}">
+
+                            <DataGrid.Columns>
+                                <DataGridTextColumn
+                                    Width="*"
+                                    Binding="{Binding MaSach}"
+                                    ElementStyle="{StaticResource ColumnTextBlockStyle}"
+                                    Header="Mã sách" />
+
+                                <DataGridTextColumn
+                                    Width="*"
+                                    Binding="{Binding TenSach}"
+                                    ElementStyle="{StaticResource ColumnTextBlockStyle}"
+                                    Header="Tên sách" />
+
+                                <DataGridTextColumn
+                                    Width="*"
+                                    Binding="{Binding TheLoai}"
+                                    ElementStyle="{StaticResource ColumnTextBlockStyle}"
+                                    Header="Thể loại" />
+
+                                <DataGridTextColumn
+                                    Width="*"
+                                    Binding="{Binding TacGia}"
+                                    ElementStyle="{StaticResource ColumnTextBlockStyle}"
+                                    Header="Tác giả" />
+
+                                <DataGridTextColumn
+                                    Width="*"
+                                    Binding="{Binding SoLuongTon}"
+                                    ElementStyle="{StaticResource ColumnTextBlockStyle}"
+                                    Header="Số lượng tồn" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Border>
+                </Grid>
             </Border>
-
         </Grid>
     </Border>
 </Page>
