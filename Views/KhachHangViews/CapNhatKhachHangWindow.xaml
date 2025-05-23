@@ -187,7 +187,7 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="0" Width="205" HorizontalAlignment="Left" Command="{Binding TiepNhanKhachHangCommand}" Style="{StaticResource WindowPrimaryButtonStyle}">
+                <Button Grid.Column="0" Width="205" HorizontalAlignment="Left" Command="{Binding CapNhatKhachHangCommand}" Style="{StaticResource WindowPrimaryButtonStyle}">
                     <StackPanel Orientation="Horizontal">
                         <fa:FontAwesome Margin="0,0,10,0" Icon="Pencil" />
                         <TextBlock Text="Cập nhật khách hàng" Width="170" />
