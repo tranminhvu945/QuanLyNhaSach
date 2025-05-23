@@ -7,6 +7,7 @@ using QuanLyNhaSach.Models;
 using QuanLyNhaSach.Models.dto;
 using QuanLyNhaSach.Services;
 using QuanLyNhaSach.Views.HoaDonBanViews;
+using QuanLyNhaSach.Views.KhachHangHoaDonViews;
 using QuanLyNhaSach.Views.KhachHangViews;
 using QuanLyNhaSach.Views.SachViews;
 using System.Collections.ObjectModel;
@@ -303,6 +304,7 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
                 {
                     var khachHangHienTai = await _khachHangService.GetKhachHangById(SelectedKhachHang.MaKhachHang);
                     var existingHoaDon = await _hoaDonService.GetHoaDonById(_hoaDonID);
+                    
                     long tienNoDuKien = khachHangHienTai.TienNo + TongTien - existingHoaDon.TongTien;
 
                     if (tienNoDuKien > thamSo.TienNoToiDa)
@@ -384,12 +386,12 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
         }
 
         [RelayCommand]
-        private void AddKhachHang()
+        private void ThongTinKhachHang()
         {
             SelectedKhachHang = null!;
 
-            var addKhachHangtWindow = _serviceProvider.GetRequiredService<ThemKhachHangWindow>();
-            addKhachHangtWindow.Show();
+            var thongTinKhachHangWindow = _serviceProvider.GetRequiredService<KhachHangHoaDonWindow>();
+            thongTinKhachHangWindow.Show();
         }
 
         [RelayCommand]
