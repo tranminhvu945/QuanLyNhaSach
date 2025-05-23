@@ -55,6 +55,7 @@ namespace QuanLyNhaSach.Extentions
             services.AddTransient<PhieuThuPageViewModel>();
             services.AddTransient<ThemPhieuThuWindowViewModel>();
             services.AddTransient<TraCuuPhieuThuWindowViewModel>();
+            services.AddTransient<CapNhatPhieuThuViewModel>();
 
             services.AddTransient<HoaDonBanPageViewModel>();
             services.AddTransient<ThemHoaDonBanViewModel>();
@@ -65,16 +66,6 @@ namespace QuanLyNhaSach.Extentions
 
             services.AddTransient<ViewModels.PhieuNhapSachViewModel.MainWindowViewModel>();
             services.AddTransient<ViewModels.PhieuNhapSachViewModel.LapPhieuNhapSachViewModel>();
-            //services.AddTransient<Func<int, ViewModels.PhieuNhapSachViewModel.CapNhatPhieuNhapSachViewModel>>(pn => phieuNhapSachId =>
-            //    new ViewModels.PhieuNhapSachViewModel.CapNhatPhieuNhapSachViewModel(
-            //        pn.GetRequiredService <IPhieuNhapSachService>(),
-            //        pn.GetRequiredService<IChiTietPhieuNhapService>(),
-            //        pn.GetRequiredService<ISachService>(),
-            //        pn.GetRequiredService<IThamSoService>(),
-            //        phieuNhapSachId
-            //)
-            //);
-
             services.AddTransient<ViewModels.PhieuNhapSachViewModel.CapNhatPhieuNhapSachViewModel>();
             services.AddTransient<ViewModels.PhieuNhapSachViewModel.TraCuuPhieuNhapSachViewModel>();
 
@@ -102,6 +93,7 @@ namespace QuanLyNhaSach.Extentions
             services.AddTransient<Views.PhieuThuViews.PhieuThuPage>();
             services.AddTransient<Views.PhieuThuViews.ThemPhieuThuWindow>();
             services.AddTransient<Views.PhieuThuViews.TraCuuPhieuThuWindow>();
+            services.AddTransient<Views.PhieuThuViews.CapNhatPhieuThuWindow>();
 
             services.AddTransient<Views.HoaDonBanViews.HoaDonBanPage>();
             services.AddTransient<Views.HoaDonBanViews.CapNhatHoaDonBanWindow>();

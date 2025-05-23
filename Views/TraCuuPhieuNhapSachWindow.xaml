@@ -127,7 +127,9 @@
                                 Height="30"
                                     Margin="0,0,0,0"
                                 SelectedDate="{Binding NgayNhapFrom}"
+                                    Language="vi-VN"
                                 Style="{StaticResource StandardDatePickerStyle}" />
+
                                 <TextBlock
                                 Grid.Column="2"
                                     HorizontalAlignment="Center"
@@ -140,6 +142,7 @@
                                 Width="140"
                                 Height="30"
                                 SelectedDate="{Binding NgayNhapTo}"
+                                    Language="vi-VN"
                                 Style="{StaticResource StandardDatePickerStyle}" />
                             </Grid>
 

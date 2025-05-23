@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using QuanLyNhaSach.Messages;
 using QuanLyNhaSach.Models;
 using QuanLyNhaSach.Services;
+using QuanLyNhaSach.Views;
 using QuanLyNhaSach.Views.PhieuThuViews;
 
 namespace QuanLyNhaSach.ViewModels.PhieuThuViewModel
@@ -18,13 +19,16 @@ namespace QuanLyNhaSach.ViewModels.PhieuThuViewModel
     {
         // Services
         private readonly IPhieuThuService _phieuThuService;
+        private readonly IKhachHangService _khachHangService;
         private readonly IServiceProvider _serviceProvider;
 
         public PhieuThuPageViewModel(
                 IPhieuThuService phieuThuService,
+                IKhachHangService khachHangService,
                 IServiceProvider serviceProvider )
         {
             _phieuThuService = phieuThuService;
+            _khachHangService = khachHangService;
             _serviceProvider = serviceProvider;
 
             WeakReferenceMessenger.Default.RegisterAll(this);
@@ -100,6 +104,13 @@ namespace QuanLyNhaSach.ViewModels.PhieuThuViewModel
                 var result = MessageBox.Show("Bạn có chắc chắn muốn xóa phiếu thu này?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
+                    var khachHang = await _khachHangService.GetKhachHangById(SelectedPhieuThu.MaKhachHang);
+                    if (khachHang != null)
+                    {
+                        khachHang.TienNo += SelectedPhieuThu.SoTienThu;
+                        await _khachHangService.UpdateKhachHang(khachHang);
+                    }
+
                     await _phieuThuService.DeletePhieuThu(SelectedPhieuThu.MaPhieuThu);
                     MessageBox.Show("Đã xóa phiếu thu thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                     await LoadDataAsync();
@@ -108,6 +119,29 @@ namespace QuanLyNhaSach.ViewModels.PhieuThuViewModel
             catch (Exception ex)
             {
                 MessageBox.Show($"Có lỗi xảy ra khi xóa phiếu thu: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        [RelayCommand]
+        private void EditPhieuThu()
+        {
+            if (SelectedPhieuThu == null!)
+            {
+                MessageBox.Show("Vui lòng chọn phiếu thu để chỉnh sửa!", "Thông báo", MessageBoxButton.OK,
+                    MessageBoxImage.Information);
+                return;
+            }
+
+            try
+            {
+                var window = _serviceProvider.GetRequiredService<CapNhatPhieuThuWindow>();
+                window.Show();
+                WeakReferenceMessenger.Default.Send(new SelectedIdMessage(SelectedPhieuThu.MaPhieuThu));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi mở cửa sổ chỉnh sửa phiếu thu: {ex.Message}", "Lỗi", MessageBoxButton.OK,
+                    MessageBoxImage.Error);
             }
         }
 

@@ -898,15 +898,9 @@
 
                         <Border Margin="0,0,0, 0" Padding="15" CornerRadius="8" Height="110" >
                             <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-
                                 <Button
-                                    Grid.Column="0"
                                     Margin="6,5,15,5"
-                                    Command="{Binding EditThamSoCommand}"
+                                    Command="{Binding EditOrSaveCommand}"
                                     Style="{StaticResource PrimaryButtonStyle}" Width="200" Height="70">
                                     <StackPanel Orientation="Horizontal">
                                         <fa:FontAwesome
@@ -915,23 +909,7 @@
                                     Icon="Edit" />
                                         <TextBlock VerticalAlignment="Center"
                                     FontSize="25"
-                                    Text="Sửa tham số" />
-                                    </StackPanel>
-                                </Button>
-
-                                <Button
-                                    Grid.Column="1"
-                                    Margin="0,0,0,0"
-                                    Command="{Binding SaveChangesCommand}"
-                                    Style="{StaticResource PrimaryButtonStyle}" Width="200" Height="70">
-                                    <StackPanel Orientation="Horizontal">
-                                    <fa:FontAwesome
-                                    Margin="0,0,0,0"
-                                    VerticalAlignment="Center"
-                                    Icon="Save" />
-                                        <TextBlock VerticalAlignment="Center"
-                                            FontSize="25"
-                                            Text="Lưu thay đổi" />
+                                    Text="{Binding ButtonText}" />
                                     </StackPanel>
                                 </Button>
                             </Grid>

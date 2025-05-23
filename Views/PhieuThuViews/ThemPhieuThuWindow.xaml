@@ -111,6 +111,7 @@
                                 SelectedDate="{Binding NgayThuTien}"
                                 HorizontalAlignment="Right"
                                 Width="170"
+                                Language="vi-VN"
                                 Style="{StaticResource StandardDatePickerStyle}" />
                         </Grid>
                     </Grid>
@@ -144,7 +145,8 @@
                                 Style="{StaticResource StandardTextBoxStyle}"
                                 HorizontalAlignment="Left"
                                 Width="170"
-                                Text="{Binding SoDienThoai}" Height="30" Margin="90,0,0,0" VerticalAlignment="Top" />
+                                Text="{Binding SoDienThoai, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Height="30" Margin="90,0,0,0" VerticalAlignment="Top" />
+                            
                         </Grid>
 
                         <Grid Grid.Column="1"
@@ -166,7 +168,7 @@
                                 HorizontalAlignment="Right"
                                 Width="170"
                                 Style="{StaticResource ReadOnlyTextBoxStyle}"
-                                Text="{Binding TenKhachHang}" />
+                                Text="{Binding TenKhachHang, Mode=OneWay}" />
                         </Grid>
                     </Grid>
 
@@ -194,7 +196,7 @@
                                 Style="{StaticResource ReadOnlyTextBoxStyle}"
                                 HorizontalAlignment="Right"
                                 Width="350"
-                                Text="{Binding Email}" />
+                                Text="{Binding Email, Mode=OneWay}" />
                         </Grid>
                     </Grid>
 
@@ -221,7 +223,7 @@
                                 Style="{StaticResource ReadOnlyTextBoxStyle}"
                                 HorizontalAlignment="Right"
                                 Width="350"
-                                Text="{Binding DiaChi}" />
+                                Text="{Binding DiaChi, Mode=OneWay}" />
                         </Grid>
                     </Grid>
 
@@ -252,7 +254,7 @@
                                 HorizontalAlignment="Right"
                                 Width="170"
                                 Style="{StaticResource ReadOnlyTextBoxStyle}"
-                                Text="{Binding NoiDung}" />
+                                Text="{Binding TienNo, Mode=OneWay}" />
                         </Grid>
 
                         <Grid Grid.Column="1"
@@ -274,7 +276,7 @@
                                 HorizontalAlignment="Right"
                                 Width="170"
                                 Style="{StaticResource ReadOnlyTextBoxStyle}"
-                                Text="{Binding TienNo}" />
+                                Text="{Binding NoiDung}" />
                         </Grid>
                     </Grid>
 
@@ -337,12 +339,12 @@
                 <Button 
                     Grid.Column="1"
                     HorizontalAlignment="Center" 
-                    Command="{Binding TraCuuPhieuThuCommand}" 
+                    Command="{Binding ThemKhachHangCommand}" 
                     Style="{StaticResource WindowPrimaryButtonStyle}" 
-                    Width="154">
+                    Width="200">
                     <StackPanel Orientation="Horizontal">
                         <fa:FontAwesome/>
-                        <TextBlock Text="Tìm khách hàng" />
+                        <TextBlock Text="Thêm khách hàng mới" />
                     </StackPanel>
                 </Button>
 
