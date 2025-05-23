@@ -110,6 +110,8 @@
                                 Grid.Column="1"
                                 SelectedDate="{Binding NgayThuTien}"
                                 HorizontalAlignment="Right"
+                                SelectedDateFormat="Short"
+                                Language="vi-VN"
                                 Width="170"
                                 Style="{StaticResource StandardDatePickerStyle}" />
                         </Grid>
