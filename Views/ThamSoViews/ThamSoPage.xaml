@@ -74,7 +74,7 @@
                          VerticalContentAlignment="Center"
                          HorizontalAlignment="Center"
                          Cursor="Hand"
-                         IsChecked="{Binding QuyDinhSoLuongNhapToiThieu}"
+                         IsChecked="{Binding QuyDinhSoLuongTonToiDa}"
                          IsHitTestVisible="{Binding IsEditing}"
                          Height="80" Margin="0,-20,0,-20" >
                                     <ToggleButton.Resources>
@@ -179,10 +179,9 @@
                             <TextBox Grid.Column="1"
                                      Margin="30,20,30,20"
                                      FontSize="20"
-                                     Style="{StaticResource StandardTextBoxStyle}"
+                                     HorizontalContentAlignment="Center"
+                                     Style="{Binding TextBoxStyle}"
                                      Text="{Binding SoLuongTonToiDa}"/>
-
-
                         </Grid>
 
 
@@ -213,7 +212,7 @@
                          VerticalContentAlignment="Center"
                          HorizontalAlignment="Center"
                          Cursor="Hand"
-                         IsChecked="{Binding QuyDinhSoLuongNhapToiThieu}"
+                         IsChecked="{Binding QuyDinhSoLuongTonToiThieu}"
                          IsHitTestVisible="{Binding IsEditing}"
                          Height="80" Margin="0,-20,0,-20" >
                                     <ToggleButton.Resources>
@@ -318,7 +317,8 @@
                             <TextBox Grid.Column="1"
                                      Margin="30,20,30,20"
                                      FontSize="20"
-                                     Style="{StaticResource StandardTextBoxStyle}"
+                                     HorizontalContentAlignment="Center"
+                                     Style="{Binding TextBoxStyle}"
                                      Text="{Binding SoLuongTonToiThieu}"/>
 
 
@@ -326,86 +326,6 @@
 
                     </Grid>
 
-<<<<<<< HEAD
-                                                            <!--  Switch Thumb/Knob  -->
-                                                            <Border
-                                    x:Name="SwitchKnob"
-                                    Width="40"
-                                    Height="40"
-                                    Margin="4,0,0,0"
-                                    HorizontalAlignment="Left"
-                                    Background="White"
-                                    CornerRadius="20">
-                                                                <Border.Effect>
-                                                                    <DropShadowEffect
-                                            BlurRadius="3"
-                                            Opacity="0.2"
-                                            ShadowDepth="1"
-                                            Color="#555555" />
-                                                                </Border.Effect>
-                                                            </Border>
-                                                        </Border>
-                                                    </Grid>
-
-                                                    <!--  Visual States  -->
-                                                    <ControlTemplate.Triggers>
-                                                        <Trigger Property="IsChecked" Value="True">
-                                                            <Setter TargetName="SwitchTrack" Property="Background" Value="#2871DF" />
-                                                            <Setter TargetName="SwitchKnob" Property="HorizontalAlignment" Value="Right" />
-                                                            <Setter TargetName="SwitchKnob" Property="Margin" Value="0,0,4,0" />
-                                                        </Trigger>
-                                                        <Trigger Property="IsMouseOver" Value="True">
-                                                            <Setter TargetName="SwitchTrack" Property="Background">
-                                                                <Setter.Value>
-                                                                    <SolidColorBrush Opacity="0.9" Color="#CCCCCC" />
-                                                                </Setter.Value>
-                                                            </Setter>
-                                                        </Trigger>
-                                                        <MultiTrigger>
-                                                            <MultiTrigger.Conditions>
-                                                                <Condition Property="IsMouseOver" Value="True" />
-                                                                <Condition Property="IsChecked" Value="True" />
-                                                            </MultiTrigger.Conditions>
-                                                            <Setter TargetName="SwitchTrack" Property="Background">
-                                                                <Setter.Value>
-                                                                    <SolidColorBrush Opacity="0.9" Color="#2871DF" />
-                                                                </Setter.Value>
-                                                            </Setter>
-                                                        </MultiTrigger>
-                                                        <Trigger Property="IsEnabled" Value="False">
-                                                            <Setter TargetName="SwitchTrack" Property="Background" Value="#E0E0E0" />
-                                                            <Setter TargetName="SwitchKnob" Property="Background" Value="#CCCCCC" />
-                                                        </Trigger>
-                                                    </ControlTemplate.Triggers>
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Style>
-                                </ToggleButton.Style>
-                            </ToggleButton>
-                        </Border>
-
-                        <Border Margin="0,0,0, 0" Padding="15" CornerRadius="8" Height="110" >
-                            <Grid>
-                                <Button
-                                    Margin="6,5,15,5"
-                                    Command="{Binding EditOrSaveCommand}"
-                                    Style="{StaticResource PrimaryButtonStyle}" Width="200" Height="70">
-                                    <StackPanel Orientation="Horizontal">
-                                        <fa:FontAwesome
-                                    Margin="0,0,0,0"
-                                    VerticalAlignment="Center"
-                                    Icon="Edit" />
-                                        <TextBlock VerticalAlignment="Center"
-                                    FontSize="25"
-                                    Text="{Binding ButtonText}" />
-                                    </StackPanel>
-                                </Button>
-                            </Grid>
-                        </Border>
-                    </StackPanel>
-=======
->>>>>>> ccd26169cd07832a6be2e5dd9cb1a63a19be76c2
                 </Grid>
 
                 <!--Line 2-->
@@ -552,8 +472,9 @@
                             <TextBox Grid.Column="1"
                                      Margin="30,20,30,20"
                                      FontSize="20"
-                                     Style="{StaticResource StandardTextBoxStyle}"
-                                     Text="{Binding SoLuongTonToiDa}"/>
+                                     HorizontalContentAlignment="Center"
+                                     Style="{Binding TextBoxStyle}"
+                                     Text="{Binding SoLuongNhapToiThieu}"/>
 
 
                         </Grid>
@@ -602,7 +523,7 @@
                          VerticalContentAlignment="Center"
                          HorizontalAlignment="Center"
                          Cursor="Hand"
-                         IsChecked="{Binding QuyDinhSoLuongNhapToiThieu}"
+                         IsChecked="{Binding QuyDinhTienNoToiDa}"
                          IsHitTestVisible="{Binding IsEditing}"
                          Height="80" Margin="0,-20,0,-20" >
                                     <ToggleButton.Resources>
@@ -707,8 +628,9 @@
                             <TextBox Grid.Column="1"
                                      Margin="30,20,30,20"
                                      FontSize="20"
-                                     Style="{StaticResource StandardTextBoxStyle}"
-                                     Text="{Binding SoLuongTonToiDa}"/>
+                                     HorizontalContentAlignment="Center"
+                                     Style="{Binding TextBoxStyle}"
+                                     Text="{Binding TienNoToiDa}"/>
 
 
                         </Grid>
@@ -741,7 +663,7 @@
                          VerticalContentAlignment="Center"
                          HorizontalAlignment="Center"
                          Cursor="Hand"
-                         IsChecked="{Binding QuyDinhSoLuongNhapToiThieu}"
+                         IsChecked="{Binding QuyDinhTienThuTienNo}"
                          IsHitTestVisible="{Binding IsEditing}"
                          Height="80" Margin="0,-20,0,-20" >
                                     <ToggleButton.Resources>
@@ -840,13 +762,13 @@
                         Height="50"
                         Margin="0,0,30,0"
                             HorizontalAlignment="Right" 
-                            Command="{Binding SearchKhachHangCommand}" 
+                            Command="{Binding EditOrSaveCommand}" 
                             Style="{StaticResource WindowPrimaryButtonStyle}"
                        Width="164"
                         >
                         <StackPanel Orientation="Horizontal">
                             <fa:FontAwesome Margin="0,0,10,0" Icon="Edit" />
-                            <TextBlock Text="Sửa tham số" FontSize="20" />
+                            <TextBlock Text="{Binding ButtonText}" FontSize="20" />
                         </StackPanel>
                     </Button>
                 </Grid>

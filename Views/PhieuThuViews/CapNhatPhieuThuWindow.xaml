@@ -113,7 +113,6 @@
                                 SelectedDateFormat="Short"
                                 Language="vi-VN"
                                 Width="170"
-                                Language="vi-VN"
                                 Style="{StaticResource StandardDatePickerStyle}" />
                         </Grid>
                     </Grid>

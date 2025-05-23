@@ -127,12 +127,8 @@
                                 Height="30"
                                     Margin="0,0,0,0"
                                 SelectedDate="{Binding NgayNhapFrom}"
-<<<<<<< HEAD
-                                    Language="vi-VN"
-=======
                                 SelectedDateFormat="Short"
                                 Language="vi-VN"                                    
->>>>>>> ccd26169cd07832a6be2e5dd9cb1a63a19be76c2
                                 Style="{StaticResource StandardDatePickerStyle}" />
 
                                 <TextBlock
@@ -147,12 +143,8 @@
                                 Width="140"
                                 Height="30"
                                 SelectedDate="{Binding NgayNhapTo}"
-<<<<<<< HEAD
-                                    Language="vi-VN"
-=======
                                 SelectedDateFormat="Short"
                                 Language="vi-VN"                                    
->>>>>>> ccd26169cd07832a6be2e5dd9cb1a63a19be76c2
                                 Style="{StaticResource StandardDatePickerStyle}" />
                             </Grid>
 
