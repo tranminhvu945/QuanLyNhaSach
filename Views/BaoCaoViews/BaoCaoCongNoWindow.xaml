@@ -40,7 +40,7 @@
                     Grid.Column="0"
                     Margin="20,15,0,0"
                     VerticalAlignment="Center">
-                    <TextBlock Style="{StaticResource WindowHeaderTextBlockStyle}" Text="Báo cáo tồn theo tháng" />
+                    <TextBlock Style="{StaticResource WindowHeaderTextBlockStyle}" Text="Báo cáo công nợ theo tháng" />
                 </StackPanel>
 
                 <StackPanel
@@ -122,14 +122,14 @@
 
                             <Button
                                 Command="{Binding ExportToPDFCommand}"
-                                Style="{StaticResource WindowPrimaryButtonStyle}" Width="181">
+                                Style="{StaticResource WindowPrimaryButtonStyle}" Width="210">
                                 <StackPanel Orientation="Horizontal">
                                     <fa:FontAwesome Margin="0,0,10,0" Icon="FileText" />
-                                    <TextBlock Text="Lập báo cáo tồn" />
+                                    <TextBlock Text="Lập báo cáo công nợ" />
                                 </StackPanel>
                             </Button>
 
-                            <Button Command="{Binding CloseWindowCommand}" Style="{StaticResource WindowSignoutButtonStyle}" Width="NaN" Margin="36,0,1,0">
+                            <Button Command="{Binding CloseCommand}" Style="{StaticResource WindowSignoutButtonStyle}" Width="NaN" Margin="36,0,1,0">
                                 <StackPanel Orientation="Horizontal">
                                     <fa:FontAwesome Margin="0,0,10,0" Icon="SignOut" />
                                     <TextBlock Text="Thoát" />
@@ -154,9 +154,8 @@
                                 Text="Người báo cáo" />
                             <TextBox
                                 Grid.Column="2"
-                                IsReadOnly="True"
                                 Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding TongTonCuoiThang, StringFormat={}{0:N0}}" />
+                                Text="{Binding NguoiLap, UpdateSourceTrigger=PropertyChanged}" />
 
                         </Grid>
 
@@ -172,12 +171,12 @@
                             <TextBlock
                                 Grid.Column="1"
                                 Style="{StaticResource FieldLabelTextBlockStyle}"
-                                Text="Tổng tồn cuối trong tháng của tất cả đầu sách" />
+                                Text="Tổng nợ cuối trong tháng của tất cả khách hàng" />
                             <TextBox
                                 Grid.Column="2"
                                 IsReadOnly="True"
                                 Style="{StaticResource ReadOnlyTextBoxStyle}"
-                                Text="{Binding TongTonCuoiThang, StringFormat={}{0:N0}}" />
+                                Text="{Binding TongNoCuoiThang, StringFormat={}{0:N0}}" />
 
                         </Grid>
 
@@ -224,7 +223,7 @@
 
                                 <DataGridTemplateColumn
                                     Width="*"
-                                    Header="TỒN ĐẦU"
+                                    Header="NỢ ĐẦU"
                                     IsReadOnly="True">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
@@ -250,7 +249,7 @@
 
                                 <DataGridTemplateColumn
                                     Width="*"
-                                    Header="TỒN CUỐI"
+                                    Header="NỢ CUỐI"
                                     IsReadOnly="True">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>

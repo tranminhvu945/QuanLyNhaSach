@@ -11,25 +11,17 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using QuanLyNhaSach.ViewModels.PhieuNhapSachViewModel;
-using QuanLyNhaSach.ViewModels.PhieuThuViewModel;
 
-namespace QuanLyNhaSach.Views
+namespace QuanLyNhaSach.Views.PhieuThuViews
 {
     /// <summary>
-    /// Interaction logic for LapPhieuNhapSachWindow.xaml
+    /// Interaction logic for CapNhatPhieuThuWindow.xaml
     /// </summary>
-    public partial class LapPhieuNhapSachWindow : Window
+    public partial class CapNhatPhieuThuWindow : Window
     {
-        public LapPhieuNhapSachWindow(LapPhieuNhapSachViewModel vm)
+        public CapNhatPhieuThuWindow()
         {
             InitializeComponent();
-            DataContext = vm;
-        }
-
-        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }

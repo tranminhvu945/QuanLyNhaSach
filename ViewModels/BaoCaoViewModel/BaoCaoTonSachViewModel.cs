@@ -89,7 +89,8 @@ namespace QuanLyNhaSach.ViewModels.BaoCaoViewModel
 
         [ObservableProperty]
         private ObservableCollection<BaoCaoTonSach> _baoCaoTonSachList = new ObservableCollection<BaoCaoTonSach>();
-
+        [ObservableProperty]
+        private string _nguoiLap = "";
         partial void OnBaoCaoTonSachListChanged(ObservableCollection<BaoCaoTonSach> value)
         {
             _ = LoadDataAsync();
@@ -110,61 +111,54 @@ namespace QuanLyNhaSach.ViewModels.BaoCaoViewModel
             {
                 BaoCaoTonSachList.Clear();
 
-                // Lấy danh sách tất cả sách từ service
-                var sachList = await _sachService.GetAllSach();
-
                 int month = int.Parse(SelectedMonth.Replace("Tháng ", ""));
                 int year = SelectedYear;
-                TongTonCuoiThang = 0;
                 DateTime dauThang = new DateTime(year, month, 1);
+                TongTonCuoiThang = 0;
+
+                var sachList = await _sachService.GetAllSach();
+                var allChiTietPhieuNhap = await _chiTietPhieuNhapService.GetAllChiTietPhieuNhap();
+                var allChiTietHoaDon = await _chiTietHoaDonService.GetAllChiTietHoaDon();
 
                 foreach (var sach in sachList)
                 {
-                    var chiTietPhieuNhapList = await _chiTietPhieuNhapService.GetAllChiTietPhieuNhap();
-                    var chiTietPhieuNhapTheoSach = chiTietPhieuNhapList
-                        .Where(ct => ct.MaSach == sach.MaSach)
-                        .ToList();
-
-                    var chiTietHoaDonList = await _chiTietHoaDonService.GetAllChiTietHoaDon();
-                    var chiTietHoaDonTheoSach = chiTietHoaDonList
-                        .Where(ct => ct.MaSach == sach.MaSach)
-                        .ToList();
-
                     int tonDau = 0;
                     int phatSinh = 0;
-                    foreach (var chiTiet in chiTietPhieuNhapTheoSach)
+
+                    var chiTietNhapTheoSach = allChiTietPhieuNhap.Where(ct => ct.MaSach == sach.MaSach);
+                    foreach (var chiTiet in chiTietNhapTheoSach)
                     {
                         var phieuNhap = await _phieuNhapSachService.GetPhieuNhapById(chiTiet.MaPhieuNhapSach);
+                        var ngayNhap = phieuNhap.NgayNhap;
 
-                        // Tính tồn đầu tháng (tất cả tồn trước tháng được tính)
-                        if (phieuNhap.NgayNhap < dauThang)
+                        if (ngayNhap < dauThang)
                             tonDau += chiTiet.SoLuongNhap;
-                        else 
-                            if (phieuNhap.NgayNhap.Month == month && phieuNhap.NgayNhap.Year == year)
-                                phatSinh += chiTiet.SoLuongNhap;
-
-
+                        else if (ngayNhap.Month == month && ngayNhap.Year == year)
+                            phatSinh += chiTiet.SoLuongNhap;
                     }
 
-                    foreach (var chiTiet in chiTietHoaDonTheoSach)
+                    var chiTietBanTheoSach = allChiTietHoaDon.Where(ct => ct.MaSach == sach.MaSach);
+                    foreach (var chiTiet in chiTietBanTheoSach)
                     {
                         var hoaDon = await _hoaDonService.GetHoaDonById(chiTiet.MaHoaDon);
+                        var ngayLap = hoaDon.NgayLap;
 
-                        // Tính tồn đầu tháng (tất cả tồn trước tháng được tính)
-                        if (hoaDon.NgayLap < dauThang)
+                        if (ngayLap < dauThang)
                             tonDau -= chiTiet.SoLuongBan;
-                        else
-                            if (hoaDon.NgayLap.Month == month && hoaDon.NgayLap.Year == year)
-                                phatSinh -= chiTiet.SoLuongBan;
+                        else if (ngayLap.Month == month && ngayLap.Year == year)
+                            phatSinh -= chiTiet.SoLuongBan;
                     }
-                    TongTonCuoiThang += tonDau + phatSinh;
+
+                    int tonCuoi = tonDau + phatSinh;
+                    TongTonCuoiThang += tonCuoi;
+
                     BaoCaoTonSachList.Add(new BaoCaoTonSach
                     {
                         STT = BaoCaoTonSachList.Count + 1,
                         TenSach = sach.TenSach,
                         TonDau = tonDau,
-                        TonCuoi = tonDau + phatSinh,
-                        PhatSinh = phatSinh
+                        PhatSinh = phatSinh,
+                        TonCuoi = tonCuoi
                     });
                 }
             }
@@ -173,6 +167,7 @@ namespace QuanLyNhaSach.ViewModels.BaoCaoViewModel
                 MessageBox.Show($"Lỗi khi tải dữ liệu: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
 
         [RelayCommand]
         private void ExportToPDF()
@@ -232,7 +227,7 @@ namespace QuanLyNhaSach.ViewModels.BaoCaoViewModel
                                 column.Spacing(5);
 
                                 // Thông tin người lập
-                                column.Item().Text($"Người lập: Nguyễn Văn A").Italic();
+                                column.Item().Text($"Người lập: {_nguoiLap}").Italic();
                                 column.Item().Text($"Ngày lập: {DateTime.Now:dd/MM/yyyy}").Italic();
 
                                 // Bảng dữ liệu

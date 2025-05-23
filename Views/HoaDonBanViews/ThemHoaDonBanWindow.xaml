@@ -4,6 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:fa="http://schemas.fontawesome.io/icons/"
     xmlns:helpers="clr-namespace:QuanLyNhaSach.Helpers"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Thêm hóa đơn bán sách"
     Width="1069"
@@ -14,6 +15,9 @@
 
     <Window.Resources>
         <helpers:RowToIndexConverter x:Key="RowToIndexConverter" />
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <!-- Converter chuyển số sang Visibility -->
+        <helpers:IntToVisibilityConverter x:Key="IntToVisibilityConverter" />
     </Window.Resources>
 
     <Border Style="{StaticResource WindowPopUpBorder}">
@@ -143,7 +147,6 @@
                                     <ColumnDefinition Width="3.78*" />
                                     <ColumnDefinition Width="4*" />
                                 </Grid.ColumnDefinitions>
-
                                 <TextBlock
                                  Grid.Column="0"
                                  Style="{StaticResource FieldLabelTextBlockStyle}"
@@ -152,7 +155,7 @@
                                     Margin="0"
                                  Grid.Column="1"
                                  Style="{StaticResource ReadOnlyTextBoxStyle}"
-                                 Text="{Binding TenKhachHang}" />
+                                 Text="{Binding SelectedKhachHang.TenKhachHang}" />
 
                             </Grid>
 
@@ -170,6 +173,7 @@
                                  Grid.Column="1"
                                  Style="{StaticResource StandardTextBoxStyle}"
                                  Text="{Binding DienThoai, UpdateSourceTrigger=PropertyChanged}" />
+                                 LostFocus="DienThoaiTextBox_LostFocus"/>
 
                             </Grid>
 
@@ -191,16 +195,15 @@
                                     <ColumnDefinition Width="3*" />
                                     <ColumnDefinition Width="4*" />
                                 </Grid.ColumnDefinitions>
-
                                 <TextBlock
-                                 Grid.Column="0"
-                                 Style="{StaticResource FieldLabelTextBlockStyle}"
-                                 Text="Tiền nợ" />
+        Grid.Column="0"
+        Style="{StaticResource FieldLabelTextBlockStyle}"
+        Text="Tiền nợ" />
                                 <TextBox
-                                 Grid.Column="1"
-                                 Style="{StaticResource ReadOnlyTextBoxStyle}"
-                                 Text="{Binding TienNo}" />
-
+        Grid.Column="1"
+        Style="{StaticResource ReadOnlyTextBoxStyle}"
+        Text="{Binding TienNo}"
+        IsReadOnly="True" />
                             </Grid>
                         </Grid>
 
@@ -225,7 +228,7 @@
                                 <TextBox
                                 Grid.Column="1"
                                 Style="{StaticResource ReadOnlyTextBoxStyle}"
-                                Text="{Binding SoLuongNhapToiThieu}" />
+                                Text="{Binding SoLuongTonToiThieuSauBan}" />
 
                             </Grid>
 
@@ -234,6 +237,7 @@
                                     <ColumnDefinition Width="3*" />
                                     <ColumnDefinition Width="4*" />
                                 </Grid.ColumnDefinitions>
+
 
                                 <TextBlock
                                  Grid.Column="0"
@@ -356,7 +360,7 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBox 
-                                                Text="{Binding SoLuongBan}"
+                                                Text="{Binding SoLuongBan, UpdateSourceTrigger=PropertyChanged}"
                                                 Style="{StaticResource ColumnTextBoxGridStyle}"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
@@ -367,7 +371,7 @@
                                         <DataTemplate>
                                             <TextBox 
                                                 Width="100"
-                                                Text="{Binding DonGiaBan}"
+                                                Text="{Binding DonGiaBan, UpdateSourceTrigger=PropertyChanged}"
                                                 Style="{StaticResource ColumnTextBoxGridStyle}"/>                                            
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>

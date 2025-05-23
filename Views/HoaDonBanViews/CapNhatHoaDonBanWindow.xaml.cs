@@ -10,5 +10,16 @@ namespace QuanLyNhaSach.Views.HoaDonBanViews
             InitializeComponent();
             DataContext = vm;
         }
+
+        private void DienThoaiTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is CapNhatHoaDonBanViewModel vm)
+            {
+                if (vm.TimKhachHangTheoDienThoaiCommand.CanExecute(null))
+                {
+                    vm.TimKhachHangTheoDienThoaiCommand.Execute(null);
+                }
+            }
+        }
     }
 }

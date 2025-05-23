@@ -63,6 +63,10 @@ namespace QuanLyNhaSach.ViewModels.BaoCaoViewModel
         }
 
         [ObservableProperty]
+        private string _nguoiLap = "";
+
+
+        [ObservableProperty]
         private int _selectedYear = 2025;
         partial void OnSelectedYearChanged(int value)
         {
@@ -93,54 +97,40 @@ namespace QuanLyNhaSach.ViewModels.BaoCaoViewModel
             try
             {
                 BaoCaoCongNoList.Clear();
+
+                // Lấy danh sách khách hàng và toàn bộ hóa đơn, phiếu thu trước
                 var khachHangList = await _khachHangService.GetAllKhachHang();
+                var hoaDonList = await _hoaDonService.GetAllHoaDon();
+                var phieuThuList = await _phieuThuService.GetAllPhieuThu();
 
                 int month = int.Parse(SelectedMonth.Replace("Tháng ", ""));
                 int year = SelectedYear;
-
                 DateTime dauThang = new DateTime(year, month, 1);
+
                 TongNoCuoiThang = 0;
+                int stt = 1;
+
                 foreach (var kh in khachHangList)
                 {
-                    var hoaDonList = await _hoaDonService.GetAllHoaDon();
-                    var hoaDonTheoKH = hoaDonList
-                        .Where(hd => hd.MaKhachHang == kh.MaKhachHang)
-                        .ToList();
+                    var hoaDonKH = hoaDonList.Where(hd => hd.MaKhachHang == kh.MaKhachHang);
+                    var phieuThuKH = phieuThuList.Where(pt => pt.MaKhachHang == kh.MaKhachHang);
 
-                    var phieuThuList = await _phieuThuService.GetAllPhieuThu();
-                    var phieuThuTheoKH = phieuThuList
-                        .Where(hd => hd.MaKhachHang == kh.MaKhachHang)
-                        .ToList();
+                    long noDau = hoaDonKH.Where(hd => hd.NgayLap < dauThang).Sum(hd => hd.TongTien)
+                                - phieuThuKH.Where(pt => pt.NgayThu < dauThang).Sum(pt => pt.SoTienThu);
 
-                    long noDau = 0;
-                    long phatSinh = 0;
+                    long phatSinh = hoaDonKH.Where(hd => hd.NgayLap.Month == month && hd.NgayLap.Year == year).Sum(hd => hd.TongTien)
+                                   - phieuThuKH.Where(pt => pt.NgayThu.Month == month && pt.NgayThu.Year == year).Sum(pt => pt.SoTienThu);
 
-                    foreach (var hd in hoaDonTheoKH)
-                    {
-                        if (hd.NgayLap < dauThang)
-                            noDau += hd.TongTien;
-                        else
-                            if (hd.NgayLap.Month == month && hd.NgayLap.Year == year)
-                            phatSinh += hd.TongTien;
-                    }
+                    long noCuoi = noDau + phatSinh;
+                    TongNoCuoiThang += noCuoi;
 
-                    foreach (var pt in phieuThuTheoKH)
-                    {
-                        if (pt.NgayThu < dauThang)
-                            noDau -= pt.SoTienThu;
-                        else
-                            if (pt.NgayThu.Month == month && pt.NgayThu.Year == year)
-                            phatSinh -= pt.SoTienThu;
-                    }
-
-                    TongNoCuoiThang += noDau + phatSinh;
                     BaoCaoCongNoList.Add(new BaoCaoCongNo
                     {
-                        STT = BaoCaoCongNoList.Count + 1,
+                        STT = stt++,
                         TenKhachHang = kh.TenKhachHang,
                         NoDauThang = noDau,
-                        NoCuoiThang = noDau + phatSinh,
-                        PhatSinh = phatSinh
+                        PhatSinh = phatSinh,
+                        NoCuoiThang = noCuoi
                     });
                 }
             }
@@ -149,6 +139,7 @@ namespace QuanLyNhaSach.ViewModels.BaoCaoViewModel
                 MessageBox.Show($"Lỗi khi tải dữ liệu: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
 
         [RelayCommand]
         private void ExportToPDF()
@@ -208,7 +199,7 @@ namespace QuanLyNhaSach.ViewModels.BaoCaoViewModel
                                 column.Spacing(5);
 
                                 // Thông tin người lập
-                                column.Item().Text($"Người lập: Nguyễn Văn A").Italic();
+                                column.Item().Text($"Người lập: {_nguoiLap}").Italic();
                                 column.Item().Text($"Ngày lập: {DateTime.Now:dd/MM/yyyy}").Italic();
 
                                 // Bảng dữ liệu
