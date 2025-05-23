@@ -169,7 +169,7 @@
                                  Text="Điện thoại khách hàng" />
                                 <TextBox
                                  Grid.Column="1"
-                                 LostFocus="DienThoaiTextBox_LostFocus"/>
+                                 LostFocus="DienThoaiTextBox_LostFocus"
                                  Style="{StaticResource StandardTextBoxStyle}"
                                  Text="{Binding DienThoai, UpdateSourceTrigger=PropertyChanged}" />
 
