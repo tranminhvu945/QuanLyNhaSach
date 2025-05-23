@@ -107,6 +107,7 @@
     <Style x:Key="BaoCaoBorderStyle" TargetType="Border">
         <Setter Property="Padding" Value="3" />
         <Setter Property="Height" Value="30" />
+        <Setter Property="MinWidth" Value="75" />
         <Setter Property="Background" Value="#A2A2A2" />
         <Setter Property="BorderBrush" Value="Black" />
         <Setter Property="BorderThickness" Value="1" />

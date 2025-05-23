@@ -248,14 +248,20 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
                     hoaDons = hoaDons.Where(d => d.DsChiTietHoaDon.Any(ct => ct.Sach.MaSach == SelectedSach.MaSach));
                 }
 
-                if (!string.IsNullOrEmpty(TheLoai))
+                if (!string.IsNullOrWhiteSpace(TheLoai))
                 {
-                    hoaDons = hoaDons.Where(h => h.DsChiTietHoaDon.Any(ct => ct.Sach.TheLoai.Contains(TheLoai)));
+                    hoaDons = hoaDons.Where(d =>
+                        d.DsChiTietHoaDon.Any(ct =>
+                            !string.IsNullOrEmpty(ct.Sach.TheLoai) &&
+                            ct.Sach.TheLoai.IndexOf(TheLoai, StringComparison.OrdinalIgnoreCase) >= 0));
                 }
 
-                if (!string.IsNullOrEmpty(TacGia))
+                if (!string.IsNullOrWhiteSpace(TacGia))
                 {
-                    hoaDons = hoaDons.Where(h => h.DsChiTietHoaDon.Any(ct => ct.Sach.TacGia.Contains(TacGia)));
+                    hoaDons = hoaDons.Where(d =>
+                        d.DsChiTietHoaDon.Any(ct =>
+                            !string.IsNullOrEmpty(ct.Sach.TacGia) &&
+                            ct.Sach.TacGia.IndexOf(TacGia, StringComparison.OrdinalIgnoreCase) >= 0));
                 }
 
                 if (!string.IsNullOrEmpty(SoLuongTonFrom) && !string.IsNullOrEmpty(SoLuongTonTo)

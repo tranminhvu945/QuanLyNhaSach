@@ -19,17 +19,20 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
         private readonly IHoaDonService _hoaDonService;
         private readonly IChiTietHoaDonService _phieuHoaDonChiTietService;
         private readonly ISachService _sachService;
+        private readonly IKhachHangService _khachHangService;
         private readonly IServiceProvider _serviceProvider;
 
         public HoaDonBanPageViewModel(
             IHoaDonService HoaDonService,
             IChiTietHoaDonService phieuHoaDonChiTietService,
             ISachService sachService,
+            IKhachHangService khachHangService,
             IServiceProvider serviceProvider)
         {
             _hoaDonService = HoaDonService;
             _phieuHoaDonChiTietService = phieuHoaDonChiTietService;
             _sachService = sachService;
+            _khachHangService = khachHangService;
             _serviceProvider = serviceProvider;
 
             WeakReferenceMessenger.Default.Register<DataReloadMessage>(this);
@@ -146,6 +149,17 @@ namespace QuanLyNhaSach.ViewModels.HoaDonBanViewModel
                             await _sachService.UpdateSach(sach);
                         }
                     }
+
+                    // Trừ tổng tiền hóa đơn bị xóa ra khỏi tiền nợ khách hàng
+                    var khachHang = await _khachHangService.GetKhachHangById(SelectedHoaDon.MaKhachHang);
+                    if (khachHang != null)
+                    {
+                        khachHang.TienNo -= SelectedHoaDon.TongTien;
+                        if (khachHang.TienNo < 0) 
+                            khachHang.TienNo = 0; // tránh âm nợ
+                        await _khachHangService.UpdateKhachHang(khachHang);
+                    }
+
                     // Xóa chi tiết hoá đơn cũ
                     await _phieuHoaDonChiTietService.DeleteChiTietHoaDonByHoaDonId(SelectedHoaDon.MaHoaDon);
 

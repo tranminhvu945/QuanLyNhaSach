@@ -1,0 +1,155 @@
+﻿<Window x:Class="QuanLyNhaSach.Views.KhachHangHoaDonViews.KhachHangHoaDonWindow"
+     
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:fa="http://schemas.fontawesome.io/icons/"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="1536"
+    d:DesignWidth="1536"
+    Background="#F7F9FD"
+    mc:Ignorable="d">
+
+    <Border
+    Margin="10"
+    HorizontalAlignment="Stretch"
+    VerticalAlignment="Stretch"
+    Background="White"
+    CornerRadius="10">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="15*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="80*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <TextBlock
+            Grid.Row="0"
+            Style="{StaticResource PageHeaderTextBlockStyle}"
+            Text="Thông tin khách hàng" />
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".5*" />
+                    <ColumnDefinition Width=".5*" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel
+                Grid.Column="0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+
+                    <Button
+                    Margin="20,0,0,0"
+                    Command="{Binding SearchKhachHangCommand}"
+                    Style="{StaticResource PrimaryButtonStyle}"
+                    MinWidth="200">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:FontAwesome
+                            Margin="0,0,8,0"
+                            VerticalAlignment="Center"
+                            Icon="Search" />
+                            <TextBlock VerticalAlignment="Center" Text="Tra cứu khách hàng" />
+                        </StackPanel>
+                    </Button>
+                    <Button
+                    Width="50"
+                    Margin="10,0,0,0"
+                    Command="{Binding LoadDataCommand}"
+                    Style="{StaticResource PrimaryButtonStyle}">
+                        <fa:FontAwesome VerticalAlignment="Center" Icon="Refresh" />
+                    </Button>
+
+                </StackPanel>
+
+                <StackPanel
+                Grid.Column="1"
+                Margin="0,0,20,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+
+                    <Button Command="{Binding AddKhachHangCommand}" Style="{StaticResource PrimaryButtonStyle}" MinWidth="200">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:FontAwesome
+                            Margin="0,0,8,0"
+                            VerticalAlignment="Center"
+                            Icon="Plus" />
+                            <TextBlock VerticalAlignment="Center" Text="Thêm khách hàng" />
+                        </StackPanel>
+                    </Button>
+
+                    <Button
+                    Margin="10,0,0,0"
+                    Command="{Binding TroVeHoaDonCommand}"
+                    Style="{StaticResource DeleteButtonStyle}"
+                    MinWidth="250">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:FontAwesome
+                            Margin="0,0,8,0"
+                            VerticalAlignment="Center"
+                            Icon="ArrowLeft" />
+                            <TextBlock VerticalAlignment="Center" Text="Trở về trang lập hoá đơn" />
+                        </StackPanel>
+                    </Button>
+
+                </StackPanel>
+            </Grid>
+
+            <Border
+            Grid.Row="2"
+            Margin="20"
+            Background="#F7F9FD"
+            BorderBrush="#E0E0E0"
+            BorderThickness="1">
+                <DataGrid
+                ItemsSource="{Binding DanhSachKhachHang}"
+                SelectedItem="{Binding SelectedKhachHang}"
+                Style="{StaticResource DefaultDataGridStyle}">
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding MaKhachHang}"
+                        ElementStyle="{StaticResource ColumnTextBlockStyle}"
+                        Header="Mã khách hàng" />
+
+                        <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding TenKhachHang}"
+                        ElementStyle="{StaticResource ColumnTextBlockStyle}"
+                        Header="Tên khách hàng" />
+
+                        <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding DienThoai, StringFormat={}{0:dd/MM/yyyy}}"
+                        ElementStyle="{StaticResource ColumnTextBlockStyle}"
+                        Header="Điện thoại" />
+
+                        <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding DiaChi}"
+                        ElementStyle="{StaticResource ColumnTextBlockStyle}"
+                        Header="Địa chỉ" />
+
+                        <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding Email}"
+                        ElementStyle="{StaticResource ColumnTextBlockStyle}"
+                        Header="Email" />
+
+                        <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding TienNo, StringFormat={}{0:N0} VNĐ}"
+                        ElementStyle="{StaticResource ColumnTextBlockStyle}"
+                        Header="Tiền nợ" />
+
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
+
+        </Grid>
+    </Border>
+</Window>

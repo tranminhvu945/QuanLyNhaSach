@@ -85,14 +85,7 @@
                                 <RowDefinition Height="7*" />
                             </Grid.RowDefinitions>
 
-                            <TextBlock
-                                Grid.Row="0"
-                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
-                                Text="Mã sách" />
-                            <TextBox
-                                Grid.Row="1"
-                                Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding MaSach}" />
+                            
                         </Grid>
 
                         <!--  Tên đại lý  -->
@@ -106,10 +99,17 @@
                                 Grid.Row="0"
                                 Style="{StaticResource FieldSmallLabelTextBlockStyle}"
                                 Text="Tên sách" />
-                            <TextBox
-                                Grid.Row="1"
-                                Style="{StaticResource StandardTextBoxStyle}"
-                                Text="{Binding TenSach}" />
+                            <ComboBox
+                            Grid.Row="1"
+                            ItemsSource="{Binding Sachs}"
+                            SelectedItem="{Binding SelectedSach}"
+                            Style="{StaticResource StandardComboBoxStyle}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding TenSach}" />
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
                         </Grid>
 
                         <!--  Điện thoại  -->
@@ -336,6 +336,8 @@
                             <DatePicker
                                 Grid.Column="2"
                                 SelectedDate="{Binding NgayLapHoaDonFrom}"
+                                SelectedDateFormat="Short"
+                                Language="vi-VN"
                                 Style="{StaticResource StandardDatePickerStyle}" />
                             <TextBlock
                                 Grid.Column="3"
@@ -344,6 +346,8 @@
                             <DatePicker
                                 Grid.Column="4"
                                 SelectedDate="{Binding NgayLapHoaDonTo}"
+                                SelectedDateFormat="Short"
+                                Language="vi-VN"
                                 Style="{StaticResource StandardDatePickerStyle}" />
                         </Grid>
                     </Grid>
@@ -573,6 +577,8 @@
                             <DatePicker
                                 Grid.Column="2"
                                 SelectedDate="{Binding NgayNhapFrom}"
+                                SelectedDateFormat="Short"
+                                Language="vi-VN"                                
                                 Style="{StaticResource StandardDatePickerStyle}" />
                             <TextBlock
                                 Grid.Column="3"
@@ -581,6 +587,8 @@
                             <DatePicker
                                 Grid.Column="4"
                                 SelectedDate="{Binding NgayNhapTo}"
+                                SelectedDateFormat="Short"
+                                Language="vi-VN"
                                 Style="{StaticResource StandardDatePickerStyle}" />
                         </Grid>
                     </Grid>
