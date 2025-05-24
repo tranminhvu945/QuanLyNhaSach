@@ -44,7 +44,7 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center">
                     <Button
-                        Command="{Binding CloseCommand}"
+                        Command="{Binding CloseWindowCommand}"
                         Content="❌"
                         Style="{StaticResource WindowCloseButtonStyle}" />
                 </StackPanel>
