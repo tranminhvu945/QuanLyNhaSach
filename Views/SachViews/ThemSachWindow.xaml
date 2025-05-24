@@ -35,7 +35,7 @@
                     Grid.Column="0"
                     Margin="20,5,0,0"
                     VerticalAlignment="Center" Grid.ColumnSpan="2">
-                    <TextBlock Style="{StaticResource WindowHeaderTextBlockStyle}" Text="Cập nhật sách" FontSize="25" Height="30" Width="175" />
+                    <TextBlock Style="{StaticResource WindowHeaderTextBlockStyle}" Text="Thêm đầu sách" FontSize="25" Height="30" Width="175" />
                 </StackPanel>
 
                 <StackPanel
