@@ -71,17 +71,12 @@
 
                             <Border Grid.Column="1" Margin="20,0,20,0" Padding="15" CornerRadius="8" >
                                 <ToggleButton
-                         VerticalContentAlignment="Center"
-                         HorizontalAlignment="Center"
-                         Cursor="Hand"
-                         IsChecked="{Binding QuyDinhSoLuongTonToiDa}"
-                         IsHitTestVisible="{Binding IsEditing}"
-                         Height="80" Margin="0,-20,0,-20" >
-                                    <ToggleButton.Resources>
-                                        <Style TargetType="{x:Type Border}">
-                                            <Setter Property="CornerRadius" Value="30" />
-                                        </Style>
-                                    </ToggleButton.Resources>
+    VerticalContentAlignment="Center"
+    HorizontalAlignment="Center"
+    Cursor="Hand"
+    IsChecked="{Binding QuyDinhSoLuongTonToiDa}"
+    IsHitTestVisible="{Binding IsEditing}"
+    Height="60" Margin="0,-12,0,-12">
                                     <ToggleButton.Style>
                                         <Style TargetType="{x:Type ToggleButton}">
                                             <Setter Property="Template">
@@ -93,25 +88,22 @@
                                                                 <ColumnDefinition Width="*" />
                                                             </Grid.ColumnDefinitions>
 
-                                                            <!--  Toggle Switch Background  -->
                                                             <Border
                                 x:Name="SwitchTrack"
                                 Grid.Column="0"
-                                Width="90"
-                                Height="48"
+                                Width="72"
+                                Height="40"
                                 VerticalAlignment="Center"
                                 Background="#E0E0E0"
-                                CornerRadius="24">
-
-                                                                <!--  Switch Thumb/Knob  -->
+                                CornerRadius="20">
                                                                 <Border
                                     x:Name="SwitchKnob"
-                                    Width="40"
-                                    Height="40"
+                                    Width="30"
+                                    Height="30"
                                     Margin="4,0,0,0"
                                     HorizontalAlignment="Left"
                                     Background="White"
-                                    CornerRadius="20">
+                                    CornerRadius="15">
                                                                     <Border.Effect>
                                                                         <DropShadowEffect
                                             BlurRadius="3"
@@ -123,7 +115,7 @@
                                                             </Border>
                                                         </Grid>
 
-                                                        <!--  Visual States  -->
+                                                        <!-- Triggers giữ nguyên -->
                                                         <ControlTemplate.Triggers>
                                                             <Trigger Property="IsChecked" Value="True">
                                                                 <Setter TargetName="SwitchTrack" Property="Background" Value="#2871DF" />
@@ -159,6 +151,7 @@
                                         </Style>
                                     </ToggleButton.Style>
                                 </ToggleButton>
+
                             </Border>
 
 
@@ -209,17 +202,19 @@
 
                             <Border Grid.Column="1" Margin="20,0,20,0" Padding="15" CornerRadius="8" >
                                 <ToggleButton
-                         VerticalContentAlignment="Center"
-                         HorizontalAlignment="Center"
-                         Cursor="Hand"
-                         IsChecked="{Binding QuyDinhSoLuongTonToiThieu}"
-                         IsHitTestVisible="{Binding IsEditing}"
-                         Height="80" Margin="0,-20,0,-20" >
+    VerticalContentAlignment="Center"
+    HorizontalAlignment="Center"
+    Cursor="Hand"
+    IsChecked="{Binding QuyDinhSoLuongTonToiThieu}"
+    IsHitTestVisible="{Binding IsEditing}"
+    Height="60" Margin="0,-12,0,-12">
+
                                     <ToggleButton.Resources>
                                         <Style TargetType="{x:Type Border}">
-                                            <Setter Property="CornerRadius" Value="30" />
+                                            <Setter Property="CornerRadius" Value="20" />
                                         </Style>
                                     </ToggleButton.Resources>
+
                                     <ToggleButton.Style>
                                         <Style TargetType="{x:Type ToggleButton}">
                                             <Setter Property="Template">
@@ -231,25 +226,25 @@
                                                                 <ColumnDefinition Width="*" />
                                                             </Grid.ColumnDefinitions>
 
-                                                            <!--  Toggle Switch Background  -->
+                                                            <!-- Toggle Switch Background -->
                                                             <Border
                                 x:Name="SwitchTrack"
                                 Grid.Column="0"
-                                Width="90"
-                                Height="48"
+                                Width="72"
+                                Height="40"
                                 VerticalAlignment="Center"
                                 Background="#E0E0E0"
-                                CornerRadius="24">
+                                CornerRadius="20">
 
-                                                                <!--  Switch Thumb/Knob  -->
+                                                                <!-- Switch Thumb/Knob -->
                                                                 <Border
                                     x:Name="SwitchKnob"
-                                    Width="40"
-                                    Height="40"
+                                    Width="30"
+                                    Height="30"
                                     Margin="4,0,0,0"
                                     HorizontalAlignment="Left"
                                     Background="White"
-                                    CornerRadius="20">
+                                    CornerRadius="15">
                                                                     <Border.Effect>
                                                                         <DropShadowEffect
                                             BlurRadius="3"
@@ -261,7 +256,7 @@
                                                             </Border>
                                                         </Grid>
 
-                                                        <!--  Visual States  -->
+                                                        <!-- Visual States -->
                                                         <ControlTemplate.Triggers>
                                                             <Trigger Property="IsChecked" Value="True">
                                                                 <Setter TargetName="SwitchTrack" Property="Background" Value="#2871DF" />
@@ -297,6 +292,9 @@
                                         </Style>
                                     </ToggleButton.Style>
                                 </ToggleButton>
+
+
+
                             </Border>
 
 
@@ -364,17 +362,19 @@
 
                             <Border Grid.Column="1" Margin="20,0,20,0" Padding="15" CornerRadius="8" >
                                 <ToggleButton
-                         VerticalContentAlignment="Center"
-                         HorizontalAlignment="Center"
-                         Cursor="Hand"
-                         IsChecked="{Binding QuyDinhSoLuongNhapToiThieu}"
-                         IsHitTestVisible="{Binding IsEditing}"
-                         Height="80" Margin="0,-20,0,-20" >
+    VerticalContentAlignment="Center"
+    HorizontalAlignment="Center"
+    Cursor="Hand"
+    IsChecked="{Binding QuyDinhSoLuongNhapToiThieu}"
+    IsHitTestVisible="{Binding IsEditing}"
+    Height="60" Margin="0,-12,0,-12">
+
                                     <ToggleButton.Resources>
                                         <Style TargetType="{x:Type Border}">
-                                            <Setter Property="CornerRadius" Value="30" />
+                                            <Setter Property="CornerRadius" Value="20" />
                                         </Style>
                                     </ToggleButton.Resources>
+
                                     <ToggleButton.Style>
                                         <Style TargetType="{x:Type ToggleButton}">
                                             <Setter Property="Template">
@@ -386,25 +386,25 @@
                                                                 <ColumnDefinition Width="*" />
                                                             </Grid.ColumnDefinitions>
 
-                                                            <!--  Toggle Switch Background  -->
+                                                            <!-- Toggle Switch Background -->
                                                             <Border
                                 x:Name="SwitchTrack"
                                 Grid.Column="0"
-                                Width="90"
-                                Height="48"
+                                Width="72"
+                                Height="40"
                                 VerticalAlignment="Center"
                                 Background="#E0E0E0"
-                                CornerRadius="24">
+                                CornerRadius="20">
 
-                                                                <!--  Switch Thumb/Knob  -->
+                                                                <!-- Switch Thumb/Knob -->
                                                                 <Border
                                     x:Name="SwitchKnob"
-                                    Width="40"
-                                    Height="40"
+                                    Width="30"
+                                    Height="30"
                                     Margin="4,0,0,0"
                                     HorizontalAlignment="Left"
                                     Background="White"
-                                    CornerRadius="20">
+                                    CornerRadius="15">
                                                                     <Border.Effect>
                                                                         <DropShadowEffect
                                             BlurRadius="3"
@@ -416,7 +416,7 @@
                                                             </Border>
                                                         </Grid>
 
-                                                        <!--  Visual States  -->
+                                                        <!-- Visual States -->
                                                         <ControlTemplate.Triggers>
                                                             <Trigger Property="IsChecked" Value="True">
                                                                 <Setter TargetName="SwitchTrack" Property="Background" Value="#2871DF" />
@@ -452,6 +452,7 @@
                                         </Style>
                                     </ToggleButton.Style>
                                 </ToggleButton>
+
                             </Border>
 
 
@@ -520,17 +521,19 @@
 
                             <Border Grid.Column="1" Margin="20,0,20,0" Padding="15" CornerRadius="8" >
                                 <ToggleButton
-                         VerticalContentAlignment="Center"
-                         HorizontalAlignment="Center"
-                         Cursor="Hand"
-                         IsChecked="{Binding QuyDinhTienNoToiDa}"
-                         IsHitTestVisible="{Binding IsEditing}"
-                         Height="80" Margin="0,-20,0,-20" >
+    VerticalContentAlignment="Center"
+    HorizontalAlignment="Center"
+    Cursor="Hand"
+    IsChecked="{Binding QuyDinhTienNoToiDa}"
+    IsHitTestVisible="{Binding IsEditing}"
+    Height="60" Margin="0,-12,0,-12">
+
                                     <ToggleButton.Resources>
                                         <Style TargetType="{x:Type Border}">
-                                            <Setter Property="CornerRadius" Value="30" />
+                                            <Setter Property="CornerRadius" Value="20" />
                                         </Style>
                                     </ToggleButton.Resources>
+
                                     <ToggleButton.Style>
                                         <Style TargetType="{x:Type ToggleButton}">
                                             <Setter Property="Template">
@@ -542,25 +545,25 @@
                                                                 <ColumnDefinition Width="*" />
                                                             </Grid.ColumnDefinitions>
 
-                                                            <!--  Toggle Switch Background  -->
+                                                            <!-- Toggle Switch Background -->
                                                             <Border
                                 x:Name="SwitchTrack"
                                 Grid.Column="0"
-                                Width="90"
-                                Height="48"
+                                Width="72"
+                                Height="40"
                                 VerticalAlignment="Center"
                                 Background="#E0E0E0"
-                                CornerRadius="24">
+                                CornerRadius="20">
 
-                                                                <!--  Switch Thumb/Knob  -->
+                                                                <!-- Switch Thumb/Knob -->
                                                                 <Border
                                     x:Name="SwitchKnob"
-                                    Width="40"
-                                    Height="40"
+                                    Width="30"
+                                    Height="30"
                                     Margin="4,0,0,0"
                                     HorizontalAlignment="Left"
                                     Background="White"
-                                    CornerRadius="20">
+                                    CornerRadius="15">
                                                                     <Border.Effect>
                                                                         <DropShadowEffect
                                             BlurRadius="3"
@@ -572,7 +575,7 @@
                                                             </Border>
                                                         </Grid>
 
-                                                        <!--  Visual States  -->
+                                                        <!-- Visual States -->
                                                         <ControlTemplate.Triggers>
                                                             <Trigger Property="IsChecked" Value="True">
                                                                 <Setter TargetName="SwitchTrack" Property="Background" Value="#2871DF" />
@@ -660,17 +663,19 @@
 
                             <Border Grid.Column="1" Margin="20,0,20,0" Padding="15" CornerRadius="8" >
                                 <ToggleButton
-                         VerticalContentAlignment="Center"
-                         HorizontalAlignment="Center"
-                         Cursor="Hand"
-                         IsChecked="{Binding QuyDinhTienThuTienNo}"
-                         IsHitTestVisible="{Binding IsEditing}"
-                         Height="80" Margin="0,-20,0,-20" >
+    VerticalContentAlignment="Center"
+    HorizontalAlignment="Center"
+    Cursor="Hand"
+    IsChecked="{Binding QuyDinhTienThuTienNo}"
+    IsHitTestVisible="{Binding IsEditing}"
+    Height="60" Margin="0,-12,0,-12">
+
                                     <ToggleButton.Resources>
                                         <Style TargetType="{x:Type Border}">
-                                            <Setter Property="CornerRadius" Value="30" />
+                                            <Setter Property="CornerRadius" Value="20" />
                                         </Style>
                                     </ToggleButton.Resources>
+
                                     <ToggleButton.Style>
                                         <Style TargetType="{x:Type ToggleButton}">
                                             <Setter Property="Template">
@@ -682,25 +687,25 @@
                                                                 <ColumnDefinition Width="*" />
                                                             </Grid.ColumnDefinitions>
 
-                                                            <!--  Toggle Switch Background  -->
+                                                            <!-- Toggle Switch Background -->
                                                             <Border
                                 x:Name="SwitchTrack"
                                 Grid.Column="0"
-                                Width="90"
-                                Height="48"
+                                Width="72"
+                                Height="40"
                                 VerticalAlignment="Center"
                                 Background="#E0E0E0"
-                                CornerRadius="24">
+                                CornerRadius="20">
 
-                                                                <!--  Switch Thumb/Knob  -->
+                                                                <!-- Switch Thumb/Knob -->
                                                                 <Border
                                     x:Name="SwitchKnob"
-                                    Width="40"
-                                    Height="40"
+                                    Width="30"
+                                    Height="30"
                                     Margin="4,0,0,0"
                                     HorizontalAlignment="Left"
                                     Background="White"
-                                    CornerRadius="20">
+                                    CornerRadius="15">
                                                                     <Border.Effect>
                                                                         <DropShadowEffect
                                             BlurRadius="3"
@@ -712,7 +717,7 @@
                                                             </Border>
                                                         </Grid>
 
-                                                        <!--  Visual States  -->
+                                                        <!-- Visual States -->
                                                         <ControlTemplate.Triggers>
                                                             <Trigger Property="IsChecked" Value="True">
                                                                 <Setter TargetName="SwitchTrack" Property="Background" Value="#2871DF" />
@@ -748,6 +753,8 @@
                                         </Style>
                                     </ToggleButton.Style>
                                 </ToggleButton>
+
+
                             </Border>
 
 
@@ -759,7 +766,7 @@
                 <!--Line 4-->
                 <Grid Grid.Row="3">
                     <Button 
-                        Height="50"
+                        Height="40"
                         Margin="0,0,30,0"
                             HorizontalAlignment="Right" 
                             Command="{Binding EditOrSaveCommand}" 
@@ -767,7 +774,7 @@
                        Width="164"
                         >
                         <StackPanel Orientation="Horizontal">
-                            <fa:FontAwesome Margin="0,0,10,0" Icon="Edit" />
+                            <fa:FontAwesome Margin="0,5,10,0" Icon="Edit" />
                             <TextBlock Text="{Binding ButtonText}" FontSize="20" />
                         </StackPanel>
                     </Button>
