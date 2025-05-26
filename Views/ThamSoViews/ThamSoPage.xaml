@@ -33,7 +33,7 @@
                     <RowDefinition Height="239*" />
                     <RowDefinition Height="159*" />
                     <RowDefinition Height="250*" />
-                    <RowDefinition Height="50*" />
+                    <RowDefinition Height="70*" />
                 </Grid.RowDefinitions>
 
                 <!--Line 1-->
@@ -177,7 +177,7 @@
                                         Text="Số lượng tồn tối đa được nhập"/>
 
                             <TextBox Grid.Column="1"
-                                     Margin="30,20,30,20"
+                                     Margin="30,10,30,15"
                                      FontSize="20"
                                      HorizontalContentAlignment="Center"
                                      Style="{Binding TextBoxStyle}"
@@ -315,7 +315,7 @@
                                         Text="Số lượng tồn tối thiểu"/>
 
                             <TextBox Grid.Column="1"
-                                     Margin="30,20,30,20"
+                                     Margin="30,10,30,15"
                                      FontSize="20"
                                      HorizontalContentAlignment="Center"
                                      Style="{Binding TextBoxStyle}"
@@ -470,7 +470,7 @@
                                         Text="Số lượng nhập tối thiểu"/>
 
                             <TextBox Grid.Column="1"
-                                     Margin="30,20,30,20"
+                                     Margin="30,10,30,15"
                                      FontSize="20"
                                      HorizontalContentAlignment="Center"
                                      Style="{Binding TextBoxStyle}"
@@ -626,7 +626,7 @@
                                         Text="Tiền nợ tối đa"/>
 
                             <TextBox Grid.Column="1"
-                                     Margin="30,20,30,20"
+                                     Margin="30,10,30,15"
                                      FontSize="20"
                                      HorizontalContentAlignment="Center"
                                      Style="{Binding TextBoxStyle}"
